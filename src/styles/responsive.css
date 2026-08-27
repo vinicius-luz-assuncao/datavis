@@ -1,0 +1,90 @@
+/* ==========================================================================
+   RESPONSIVIDADE — Tablet (8 colunas) e Mobile (4 colunas)
+   ========================================================================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .container {
+    --container-gutter: 40px;
+  }
+
+  .split {
+    gap: var(--space-lg);
+  }
+
+  .split-copy,
+  .split-visual {
+    grid-column: span 12;
+  }
+
+  .split-visual {
+    order: -1;
+  }
+
+  .stat {
+    max-width: 100%;
+  }
+}
+
+/* Mobile — transforma em narrativa vertical */
+@media (max-width: 640px) {
+  .container {
+    --container-gutter: 24px;
+  }
+
+  .section-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .col-span-1,
+  .col-span-2,
+  .col-span-3,
+  .col-span-4,
+  .col-span-5,
+  .col-span-6,
+  .col-span-7,
+  .col-span-8,
+  .col-span-9,
+  .col-span-10,
+  .col-span-11,
+  .col-span-12 {
+    grid-column: span 4;
+  }
+
+  .bar-chart__row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .bar-chart__label {
+    text-align: left;
+  }
+
+  .donut {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .grid-duo {
+    grid-template-columns: 1fr;
+  }
+
+  .barrier-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .split-visual {
+    order: 0;
+  }
+
+  .section-head .eyebrow {
+    font-size: 0.8rem;
+  }
+
+  .illustration--large,
+  .illustration--medium,
+  .illustration--small {
+    min-height: 0;
+  }
+}

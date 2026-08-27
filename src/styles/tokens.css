@@ -1,0 +1,44 @@
+/* ==========================================================================
+   DESIGN TOKENS — Esporte como direito
+   ========================================================================== */
+
+:root {
+  /* Cores principais */
+  --color-paper: #f3efe4;
+  --color-ink: #1c1c1a;
+
+  --color-teal: #087f89;
+  --color-magenta: #e52e63;
+  --color-yellow: #f0b323;
+  --color-orange: #e87916;
+  --color-gray: #77736b;
+
+  /* Tom da faixa final (fundo ink, texto papel) */
+  --color-paper-in-ink: #f3efe4;
+
+  /* Tonalidade neutra para a "parte restante" dos donuts */
+  --color-neutral: #d9d4c5;
+
+  /* Tipografia */
+  --font-display: "Roboto Condensed", "Oswald", "Anton", sans-serif;
+  --font-text: "Inter", "Roboto", system-ui, sans-serif;
+
+  /* Espaçamento */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-xxl: 7rem;
+
+  /* Grid */
+  --grid-desktop: repeat(12, 1fr);
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-gutter: 64px;
+
+  /* Elevação / limites */
+  --line-ink: 1px solid var(--color-ink);
+  --line-soft: 1px solid rgba(28, 28, 26, 0.18);
+}

@@ -1,0 +1,311 @@
+/* ==========================================================================
+   COMPONENTES — estilos específicos dos blocos
+   ========================================================================== */
+
+/* --- StatNumber --- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 30ch;
+}
+
+.stat .stat-number {
+  display: block;
+}
+
+.stat__label {
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  font-weight: 600;
+  max-width: 26ch;
+}
+
+.stat__source {
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.stat__source::before {
+  content: "";
+  width: 1.6em;
+  height: 2px;
+  background: currentColor;
+}
+
+/* --- Gráficos --- */
+.chart {
+  width: 100%;
+}
+
+.chart svg {
+  width: 100%;
+  height: auto;
+}
+
+.chart__caption {
+  margin-top: var(--space-sm);
+}
+
+/* --- Barra horizontal --- */
+.bar-chart__row {
+  display: grid;
+  grid-template-columns: 8ch 1fr;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.bar-chart__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+.bar-chart__track {
+  position: relative;
+  height: 3.5rem;
+  background: var(--color-neutral);
+  overflow: hidden;
+}
+
+.bar-chart__fill {
+  height: 100%;
+  width: 0;
+  transform-origin: left;
+}
+
+.bar-chart__value {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--color-ink);
+}
+
+/* --- Donut --- */
+.donut {  display: grid;
+  grid-template-columns: minmax(220px, 260px) 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.donut__center {
+  text-align: center;
+}
+
+.donut__value {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 0.9;
+  display: block;
+}
+
+.donut__label {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.donut__source {
+  display: block;
+  margin-top: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* --- Tendência qualitativa --- */
+.trend__axis {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--color-gray);
+  margin-top: var(--space-sm);
+  letter-spacing: 0.05em;
+}
+
+/* --- Fluxo de barreiras --- */
+.barrier-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  align-items: start;
+}
+
+.barrier-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: var(--line-soft);
+}
+
+.barrier-step__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-magenta);
+}
+
+.barrier-step__keyword {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+}
+
+.barrier-step__desc {
+  font-size: 0.9rem;
+  color: var(--color-gray);
+  line-height: 1.4;
+}
+
+/* --- Mapa --- */
+.brazil-map {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.region-label {
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.map-legend {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--color-gray);
+}
+
+.map-legend .dot {
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: var(--color-teal);
+  flex: 0 0 auto;
+}
+
+/* --- Fontes / limitações --- */
+.source-item {
+  border-top: var(--line-ink);
+  padding-block: var(--space-lg);
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.source-item__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+}
+
+.source-item__sample {
+  font-size: 0.9rem;
+}
+
+/* --- Mensagem final --- */
+.final-statement {
+  background: var(--color-ink);
+  color: var(--color-paper-in-ink);
+  padding-block: clamp(var(--space-xl), 10vw, var(--space-xxl));
+}
+
+.final-statement__lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.final-statement .fs-line {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 6vw, 5.5rem);
+  line-height: 0.95;
+}
+
+.final-statement .fs-line--accent {
+  color: var(--color-yellow);
+}
+
+/* --- Ilustração (placeholder editorial) --- */
+.illustration {
+  display: grid;
+  place-items: center;
+  padding: var(--space-lg);
+  border: var(--line-soft);
+  position: relative;
+}
+
+.illustration::before {
+  content: "";
+  position: absolute;
+  inset: 0.75em;
+  border: var(--line-soft);
+}
+
+.illustration__art {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--color-gray);
+}
+
+.illustration--large {
+  min-height: 340px;
+}
+
+.illustration--medium {
+  min-height: 240px;
+}
+
+.illustration--small {
+  min-height: 150px;
+}
+
+/* --- Grid duplo (interest) --- */
+.grid-duo {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* ==========================================================================
+   REVEAL — animação de entrada no viewport
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 850ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
