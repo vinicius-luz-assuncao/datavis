@@ -78,7 +78,7 @@ ol {
   border-radius: 2px;
 }
 
-/* Header / fonte dos elementos */
+/* Elemento visualmente oculto mas acessível */
 .visually-hidden {
   position: absolute;
   width: 1px;

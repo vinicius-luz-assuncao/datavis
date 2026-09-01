@@ -52,12 +52,12 @@
     grid-column: span 4;
   }
 
-  .bar-chart__row {
+  .bar-row {
     grid-template-columns: 1fr;
     gap: var(--space-xs);
   }
 
-  .bar-chart__label {
+  .bar-row__label {
     text-align: left;
   }
 

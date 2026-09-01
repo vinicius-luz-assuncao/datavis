@@ -2,7 +2,7 @@
    COMPONENTES — estilos específicos dos blocos
    ========================================================================== */
 
-/* --- StatNumber --- */
+/* --- StatNumber (grandes números da seção de evidências) --- */
 .stat {
   display: flex;
   flex-direction: column;
@@ -38,29 +38,37 @@
   background: currentColor;
 }
 
-/* --- Gráficos --- */
-.chart {
-  width: 100%;
+.small-note {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-gray);
+  font-weight: 500;
 }
 
-.chart svg {
+/* --- Gráficos (base) --- */
+[data-chart] svg {
   width: 100%;
   height: auto;
 }
 
-.chart__caption {
-  margin-top: var(--space-sm);
+/* ==========================================================================
+   GRÁFICO DE BARRAS (Gerado por D3 a partir de .bar-row)
+   ========================================================================== */
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
 }
 
-/* --- Barra horizontal --- */
-.bar-chart__row {
+.bar-row {
   display: grid;
   grid-template-columns: 8ch 1fr;
   gap: var(--space-md);
   align-items: center;
 }
 
-.bar-chart__label {
+.bar-row__label {
   font-family: var(--font-display);
   font-weight: 700;
   text-transform: uppercase;
@@ -68,20 +76,20 @@
   text-align: right;
 }
 
-.bar-chart__track {
+.bar-row__track {
   position: relative;
   height: 3.5rem;
   background: var(--color-neutral);
   overflow: hidden;
 }
 
-.bar-chart__fill {
+.bar-row__fill {
   height: 100%;
   width: 0;
   transform-origin: left;
 }
 
-.bar-chart__value {
+.bar-row__value {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -92,43 +100,53 @@
   color: var(--color-ink);
 }
 
-/* --- Donut --- */
-.donut {  display: grid;
-  grid-template-columns: minmax(220px, 260px) 1fr;
-  gap: var(--space-lg);
+/* ==========================================================================
+   GRÁFICO DONUT (Gerado por D3; percentual no centro)
+   ========================================================================== */
+.donut {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: var(--space-md);
 }
 
-.donut__center {
-  text-align: center;
+.donut__chart {
+  position: relative;
+  width: min(280px, 100%);
+  display: grid;
+  place-items: center;
+}
+
+.donut__chart svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .donut__value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-size: clamp(2rem, 3vw, 2.75rem);
   line-height: 0.9;
-  display: block;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 .donut__label {
   font-size: clamp(1rem, 1.4vw, 1.25rem);
   font-weight: 700;
   text-transform: uppercase;
-  max-width: 18ch;
-  margin-inline: auto;
+  max-width: 20ch;
+  text-align: center;
 }
 
-.donut__source {
-  display: block;
-  margin-top: var(--space-sm);
-  font-size: 0.8rem;
-  color: var(--color-gray);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-/* --- Tendência qualitativa --- */
+/* ==========================================================================
+   GRÁFICO DE TENDÊNCIA QUALITATIVA
+   ========================================================================== */
 .trend__axis {
   display: flex;
   justify-content: space-between;
@@ -141,7 +159,27 @@
   letter-spacing: 0.05em;
 }
 
-/* --- Fluxo de barreiras --- */
+/* ==========================================================================
+   FLUXO DE BARREIRAS
+   ========================================================================== */
+.barrier-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.barrier-list li {
+  border: 2px solid var(--color-ink);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  background: var(--color-paper);
+}
+
 .barrier-flow {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -161,6 +199,8 @@
   width: 2.5rem;
   height: 2.5rem;
   color: var(--color-magenta);
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .barrier-step__keyword {
@@ -176,11 +216,18 @@
   line-height: 1.4;
 }
 
-/* --- Mapa --- */
+/* ==========================================================================
+   MAPA DO BRASIL
+   ========================================================================== */
 .brazil-map {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-lg);
+  gap: var(--space-md);
+}
+
+.brazil-map svg {
+  width: 100%;
+  height: auto;
 }
 
 .region-label {
@@ -207,7 +254,44 @@
   flex: 0 0 auto;
 }
 
-/* --- Fontes / limitações --- */
+/* ==========================================================================
+   CONCLUSÃO — passos
+   ========================================================================== */
+.conclusion-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: var(--line-ink);
+}
+
+.conclusion-step__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-teal);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   CALLout editorial
+   ========================================================================== */
+.editorial-callout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  border-left: 4px solid var(--color-magenta);
+  padding-left: var(--space-md);
+  max-width: 60ch;
+}
+
+.editorial-callout .stat-number {
+  font-size: clamp(3rem, 7vw, 6rem);
+}
+
+/* ==========================================================================
+   FONTES E LIMITAÇÕES
+   ========================================================================== */
 .source-item {
   border-top: var(--line-ink);
   padding-block: var(--space-lg);
@@ -226,7 +310,9 @@
   font-size: 0.9rem;
 }
 
-/* --- Mensagem final --- */
+/* ==========================================================================
+   MENSAGEM FINAL
+   ========================================================================== */
 .final-statement {
   background: var(--color-ink);
   color: var(--color-paper-in-ink);
@@ -251,7 +337,9 @@
   color: var(--color-yellow);
 }
 
-/* --- Ilustração (placeholder editorial) --- */
+/* ==========================================================================
+   ILUSTRAÇÃO (placeholder editorial)
+   ========================================================================== */
 .illustration {
   display: grid;
   place-items: center;
@@ -275,6 +363,11 @@
   justify-content: center;
   gap: var(--space-sm);
   color: var(--color-gray);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-align: center;
 }
 
 .illustration--large {
@@ -295,9 +388,8 @@
 }
 
 /* ==========================================================================
-   REVEAL — animação de entrada no viewport
+   REVELAÇÃO NO SCROLL (main.js adiciona .is-visible)
    ========================================================================== */
-
 .reveal {
   opacity: 0;
   transform: translateY(24px);

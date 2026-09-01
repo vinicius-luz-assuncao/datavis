@@ -13,7 +13,7 @@
   --color-orange: #e87916;
   --color-gray: #77736b;
 
-  /* Tom da faixa final (fundo ink, texto papel) */
+  /* Tom da faixa final (fundo ink, texto paper) */
   --color-paper-in-ink: #f3efe4;
 
   /* Tonalidade neutra para a "parte restante" dos donuts */
@@ -31,14 +31,11 @@
   --space-xl: 4rem;
   --space-xxl: 7rem;
 
-  /* Grid */
-  --grid-desktop: repeat(12, 1fr);
-
   /* Layout */
   --container-max: 1280px;
   --container-gutter: 64px;
 
-  /* Elevação / limites */
+  /* Linhas */
   --line-ink: 1px solid var(--color-ink);
   --line-soft: 1px solid rgba(28, 28, 26, 0.18);
 }
