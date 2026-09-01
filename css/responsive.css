@@ -2,7 +2,7 @@
    RESPONSIVIDADE — Tablet (8 colunas) e Mobile (4 colunas)
    ========================================================================== */
 
-/* Tablet */
+/* Tablets e telas médias */
 @media (max-width: 1024px) {
   .container {
     --container-gutter: 40px;
@@ -23,6 +23,17 @@
 
   .stat {
     max-width: 100%;
+  }
+
+  /* Hero: em telas médias o texto ocupa a largura; reforça a leitura */
+  #hero::after {
+    background: linear-gradient(
+      90deg,
+      var(--color-paper) 0%,
+      var(--color-paper) 35%,
+      rgba(243, 239, 228, 0.75) 60%,
+      rgba(243, 239, 228, 0.2) 100%
+    );
   }
 }
 
@@ -86,5 +97,19 @@
   .illustration--medium,
   .illustration--small {
     min-height: 0;
+  }
+
+  /* Hero mobile: imagem como pano de fundo suave atrás do texto inteiro */
+  #hero {
+    background-position: center;
+  }
+
+  #hero::after {
+    background: linear-gradient(
+      180deg,
+      rgba(243, 239, 228, 0.96) 0%,
+      rgba(243, 239, 228, 0.9) 55%,
+      rgba(243, 239, 228, 0.7) 100%
+    );
   }
 }

@@ -86,9 +86,78 @@
     counters.forEach((el) => observer.observe(el));
   }
 
+  /* ------------------------------------------------------ PARALLAX HERO */
+  // A imagem do hero desliza suavemente para a direita conforme você rola a
+  // página (e volta quando rola de volta). O deslocamento é definido na
+  // variável CSS --hero-scroll-shift sobre o elemento #hero.
+  function initHeroParallax() {
+    var hero = document.getElementById("hero");
+    if (!hero) return;
+    if (prefersReducedMotion) return;
+
+    var amplitude = 220; // px máximos de deslocamento (a imagem tem folga
+                         // de 20% por lado; aumentar acima de ~220 mostra borda)
+    var ticking = false;
+
+    function update() {
+      var rect = hero.getBoundingClientRect();
+      // progress: 0 quando o hero está no topo, 1 depois de uma tela de rolagem
+      var progress = -rect.top / window.innerHeight;
+      progress = Math.max(0, Math.min(1, progress));
+      var shift = progress * amplitude;
+      hero.style.setProperty("--hero-scroll-shift", shift.toFixed(1) + "px");
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
+  /* ------------------------------------------- PARALLAX HERO (MOUSE) */
+  // A mesma <img> também desliza para os lados / cima / baixo conforme o
+  // mouse se move sobre a página, revelando mais partes da fotografia.
+  function initHeroMouseParallax() {
+    var hero = document.getElementById("hero");
+    if (!hero) return;
+    if (prefersReducedMotion) return;
+    // Tela de toque não tem "hover" — parallax de mouse é só para ponteiro.
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    var strength = 36; // px máximos por eixo
+    var ticking = false;
+
+    function onMove(e) {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          var rect = hero.getBoundingClientRect();
+          // nx/ny: -1..1 (mouse no centro da página = 0)
+          var nx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+          var ny = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+          hero.style.setProperty("--hero-mouse-x", (nx * strength).toFixed(1) + "px");
+          hero.style.setProperty("--hero-mouse-y", (ny * strength).toFixed(1) + "px");
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("resize", onMove);
+  }
+
   /* ---------------------------------------------------------- INIT */
   document.addEventListener("DOMContentLoaded", () => {
     initReveal();
     initCount();
+    initHeroParallax();
+    initHeroMouseParallax();
   });
 })();

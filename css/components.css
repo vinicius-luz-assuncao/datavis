@@ -145,6 +145,73 @@
 }
 
 /* ==========================================================================
+   HERO — imagem de fundo + overlay editorial para leitura
+   A imagem vive num pseudo-elemento ::before para poder ser deslocada
+   horizontalmente pelo efeito parallax (main.js define a variável
+   --hero-shift em px a cada scroll).
+   ========================================================================== */
+#hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(var(--space-xl), 12vw, calc(var(--space-xxl) * 1.6));
+}
+
+/* A imagem vive em .hero-media (uma <img> real, maior que o hero):
+   --hero-scroll-shift é definido pelo parallax de scroll (main.js),
+   --hero-mouse-x/-y pelo parallax de mouse. As variáveis "sobram" para
+   a foto ter espaço para deslizar sem abrir vãos. */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-media__img {
+  position: absolute;
+  inset: 0%;
+  width: 102%;
+  height: 104%;
+  max-width: none;
+  object-fit: cover;
+  transform: translate3d(
+    calc(var(--hero-scroll-shift, 0px) + var(--hero-mouse-x, 0px)),
+    var(--hero-mouse-y, 0px),
+    0
+  );
+  will-change: transform;
+}
+
+/* Overlay: papel sólido à esquerda (texto) → transparente à direita (foto) */
+#hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-paper) 0%,
+    var(--color-paper) 30%,
+    rgba(243, 239, 228, 0.82) 48%,
+    rgba(243, 239, 228, 0.15) 78%,
+    rgba(243, 239, 228, 0) 100%
+  );
+  pointer-events: none;
+}
+
+#hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title-color {
+  color: var(--color-magenta);
+}
+
+#hero .lede {
+  max-width: 24ch;
+}
+
+/* ==========================================================================
    GRÁFICO DE TENDÊNCIA QUALITATIVA
    ========================================================================== */
 .trend__axis {
