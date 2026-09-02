@@ -8,10 +8,14 @@
  */
 ?>
 <section class="section hero" id="hero">
-  <!-- Camada de imagem (parcialmente maior que o hero, dá "sobra"
-       para o parallax de mouse revelar mais da foto) -->
+  <!-- Camadas de parallax. data-layer: 01 é o primeiro plano (fronta, mais
+       próximo), 04 o fundo. data-depth controla a velocidade relativa:
+       quanto mais perto, mais rápido o deslocamento (scroll + mouse). -->
   <div class="hero-media" aria-hidden="true">
-    <img class="hero-media__img" src="assets/img/hero-ft.jpg" alt="" />
+    <img class="hero-media__img" data-layer="1" data-depth="1" src="assets/img/hero-ft-01.png" alt="" />
+    <img class="hero-media__img" data-layer="2" data-depth="0.68" src="assets/img/hero-ft-02.png" alt="" />
+    <img class="hero-media__img" data-layer="3" data-depth="0.4" src="assets/img/hero-ft-03.png" alt="" />
+    <img class="hero-media__img" data-layer="4" data-depth="0.18" src="assets/img/hero-ft-04.png" alt="" />
   </div>
 
   <div class="container">

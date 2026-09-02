@@ -87,25 +87,40 @@
   }
 
   /* ------------------------------------------------------ PARALLAX HERO */
-  // A imagem do hero desliza suavemente para a direita conforme você rola a
-  // página (e volta quando rola de volta). O deslocamento é definido na
-  // variável CSS --hero-scroll-shift sobre o elemento #hero.
+  // Camadas do hero deslizam conforme a rolagem. Cada <img.hero-media__img>
+  // tem um data-depth (0..1): quanto maior, mais rápido o deslocamento.
+  // 01 = primeiro plano (profundidade 1), 04 = fundo (profundidade menor).
+  function heroLayers() {
+    return Array.from(document.querySelectorAll("#hero .hero-media__img"));
+  }
+
+  // fator com curva: separa mais os níveis próximos dos distantes
+  function depthFactor(depth) {
+    return Math.pow(depth, 1.35);
+  }
+
   function initHeroParallax() {
-    var hero = document.getElementById("hero");
-    if (!hero) return;
+    var layers = heroLayers();
+    if (layers.length === 0) return;
     if (prefersReducedMotion) return;
 
-    var amplitude = 220; // px máximos de deslocamento (a imagem tem folga
-                         // de 20% por lado; aumentar acima de ~220 mostra borda)
+    var amplitude = 220; // px máximos para a camada de maior profundidade
+    var spread = 70; // recuo horizontal de repouso: puxa o fundo para trás
     var ticking = false;
 
     function update() {
+      var hero = document.getElementById("hero");
       var rect = hero.getBoundingClientRect();
       // progress: 0 quando o hero está no topo, 1 depois de uma tela de rolagem
       var progress = -rect.top / window.innerHeight;
       progress = Math.max(0, Math.min(1, progress));
       var shift = progress * amplitude;
-      hero.style.setProperty("--hero-scroll-shift", shift.toFixed(1) + "px");
+      layers.forEach(function (img) {
+        var depth = parseFloat(img.dataset.depth || "0");
+        var factor = depthFactor(depth);
+        img.style.setProperty("--hero-base-x", ((depth - 1) * spread).toFixed(1) + "px");
+        img.style.setProperty("--hero-scroll-shift", (shift * factor).toFixed(1) + "px");
+      });
       ticking = false;
     }
 
@@ -122,27 +137,38 @@
   }
 
   /* ------------------------------------------- PARALLAX HERO (MOUSE) */
-  // A mesma <img> também desliza para os lados / cima / baixo conforme o
-  // mouse se move sobre a página, revelando mais partes da fotografia.
+  // As mesmas camadas deslizam para os lados / cima / baixo conforme o
+  // mouse se move sobre a página; profundidades maiores reagem mais.
   function initHeroMouseParallax() {
-    var hero = document.getElementById("hero");
-    if (!hero) return;
+    var layers = heroLayers();
+    if (layers.length === 0) return;
     if (prefersReducedMotion) return;
     // Tela de toque não tem "hover" — parallax de mouse é só para ponteiro.
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-    var strength = 36; // px máximos por eixo
+    var strength = 36; // px máximos por eixo na camada de maior profundidade
     var ticking = false;
 
     function onMove(e) {
       if (!ticking) {
         requestAnimationFrame(function () {
+          var hero = document.getElementById("hero");
           var rect = hero.getBoundingClientRect();
           // nx/ny: -1..1 (mouse no centro da página = 0)
           var nx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
           var ny = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-          hero.style.setProperty("--hero-mouse-x", (nx * strength).toFixed(1) + "px");
-          hero.style.setProperty("--hero-mouse-y", (ny * strength).toFixed(1) + "px");
+          layers.forEach(function (img) {
+            var depth = parseFloat(img.dataset.depth || "0");
+            var factor = depthFactor(depth);
+            img.style.setProperty(
+              "--hero-mouse-x",
+              (nx * strength * factor).toFixed(1) + "px"
+            );
+            img.style.setProperty(
+              "--hero-mouse-y",
+              (ny * strength * factor * 0.7).toFixed(1) + "px"
+            );
+          });
           ticking = false;
         });
         ticking = true;

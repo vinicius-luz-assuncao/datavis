@@ -156,10 +156,11 @@
   padding-block: clamp(var(--space-xl), 12vw, calc(var(--space-xxl) * 1.6));
 }
 
-/* A imagem vive em .hero-media (uma <img> real, maior que o hero):
-   --hero-scroll-shift é definido pelo parallax de scroll (main.js),
-   --hero-mouse-x/-y pelo parallax de mouse. As variáveis "sobram" para
-   a foto ter espaço para deslizar sem abrir vãos. */
+/* As camadas vivem em .hero-media (imgs reais empilhadas, cada uma maior
+   que o hero). Cada camada recebe do main.js as próprias variáveis
+   --layer-scroll-shift e --layer-mouse-x/-y, já multiplicadas pela sua
+   profundidade (data-depth): 01 = primeiro plano (mais rápido),
+   04 = fundo (mais lento). */
 .hero-media {
   position: absolute;
   inset: 0;
@@ -174,13 +175,22 @@
   height: 104%;
   max-width: none;
   object-fit: cover;
+  /* Empilhamento por data-layer: 01 fica na frente (z maior), 04 no fundo. */
   transform: translate3d(
-    calc(var(--hero-scroll-shift, 0px) + var(--hero-mouse-x, 0px)),
+    calc(
+      var(--hero-base-x, 0px) + var(--hero-scroll-shift, 0px) +
+        var(--hero-mouse-x, 0px)
+    ),
     var(--hero-mouse-y, 0px),
     0
   );
   will-change: transform;
 }
+
+.hero-media__img[data-layer="1"] { z-index: 4; }
+.hero-media__img[data-layer="2"] { z-index: 3; }
+.hero-media__img[data-layer="3"] { z-index: 2; }
+.hero-media__img[data-layer="4"] { z-index: 1; }
 
 /* Overlay: papel sólido à esquerda (texto) → transparente à direita (foto) */
 #hero::after {
