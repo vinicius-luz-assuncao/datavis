@@ -1,0 +1,16 @@
+# Cabeçalhos de cache para desenvolvimento local.
+# Não altera roteamento nem o funcionamento das páginas: apenas define
+# Cache-Control para o navegador sempre revalidar/atualizar o conteúdo,
+# evitando que CSS, JS, imagens e páginas fiquem velhos no cache.
+<IfModule mod_headers.c>
+  # HTML/JSON gerado dinamicamente: nunca servir de cache.
+  <FilesMatch "\.(php|html?|json)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+
+  # Assets estáticos: revalidar a cada visita (local é rápido),
+  # garantindo que edições apareçam sem ter que limpar cache.
+  <FilesMatch "\.(css|js|mjs|png|jpe?g|gif|svg|ico|woff2?|ttf|otf|eot|webp)$">
+    Header set Cache-Control "no-cache, max-age=0"
+  </FilesMatch>
+</IfModule>
