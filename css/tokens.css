@@ -3,25 +3,47 @@
    ========================================================================== */
 
 :root {
-  /* Cores principais */
-  --color-paper: #f3efe4;
-  --color-ink: #373735;
+  /* ---------------------------------------------------------------- Cores
+     Paleta editorial nova: creme quente + navy, com acentos vibrantes.
+     Os nomes antigos (teal, magenta, yellow, orange, gray) foram mantidos
+     como aliases semânticos para não quebrar o conteúdo já escrito. */
 
-  --color-teal: #087f89;
-  --color-magenta: #e52e63;
-  --color-yellow: #f0b323;
-  --color-orange: #e87916;
-  --color-gray: #77736b;
+  /* Base */
+  --color-paper: #f1e9db;      /* papel quente (fundo) */
+  --color-ink: #1c2b44;        /* navy (texto, títulos, linhas) */
 
-  /* Tom da faixa final (fundo ink, texto paper) */
-  --color-paper-in-ink: #f3efe4;
+  /* Paleta principal nomeada */
+  --color-navy: #1c2b44;       /* seções escuras */
+  --color-cream: #f1e9db;      /* variante do papel */
+  --color-vermilion: #e8542b;  /* energia / impacto */
+  --color-pink: #e8557e;       /* rosa vivo */
+  --color-plum: #c44e7c;       /* ameixa / exclusão */
+  --color-purple: #7a5994;     /* dado LGBTQIA+ */
+  --color-amber: #f5a23f;      /* destaque */
+  --color-sky: #4aa8d8;        /* acesso / positivo */
+  --color-sage: #8fc9b4;       /* saúde / inclusão */
+  --color-slate: #8fb0ae;      /* neutro frio */
+
+  /* Aliases semânticos (uso legado — continuam válidos) */
+  --color-teal: #4aa8d8;       /* acesso, prática esportiva */
+  --color-magenta: #c44e7c;    /* exclusão, discriminação */
+  --color-yellow: #f5a23f;     /* destaques, chamadas */
+  --color-orange: #e8542b;     /* dados socioeconômicos */
+  --color-gray: #8fb0ae;       /* informações secundárias */
+
+  /* Tom da faixa final (fundo navy, texto paper) */
+  --color-paper-in-ink: #f1e9db;
 
   /* Tonalidade neutra para a "parte restante" dos donuts */
-  --color-neutral: #d9d4c5;
+  --color-neutral: #dcd3be;
 
-  /* Tipografia */
-  --font-display: "Roboto Condensed", "Oswald", "Anton", sans-serif;
-  --font-text: "Inter", "Roboto", system-ui, sans-serif;
+  /* ------------------------------------------------------------- Tipografia
+     4 famílias com papéis fixos (substitutas Google Fonts para a paleta):
+     Elephant→Abril Fatface | Neufreit→Oswald | Futura→Jost | Corbel→Nunito Sans */
+  --font-hero: "Abril Fatface", Georgia, serif;              /* grandes números, título do hero */
+  --font-display: "Oswald", "Archivo Narrow", sans-serif;    /* seção, eyebrow, labels */
+  --font-geo: "Jost", "Futura", sans-serif;                  /* sub-títulos, labels de gráfico */
+  --font-text: "Nunito Sans", "Inter", system-ui, sans-serif;/* corpo, legendas, fontes */
 
   /* Espaçamento */
   --space-xs: 0.5rem;
@@ -37,5 +59,10 @@
 
   /* Linhas */
   --line-ink: 1px solid var(--color-ink);
-  --line-soft: 1px solid rgba(28, 28, 26, 0.18);
+  --line-soft: 1px solid rgba(28, 43, 68, 0.18);
+
+  /* Raios (direção de arte: cantos arredondados suaves) */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
 }

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TIPOGRAFIA — hierarquia editorial
+   TIPOGRAFIA — hierarquia editorial (4 famílias)
    ========================================================================== */
 
 .font-display {
@@ -7,75 +7,90 @@
   text-transform: uppercase;
 }
 
-/* Hero */
-.hero-title {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(1.5rem, 2vw, 8rem);
-  line-height: 1.1;
+.utility-label {
+  font-family: var(--font-geo);
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  font-size: 0.95rem;
+}
+
+/* Hero — Elephant (Abril Fatface), serifa display */
+.hero-title {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 5.5rem);
+  line-height: 1.02;
+  text-transform: none;
   letter-spacing: -0.01em;
 }
 
 .hero-title-color {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.5rem, 2vw, 6rem);
-  line-height: 1.1;
-  text-transform: uppercase;
+  font-family: var(--font-hero);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 7rem);
+  line-height: 1.02;
+  text-transform: none;
   letter-spacing: -0.01em;
-  background: linear-gradient(90deg, rgb(230, 57, 70), rgb(255, 127, 50), rgb(247, 201, 72), rgb(62, 207, 142), rgb(56, 189, 248), rgb(155, 109, 255));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-vermilion);
 }
 
-
-/* Títulos de seção */
+/* Títulos de seção — Neufreit (Oswald), sans condensada */
 .section-title {
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 0.95;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.4vw, 3.5rem);
+  line-height: 1.02;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
-/* Números gigantes */
+/* Sub-título — Futura (Jost), geométrica */
+.sub-title {
+  font-family: var(--font-geo);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  letter-spacing: 0.005em;
+}
+
+/* Números gigantes — Elephant (Abril Fatface) */
 .stat-number {
-  font-family: var(--font-display);
-  font-weight: 900;
+  font-family: var(--font-hero);
+  font-weight: 400;
   font-size: clamp(4rem, 10vw, 10rem);
-  line-height: 0.8;
-  letter-spacing: -0.02em;
+  line-height: 0.85;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
 
-/* Eyebrow / labels */
+/* Eyebrow / labels — Neufreit (Oswald), condensed */
 .eyebrow {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
-/* Corpo de texto */
+/* Corpo de texto — Corbel (Nunito Sans), humanista arredondada */
 .lede {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-family: var(--font-text);
+  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
   line-height: 1.35;
   font-weight: 600;
-  max-width: 24ch;
+  max-width: 26ch;
 }
 
 .body-text {
-  font-size: clamp(1rem, 1.2vw, 1.25rem);
-  line-height: 1.55;
+  font-family: var(--font-text);
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.6;
   max-width: 62ch;
   color: var(--color-ink);
 }
 
 .small-note {
+  font-family: var(--font-text);
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--color-gray);
