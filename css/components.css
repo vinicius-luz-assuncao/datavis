@@ -175,10 +175,10 @@
 
 .hero-media__img {
   position: absolute;
-  top: -25%;
-  left: -5%;
-  width: 110%;
-  height: 127%;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
   max-width: none;
   object-fit: cover;
   /* Empilhamento por data-layer: 01 fica na frente (z maior), 04 no fundo. */
