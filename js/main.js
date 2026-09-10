@@ -179,11 +179,68 @@
     window.addEventListener("resize", onMove);
   }
 
+  /* ------------------------------------------------------ PERCURSO NAV */
+  // Marca a seção ativa no "percurso" e preenche a linha de progresso
+  // conforme a rolagem — a distância percorrida na narrativa.
+  function initTrail() {
+    var trail = document.getElementById("trail");
+    if (!trail) return;
+
+    var links = Array.prototype.slice.call(
+      trail.querySelectorAll(".trail__link")
+    );
+    if (links.length === 0) return;
+
+    var progress = trail.querySelector("[data-trail-progress]");
+    var sections = links
+      .map(function (link) {
+        return document.getElementById(link.dataset.trailTarget);
+      })
+      .filter(Boolean);
+
+    var ticking = false;
+
+    function update() {
+      var scrollY = window.pageYOffset;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var ratio = docHeight > 0 ? scrollY / docHeight : 0;
+      ratio = Math.max(0, Math.min(1, ratio));
+      if (progress) progress.style.height = (ratio * 100).toFixed(2) + "%";
+
+      // Seção ativa = a última cujo topo já passou de 1/3 da viewport.
+      var marker = scrollY + window.innerHeight * 0.34;
+      var activeIndex = 0;
+      sections.forEach(function (section, i) {
+        if (section.getBoundingClientRect().top + scrollY <= marker) {
+          activeIndex = i;
+        }
+      });
+
+      links.forEach(function (link, i) {
+        link.classList.toggle("is-active", i === activeIndex);
+      });
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
   /* ---------------------------------------------------------- INIT */
   document.addEventListener("DOMContentLoaded", () => {
     initReveal();
     initCount();
     initHeroParallax();
     initHeroMouseParallax();
+    initTrail();
   });
 })();

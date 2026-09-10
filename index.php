@@ -10,27 +10,45 @@
 
 $BASE = __DIR__;
 
+// Ordem da narrativa em 4 tempos + método e encerramento.
+$secoes = [
+  "sections/hero.php",
+  "sections/inicio.php",
+  "sections/conflito.php",
+  "sections/diagnostico.php",
+  "sections/fechamento.php",
+  "sections/fontes.php",
+  "sections/final.php"
+];
+
 include $BASE . "/includes/header.php";
+
+// Rótulos do "percurso" (navegação de âncoras). A chave é o nome do
+// arquivo da seção — assim a navegação acompanha automaticamente a
+// ordem de $secoes. Seções sem rótulo aqui simplesmente não entram.
+$navLabels = [
+  "hero" => "Abertura",
+  "inicio" => "Início",
+  "conflito" => "Conflito",
+  "diagnostico" => "Diagnóstico",
+  "fechamento" => "Fechamento",
+  "fontes" => "Fontes",
+  "final" => "Vem comigo?"
+];
+
+$navItems = [];
+foreach ($secoes as $sec) {
+  $id = basename($sec, ".php");
+  if (isset($navLabels[$id])) {
+    $navItems[] = ["id" => $id, "label" => $navLabels[$id]];
+  }
+}
+
+include $BASE . "/includes/nav.php";
 ?>
 
 <main id="conteudo">
   <?php
-  // Ordem obrigatória da narrativa (01 a 12).
-  $secoes = [
-    "sections/hero.php",
-    "sections/intro.php",
-    "sections/evidence.php",
-    "sections/gender.php",
-    "sections/socioeconomic.php",
-    "sections/lgbtqia.php",
-    "sections/interest.php",
-    "sections/barriers.php",
-    "sections/regional.php",
-    "sections/conclusion.php",
-    "sections/sources.php",
-    "sections/final.php"
-  ];
-
   foreach ($secoes as $sec) {
     $arquivo = $BASE . "/" . $sec;
     if (file_exists($arquivo)) {
