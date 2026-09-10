@@ -12,24 +12,16 @@
 
 A landing page deve funcionar como um **infográfico editorial interativo**, e não como um dashboard.
 
-A narrativa deve conduzir o usuário através da seguinte sequência:
+A narrativa em 4 tempos conduz o usuário através da seguinte sequência:
 
 ```text
-PROBLEMA
+INÍCIO — o mundo se move menos do que deveria
    ↓
-DADOS
+CONFLITO — quem fica de fora primeiro
    ↓
-DESIGUALDADES
+DIAGNÓSTICO — os motivos mudam quando se olha mais de perto
    ↓
-BARREIRAS
-   ↓
-INTERESSE
-   ↓
-EXCLUSÃO
-   ↓
-POLÍTICAS PÚBLICAS
-   ↓
-SAÚDE
+FECHAMENTO — o que fica quando tiramos o que não podemos resolver
 ```
 
 A página deve transmitir a sensação de uma **reportagem visual de revista**, combinando:
@@ -75,30 +67,53 @@ O resultado deve possuir identidade própria.
 
 ```css
 :root {
-  --color-paper: #F3EFE4;
-  --color-ink: #1C1C1A;
+  /* Base */
+  --color-paper: #F1E9DB;      /* papel quente (fundo) */
+  --color-ink: #1C2B44;        /* navy (texto, títulos, linhas) */
 
-  --color-teal: #087F89;
-  --color-magenta: #E52E63;
-
-  --color-yellow: #F0B323;
-  --color-orange: #E87916;
-
-  --color-gray: #77736B;
+  /* Paleta principal nomeada */
+  --color-navy: #1C2B44;
+  --color-cream: #F1E9DB;
+  --color-vermilion: #E8542B;  /* energia / impacto */
+  --color-pink: #E8557E;
+  --color-plum: #C44E7C;       /* ameixa / exclusão */
+  --color-purple: #7A5994;     /* dado LGBTQIA+ */
+  --color-amber: #F5A23F;      /* destaque */
+  --color-sky: #4AA8D8;        /* acesso / positivo */
+  --color-sage: #8FC9B4;       /* saúde / inclusão */
+  --color-slate: #8FB0AE;      /* neutro frio */
 }
 ```
 
+> **Nota:** os nomes antigos (`--color-teal`, `--color-magenta`, `--color-yellow`,
+> `--color-orange`, `--color-gray`) permanecem como **aliases semânticos** para não
+> quebrar o conteúdo já escrito:
+> `teal → sky`, `magenta → plum`, `yellow → amber`, `orange → vermilion`, `gray → slate`.
+
 ## Uso semântico
 
-| Cor               | Função                                |
-| ----------------- | ------------------------------------- |
-| `--color-paper`   | Fundo principal                       |
-| `--color-ink`     | Texto, títulos, linhas                |
-| `--color-teal`    | Saúde, acesso, prática esportiva      |
-| `--color-magenta` | Exclusão, discriminação, desigualdade |
-| `--color-yellow`  | Destaques e chamadas                  |
-| `--color-orange`  | Dados socioeconômicos                 |
-| `--color-gray`    | Informações secundárias               |
+| Cor                 | Hex       | Função                                |
+| ------------------- | --------- | ------------------------------------- |
+| `--color-paper`     | `#F1E9DB` | Fundo principal (papel quente)        |
+| `--color-ink`       | `#1C2B44` | Texto, títulos, linhas (navy)         |
+| `--color-sky`       | `#4AA8D8` | Saúde, acesso, prática esportiva      |
+| `--color-plum`      | `#C44E7C` | Exclusão, discriminação, desigualdade |
+| `--color-vermilion` | `#E8542B` | Energia, dado de impacto              |
+| `--color-amber`     | `#F5A23F` | Destaques e chamadas                  |
+| `--color-purple`    | `#7A5994` | Identidade LGBTQIA+                   |
+| `--color-sage`      | `#8FC9B4` | Saúde, inclusão                       |
+| `--color-slate`     | `#8FB0AE` | Informações secundárias               |
+| `--color-pink`      | `#E8557E` | Identidade, recorte de gênero         |
+
+## Modos de seção
+
+A narrativa alterna **seções claras** (fundo `paper`, texto `ink`) e **seções escuras**
+(fundo `navy`, texto `paper`) para criar ritmo de revista.
+
+* Seções claras: base da narrativa e dos gráficos.
+* Seções escuras: blocos de impacto — destaque de dado, alerta metodológico ou
+  mensagem final.
+* Em fundo escuro, usar acentos `amber`, `sky` ou `sage` (nunca plum sobre navy).
 
 ---
 
@@ -113,79 +128,114 @@ FUNDO
 → papel
 
 TEXTO
-→ preto
+→ navy / ink
 
 DADO POSITIVO / ACESSO
-→ teal
+→ sky (ou sage)
 
 DADO DE EXCLUSÃO
-→ magenta
+→ plum
 
 DESTAQUE
-→ amarelo
+→ amber
 
 DADO SOCIOECONÔMICO
-→ laranja
+→ vermilion
 ```
 
 A cor deve possuir significado. Não utilizar cor apenas como decoração.
+
+**Contraste:** `amber` e `pink` sobre `paper` têm contraste baixo para texto pequeno —
+usar apenas em display grande ou sobre fundo `navy`. O texto corrente permanece em
+`ink` sobre `paper` (ou `paper` sobre `navy`).
 
 ---
 
 # 05. TIPOGRAFIA
 
-## Display
+O sistema usa **quatro famílias**, cada uma com papel fixo. Como as fontes
+originais da direção de arte são proprietárias, usamos substitutas do Google Fonts:
 
-Utilizar uma fonte condensada e pesada.
+| Fonte original | Substituta     | Papel                                        |
+| -------------- | -------------- | -------------------------------------------- |
+| Elephant       | `Abril Fatface`| Título do hero, números gigantes, fechamento |
+| Neufreit       | `Oswald`       | Títulos de seção, eyebrows, labels           |
+| Futura MD BT   | `Jost`         | Sub-títulos, labels de gráfico, UI           |
+| Corbel         | `Nunito Sans`  | Corpo de texto, legendas, fontes             |
 
-Preferência: `Roboto Condensed`
+Carregamento (Google Fonts):
 
-Alternativas: `Archivo Narrow`, `Oswald`, `Anton`, `Bebas Neue`
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Oswald:wght@400;500;700&family=Jost:wght@400;500;600&family=Nunito+Sans:wght@400;600;700;800&display=swap" />
+```
 
-Uso: títulos, números, chamadas, labels.
+## Papéis no CSS
 
-## Texto
-
-Preferência: `Inter`
-
-Alternativas: `Source Sans 3`, `IBM Plex Sans`, `Roboto`
-
-Uso: parágrafos, legendas, fontes, descrições.
+```css
+--font-hero:    "Abril Fatface", Georgia, serif;               /* hero + números */
+--font-display: "Oswald", "Archivo Narrow", sans-serif;        /* seções + labels */
+--font-geo:     "Jost", "Futura", sans-serif;                  /* sub-títulos + gráficos */
+--font-text:    "Nunito Sans", "Inter", system-ui, sans-serif; /* corpo */
+```
 
 ---
 
 # 06. HIERARQUIA TIPOGRÁFICA
 
-## Hero
+## Hero — Abril Fatface
 
 ```css
-font-size: clamp(3.5rem, 8vw, 8rem);
-font-weight: 900;
-line-height: 0.85;
+font-family: var(--font-hero);
+font-weight: 400;
+font-size: clamp(2.5rem, 6vw, 7rem);
+line-height: 1.02;
+```
+
+## Títulos de seção — Oswald
+
+```css
+font-family: var(--font-display);
+font-weight: 700;
+font-size: clamp(1.75rem, 3.4vw, 3.5rem);
+line-height: 1.02;
 text-transform: uppercase;
 ```
 
-## Títulos de seção
+## Sub-títulos / labels de gráfico — Jost
 
 ```css
-font-size: clamp(2rem, 4vw, 4rem);
-font-weight: 900;
-text-transform: uppercase;
+font-family: var(--font-geo);
+font-weight: 500;
+font-size: clamp(1.1rem, 1.6vw, 1.4rem);
 ```
 
-## Números
+## Números — Abril Fatface
 
 ```css
+font-family: var(--font-hero);
+font-weight: 400;
 font-size: clamp(4rem, 10vw, 10rem);
-font-weight: 900;
-line-height: 0.8;
+line-height: 0.85;
 ```
 
-## Texto
+## Texto — Nunito Sans
 
 ```css
-font-size: clamp(1rem, 1.2vw, 1.25rem);
-line-height: 1.5;
+font-family: var(--font-text);
+font-size: clamp(1rem, 1.2vw, 1.2rem);
+line-height: 1.6;
+```
+
+## Texto de abertura — Oswald
+
+A história de abertura (`.prose-intro`, sobre o canvas 3D) usa Oswald 500,
+sem caixa alta, em linhas que entram em cascata (`--i` como degrau do atraso):
+
+```css
+font-family: var(--font-display);
+font-weight: 500;
+font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+line-height: 1.18;
 ```
 
 ---
@@ -246,19 +296,18 @@ As seções devem possuir bastante espaço vertical. A página não deve parecer
 A ordem obrigatória é:
 
 ```text
-01 — HERO
-02 — INTRODUÇÃO
-03 — EVIDÊNCIAS PRINCIPAIS
-04 — DESIGUALDADE DE GÊNERO
-05 — DESIGUALDADE SOCIOECONÔMICA
-06 — POPULAÇÃO LGBTQIA+
-07 — O INTERESSE EXISTE
-08 — BARREIRAS AMBIENTAIS
-09 — DISTRIBUIÇÃO DAS EQUIPES
-10 — CONCLUSÃO
-11 — FONTES E LIMITAÇÕES
-12 — MENSAGEM FINAL
+HERO (abertura)
+01 — INÍCIO (sections/inicio.php)
+02 — CONFLITO (sections/conflito.php)
+03 — DIAGNÓSTICO (sections/diagnostico.php)
+04 — FECHAMENTO (sections/fechamento.php)
+FONTES E LIMITAÇÕES (sections/fontes.php)
+MENSAGEM FINAL (sections/final.php — "VEM COMIGO?")
 ```
+
+As seções da narrativa antiga (12 blocos) estão arquivadas em `sections/_arquivo/`
+e fora do `index.php`. Novas seções (ex.: créditos) entram como arquivos em
+`sections/` + 1 linha na lista `$secoes` do `index.php` (+ rótulo em `$navLabels`).
 
 ---
 
@@ -308,67 +357,119 @@ Criar uma ilustração editorial de uma pessoa praticando corrida. Ao redor: qua
 
 ---
 
-# 12. INTRODUÇÃO
+# 12. CAPÍTULO 01 — INÍCIO (`sections/inicio.php`)
 
-## Texto principal
+Título: **O mundo se move menos do que deveria.** Fonte: WHO, 2024.
 
-```text
-A prática esportiva é essencial para a saúde,
-mas não é acessível a todos.
-```
+## História de abertura
 
-## Complemento
+Texto curto em linhas que entram em cascata (Oswald 500), sobre o canvas 3D
+do quarto (ver §20). Placeholder: tênis parado, segunda-feira que não chega.
 
-```text
-Mulheres, pessoas de baixa renda e, especialmente,
-a população LGBTQIA+ enfrentam barreiras que vão
-além da infraestrutura — são barreiras culturais,
-sociais e discriminatórias.
-```
+## Escala global
 
-## Visual
+Par de donuts: `31%` dos adultos e `80%` dos adolescentes não atingem o nível
+recomendado. Cores: `vermilion` e `amber`.
 
-Adicionar uma ilustração mostrando pessoas tentando acessar um espaço esportivo. A quadra pode funcionar como metáfora de acesso.
+## Projeção
 
----
+Gráfico `projection`: `26%` (2010, **derivado** do "+5 p.p. desde 2010") →
+`31%` (atual) → `35%` (2030, projeção). Trecho projetado em tracejado.
+Animação sequencial: círculo → linha → círculo → tracejado → círculo.
 
-# 13. EVIDÊNCIAS PRINCIPAIS
+## Impacto
 
-Esta seção deve apresentar três números gigantes.
+Três números compactos (não-gráfico): `~1,8 bi` de adultos inativos ·
+risco de morte `+20–30%` · custo `~US$ 300 bi` (2020–2030).
 
-## STAT 01
+## Benefício
 
-```text
-42,8%
-```
-
-Texto: da amostra LGBTQIA+ não tem acesso ao esporte.
-
-Fonte: Nike/Nix, 2021. Cor: `--color-teal`
-
-## STAT 02
-
-```text
-63,5%
-```
-
-Texto: já sofreu ou presenciou discriminação em ambientes esportivos.
-
-Fonte: Nike/Nix, 2021. Cor: `--color-magenta`
-
-## STAT 03
-
-```text
-76%
-```
-
-Texto: da população geral não pratica esporte.
-
-Fonte: PNAD, 2015. Cor: `--color-orange`
+Callout: atividade regular contribui para prevenção/manejo de DCV, câncer e
+diabetes; reduz depressão e ansiedade.
 
 ---
 
-# 14. COMPONENTE STAT NUMBER
+# 13. CAPÍTULO 02 — CONFLITO (`sections/conflito.php`)
+
+Título: **Quem fica de fora primeiro.** Três camadas separadas por fonte —
+nunca comparar valores absolutos entre fontes distintas.
+
+## Mundo (WHO, 2024)
+
+Mulheres ~5 p.p. menos ativas. Dumbbell: meninas `85%` × meninos `78%`
+(adolescentes sem o nível recomendado).
+
+## Brasil (IBGE, 2017, p. 12 e p. 15)
+
+Barras agrupadas (`grouped-bar`): atividade `42,7% × 33,4%`;
+só esporte `31,7% × 16,9%` (homens × mulheres).
+
+## LGBTQIA+ (NIX Diversidade/Nike, 2022, p. 21)
+
+Donut `42,8%` sem acesso ao esporte. Cor: `purple`.
+
+## Aviso metodológico (callout fixo)
+
+WHO, IBGE e NIX têm populações, métodos e perguntas distintos.
+
+---
+
+# 14. CAPÍTULO 03 — DIAGNÓSTICO (`sections/diagnostico.php`)
+
+Título: **Os motivos mudam quando se olha mais de perto.**
+Leitura de **composição e ordem** dos motivos — nunca valor absoluto entre fontes.
+
+## Comparador de motivos (IBGE × NIX)
+
+Dumbbell nas categorias equivalentes — tempo (`38,2 × 26,3`), companhia
+(`1,7 × 20,6`), não gostar/interesse (`35,0 × 18`) — mais barras das
+categorias exclusivas da NIX: capacidade física (`10`), homofobia/transfobia
+(`9,6`), bullying/assédio (`8,7`). Fontes: IBGE 2017 p. 20; NIX 2022 p. 27.
+
+## Discriminação (NIX, p. 38–39)
+
+Par de donuts: `63,5%` (ao praticar) e `68,3%` (em ambientes esportivos).
+
+## Inclusão trans (NIX, p. 40)
+
+Gráfico `range`: `75,6%–76,8%` de apoio a pessoas trans nos mesmos times.
+
+## Companhia (Lopes & Del Vecchio, 2026)
+
+Barras agrupadas: `40%` LGBT+ × `14%` não-LGBT+; escore de barreiras
+`26,1 ± 9,2` (feminino) × `13,8 ± 13,7` (masculino).
+
+## Placeholder
+
+Pessoa observando o grupo de fora / vestiário pouco acolhedor.
+
+---
+
+# 15. CAPÍTULO 04 — FECHAMENTO (`sections/fechamento.php`)
+
+Título: **O que fica quando tiramos o que não podemos resolver.**
+
+## Sem o tempo
+
+Barras dos motivos NIX com "falta de tempo" esmaecida (`data-muted`) e
+"falta de companhia" em destaque (`vermilion`).
+
+## Fluxo
+
+Companhia → Conexão → Pertencimento (`.flow`, 3 colunas, sem ícones).
+
+## Nota de projeto (faixa escura `.projeto-note`)
+
+Separa achado de pesquisa de decisão de projeto: escopo mulheres cis +
+LGBTQIA+ e gamificação/retenção como **hipótese de design**.
+
+## Placeholder
+
+Duas pessoas se encontrando para treinar / mão estendida ("vem comigo").
+
+---
+
+# 16. COMPONENTE STAT NUMBER
 
 ```ts
 interface StatNumberProps {
@@ -383,122 +484,7 @@ Estrutura: NUMBER → LABEL → SOURCE. Nunca apresentar o número sem contexto.
 
 ---
 
-# 15. DESIGUALDADE DE GÊNERO
-
-## Título
-
-```text
-QUEM PRATICA MAIS?
-```
-
-## Dados
-
-```text
-Homens: 42,7%
-Mulheres: 33,4%
-```
-
----
-
-# 16. GRÁFICO — GÊNERO
-
-## Tipo
-
-Barra horizontal comparativa.
-
-```text
-HOMENS
-█████████████████████ 42,7%
-
-MULHERES
-█████████████████     33,4%
-```
-
-## Regras
-
-Homens: TEAL. Mulheres: MAGENTA. O eixo deve ser simples. Não utilizar 3D, sombras, gradientes ou efeitos de brilho.
-
-## Texto interpretativo
-
-```text
-Homens apresentam uma taxa de prática esportiva
-maior que mulheres.
-```
-
----
-
-# 17. ILUSTRAÇÃO — GÊNERO
-
-Posicionar uma ilustração ao lado ou abaixo do gráfico. Mostrar duas ou mais pessoas em situações esportivas diferentes. A ilustração deve sugerir ACESSO, OPORTUNIDADE, CONTEXTO. Não representar literalmente homem = pratica, mulher = não pratica. Evitar reforço de estereótipos.
-
----
-
-# 18. DESIGUALDADE SOCIOECONÔMICA
-
-## Título
-
-```text
-O ACESSO TAMBÉM DEPENDE
-DAS CONDIÇÕES SOCIAIS.
-```
-
-Mensagem: A prática esportiva aumenta conforme aumentam escolaridade e renda.
-
----
-
-# 19. GRÁFICO — ESCOLARIDADE E RENDA
-
-## Tipo
-
-Gráfico de tendência qualitativa.
-
-```text
-                    ●
-                ●
-            ●
-        ●
-    ●
-────────────────────────
-MENOR             MAIOR
-ESCOLARIDADE/RENDA
-```
-
-## Regra crítica
-
-Se a fonte não fornecer percentuais específicos por faixa: **NÃO INVENTAR VALORES.** O gráfico deve representar apenas a existência da tendência.
-
----
-
-# 20. POPULAÇÃO LGBTQIA+
-
-## Título
-
-```text
-QUANDO O PROBLEMA
-NÃO É FALTA DE INTERESSE.
-```
-
-Texto: Para parte da população LGBTQIA+, a exclusão não acontece apenas porque faltam espaços ou oportunidades. Ela também acontece quando o espaço esportivo deixa de ser percebido como seguro.
-
----
-
-# 21. GRÁFICO — ACESSO
-
-## Tipo
-
-Donut chart. Valor: `42,8%`. Texto: DA AMOSTRA NÃO TEM ACESSO AO ESPORTE.
-
----
-
-# 22. GRÁFICO — DISCRIMINAÇÃO
-
-## Tipo
-
-Donut chart. Valor: `63,5%`. Texto: SOFREU OU PRESENCIOU DISCRIMINAÇÃO.
-
----
-
-# 23. COMPONENTE DONUT CHART
+# 17. COMPONENTE DONUT CHART
 
 ```ts
 interface DonutChartProps {
@@ -513,9 +499,22 @@ O percentual deve aparecer no centro. A parte restante deve utilizar uma tonalid
 
 ---
 
-# 24. ALERTA METODOLÓGICO
+# 18. NOVOS COMPONENTES DE GRÁFICO (`js/charts.js`)
 
-Adicionar uma pequena nota próxima aos dados:
+Todos via `data-chart` + `data-*`, desenhados com D3 e animados ao entrar no
+viewport (com `prefers-reduced-motion` mostrando o estado final de imediato).
+
+* `grouped-bar` — linhas de `.gbar__bar` (`data-name`, `data-value`, `data-color`;
+  `data-max` e `data-unit` opcionais). Uso: gênero IBGE, companhia Lopes.
+* `dumbbell` — linhas de `.dumbbell__row` (`data-label`, `data-a`, `data-b`);
+  cores/legendas via `data-a-label/color`, `data-b-label/color`. Uso: meninas ×
+  meninos, motivos IBGE × NIX.
+* `range` — linhas de `.range__row` (`data-min`, `data-max`). Uso: apoio trans.
+* `projection` — pontos de `.projection__point` (`data-year`, `data-value`,
+  `data-tag`); trecho projetado em tracejado com máscara `clipPath`.
+* `bar` + `data-muted="true"` — linha esmaecida para o "sem o tempo".
+
+## Alerta metodológico (regra permanente)
 
 ```text
 42,8% não significa que 42,8% abandonaram
@@ -529,227 +528,95 @@ Não interpretar o dado além do que a fonte permite.
 
 ---
 
-# 25. O INTERESSE EXISTE
+# 19. FONTES E LIMITAÇÕES (`sections/fontes.php`)
 
-## Título
+Apenas as quatro fontes da narrativa, cada uma com amostra e limitação:
 
-```text
-O INTERESSE EXISTE.
-O QUE FALTA É ACOLHIMENTO.
-```
-
-## DADO 01
-
-```text
-76,8%
-```
-
-Texto: considera o esporte "muito importante" para a comunidade.
-
-Fonte: Nike/Nix, 2021.
-
-## DADO 02
-
-```text
-95,8%
-```
-
-Texto: admira atletas assumidos.
-
-Fonte: Nike/Nix, 2021.
-
----
-
-# 26. ILUSTRAÇÃO — PERTENCIMENTO
-
-Essa deve ser uma das principais ilustrações da página. Mostrar: pessoas diversas, diferentes corpos, diferentes expressões, roupas esportivas, interação, esporte coletivo, sensação de pertencimento. A diversidade deve aparecer principalmente através das pessoas. Não depender exclusivamente de símbolos LGBTQIA+.
-
----
-
-# 27. BARREIRAS AMBIENTAIS
-
-## Título
-
-```text
-ÀS VEZES,
-O ESPAÇO TAMBÉM AFASTA.
-```
-
-Fonte: Lopes & Del Vecchio, 2026.
-
-## Barreiras
-
-```text
-BULLYING
-VESTIÁRIOS INADEQUADOS
-FALTA DE SEGURANÇA
-ISOLAMENTO
-FALTA DE APOIO
-```
-
----
-
-# 28. FLUXO DE EXCLUSÃO
-
-```text
-BARREIRA
-   ↓
-MEDO
-   ↓
-ISOLAMENTO
-   ↓
-MENOR PARTICIPAÇÃO
-```
-
-Cada etapa deve possuir: ícone, palavra-chave, pequena descrição.
-
----
-
-# 29. ILUSTRAÇÃO — ISOLAMENTO
-
-Uma pessoa afastada enquanto outras pessoas praticam esporte. A cena deve ser editorial, discreta, humana, não melodramática.
-
----
-
-# 30. DISTRIBUIÇÃO DAS EQUIPES LGBTQIA+
-
-## Dados
-
-```text
-103 perfis analisados
-
-Sudeste: 51,1%
-Sul: 28,9%
-Nordeste: 11,1%
-Centro-Oeste: 5,6%
-Norte: 3,3%
-```
-
----
-
-# 31. GRÁFICO — MAPA DO BRASIL
-
-## Tipo
-
-Mapa editorial do Brasil. Utilizar círculos proporcionais ou marcadores regionais. Não utilizar mapa coroplético caso o objetivo seja representar quantidade de equipes.
-
-## Destaque
-
-```text
-80% DAS EQUIPES ESTÃO
-CONCENTRADAS NO SUL/SUDESTE.
-```
-
----
-
-# 32. COMPONENTE BRAZIL MAP
-
-```ts
-BrazilMap
-```
-
-Responsabilidades: exibir mapa simplificado; posicionar dados regionais; permitir responsividade; apresentar legenda; disponibilizar descrição acessível. O mapa deve ser SVG. Não utilizar imagem rasterizada.
-
----
-
-# 33. CONCLUSÃO
-
-## Título
-
-```text
-ENTÃO,
-POR QUE ISSO IMPORTA?
-```
-
-Sequência visual:
-
-```text
-ATIVIDADE FÍSICA
-        ↓
-ESPORTE INCLUSIVO
-        ↓
-POLÍTICAS PÚBLICAS
-        ↓
-SAÚDE E EQUIDADE
-```
-
----
-
-# 34. BLOCO FINAL
-
-## 01 — ATIVIDADE FÍSICA
-Ícone: coração. Mensagem: reduz riscos de doenças e promove saúde.
-
-## 02 — ESPORTE INCLUSIVO
-Ícone: grupo de pessoas. Mensagem: fortalece vínculos sociais e combate formas de violência.
-
-## 03 — POLÍTICAS PÚBLICAS
-Ícone: instituição. Mensagem: garantem acesso e promovem equidade.
-
-## 04 — PARTICIPAÇÃO
-Ícone: pessoa praticando esporte. Mensagem: quando todos participam, toda a sociedade ganha.
-
----
-
-# 35. FONTES E LIMITAÇÕES
-
-## OMS — 2024
+## WHO — 2024
 Dados globais sobre atividade física. Limitação: não apresenta recorte específico LGBTQIA+.
 
-## PNAD / IBGE — 2015
-Dados nacionais sobre prática esportiva. Limitação: não apresenta orientação sexual ou identidade de gênero.
+## IBGE / PNAD — 2015 (publicado em 2017)
+Dados nacionais sobre prática esportiva. Limitação: não abre por orientação sexual ou identidade de gênero.
 
-## Nike/Nix — 2021
-Amostra de 1.037 pessoas LGBTQIA+. Limitação: amostra não probabilística. Não generalizar para toda a população.
+## NIX Diversidade/Nike — coleta 2021, publicado em 2022
+Amostra: 1.037 pessoas. Limitação: amostra não probabilística. Não generalizar para toda a população.
 
 ## Lopes & Del Vecchio — 2026
-Estudo com foco em jovens e ambiente escolar. Limitação: não representa toda a população brasileira.
-
-## Tesser & Kovaleski — 2023
-Mapeamento de equipes esportivas LGBTQIA+. Limitação: analisa equipes/perfis, não indivíduos.
+Estudo com foco em jovens e ambiente escolar em Pelotas. Limitação: não representa toda a população brasileira.
 
 ---
 
-# 36. MENSAGEM FINAL
+# 20. MENSAGEM FINAL (`sections/final.php` — "VEM COMIGO?")
 
-Faixa visual forte.
+Faixa escura de encerramento.
 
 ```text
-ESPORTE É DIREITO.
-INCLUSÃO É SAÚDE.
-NINGUÉM FICA PARA TRÁS.
+De: "Eu não vou sozinha."
+Para: "Vem comigo?"
+[ nome do projeto ]  ← placeholder
 ```
 
-Visual: FUNDO → INK, TEXTO → PAPER, DESTAQUE → YELLOW.
+Texto de apoio: aproximar pessoas, formar conexões, tornar o ambiente
+esportivo mais acolhedor. Visual: FUNDO → NAVY, TEXTO → PAPER, DESTAQUE → AMBER.
 
 ---
 
-# 37. COMPONENTES
+# 21. NAVEGAÇÃO "PERCURSO" (`includes/nav.php`)
+
+A narrativa é um percurso: trilha lateral fixa com checkpoints numerados
+(`01–07`), linha que preenche conforme a rolagem e rótulo no hover/foco/ativo.
+Em telas estreitas, só os pontos.
+
+* `index.php` gera `$navItems` a partir de `$secoes` + `$navLabels` — a navegação
+  acompanha automaticamente a ordem das seções.
+* `js/main.js` (`initTrail`) marca a seção ativa e preenche o progresso.
+* Âncoras reais: funciona mesmo sem JavaScript.
+
+---
+
+# 22. CENA 3D — QUARTO (`assets/Quarto-interacao/`, `js/quarto.js`)
+
+Exceção documentada à regra "sem 3D": a cena interativa do quarto (three.js,
+GLB `quarto02.glb`) vive **atrás do texto de abertura** do Capítulo 01.
+
+* Camadas: canvas (`z 0`) → véu claro em degradê (`z 1`, `pointer-events: none`)
+  → texto (`z 2`, não clicável para a bola ser arrastável).
+* `importmap` do three@0.160.0 no `header.php`; `js/quarto.js` reaproveita o
+  `initQuarto()` do projeto com `modelURL` corrigido e câmera própria
+  (posição deslocada à direita, `fov 33`).
+* Inicialização preguiçosa (só ao entrar na tela); com
+  `prefers-reduced-motion` o 3D nem inicia; sem WebGL/CDN, texto + véu seguem intactos.
+
+---
+
+# 23. COMPONENTES (`sections/` + `includes/`)
 
 ```text
-LandingPage
+LandingPage (index.php: $secoes + $navLabels + $navItems)
 │
-├── Hero
-├── IntroSection
-├── EvidenceStats
-│   └── StatNumber
-├── GenderSection
-│   └── BarChart
-├── SocioeconomicSection
-│   └── TrendChart
-├── LGBTQSection
-│   ├── DonutChart
-│   └── DonutChart
-├── InterestSection
-│   ├── DonutChart
-│   └── DonutChart
-├── BarrierSection
-│   └── BarrierFlow
-├── RegionalSection
-│   └── BrazilMap
-├── ConclusionSection
-├── SourcesSection
-└── FinalStatement
+├── Hero (parallax em 4 camadas)
+├── Capitulo01 (inicio.php)
+│   ├── ProseStage (texto em cascata + canvas Quarto)
+│   ├── DonutChart × 2 (31%, 80%)
+│   ├── ProjectionChart (2010 → 2024 → 2030)
+│   └── StatNumber × 3 (1,8 bi · 20–30% · US$ 300 bi)
+├── Capitulo02 (conflito.php)
+│   ├── DumbbellChart (85% × 78%)
+│   ├── GroupedBarChart (IBGE gênero)
+│   └── DonutChart (42,8%)
+├── Capitulo03 (diagnostico.php)
+│   ├── DumbbellChart (motivos IBGE × NIX)
+│   ├── BarChart (motivos exclusivos NIX)
+│   ├── DonutChart × 2 (63,5% · 68,3%)
+│   ├── RangeChart (75,6%–76,8%)
+│   └── GroupedBarChart × 2 (companhia · escores)
+├── Capitulo04 (fechamento.php)
+│   ├── BarChart ("sem o tempo", data-muted)
+│   ├── Flow (companhia → conexão → pertencimento)
+│   └── ProjetoNote (faixa escura)
+├── FontesSection (4 fontes)
+├── FinalStatement ("VEM COMIGO?")
+└── TrailNav (includes/nav.php — percurso com progresso)
 ```
 
 ---
@@ -760,46 +627,39 @@ Criar também: `SectionHeader`, `SourceLabel`, `EditorialCallout`, `Illustration
 
 ---
 
-# 39. DADOS
+# 25. DADOS
 
-Separar dados da interface.
+Os dados vivem nos atributos `data-*` do HTML em `sections/` (o projeto é PHP;
+não há `src/data/*.ts`). Cada número carrega sua fonte no `stat__source` ao lado.
 
-```ts
-export const statistics = {
-  lgbtqiaNoAccess: 42.8,
-  discrimination: 63.5,
-  generalInactive: 76,
-  menPractice: 42.7,
-  womenPractice: 33.4,
-  sportImportance: 76.8,
-  admireAthletes: 95.8
-};
+```text
+WHO 2024 ............ 31 · 80 · 1,8 bi · +5 p.p. · 35 (2030) · 20–30 · US$ 300 bi
+IBGE 2017 ........... 42,7 · 33,4 · 31,7 · 16,9 · motivos (38,2 · 35,0 · 19,0 · 2,7 · 1,9 · 1,7)
+NIX 2022 ............ 42,8 · 63,5 · 68,3 · 75,6–76,8 · motivos (26,3 · 20,6 · 18 · 10 · 9,6 · 8,7)
+Lopes & Del Vecchio . 40 · 14 · 26,1 ± 9,2 · 13,8 ± 13,7
 ```
 
 ---
 
-# 40. FONTES
+# 26. FONTES
 
-Criar arquivo `src/data/sources.ts`.
-
-```ts
-export const sources = {
-  oms: { name: "OMS", year: 2024 },
-  pnad: { name: "PNAD / IBGE", year: 2015 },
-  nikeNix: { name: "Nike/Nix", year: 2021, sample: 1037 },
-  lopesDelVecchio: { name: "Lopes & Del Vecchio", year: 2026 },
-  tesserKovaleski: { name: "Tesser & Kovaleski", year: 2023 }
-};
-```
+As quatro fontes estão documentadas em `sections/fontes.php` (nome, ano,
+amostra e limitação). Não existem outras fontes ativas no site.
 
 ---
 
-# 41. REGRA DOS DADOS
+# 28. REGRA DOS DADOS
 
 ## OBRIGATÓRIO
 Não inventar dados.
 
 Se a fonte possui percentual, mostrar percentual. Se possui quantidade, mostrar quantidade. Se possui tendência, mostrar tendência. Nunca criar números intermediários para tornar um gráfico "mais bonito".
+
+## Exceções documentadas
+* **2010 derivado:** o ponto `26%` é aritmética explícita (`31 − 5 p.p.`), sempre
+  rotulado como "derivado" — nunca apresentado como achado da OMS.
+* **Sem comparação absoluta entre fontes:** WHO, IBGE, NIX e Lopes têm populações,
+  métodos e perguntas distintos; a leitura entre elas é de composição/ordem.
 
 ---
 
@@ -809,12 +669,17 @@ Todos os gráficos devem: ser responsivos; possuir fonte; possuir legenda quando
 
 ---
 
-# 43. ANIMAÇÕES
+# 27. ANIMAÇÕES
 
-Utilizar animações apenas quando o elemento entrar no viewport.
+Utilizar animações apenas quando o elemento entrar no viewport
+(`IntersectionObserver`; `prefers-reduced-motion` mostra o estado final).
 
 * Barras: 0% → valor final.
 * Donuts: 0° → percentual.
+* Projeção (sequência ~2,9s): círculo → linha sólida cresce → círculo →
+  tracejado cresce (máscara `clipPath`) → círculo final.
+* Texto de abertura: linhas entram em cascata (`--i` × 240ms).
+* Percurso: linha de progresso preenche conforme a rolagem; checkpoint ativo.
 * Ilustrações: entrada com opacity + translateY, duração 600–1000ms.
 
 ---
@@ -848,9 +713,11 @@ Reduzir: tamanho das ilustrações; títulos; espaçamentos. Manter a estrutura 
 Transformar a composição em narrativa vertical:
 
 ```text
-HERO → INTRO → 42,8% → 63,5% → 76% → GÊNERO → GRÁFICO →
-SOCIOECONÔMICO → LGBTQIA+ → 42,8% + 63,5% → INTERESSE →
-76,8% + 95,8% → BARREIRAS → MAPA → CONCLUSÃO → FONTES
+HERO → 01 INÍCIO (31% · 80% · projeção · 1,8 bi) →
+02 CONFLITO (gênero · IBGE · 42,8%) →
+03 DIAGNÓSTICO (motivos · 63,5% · 68,3% · 75,6–76,8% · companhia) →
+04 FECHAMENTO (sem o tempo · fluxo · nota de projeto) →
+FONTES → VEM COMIGO?
 ```
 
 ---
@@ -873,135 +740,74 @@ Todas as ilustrações devem seguir: EDITORIAL, VETORIAL, ORGÂNICO, CONTORNOS L
 
 Evitar: FOTORREALISMO, 3D, GRADIENTES EXCESSIVOS, ESTILO CORPORATIVO GENÉRICO, STOCK PHOTOS, EXCESSO DE DETALHES.
 
----
+## Elementos gráficos e tom
 
-# 49. MAPA DE IMAGENS
-
-* HERO: ILUSTRAÇÃO GRANDE. Pessoa praticando esporte + obstáculos.
-* INTRO: ILUSTRAÇÃO MÉDIA. Pessoas tentando acessar espaço esportivo.
-* GÊNERO: ILUSTRAÇÃO PEQUENA/MÉDIA. Pessoas em contexto esportivo.
-* LGBTQIA+: ILUSTRAÇÃO GRANDE. Grupo diverso praticando esporte.
-* BARREIRAS: ILUSTRAÇÃO MÉDIA. Pessoa isolada.
-* MAPA: MAPA SVG. O mapa é o próprio elemento visual principal.
-* CONCLUSÃO: ILUSTRAÇÃO PEQUENA. Grupo praticando esporte de maneira inclusiva.
+* **Cantos arredondados suaves** em blocos, cartões e barras (`--radius-sm/md/lg`).
+* **Elementos gráficos com personalidade:** pequenos ícones/mascotes acolhedores
+  (formas orgânicas com expressão), reforçando o tom humano da narrativa.
+* **Recortes de cor chapada:** faixas, etiquetas e realces usam cor sólida da paleta,
+  sem gradientes chamativos.
+* O mascote é apoio expressivo — **nunca** o único comunicador de um dado
+  (nunca depender só da cor ou da ilustração).
 
 ---
 
-# 50. O QUE NÃO FAZER
+# 32. MAPA DE IMAGENS (placeholders com o tipo de arte descrito)
 
-Não transformar a landing page em Dashboard. Não utilizar cards excessivos. Não utilizar gráficos 3D. Não utilizar gradientes chamativos. Não utilizar sombras pesadas. Não utilizar fotografias aleatórias. Não utilizar números sem fonte. Não inventar dados. Não transformar tendência → percentual sem que a fonte forneça o percentual.
+* HERO: parallax em 4 camadas (`hero-ft-01..04.png`, 01 = primeiro plano).
+* INÍCIO: cena 3D do quarto atrás do texto + placeholder "tênis parado e a segunda-feira que não chega".
+* CONFLITO: placeholder "linha de partida com pessoas diversas; alguém ainda de fora".
+* DIAGNÓSTICO: placeholder "pessoa observando o grupo de fora / vestiário pouco acolhedor".
+* FECHAMENTO: placeholder grande "duas pessoas se encontrando para treinar / mão estendida".
 
 ---
 
-# 51. PRINCÍPIO EDITORIAL
+# 33. O QUE NÃO FAZER
+
+Não transformar a landing page em Dashboard. Não utilizar cards excessivos. Não utilizar sombras pesadas. Não utilizar fotografias aleatórias. Não utilizar números sem fonte. Não inventar dados. Não transformar tendência → percentual sem que a fonte forneça o percentual. Não comparar valores absolutos entre fontes distintas.
+
+Sobre 3D e gradientes: valem apenas o deliberado — a cena do quarto (§22, com véu de leitura) e os véus de legibilidade do hero. Nada além disso.
+
+---
+
+# 34. PRINCÍPIO EDITORIAL
 
 A página deve parecer uma história. Não uma coleção de informações.
 
 ```text
-"Existe um problema." → "Os números mostram isso." →
-"Mas o problema não é igual para todos." →
-"Algumas pessoas enfrentam barreiras adicionais." →
-"Mesmo assim, existe interesse." →
-"Portanto, o problema também está no ambiente." →
-"Espaços seguros e políticas públicas podem mudar isso."
+"O mundo se move menos." → "Mas não para todos igual." →
+"Os motivos mudam de perto." → "O tempo não se resolve." →
+"Companhia, conexão, pertencimento." → "Vem comigo?"
 ```
 
 ---
 
-# 52. ORDEM DE IMPLEMENTAÇÃO
+# 35. STATUS DE IMPLEMENTAÇÃO
 
-## FASE 01 — BASE
-* [ ] Configurar projeto.
-* [ ] Configurar fonte.
-* [ ] Criar variáveis CSS.
-* [ ] Criar grid.
-* [ ] Criar container.
-* [ ] Criar textura.
-* [ ] Criar estilos globais.
+## FEITO
+* [x] Base, variáveis, grid, container, textura, estilos globais.
+* [x] Estrutura em 4 capítulos + fontes + encerramento (seções antigas em `sections/_arquivo/`).
+* [x] Componentes: StatNumber, BarChart (+`data-muted`), DonutChart, GroupedBarChart, DumbbellChart, RangeChart, ProjectionChart, Flow, ProjetoNote, TrailNav, ProseStage.
+* [x] Dados das 4 fontes nos `data-*` do HTML, cada número com sua fonte.
+* [x] Direção de arte: paleta, 4 fontes, véus, cantos arredondados, cena do quarto.
+* [x] Animações por IntersectionObserver + `prefers-reduced-motion`.
+* [x] Responsividade desktop/tablet/mobile; HTML semântico, foco visível, `aria-label` nos gráficos.
 
-## FASE 02 — ESTRUTURA
-* [ ] Criar Hero.
-* [ ] Criar Intro.
-* [ ] Criar Evidências.
-* [ ] Criar Gênero.
-* [ ] Criar Socioeconômico.
-* [ ] Criar LGBTQIA+.
-* [ ] Criar Interesse.
-* [ ] Criar Barreiras.
-* [ ] Criar Mapa.
-* [ ] Criar Conclusão.
-* [ ] Criar Fontes.
-* [ ] Criar encerramento.
-
-## FASE 03 — COMPONENTES
-* [ ] StatNumber.
-* [ ] BarChart.
-* [ ] DonutChart.
-* [ ] TrendChart.
-* [ ] BrazilMap.
-* [ ] BarrierFlow.
-* [ ] SourceLabel.
-* [ ] IllustrationBlock.
-
-## FASE 04 — DADOS
-* [ ] Criar `statistics.ts`.
-* [ ] Criar `sources.ts`.
-* [ ] Separar conteúdo dos componentes.
-* [ ] Validar números.
-* [ ] Associar cada número à sua fonte.
-
-## FASE 05 — GRÁFICOS
-* [ ] Homens x Mulheres.
-* [ ] 42,8%.
-* [ ] 63,5%.
-* [ ] 76,8%.
-* [ ] 95,8%.
-* [ ] Tendência socioeconômica.
-* [ ] Mapa regional.
-
-## FASE 06 — DIREÇÃO DE ARTE
-* [ ] Inserir ilustrações.
-* [ ] Ajustar composição.
-* [ ] Aplicar textura.
-* [ ] Aplicar linhas editoriais.
-* [ ] Ajustar cores.
-* [ ] Ajustar tipografia.
-
-## FASE 07 — ANIMAÇÃO
-* [ ] Contagem dos números.
-* [ ] Animação das barras.
-* [ ] Animação dos donuts.
-* [ ] Entrada das ilustrações.
-* [ ] Intersection Observer.
-
-## FASE 08 — RESPONSIVIDADE
-* [ ] Desktop.
-* [ ] Tablet.
-* [ ] Mobile.
-* [ ] Testar gráficos.
-* [ ] Testar ilustrações.
-* [ ] Testar textos longos.
-
-## FASE 09 — ACESSIBILIDADE
-* [ ] Contraste.
-* [ ] Alt text.
-* [ ] Descrição dos gráficos.
-* [ ] Teclado.
-* [ ] Focus states.
-* [ ] Reduced motion.
-* [ ] HTML semântico.
+## ABERTO
+* [ ] Ilustrações finais nos placeholders (tênis, linha de partida, vestiário, encontro).
+* [ ] Nome do projeto no "VEM COMIGO?".
+* [ ] Novas seções futuras (ex.: créditos) via `sections/` + `$secoes`.
 
 ---
 
-# 54. CRITÉRIO FINAL
+# 36. CRITÉRIO FINAL
 
 A página estará conceitualmente correta quando o usuário conseguir entender apenas percorrendo os títulos e números:
 
 ```text
-ESPORTE É IMPORTANTE → MUITA GENTE NÃO PRATICA → O ACESSO NÃO É IGUAL →
-MULHERES PRATICAM MENOS → RENDA E ESCOLARIDADE IMPORTAM →
-LGBTQIA+ ENFRENTA BARREIRAS → EXISTE INTERESSE → O AMBIENTE PODE AFASTAR →
-INCLUSÃO EXIGE POLÍTICAS → ESPORTE TAMBÉM É SAÚDE
+31% · 80% → 2030: 35% → MULHERES PRATICAM MENOS → 42,8% SEM ACESSO →
+TEMPO × COMPANHIA → 63,5% · 68,3% → 75,6–76,8% → 40% × 14% →
+SEM O TEMPO, SOBRA COMPANHIA → VEM COMIGO?
 ```
 
 ## Resultado visual esperado
