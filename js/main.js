@@ -95,8 +95,9 @@
   }
 
   // fator com curva: separa mais os níveis próximos dos distantes
+  // exponente 1.6 → camadas à frente se destacam proporcionalmente mais
   function depthFactor(depth) {
-    return Math.pow(depth, 1.35);
+    return Math.pow(depth, 1.6);
   }
 
   function initHeroParallax() {
@@ -104,22 +105,31 @@
     if (layers.length === 0) return;
     if (prefersReducedMotion) return;
 
-    var amplitude = 220; // px máximos para a camada de maior profundidade
-    var spread = 70; // recuo horizontal de repouso: puxa o fundo para trás
+    var hero = document.getElementById("hero");
+    var spread = 120;       // recuo horizontal de repouso (maior → mais profundidade)
+    var baseAmplitude = 280; // deslocamento desejado para depth=1 (px)
     var ticking = false;
 
     function update() {
-      var hero = document.getElementById("hero");
       var rect = hero.getBoundingClientRect();
+      var heroW = hero.offsetWidth;
+
+      // Clamp dinâmico: a camada frontal não pode se deslocar mais que
+      // 18% da largura do hero (evita expor bordas das imagens)
+      var maxPx = heroW * 0.18;
+      var amplitude = Math.min(baseAmplitude, maxPx);
+
       // progress: 0 quando o hero está no topo, 1 depois de uma tela de rolagem
       var progress = -rect.top / window.innerHeight;
       progress = Math.max(0, Math.min(1, progress));
-      var shift = progress * amplitude;
+
       layers.forEach(function (img) {
         var depth = parseFloat(img.dataset.depth || "0");
         var factor = depthFactor(depth);
-        img.style.setProperty("--hero-base-x", ((depth - 1) * spread).toFixed(1) + "px");
-        img.style.setProperty("--hero-scroll-shift", (shift * factor).toFixed(1) + "px");
+        var baseX = (depth - 1) * spread;
+        var scrollShift = progress * amplitude * factor;
+        img.style.setProperty("--hero-base-x", baseX.toFixed(1) + "px");
+        img.style.setProperty("--hero-scroll-shift", scrollShift.toFixed(1) + "px");
       });
       ticking = false;
     }
@@ -146,14 +156,20 @@
     // Tela de toque não tem "hover" — parallax de mouse é só para ponteiro.
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-    var strength = 36; // px máximos por eixo na camada de maior profundidade
+    var hero = document.getElementById("hero");
+    var baseStrength = 45; // px máximos por eixo na camada de maior profundidade
     var ticking = false;
 
     function onMove(e) {
       if (!ticking) {
         requestAnimationFrame(function () {
-          var hero = document.getElementById("hero");
           var rect = hero.getBoundingClientRect();
+          var heroW = hero.offsetWidth;
+
+          // Clamp dinâmico: mouse não pode deslocar mais que 3% da largura
+          var maxMousePx = heroW * 0.03;
+          var strength = Math.min(baseStrength, maxMousePx);
+
           // nx/ny: -1..1 (mouse no centro da página = 0)
           var nx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
           var ny = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
