@@ -17,4 +17,10 @@
     transform: none;
     transition: none;
   }
+
+  .prose-intro .prose-line {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
