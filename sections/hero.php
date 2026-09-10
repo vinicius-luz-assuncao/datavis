@@ -1,10 +1,7 @@
 <?php
 /**
- * 01 — HERO
- * Eyebrow, título gigante e pergunta de abertura sobre imagem de fundo.
- *
- * Para trocar a imagem de fundo, basta mudar a URL abaixo
- * (caminho relativo a partir da raiz do site).
+ * HERO — abertura
+ * Eyebrow, título e pergunta de abertura sobre as camadas de parallax.
  */
 ?>
 <section class="section hero" id="hero">
@@ -21,7 +18,7 @@
   <div class="container">
     <div class="split">
       <div class="split-copy">
-        <span class="eyebrow" style="color: var(--color-magenta);">Saúde e Direitos</span>
+        <span class="eyebrow" style="color: var(--color-sky);">Saúde e Direitos</span>
         <h1 class="hero-title">
           <span class="hero-title-color">Movimentar-se é um direito:</span><br />
           quem fica de fora e por quê?
