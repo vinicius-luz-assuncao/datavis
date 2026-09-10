@@ -1,0 +1,7 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111;font-family:system-ui,sans-serif}
+.quarto-section{position:relative;width:100%;height:70vh;min-height:420px;overflow:hidden;background:#0b0b12}
+#quarto-container{position:absolute;inset:0}
+#quarto-container canvas{display:block;width:100%;height:100%;touch-action:none}
+.quarto-section.ball-hover #quarto-container{cursor:pointer}
+.quarto-section.ball-held #quarto-container{cursor:grabbing}

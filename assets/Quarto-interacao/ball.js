@@ -1,0 +1,113 @@
+import * as THREE from 'three';
+import { CONFIG } from './config.js';
+export function wrapBall(mesh) {
+  mesh.name = 'ball';
+  const s = CONFIG.ball.scale || 1;
+  mesh.scale.setScalar(s);
+  return {
+    mesh, physR: CONFIG.ball.radius * s, baseScale: s, vel: new THREE.Vector3(0, 0, 0),
+    sleeping: false, squash: 0, rollingTime: 0,
+    state: 'dropping',
+    spinAxis: new THREE.Vector3(1, 0, 0), spinSpeed: 0
+  };
+}
+export function createBall(scene) {
+  const { radius, color } = CONFIG.ball;
+  const mesh = new THREE.Mesh(
+    new THREE.SphereGeometry(radius, 40, 28),
+    new THREE.MeshStandardMaterial({ color, roughness: 0.45 })
+  );
+  mesh.castShadow = true;
+  scene.add(mesh);
+  return wrapBall(mesh);
+}
+export function kickBall(ball, reduced) {
+  const b = CONFIG.ball;
+  if (!ball.sleeping && ball.state !== 'idle') return false;
+  ball.sleeping = false;
+  ball.state = 'rolling';
+  ball.rollingTime = 0;
+  const up = reduced ? b.kickUpReduced : b.kickUp;
+  ball.vel.set(
+    (Math.random() * 2 - 1) * b.kickSide + b.kickBias,
+    up,
+    (Math.random() * 2 - 1) * b.kickSide + b.kickBias
+  );
+  const sp = ball.vel.length();
+  if (sp > b.maxSpeed) ball.vel.multiplyScalar(b.maxSpeed / sp);
+  ball.squash = 0;
+  return true;
+}
+export function stepBall(ball, bounds, dt, onBounce) {
+  const b = CONFIG.ball;
+  const dg = CONFIG.wallDiag;
+  const rh = CONFIG.returnHome;
+  const p = ball.mesh.position;
+  if (ball.sleeping) return;
+  if (!isFinite(p.x + p.y + p.z) || p.y < -2 || p.y > 12) {
+    p.copy(bounds.corner).add(new THREE.Vector3(0, 1.5, 0));
+    ball.vel.set(0, 0, 0);
+  }
+  ball.vel.y += b.gravity * dt;
+  const sp0 = ball.vel.length();
+  if (sp0 > b.maxSpeed) ball.vel.multiplyScalar(b.maxSpeed / sp0);
+  p.addScaledVector(ball.vel, dt);
+  const r = ball.physR ?? b.radius;
+  if (p.y < r) {
+    p.y = r;
+    if (Math.abs(ball.vel.y) > 0.6) { ball.squash = 1; onBounce && onBounce(); }
+    ball.vel.y *= -b.restitutionFloor;
+    if (Math.abs(ball.vel.y) < 0.35) ball.vel.y = 0;
+    const f = Math.max(0, 1 - b.friction * dt);
+    ball.vel.x *= f; ball.vel.z *= f;
+  }
+  if (p.x < bounds.minX) { p.x = bounds.minX; ball.vel.x *= -b.restitutionWall; onBounce && onBounce(); }
+  if (p.x > bounds.maxX) { p.x = bounds.maxX; ball.vel.x *= -b.restitutionWall; onBounce && onBounce(); }
+  if (p.z < bounds.minZ) { p.z = bounds.minZ; ball.vel.z *= -b.restitutionWall; onBounce && onBounce(); }
+  if (p.z > bounds.maxZ) { p.z = bounds.maxZ; ball.vel.z *= -b.restitutionWall; onBounce && onBounce(); }
+  const s = p.x + p.z - dg.c;
+  if (s > 0) {
+    const nx = Math.SQRT1_2, nz = Math.SQRT1_2;
+    p.x -= nx * s; p.z -= nz * s;
+    const vn = ball.vel.x * nx + ball.vel.z * nz;
+    if (vn > 0) {
+      ball.vel.x -= (1 + dg.restitution) * vn * nx;
+      ball.vel.z -= (1 + dg.restitution) * vn * nz;
+      onBounce && onBounce();
+    }
+  }
+  const onFloor = p.y <= r + 0.002;
+  if (onFloor) {
+    ball.rollingTime += dt;
+    if (ball.rollingTime > rh.delay) {
+      const dx = rh.target[0] - p.x, dz = rh.target[1] - p.z;
+      const dist = Math.hypot(dx, dz);
+      if (dist > rh.stopDist) {
+        ball.vel.x += (dx / dist) * rh.force * dt;
+        ball.vel.z += (dz / dist) * rh.force * dt;
+      }
+    }
+    const hs = Math.hypot(ball.vel.x, ball.vel.z);
+    if (hs > 0.01) {
+      ball.spinAxis.set(ball.vel.z, 0, -ball.vel.x).normalize();
+      ball.spinSpeed = hs / r;
+      ball.mesh.rotateOnWorldAxis(ball.spinAxis, Math.min(ball.spinSpeed * dt, 0.4));
+    }
+  } else {
+    ball.mesh.rotation.x += ball.vel.z * dt * 0.5;
+    ball.mesh.rotation.z -= ball.vel.x * dt * 0.5;
+  }
+  if (ball.squash > 0) {
+    ball.squash = Math.max(0, ball.squash - dt * 7);
+    const q = ball.squash * b.squash;
+    const bs = ball.baseScale ?? 1;
+    ball.mesh.scale.set(bs * (1 + q), bs * (1 - q), bs * (1 + q));
+  } else ball.mesh.scale.setScalar(ball.baseScale ?? 1);
+  const speed = ball.vel.length();
+  if (onFloor && speed < b.stopSpeed) {
+    ball.vel.set(0, 0, 0);
+    ball.sleeping = true;
+    ball.state = 'idle';
+    ball.mesh.scale.setScalar(ball.baseScale ?? 1);
+  }
+}

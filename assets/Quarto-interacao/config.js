@@ -1,0 +1,17 @@
+export const CONFIG = {
+  room: { w: 12, d: 12, h: 6, backZ: -4, leftX: -4 },
+  ball: {
+    radius: 0.32, color: 0xe2483d, restitutionFloor: 0.42, restitutionWall: 0.55,
+    gravity: -14, friction: 2.2, stopSpeed: 0.25, maxSpeed: 6,
+    kickUp: 4.2, kickUpReduced: 2.0, kickSide: 2.0, kickBias: 0.3, squash: 0.045, scale: 1.3
+  },
+  wallDiag: { c: -0.6, restitution: 0.55 },
+  returnHome: { target: [-1.9, -2.6], force: 1.6, delay: 1.0, stopDist: 0.25 },
+  tenis: { home: [-1.4, 0, -2.3], maxNudge: 0.8, spring: 11, damping: 6.5, kick: 0.7, tilt: 0.1, yaw: 0, radius: 0.55, contact: 1.0, topBounce: 0.45, topSlide: 3.0, scale: 1.5, modelURL: null },
+  model: 'quarto02.glb',
+  roles: { ball: 'ball', tenis: 'tenis' },
+  useModelLights: true,
+  modelLightDiv: { directional: 400, point: 120, spot: 120 },
+  camera: { pos: [2.35, 3.6, 3.1], look: [-1.7, 0.85, -2.5], fov: 42 },
+  colors: { floor: 0x8a6f55, wallBack: 0x4a5a7a, wallLeft: 0x42506e, base: 0x1c1c22, poster: 0xd9556b, led: 0x00e5ff }
+};
