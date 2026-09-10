@@ -152,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var label = row.dataset.label || "";
       var value = parseFloat(row.dataset.value) || 0;
       var color = row.dataset.color || "var(--color-ink)";
+      var muted = row.dataset.muted === "true";
 
       var labelEl = document.createElement("span");
       labelEl.className = "bar-row__label";
@@ -168,6 +169,12 @@ document.addEventListener("DOMContentLoaded", function () {
       var valEl = document.createElement("span");
       valEl.className = "bar-row__value";
       valEl.textContent = fmt(value) + "%";
+
+      if (muted) {
+        row.classList.add("bar-row--muted");
+        fill.style.opacity = "0.45";
+        valEl.style.opacity = "0.6";
+      }
 
       track.appendChild(fill);
       track.appendChild(valEl);
@@ -392,6 +399,380 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ================================================================
+     GROUPED BAR — barras agrupadas (ex.: Homens x Mulheres)
+     ================================================================ */
+  function drawGroupedBar(el) {
+    var max = parseFloat(el.dataset.max) || 100;
+    var unit = el.dataset.unit !== undefined ? el.dataset.unit : "%";
+    var bars = Array.prototype.slice.call(el.querySelectorAll(".gbar__bar"));
+
+    bars.forEach(function (bar) {
+      var name = bar.dataset.name || "";
+      var value = parseFloat(bar.dataset.value) || 0;
+      var color = bar.dataset.color || "var(--color-ink)";
+
+      var nameEl = document.createElement("span");
+      nameEl.className = "gbar__name";
+      nameEl.textContent = name;
+
+      var track = document.createElement("div");
+      track.className = "gbar__track";
+
+      var fill = document.createElement("div");
+      fill.className = "gbar__fill";
+      fill.style.background = color;
+      fill.style.width = "0%";
+      track.appendChild(fill);
+
+      var valEl = document.createElement("span");
+      valEl.className = "gbar__value";
+      valEl.textContent = fmt(value) + unit;
+
+      bar.appendChild(nameEl);
+      bar.appendChild(track);
+      bar.appendChild(valEl);
+
+      onEnter(bar, function () {
+        fill.style.transition = "width 1100ms cubic-bezier(0.16,1,0.3,1)";
+        requestAnimationFrame(function () {
+          fill.style.width = (value / max) * 100 + "%";
+        });
+      });
+    });
+  }
+
+  /* ================================================================
+     DUMBBELL — dois pontos conectados por linha (comparação 1:1)
+     ================================================================ */
+  function drawDumbbell(el) {
+    var scale = (el.dataset.scale || "0,100").split(",");
+    var min = parseFloat(scale[0]) || 0;
+    var max = parseFloat(scale[1]) || 100;
+    var unit = el.dataset.unit !== undefined ? el.dataset.unit : "%";
+    var aColor = el.dataset.aColor || "var(--color-amber)";
+    var bColor = el.dataset.bColor || "var(--color-purple)";
+
+    function pos(v) {
+      return ((v - min) / (max - min)) * 100;
+    }
+
+    var rows = Array.prototype.slice.call(el.querySelectorAll(".dumbbell__row"));
+
+    rows.forEach(function (row) {
+      var label = row.dataset.label || "";
+      var a = parseFloat(row.dataset.a) || 0;
+      var b = parseFloat(row.dataset.b) || 0;
+
+      var labelEl = document.createElement("span");
+      labelEl.className = "dumbbell__row-label";
+      labelEl.textContent = label;
+
+      var track = document.createElement("div");
+      track.className = "dumbbell__track";
+
+      var line = document.createElement("span");
+      line.className = "dumbbell__line";
+
+      var dotA = document.createElement("span");
+      dotA.className = "dumbbell__dot";
+      dotA.style.background = aColor;
+
+      var dotB = document.createElement("span");
+      dotB.className = "dumbbell__dot";
+      dotB.style.background = bColor;
+
+      var valA = document.createElement("span");
+      valA.className = "dumbbell__val";
+      valA.textContent = fmt(a) + unit;
+
+      var valB = document.createElement("span");
+      valB.className = "dumbbell__val";
+      valB.textContent = fmt(b) + unit;
+
+      track.appendChild(line);
+      track.appendChild(dotA);
+      track.appendChild(dotB);
+      track.appendChild(valA);
+      track.appendChild(valB);
+      row.appendChild(labelEl);
+      row.appendChild(track);
+
+      onEnter(row, function () {
+        var pa = pos(a);
+        var pb = pos(b);
+        line.style.left = Math.min(pa, pb) + "%";
+        line.style.width = Math.abs(pa - pb) + "%";
+        dotA.style.left = pa + "%";
+        dotB.style.left = pb + "%";
+        valA.style.left = pa + "%";
+        valB.style.left = pb + "%";
+        track
+          .querySelectorAll(".dumbbell__dot, .dumbbell__val")
+          .forEach(function (node) {
+            node.style.transition = "opacity 0.6s ease";
+            node.style.opacity = "1";
+          });
+      });
+    });
+  }
+
+  /* ================================================================
+     RANGE — intervalo (mín–máx) numa escala
+     ================================================================ */
+  function drawRange(el) {
+    var scale = (el.dataset.scale || "0,100").split(",");
+    var min = parseFloat(scale[0]) || 0;
+    var max = parseFloat(scale[1]) || 100;
+    var unit = el.dataset.unit !== undefined ? el.dataset.unit : "%";
+
+    function pos(v) {
+      return ((v - min) / (max - min)) * 100;
+    }
+
+    var rows = Array.prototype.slice.call(el.querySelectorAll(".range__row"));
+
+    rows.forEach(function (row) {
+      var label = row.dataset.label || "";
+      var lo = parseFloat(row.dataset.min) || 0;
+      var hi = parseFloat(row.dataset.max) || 0;
+      var color = row.dataset.color || "var(--color-purple)";
+
+      var labelEl = document.createElement("p");
+      labelEl.className = "range__row-label";
+      labelEl.textContent = label;
+
+      var track = document.createElement("div");
+      track.className = "range__track";
+
+      var segment = document.createElement("span");
+      segment.className = "range__segment";
+      segment.style.background = color;
+
+      var valEl = document.createElement("span");
+      valEl.className = "range__value";
+      valEl.textContent = fmt(lo) + "–" + fmt(hi) + unit;
+
+      track.appendChild(segment);
+      track.appendChild(valEl);
+      row.appendChild(labelEl);
+      row.appendChild(track);
+
+      onEnter(row, function () {
+        var p1 = pos(lo);
+        var p2 = pos(hi);
+        segment.style.transition = "left 0.9s ease, width 0.9s ease";
+        segment.style.left = Math.min(p1, p2) + "%";
+        segment.style.width = Math.abs(p2 - p1) + "%";
+        valEl.style.left = (p1 + p2) / 2 + "%";
+        valEl.style.opacity = "1";
+      });
+    });
+  }
+
+  /* ================================================================
+     PROJECTION — linha do tempo (dados + projeção)
+     ================================================================ */
+  var projClipSeq = 0;
+
+  function drawProjection(el) {
+    var points = Array.prototype.slice.call(
+      el.querySelectorAll(".projection__point")
+    );
+    if (points.length === 0) return;
+
+    var unit = el.dataset.unit !== undefined ? el.dataset.unit : "%";
+    var min = parseFloat(el.dataset.scaleMin) || 0;
+    var max = parseFloat(el.dataset.scaleMax) || 100;
+
+    var W = 640;
+    var H = 240;
+    var PADX = 60;
+    var PADY = 44;
+
+    var data = points.map(function (p) {
+      return {
+        year: p.dataset.year || "",
+        value: parseFloat(p.dataset.value) || 0,
+        tag: p.dataset.tag || ""
+      };
+    });
+
+    function x(i) {
+      return PADX + (i / (data.length - 1)) * (W - PADX * 2);
+    }
+    function y(v) {
+      return H - PADY - ((v - min) / (max - min)) * (H - PADY * 2);
+    }
+
+    var svg = d3
+      .select(el)
+      .append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("role", "img")
+      .attr(
+        "aria-label",
+        "Inatividade física em adultos: " +
+          data
+            .map(function (d) {
+              return fmt(d.value, 0) + unit + " em " + d.year;
+            })
+            .join(", ") +
+          "."
+      );
+
+    svg
+      .append("line")
+      .attr("x1", PADX)
+      .attr("y1", H - PADY)
+      .attr("x2", W - PADX)
+      .attr("y2", H - PADY)
+      .attr("stroke", "var(--color-neutral)")
+      .attr("stroke-width", 2);
+
+    // Trecho com dados (sólido) — começa "apagado", cresce na animação
+    var solid = svg
+      .append("path")
+      .attr(
+        "d",
+        "M" + x(0) + " " + y(data[0].value) + " L" + x(1) + " " + y(data[1].value)
+      )
+      .attr("fill", "none")
+      .attr("stroke", "var(--color-vermilion)")
+      .attr("stroke-width", 3);
+
+    var solidLen = solid.node().getTotalLength();
+    solid.attr("stroke-dasharray", solidLen).attr("stroke-dashoffset", solidLen);
+
+    // Trecho projetado (tracejado) — revelado por máscara na animação,
+    // para o tracejado "7 7" não se perder durante o crescimento
+    var clipId = "proj-clip-" + ++projClipSeq;
+    var clipRect = svg
+      .append("clipPath")
+      .attr("id", clipId)
+      .append("rect")
+      .attr("x", x(1))
+      .attr("y", 0)
+      .attr("width", 0)
+      .attr("height", H);
+
+    svg
+      .append("path")
+      .attr(
+        "d",
+        "M" + x(1) + " " + y(data[1].value) + " L" + x(2) + " " + y(data[2].value)
+      )
+      .attr("fill", "none")
+      .attr("stroke", "var(--color-vermilion)")
+      .attr("stroke-width", 3)
+      .attr("stroke-dasharray", "7 7")
+      .attr("clip-path", "url(#" + clipId + ")");
+
+    var g = svg.selectAll("g.proj-pt").data(data).enter().append("g").attr("class", "proj-pt");
+
+    var circles = g
+      .append("circle")
+      .attr("cx", function (d, i) {
+        return x(i);
+      })
+      .attr("cy", function (d) {
+        return y(d.value);
+      })
+      .attr("r", 0)
+      .style("fill", "var(--color-paper)")
+      .style("stroke", "var(--color-vermilion)")
+      .style("stroke-width", 3);
+
+    var valueText = g
+      .append("text")
+      .attr("x", function (d, i) {
+        return x(i);
+      })
+      .attr("y", function (d) {
+        return y(d.value) - 16;
+      })
+      .attr("text-anchor", "middle")
+      .style("font-family", "var(--font-display)")
+      .style("font-weight", 700)
+      .style("font-size", "18px")
+      .style("fill", "var(--color-ink)")
+      .style("opacity", 0)
+      .text(function (d) {
+        return fmt(d.value, 0) + unit;
+      });
+
+    var yearText = g
+      .append("text")
+      .attr("x", function (d, i) {
+        return x(i);
+      })
+      .attr("y", H - PADY + 28)
+      .attr("text-anchor", "middle")
+      .style("font-family", "var(--font-geo)")
+      .style("font-size", "15px")
+      .style("fill", "var(--color-gray)")
+      .style("opacity", 0)
+      .text(function (d) {
+        return d.year + (d.tag ? " · " + d.tag : "");
+      });
+
+    // Sequência: círculo → linha cresce → círculo → tracejado cresce → círculo.
+    // Cada ponto acende junto com seus dois rótulos (valor + ano).
+    function showPoint(i, delay) {
+      circles
+        .filter(function (d, j) {
+          return j === i;
+        })
+        .transition()
+        .delay(delay)
+        .duration(350)
+        .ease(d3.easeCubicOut)
+        .attr("r", 7);
+      valueText
+        .filter(function (d, j) {
+          return j === i;
+        })
+        .transition()
+        .delay(delay)
+        .duration(350)
+        .style("opacity", 1);
+      yearText
+        .filter(function (d, j) {
+          return j === i;
+        })
+        .transition()
+        .delay(delay)
+        .duration(350)
+        .style("opacity", 1);
+    }
+
+    onEnter(el, function () {
+      if (prefersReducedMotion) {
+        solid.attr("stroke-dashoffset", 0);
+        clipRect.attr("width", x(2) - x(1));
+        circles.attr("r", 7);
+        valueText.style("opacity", 1);
+        yearText.style("opacity", 1);
+        return;
+      }
+      showPoint(0, 100);
+      solid
+        .transition()
+        .delay(500)
+        .duration(750)
+        .ease(d3.easeLinear)
+        .attr("stroke-dashoffset", 0);
+      showPoint(1, 1300);
+      clipRect
+        .transition()
+        .delay(1700)
+        .duration(750)
+        .ease(d3.easeLinear)
+        .attr("width", x(2) - x(1));
+      showPoint(2, 2500);
+    });
+  }
+
+  /* ================================================================
      DISPATCH — iniicia cada gráfico encontrado na página
      ================================================================ */
   function initCharts() {
@@ -400,6 +781,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     d3.selectAll("[data-chart='bar']").each(function () {
       drawBar(this);
+    });
+    d3.selectAll("[data-chart='grouped-bar']").each(function () {
+      drawGroupedBar(this);
+    });
+    d3.selectAll("[data-chart='dumbbell']").each(function () {
+      drawDumbbell(this);
+    });
+    d3.selectAll("[data-chart='range']").each(function () {
+      drawRange(this);
+    });
+    d3.selectAll("[data-chart='projection']").each(function () {
+      drawProjection(this);
     });
     d3.selectAll("[data-chart='trend']").each(function () {
       drawTrend(this);
