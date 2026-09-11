@@ -15,7 +15,14 @@
   <meta name="description"
     content="Esporte como direito: quem fica de fora e por quê? Uma leitura editorial sobre acesso, desigualdade e inclusão no esporte." />
   <meta name="theme-color" content="#F1E9DB" />
+<?php if (!empty($pageTitle)): ?>
+  <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
+<?php else: ?>
   <title>Esporte como direito — quem fica de fora e por quê?</title>
+<?php endif; ?>
+<?php if (!empty($pageRobots)): ?>
+  <meta name="robots" content="<?= htmlspecialchars($pageRobots, ENT_QUOTES, 'UTF-8') ?>" />
+<?php endif; ?>
 
   <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
