@@ -233,7 +233,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--color-paper) 0%, var(--color-paper) 0%, rgba(241, 233, 219, 0.62) 10%, rgba(241, 233, 219, 0.15) 30%, rgba(241, 233, 219, 0) 100%);
+  background: linear-gradient(90deg, #0B122E 0%, #0B122E 0%, #0b122ea6 10%, #0b122e1f 30%, rgba(241, 233, 219, 0) 100%);
   pointer-events: none;
 }
 
@@ -243,11 +243,14 @@
 }
 
 .hero-title-color {
-  color: var(--color-magenta);
+  color: #ffffff;
+}
+.hero-title-color-02 {
+  color: var(--color-paper-in-ink);
 }
 
 #hero .lede {
-  max-width: 24ch;
+  max-width: 35ch;
 }
 
 /* ==========================================================================

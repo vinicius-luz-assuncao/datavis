@@ -21,9 +21,9 @@
         <span class="eyebrow" style="color: var(--color-sky);">Saúde e Direitos</span>
         <h1 class="hero-title">
           <span class="hero-title-color">Movimentar-se é um direito:</span><br />
-          quem fica de fora e por quê?
+          <span class="hero-title-color-02">quem fica de fora e por quê?</span>
         </h1>
-        <p class="lede" style="margin-top: var(--space-lg);">
+        <p class="lede hero-title-color-02" style="margin-top: var(--space-lg);">
           Por que, mesmo sabendo que o esporte salva vidas, tantas pessoas ainda estão fora dele?
         </p>
       </div>
