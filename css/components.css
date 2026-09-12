@@ -1174,57 +1174,60 @@ main section[id] {
   margin-bottom: var(--space-sm);
 }
 
-/* Numerões */
-.hero-nums {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  gap: clamp(var(--space-md), 6vw, var(--space-xxl));
-  margin-top: var(--space-lg);
-  padding-left: clamp(2.5rem, 6vw, 4rem);
+/* Título bipartido do capítulo (linha Oswald + destaque Elephant) */
+.chapter-title-split {
+  max-width: 100%;
 }
 
-.hero-nums__scale {
-  position: absolute;
-  left: 0;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-family: var(--font-geo);
-  font-size: 0.8rem;
-  color: var(--color-gray);
-  border-left: 2px solid var(--color-neutral);
-  padding-left: 0.5rem;
-}
-
-.hero-nums__item {
-  display: flex;
-  flex-direction: column;
-}
-
-.hero-nums__value {
-  font-family: var(--font-hero);
-  font-weight: 400;
-  font-size: clamp(4.5rem, 13vw, 10rem);
-  line-height: 0.9;
-}
-
-.hero-nums__label {
+.chapter-title-split .split-l1 {
+  display: block;
   font-family: var(--font-display);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: clamp(0.95rem, 2vw, 1.3rem);
-  margin-top: var(--space-sm);
+  font-size: clamp(1.75rem, 3.4vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.005em;
 }
 
-.hero-nums__conj {
+.chapter-title-split .split-l2 {
+  display: block;
   font-family: var(--font-hero);
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  color: var(--color-gray);
-  padding-bottom: 2.2rem;
+  font-weight: 400;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 1;
+  color: var(--color-vermilion);
+  margin-top: var(--space-xs);
+}
+
+/* Texto de abertura sem palco */
+.prose-plain {
+  margin-top: 0;
+}
+
+/* Barras com escala real */
+.scalebar {
+  margin-top: var(--space-lg);
+}
+
+.scalebar svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tipografia populacional */
+.pop-huge {
+  font-size: 1.35em;
+}
+
+.pop-big {
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+/* Palco de cena sem texto (o palco herda .prose-stage) */
+.prose-stage.scene-stage {
+  margin-top: 0;
 }
 
 /* Barra populacional com slider */

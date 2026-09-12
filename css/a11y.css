@@ -23,4 +23,9 @@
     transform: none;
     transition: none;
   }
+
+  /* Cena 3D decorativa: fora com movimento reduzido. */
+  .scene-block {
+    display: none;
+  }
 }

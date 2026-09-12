@@ -3,23 +3,24 @@
  * CAPÍTULO 01 — INÍCIO
  * "O mundo se move menos do que deveria" — WHO, 2024.
  *
- * Composição do wireframe: história de abertura → faixa ilustrada →
- * numerões 31%/80% → barra populacional com slider → custo + quadra 3D →
- * banco (risco) → benefício → pergunta de transição para o Cap. 02.
+ * Composição: título bipartido → história de abertura → faixa ilustrada →
+ * barras com escala real (31%/80%) → barra populacional com slider →
+ * custo + quadra 3D → banco (risco) → benefício → pergunta de transição.
  */
 ?>
 <section class="section chapter" id="inicio">
   <div class="container">
     <header class="chapter__head reveal">
       <span class="chapter__marker">Capítulo 01 · Início</span>
-      <h2 class="section-title">Nossa sociedade está se tornando cada vez mais sedentária.</h2>
+      <h2 class="chapter-title-split">
+        <span class="split-l1">Nossa sociedade está se tornando cada vez mais</span>
+        <span class="split-l2">sedentária.</span>
+      </h2>
     </header>
 
-    <!-- História de abertura (enxuta) sobre o canvas 3D -->
-    <div class="prose-stage quarto-section reveal">
-      <div class="prose-canvas" data-quarto-canvas aria-hidden="true"></div>
-      <div class="prose-scrim" aria-hidden="true"></div>
-      <blockquote class="prose-intro prose-intro--overlay">
+    <!-- História de abertura (texto em cascata, sem canvas) -->
+    <div class="block reveal">
+      <blockquote class="prose-intro prose-plain">
         <p class="prose-line" style="--i: 0;">Ela compra um tênis.</p>
         <p class="prose-line" style="--i: 1;">Escolhe uma academia.</p>
         <p class="prose-line" style="--i: 2;">Salva um treino e promete que na segunda-feira, vai...</p>
@@ -38,32 +39,25 @@
       </figure>
     </div>
 
-    <!-- Numerões -->
+    <!-- Barras com escala real -->
     <div class="block reveal">
       <p class="block__lede">
         Segundo a Organização Mundial da Saúde, a maioria não atinge o nível mínimo recomendado de atividade física.
       </p>
-      <div class="hero-nums" role="img"
-        aria-label="31% dos adultos e 80% dos adolescentes não atingem o nível recomendado de atividade física. Fonte: WHO, 2024.">
-        <div class="hero-nums__scale" aria-hidden="true">
-          <span>100</span><span>50</span><span>0</span>
-        </div>
-        <div class="hero-nums__item">
-          <span class="hero-nums__value" style="color: var(--color-amber);"><span class="stat-count" data-value="31" data-decimals="0">0%</span></span>
-          <span class="hero-nums__label">dos adultos</span>
-        </div>
-        <span class="hero-nums__conj" aria-hidden="true">e</span>
-        <div class="hero-nums__item">
-          <span class="hero-nums__value" style="color: var(--color-vermilion);"><span class="stat-count" data-value="80" data-decimals="0">0%</span></span>
-          <span class="hero-nums__label">dos adolescentes</span>
-        </div>
+      <div class="scalebar" data-chart="scalebar" data-max="100">
+        <div class="scalebar__row" data-label="dos adultos" data-value="31" data-color="var(--color-amber)"></div>
+        <div class="scalebar__row" data-label="dos adolescentes" data-value="80" data-color="var(--color-vermilion)"></div>
       </div>
       <p class="stat__source small-note">Fonte: WHO, 2024.</p>
     </div>
 
     <!-- Barra populacional com slider -->
     <div class="block reveal">
-      <p class="block__lede">Em um mundo com <strong>8 bilhões de pessoas</strong>, arraste o ano e veja a conta crescer:</p>
+      <p class="block__lede">Em um mundo com <strong class="pop-huge">8 bilhões</strong> <span class="pop-big">de pessoas</span>, arraste o ano e veja a conta crescer:</p>
+      <p class="body-text">
+        Quase <strong>1,8 bilhão</strong> de adultos estão fisicamente inativos — e, se a tendência
+        continuar, esse número pode chegar a <strong>35% até 2030</strong>.
+      </p>
       <div class="popslider" data-chart="popslider">
         <div class="popslider__canvas" data-pop-canvas></div>
         <div class="popslider__controls">
@@ -77,8 +71,8 @@
         </div>
         <div class="popslider__tip" data-pop-tip></div>
         <p class="small-note" style="margin-top: var(--space-sm); max-width: 62ch;">
-          Fonte: OMS (2024). O dado de 2010 é derivado do “+5 p.p. desde 2010” informado pela OMS;
-          o de 2030 é projeção. Valores intermediários são interpolação linear.
+          Fonte: OMS (2024); totais adultos: ONU WPP 2024. O dado de 2010 é derivado do “+5 p.p. desde 2010”
+          informado pela OMS; o de 2030 é projeção. Valores intermediários são interpolação linear.
         </p>
       </div>
     </div>

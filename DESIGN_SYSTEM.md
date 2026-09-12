@@ -359,28 +359,34 @@ Criar uma ilustração editorial de uma pessoa praticando corrida. Ao redor: qua
 
 # 12. CAPÍTULO 01 — INÍCIO (`sections/inicio.php`)
 
-Título: **O mundo se move menos do que deveria.** Fonte: WHO, 2024.
-Composição do wireframe (hero pronto, não refazer).
+Fonte: WHO, 2024 (+ ONU WPP 2024 só para os totais adultos). Hero pronto, não refazer.
+
+## Título bipartido
+
+Linha 1 em 2 colunas (Oswald 700, caixa alta): "Nossa sociedade está se
+tornando cada vez mais" + linha 2 em destaque maior (Elephant 400,
+`vermilion`): "sedentária."
 
 ## História de abertura
 
-Texto curto em linhas que entram em cascata (Oswald 500), sobre o canvas 3D
-do quarto (ver §20). Placeholder: tênis parado, segunda-feira que não chega.
+Texto curto em linhas que entram em cascata (Oswald 500). Sem canvas
+(a cena 3D mudou para o Cap. 02, ver §22).
 
 ## Faixa de ilustração
 
 Slot genérico (2D ou cena 3D futura) com texto-grafite de apresentação:
 três figuras em movimento (corredor, pessoa em pé, skatista).
 
-## Numerões
+## Barras com escala real
 
-Display gigante (sem donuts): `31%` (`amber`, dos adultos) e `80%`
-(`vermilion`, dos adolescentes), com contagem animada (`.stat-count`) e
-escala decorativa 0–100 ao fundo.
+Gráfico `scalebar` (`js/charts.js`): `31%` (`amber`, dos adultos) e `80%`
+(`vermilion`, dos adolescentes) em escala real 0–100, eixo inferior com
+ticks, rótulos abaixo do eixo e contagem animada até o valor.
 
 ## Barra populacional
 
-Texto "Em um mundo com 8 bilhões de pessoas" + gráfico `popslider`
+"Em um mundo com **8 bilhões** (display maior) **de pessoas** (escala grande)"
++ frase de apoio (`~1,8 bi` inativos; `35% até 2030`) + gráfico `popslider`
 (`js/charts.js`): barra horizontal empilhada (total em `slate` × inativos em
 `vermilion`) com slider 2010–2030, tooltip, legenda e marcas de escala.
 Âncoras: 2010 derivado, 2024 dado, 2030 projeção; intermediários interpolados
@@ -412,6 +418,11 @@ Faixa rosa (`.bridge`): *"O que nos leva à pergunta: por que é que mais gente
 
 Título: **Quem fica de fora primeiro.** Três camadas separadas por fonte —
 nunca comparar valores absolutos entre fontes distintas.
+
+## Cena interativa (vinda do Cap. 01)
+
+Palco `.scene-stage` (reaproveita `.prose-stage`) só com o canvas do quarto —
+sem texto por cima, legenda funcional abaixo. Some com `reduced-motion`.
 
 ## Mundo (WHO, 2024)
 
@@ -596,7 +607,8 @@ Em telas estreitas, só os pontos.
 # 22. CENA 3D — QUARTO (`assets/Quarto-interacao/`, `js/quarto.js`)
 
 Exceção documentada à regra "sem 3D": a cena interativa do quarto (three.js,
-GLB `quarto02.glb`) vive **atrás do texto de abertura** do Capítulo 01.
+GLB `quarto02.glb`) vive no **Capítulo 02**, em palco próprio sem texto por
+cima (antes ficava atrás do texto de abertura do Cap. 01).
 
 * Camadas: canvas (`z 0`) → véu claro em degradê (`z 1`, `pointer-events: none`)
   → texto (`z 2`, não clicável para a bola ser arrastável).
@@ -615,11 +627,14 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 │
 ├── Hero (parallax em 4 camadas)
 ├── Capitulo01 (inicio.php)
-│   ├── ProseStage (texto em cascata + canvas Quarto)
-│   ├── DonutChart × 2 (31%, 80%)
-│   ├── ProjectionChart (2010 → 2024 → 2030)
-│   └── StatNumber × 3 (1,8 bi · 20–30% · US$ 300 bi)
+│   ├── Título bipartido (Oswald + Elephant)
+│   ├── ProseLines (texto em cascata, sem canvas)
+│   ├── ScalebarChart (31% · 80%, escala real + contagem)
+│   ├── PopsliderChart (slider 2010–2030)
+│   ├── CostDisplay + QuadraSlot (futura)
+│   └── BenchBlock + Bridge (ponte p/ Cap. 02)
 ├── Capitulo02 (conflito.php)
+│   ├── SceneStage (canvas Quarto, vindo do Cap. 01)
 │   ├── DumbbellChart (85% × 78%)
 │   ├── GroupedBarChart (IBGE gênero)
 │   └── DonutChart (42,8%)
