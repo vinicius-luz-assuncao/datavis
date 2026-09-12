@@ -41,9 +41,7 @@
 
     <!-- Números-coluna em escala real -->
     <div class="block reveal">
-      <p class="block__lede">
-        Segundo a Organização Mundial da Saúde, a maioria não atinge o nível mínimo recomendado de atividade física.
-      </p>
+      
       <div class="bignums" data-bignums role="img"
         aria-label="31% dos adultos e 80% dos adolescentes não atingem o nível recomendado de atividade física. Fonte: WHO, 2024.">
         <div class="bignums__axis" aria-hidden="true">
@@ -52,6 +50,7 @@
         <div class="bignums__col">
           <span class="bignums__value" data-bignum data-value="31" style="color: var(--color-amber);">0%</span>
         </div>
+        <span class="bignums__conj" aria-hidden="true">e</span>
         <div class="bignums__col">
           <span class="bignums__value" data-bignum data-value="80" style="color: var(--color-vermilion);">0%</span>
         </div>
@@ -59,11 +58,12 @@
         <span class="bignums__cap bignums__cap--a">dos adultos</span>
         <span class="bignums__cap bignums__cap--b">dos adolescentes</span>
       </div>
-      <p class="stat__source small-note">Fonte: WHO, 2024.</p>
+      <p class="block__lede">
+              Não atinge o nível mínimo recomendado de atividade física.
+            </p>  
+            <p class="stat__source small-note">Fonte: WHO, 2024.</p>
     </div>
-      <p class="stat__source small-note">Fonte: WHO, 2024.</p>
-    </div>
-
+    
     <!-- Barra populacional com slider -->
     <div class="block reveal">
       <p class="block__lede">Em um mundo com <strong class="pop-huge">8 bilhões</strong> <span class="pop-big">de pessoas</span>, arraste o ano e veja a conta crescer:</p>
