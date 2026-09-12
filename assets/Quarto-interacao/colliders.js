@@ -90,6 +90,19 @@ export function collectColliders(root, opts = {}) {
   return { walls, backboard, rim, net, active: found > 0 };
 }
 
+// Retângulo útil = união das caixas das paredes (para arrasto, spawn,
+// retorno e tênis seguirem a sala modelada em vez da salinha do fallback).
+export function wallsBounds(colliders) {
+  if (!colliders || !colliders.walls.length) return null;
+  const u = new THREE.Box3();
+  colliders.walls.forEach((w, i) => {
+    if (i === 0) u.copy(w.box);
+    else u.union(w.box);
+  });
+  if (u.isEmpty()) return null;
+  return u;
+}
+
 function clampNum(v, a, b) {
   return Math.max(a, Math.min(b, v));
 }

@@ -28,7 +28,7 @@ export function wrapTenis(group) {
       if (this.yawVel > yw) this.yawVel = yw;
       if (this.yawVel < -yw) this.yawVel = -yw;
     },
-    update(dt, bounds) {
+    update(dt, bounds, useDiag) {
       const k = CONFIG.tenis.spring, d = CONFIG.tenis.damping;
       this.offsetVel.x += (-this.offsetVel.x * d) * dt;
       this.offsetVel.z += (-this.offsetVel.z * d) * dt;
@@ -56,9 +56,11 @@ export function wrapTenis(group) {
       if (bounds) {
         p.x = THREE.MathUtils.clamp(p.x, bounds.minX + 0.3, bounds.maxX - 0.3);
         p.z = THREE.MathUtils.clamp(p.z, bounds.minZ + 0.3, bounds.maxZ - 0.3);
-        const dg = CONFIG.wallDiag;
-        const s = p.x + p.z - dg.c;
-        if (s > -0.4) { p.x += -Math.SQRT1_2 * (s + 0.4); p.z += -Math.SQRT1_2 * (s + 0.4); }
+        if (useDiag !== false) {
+          const dg = CONFIG.wallDiag;
+          const s = p.x + p.z - dg.c;
+          if (s > -0.4) { p.x += -Math.SQRT1_2 * (s + 0.4); p.z += -Math.SQRT1_2 * (s + 0.4); }
+        }
       }
       this.group.position.copy(p);
       this.group.rotation.set(baseRot.x + this.tilt.x, baseRot.y + this.yaw, baseRot.z + this.tilt.z);

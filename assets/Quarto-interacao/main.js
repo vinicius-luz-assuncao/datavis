@@ -3,7 +3,7 @@ import { CONFIG } from './config.js';
 import { createRoom, computeBounds, addLights, stripLights, normalizeModelLights } from './scene.js';
 import { createBall, wrapBall, kickBall, stepBall } from './ball.js';
 import { wrapTenis, collideBallTenis } from './tenis.js';
-import { collectColliders } from './colliders.js';
+import { collectColliders, wallsBounds } from './colliders.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 function thud() {
   try {
@@ -52,6 +52,8 @@ export function initQuarto(container, opts = {}) {
   const bounds = computeBounds();
   bounds.maxX = Math.min(bounds.maxX, 1.4);
   bounds.maxZ = Math.min(bounds.maxZ, 1.4);
+  // true = salinha do fallback (retângulo + diagonal); false = sala modelada.
+  let useFallbackWalls = true;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const camera = new THREE.PerspectiveCamera(CONFIG.camera.fov, 1, 0.1, 100);
   camera.position.fromArray(opts.cameraPos || CONFIG.camera.pos);
@@ -148,6 +150,21 @@ export function initQuarto(container, opts = {}) {
       setStage(gltf.scene);
       // Colisores modelados no Blender (Collider_*, tabela, aro, rede).
       quarto.colliders = collectColliders(gltf.scene);
+      // Arrasto, spawn, retorno e tênis passam a seguir a sala modelada.
+      const wb = wallsBounds(quarto.colliders);
+      if (wb) {
+        const r = (CONFIG.ball.radius || 0.5) * (CONFIG.ball.scale || 1);
+        bounds.minX = wb.min.x + r;
+        bounds.maxX = wb.max.x - r;
+        bounds.minZ = wb.min.z + r;
+        bounds.maxZ = wb.max.z - r;
+        const cx = (bounds.minX + bounds.maxX) / 2;
+        const cz = (bounds.minZ + bounds.maxZ) / 2;
+        bounds.corner.set(cx, r, cz);
+        CONFIG.returnHome.target = [cx, cz];
+        useFallbackWalls = false;
+        console.info(`[quarto] limites pela sala modelada: x[${bounds.minX.toFixed(1)}, ${bounds.maxX.toFixed(1)}] z[${bounds.minZ.toFixed(1)}, ${bounds.maxZ.toFixed(1)}]`);
+      }
       // Adota a câmera embutida no GLB (cópia exata: posição, rotação e fov
       // em graus). O aspect segue dinâmico do container (resize).
       const glbCam =
@@ -183,9 +200,11 @@ export function initQuarto(container, opts = {}) {
   function clampToRoom(x, z) {
     x = THREE.MathUtils.clamp(x, bounds.minX, bounds.maxX);
     z = THREE.MathUtils.clamp(z, bounds.minZ, bounds.maxZ);
-    const dg = CONFIG.wallDiag;
-    const s = x + z - dg.c;
-    if (s > 0) { x -= Math.SQRT1_2 * s; z -= Math.SQRT1_2 * s; }
+    if (useFallbackWalls) {
+      const dg = CONFIG.wallDiag;
+      const s = x + z - dg.c;
+      if (s > 0) { x -= Math.SQRT1_2 * s; z -= Math.SQRT1_2 * s; }
+    }
     return [x, z];
   }
   function pushOutTenis(p, ball) {
@@ -306,7 +325,7 @@ export function initQuarto(container, opts = {}) {
       stepBall(quarto.ball, bounds, dt, thud, quarto.colliders);
       if (quarto.tenis) {
         collideBallTenis(quarto.ball, quarto.tenis, dt, thud);
-        quarto.tenis.update(dt, bounds);
+        quarto.tenis.update(dt, bounds, useFallbackWalls);
       }
     }
     if (!reduced && !grab.active) {
