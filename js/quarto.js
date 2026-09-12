@@ -9,16 +9,10 @@ if (stage && !reducedMotion) {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         try {
-          const quarto = initQuarto(stage, {
+          /* A câmera agora vem do próprio GLB (posição, rotação e fov). */
+          initQuarto(stage, {
             modelURL: "assets/Quarto-interacao/quarto02.glb",
-            /* Ponto de vista um pouco mais à direita que o padrão. */
-            cameraPos: [3.1, 3.5, 3.0],
           });
-          /* Zoom mais fechado em direção à parede (padrão: 42). */
-          if (quarto && quarto.camera) {
-            quarto.camera.fov = 33;
-            quarto.camera.updateProjectionMatrix();
-          }
         } catch (err) {
           /* Sem WebGL/CDN o palco segue só com texto + véu. */
         }

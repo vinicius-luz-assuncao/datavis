@@ -53,7 +53,8 @@ export function initQuarto(container, opts = {}) {
   const camera = new THREE.PerspectiveCamera(CONFIG.camera.fov, 1, 0.1, 100);
   camera.position.fromArray(opts.cameraPos || CONFIG.camera.pos);
   camera.lookAt(...(opts.cameraLook || CONFIG.camera.look));
-  const baseQuat = camera.quaternion.clone();
+  // Quaternion-base do parallax de mouse; atualizado se o GLB trouxer câmera.
+  let baseQuat = camera.quaternion.clone();
   const par = { x: 0, y: 0, tx: 0, ty: 0 };
   const _eul = new THREE.Euler(), _q = new THREE.Quaternion();
   if (!reduced) {
@@ -142,6 +143,21 @@ export function initQuarto(container, opts = {}) {
       if (tg) { tg.traverse(o => { if (o.isMesh) o.castShadow = true; }); tenis = wrapTenis(tg); }
       else tenis = null;
       setStage(gltf.scene);
+      // Adota a câmera embutida no GLB (cópia exata: posição, rotação e fov
+      // em graus). O aspect segue dinâmico do container (resize).
+      const glbCam =
+        gltf.scene.getObjectByProperty('isCamera', true) ||
+        (gltf.cameras && gltf.cameras[0]) || null;
+      if (glbCam) {
+        glbCam.updateWorldMatrix(true, false);
+        glbCam.matrixWorld.decompose(camera.position, camera.quaternion, new THREE.Vector3());
+        if (glbCam.fov) camera.fov = glbCam.fov;
+        camera.updateProjectionMatrix();
+        baseQuat.copy(camera.quaternion);
+        console.info('[quarto] câmera do GLB adotada:', glbCam.name || '(sem nome)', 'fov=' + camera.fov.toFixed(2));
+      } else {
+        console.info('[quarto] GLB sem câmera; mantida a câmera do código');
+      }
       quarto.usingModel = true;
       start(ball, tenis, keepPos);
     }, undefined, err => {

@@ -1121,6 +1121,10 @@ main section[id] {
     min-height: 440px;
   }
 
+  .prose-stage.scene-stage--tall {
+    min-height: 1320px;
+  }
+
   .prose-intro--overlay {
     margin: var(--space-lg) var(--space-md);
   }
@@ -1250,6 +1254,15 @@ main section[id] {
 /* Palco de cena sem texto (o palco herda .prose-stage) */
 .prose-stage.scene-stage {
   margin-top: 0;
+}
+
+/* Palco ampliado: ~3x a altura (1560px) em largura total da página. */
+.prose-stage.scene-stage--tall {
+  min-height: 1560px;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  border-radius: 0;
 }
 
 /* Barra populacional com slider */
