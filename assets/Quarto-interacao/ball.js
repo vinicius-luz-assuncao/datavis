@@ -3,9 +3,13 @@ import { CONFIG } from './config.js';
 export function wrapBall(mesh) {
   mesh.name = 'ball';
   const s = CONFIG.ball.scale || 1;
-  mesh.scale.setScalar(s);
+  // Preserva a escala vinda do Blender (nó do GLB) e multiplica pelo ajuste:
+  // setScalar apagaria a escala do modelo e encolhia a bola.
+  mesh.scale.multiplyScalar(s);
+  const baseScaleVec = mesh.scale.clone();
   return {
-    mesh, physR: CONFIG.ball.radius * s, baseScale: s, vel: new THREE.Vector3(0, 0, 0),
+    mesh, physR: CONFIG.ball.radius * s, baseScale: s, baseScaleVec,
+    vel: new THREE.Vector3(0, 0, 0),
     sleeping: false, squash: 0, rollingTime: 0,
     state: 'dropping',
     spinAxis: new THREE.Vector3(1, 0, 0), spinSpeed: 0
@@ -100,14 +104,20 @@ export function stepBall(ball, bounds, dt, onBounce) {
   if (ball.squash > 0) {
     ball.squash = Math.max(0, ball.squash - dt * 7);
     const q = ball.squash * b.squash;
-    const bs = ball.baseScale ?? 1;
-    ball.mesh.scale.set(bs * (1 + q), bs * (1 - q), bs * (1 + q));
-  } else ball.mesh.scale.setScalar(ball.baseScale ?? 1);
+    const bsv = ball.baseScaleVec;
+    if (bsv) ball.mesh.scale.set(bsv.x * (1 + q), bsv.y * (1 - q), bsv.z * (1 + q));
+    else {
+      const bs = ball.baseScale ?? 1;
+      ball.mesh.scale.set(bs * (1 + q), bs * (1 - q), bs * (1 + q));
+    }
+  } else if (ball.baseScaleVec) ball.mesh.scale.copy(ball.baseScaleVec);
+  else ball.mesh.scale.setScalar(ball.baseScale ?? 1);
   const speed = ball.vel.length();
   if (onFloor && speed < b.stopSpeed) {
     ball.vel.set(0, 0, 0);
     ball.sleeping = true;
     ball.state = 'idle';
-    ball.mesh.scale.setScalar(ball.baseScale ?? 1);
+    if (ball.baseScaleVec) ball.mesh.scale.copy(ball.baseScaleVec);
+    else ball.mesh.scale.setScalar(ball.baseScale ?? 1);
   }
 }
