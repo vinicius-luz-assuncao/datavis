@@ -13,13 +13,13 @@
     <header class="chapter__head reveal">
       <span class="chapter__marker">Capítulo 01 · Início</span>
       <h2 class="chapter-title-split">
-        <span class="split-l1">Nossa sociedade está se tornando cada vez mais</span>
-        <span class="split-l2">sedentária.</span>
+        <span class="split-l1">Nossa sociedade está se tornando cada vez mais...</span>
+        <span class="split-l2">Sedentária.</span>
       </h2>
     </header>
 
     <!-- História de abertura (texto em cascata, sem canvas) -->
-    <div class="block reveal">
+    <!-- <div class="block reveal">
       <blockquote class="prose-intro prose-plain">
         <p class="prose-line" style="--i: 0;">Ela compra um tênis.</p>
         <p class="prose-line" style="--i: 1;">Escolhe uma academia.</p>
@@ -28,26 +28,39 @@
         <p class="prose-line" style="--i: 4;">Talvez falte tempo.</p>
         <p class="prose-line" style="--i: 5;">Talvez falte companhia.</p>
       </blockquote>
-    </div>
+    </div> -->
 
     <!-- Faixa de ilustração de abertura -->
-    <div class="block reveal">
+    <!-- <div class="block reveal">
       <p class="graphite-note">Faixa de abertura — gente diversa em movimento (arte final 2D ou cena 3D)</p>
       <figure class="illustration illustration--large" role="img"
         aria-label="Ilustração editorial: corredor, pessoa em pé e skatista lado a lado, sugerindo diferentes formas de se mover.">
         <figcaption class="illustration__art">Corredor, pessoa em pé e skatista</figcaption>
       </figure>
-    </div>
+    </div> -->
 
-    <!-- Barras com escala real -->
+    <!-- Números-coluna em escala real -->
     <div class="block reveal">
       <p class="block__lede">
         Segundo a Organização Mundial da Saúde, a maioria não atinge o nível mínimo recomendado de atividade física.
       </p>
-      <div class="scalebar" data-chart="scalebar" data-max="100">
-        <div class="scalebar__row" data-label="dos adultos" data-value="31" data-color="var(--color-amber)"></div>
-        <div class="scalebar__row" data-label="dos adolescentes" data-value="80" data-color="var(--color-vermilion)"></div>
+      <div class="bignums" data-bignums role="img"
+        aria-label="31% dos adultos e 80% dos adolescentes não atingem o nível recomendado de atividade física. Fonte: WHO, 2024.">
+        <div class="bignums__axis" aria-hidden="true">
+          <span>100</span><span>75</span><span>50</span><span>25</span><span>0</span>
+        </div>
+        <div class="bignums__col">
+          <span class="bignums__value" data-bignum data-value="31" style="color: var(--color-amber);">0%</span>
+        </div>
+        <div class="bignums__col">
+          <span class="bignums__value" data-bignum data-value="80" style="color: var(--color-vermilion);">0%</span>
+        </div>
+        <div class="bignums__rule" aria-hidden="true"></div>
+        <span class="bignums__cap bignums__cap--a">dos adultos</span>
+        <span class="bignums__cap bignums__cap--b">dos adolescentes</span>
       </div>
+      <p class="stat__source small-note">Fonte: WHO, 2024.</p>
+    </div>
       <p class="stat__source small-note">Fonte: WHO, 2024.</p>
     </div>
 

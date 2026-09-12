@@ -377,11 +377,12 @@ Texto curto em linhas que entram em cascata (Oswald 500). Sem canvas
 Slot genérico (2D ou cena 3D futura) com texto-grafite de apresentação:
 três figuras em movimento (corredor, pessoa em pé, skatista).
 
-## Barras com escala real
+## Números-coluna em escala real
 
-Gráfico `scalebar` (`js/charts.js`): `31%` (`amber`, dos adultos) e `80%`
-(`vermilion`, dos adolescentes) em escala real 0–100, eixo inferior com
-ticks, rótulos abaixo do eixo e contagem animada até o valor.
+Os numerões **são** as colunas (`main.js`, `initBigNums`): `31%` (`amber`,
+dos adultos) e `80%` (`vermilion`, dos adolescentes) com altura proporcional
+na escala 0–100 do eixo vertical; o eixo inferior separa os rótulos.
+Animação tipo contador digital: contam e crescem juntos até o valor.
 
 ## Barra populacional
 
@@ -629,7 +630,7 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 ├── Capitulo01 (inicio.php)
 │   ├── Título bipartido (Oswald + Elephant)
 │   ├── ProseLines (texto em cascata, sem canvas)
-│   ├── ScalebarChart (31% · 80%, escala real + contagem)
+│   ├── BignumsChart (31% · 80% como colunas + contador)
 │   ├── PopsliderChart (slider 2010–2030)
 │   ├── CostDisplay + QuadraSlot (futura)
 │   └── BenchBlock + Bridge (ponte p/ Cap. 02)

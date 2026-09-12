@@ -251,6 +251,60 @@
     update();
   }
 
+  /* --------------------------------------------- NÚMEROS-COLUNA */
+  // Numerais que contam de 0 até o valor enquanto crescem até a altura
+  // proporcional na escala (como um contador digital).
+  function initBigNums() {
+    var nums = Array.prototype.slice.call(
+      document.querySelectorAll("[data-bignum]")
+    );
+    if (nums.length === 0) return;
+
+    function play(el) {
+      var target = parseFloat(el.dataset.value) || 0;
+      var wrap = el.closest("[data-bignums]");
+      var axis = wrap ? wrap.querySelector(".bignums__axis") : null;
+      var maxPx = axis ? axis.clientHeight : 160;
+      var finalPx = Math.max(20, (maxPx * target) / 100);
+      if (prefersReducedMotion) {
+        el.style.fontSize = finalPx + "px";
+        el.textContent = formatNumber(target, 0) + "%";
+        return;
+      }
+      var dur = 1400;
+      var start = null;
+      function tick(now) {
+        if (!start) start = now;
+        var t = Math.min(1, (now - start) / dur);
+        var e = 1 - Math.pow(1 - t, 3);
+        el.style.fontSize = 20 + (finalPx - 20) * e + "px";
+        el.textContent = formatNumber(target * e, 0) + "%";
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if (prefersReducedMotion) {
+      nums.forEach(play);
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          play(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    nums.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
   /* ---------------------------------------------------------- INIT */
   document.addEventListener("DOMContentLoaded", () => {
     initReveal();
@@ -258,5 +312,6 @@
     initHeroParallax();
     initHeroMouseParallax();
     initTrail();
+    initBigNums();
   });
 })();

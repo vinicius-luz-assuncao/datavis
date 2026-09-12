@@ -1204,15 +1204,65 @@ main section[id] {
   margin-top: 0;
 }
 
-/* Barras com escala real */
-.scalebar {
+/* Números-coluna em escala real (os numerais SÃO as colunas) */
+.bignums {
+  --max: clamp(5rem, 14vw, 11rem);
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  column-gap: clamp(var(--space-md), 4vw, var(--space-xl));
+  align-items: end;
   margin-top: var(--space-lg);
 }
 
-.scalebar svg {
-  width: 100%;
-  height: auto;
-  display: block;
+.bignums__axis {
+  height: var(--max);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--font-geo);
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  border-right: 2px solid var(--color-neutral);
+  padding-right: 0.5rem;
+}
+
+.bignums__col {
+  min-width: 0;
+}
+
+.bignums__value {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  line-height: 1;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bignums__rule {
+  grid-column: 1 / -1;
+  height: 2px;
+  background: var(--color-ink);
+  margin-top: var(--space-sm);
+}
+
+.bignums__cap {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  margin-top: var(--space-sm);
+}
+
+.bignums__cap--a {
+  grid-column: 2;
+}
+
+.bignums__cap--b {
+  grid-column: 3;
 }
 
 /* Tipografia populacional */
