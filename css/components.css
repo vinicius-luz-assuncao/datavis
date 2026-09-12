@@ -1221,10 +1221,10 @@ main section[id] {
   justify-content: space-between;
   align-items: flex-end;
   font-family: var(--font-geo);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--color-gray);
-  border-right: 6px solid var(--color-neutral);
-  padding: 3.5rem 1rem 0rem 0rem;
+  border-right: 2px solid var(--color-neutral);
+  padding-right: 0.5rem;
 }
 
 .bignums__col {
@@ -1232,7 +1232,13 @@ main section[id] {
 }
 
 .bignums__conj {
+  width: 0;
+  min-width: 0;
+  overflow: visible;
+  justify-self: center;
   align-self: center;
+  text-align: center;
+  white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(1rem, 2.4vw, 1.5rem);
@@ -1253,7 +1259,7 @@ main section[id] {
   grid-column: 1 / -1;
   height: 2px;
   background: var(--color-ink);
-  /* margin-top: var(--space-sm); */
+  margin-top: var(--space-sm);
 }
 
 .bignums__cap {
@@ -1261,7 +1267,7 @@ main section[id] {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 2.85rem;
+  font-size: 0.85rem;
   color: var(--color-gray);
   margin-top: var(--space-sm);
 }
