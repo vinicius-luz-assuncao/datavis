@@ -20,11 +20,11 @@
       <div class="split-copy">
         <span class="eyebrow" style="color: var(--color-sky);">Saúde e Direitos</span>
         <h1 class="hero-title">
-          <span class="hero-title-color">Movimentar-se é um direito:</span><br />
-          <span class="hero-title-color-02">quem fica de fora e por quê?</span>
+          <span class="hero-title-color">Movimentar-se é um direito, </span><br />
+          <span class="hero-title-color-02">mas quem fica de fora?</span>
         </h1>
         <p class="lede hero-title-color-02" style="margin-top: var(--space-lg);">
-          Por que, mesmo sabendo que o esporte salva vidas, tantas pessoas ainda estão fora dele?
+          Por que, mesmo sabendo que atividade física salva vidas, tantas pessoas não conseguem pratica-la?
         </p>
       </div>
     </div>
