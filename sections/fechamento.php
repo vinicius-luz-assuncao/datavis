@@ -27,25 +27,33 @@
         <div class="bar-row" data-label="Falta de companhia" data-value="20.6" data-color="var(--color-vermilion)"></div>
         <div class="bar-row" data-label="Falta de interesse" data-value="18" data-color="var(--color-slate)" data-muted="true"></div>
         <div class="bar-row" data-label="Falta de capacidade física" data-value="10" data-color="var(--color-slate)" data-muted="true"></div>
+        <div class="bar-row" data-label="Homofobia ou transfobia" data-value="9.6" data-color="var(--color-slate)" data-muted="true"></div>
+        <div class="bar-row" data-label="Bullying ou assédio" data-value="8.7" data-color="var(--color-slate)" data-muted="true"></div>
       </div>
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 27.</p>
     </div>
 
     <!-- 4.2 Companhia → Conexão → Pertencimento -->
     <div class="block reveal">
-      <p class="block__lede">A falta de companhia aparece como 2º motivo entre pessoas LGBTQIA+ que não praticam esporte.</p>
-      <div class="flow" style="margin-top: var(--space-lg);">
-        <div class="flow__step">
+      <p class="block__lede">E se o primeiro passo fosse acompanhado?</p>
+      <p class="body-text">A necessidade de companhia aparece como 2º motivo entre pessoas LGBTQIAPN+ que não
+        praticam esporte — e foi significativamente mais citada por estudantes LGBTQIAPN+ do que por não-LGBTQIAPN+.</p>
+      <div class="flow flow--cascade" style="margin-top: var(--space-lg);">
+        <div class="flow__step" style="--i: 0;">
           <span class="flow__keyword">Companhia</span>
           <span class="flow__desc">Alguém com quem começar.</span>
         </div>
-        <div class="flow__step">
+        <div class="flow__step" style="--i: 1;">
           <span class="flow__keyword">Conexão</span>
           <span class="flow__desc">Um vínculo que sustenta a prática.</span>
         </div>
-        <div class="flow__step">
+        <div class="flow__step" style="--i: 2;">
           <span class="flow__keyword">Pertencimento</span>
           <span class="flow__desc">Um lugar onde se quer voltar.</span>
+        </div>
+        <div class="flow__step" style="--i: 3;">
+          <span class="flow__keyword">Acolhimento</span>
+          <span class="flow__desc">Um treino mais acolhedor.</span>
         </div>
       </div>
       <p class="stat__source small-note">Fontes: NIX Diversidade/Nike, 2022, p. 27; Lopes &amp; Del Vecchio, 2026.</p>

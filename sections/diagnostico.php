@@ -42,14 +42,36 @@
       </div>
     </div>
 
-    <!-- 3.2 Motivos que só aparecem na comunidade -->
+    <!-- 3.2 Motivos na população em geral (ranking IBGE) -->
+    <div class="block reveal">
+      <p class="block__lede">Vamos olhar mais de perto.</p>
+      <p class="body-text">
+        Na população brasileira em geral, o principal motivo para não praticar esporte é a falta de tempo —
+        seguida de perto por simplesmente não gostar ou não querer.
+      </p>
+      <div class="bar-chart" data-chart="bar">
+        <div class="bar-row" data-label="Falta de tempo" data-value="38.2" data-color="var(--color-amber)"></div>
+        <div class="bar-row" data-label="Não gostar ou não querer" data-value="35" data-color="var(--color-amber)"></div>
+        <div class="bar-row" data-label="Saúde ou idade" data-value="19" data-color="var(--color-slate)"></div>
+        <div class="bar-row" data-label="Falta de instalação acessível" data-value="2.7" data-color="var(--color-slate)"></div>
+        <div class="bar-row" data-label="Problema financeiro" data-value="1.9" data-color="var(--color-slate)"></div>
+        <div class="bar-row" data-label="Falta de companhia" data-value="1.7" data-color="var(--color-slate)"></div>
+      </div>
+      <p class="stat__source small-note">Fonte: IBGE, 2017, p. 20.</p>
+    </div>
+
+    <!-- 3.3 Motivos na comunidade LGBTQIA+ (ranking NIX) -->
     <div class="block reveal">
       <p class="byline">NIX Diversidade/Nike, 2022</p>
       <p class="body-text">
-        Entre os motivos citados pela comunidade LGBTQIA+ aparecem barreiras que não existem como categoria na
-        pesquisa do IBGE.
+        Na comunidade LGBTQIAPN+, algo muda drasticamente: entre os motivos aparecem barreiras que nem
+        existem como categoria na pesquisa do IBGE.
       </p>
+      <p class="drop">O tempo ainda é a principal barreira — mas não é a única.</p>
       <div class="bar-chart" data-chart="bar">
+        <div class="bar-row" data-label="Falta de tempo" data-value="26.3" data-color="var(--color-purple)"></div>
+        <div class="bar-row" data-label="Falta de companhia" data-value="20.6" data-color="var(--color-purple)"></div>
+        <div class="bar-row" data-label="Falta de interesse" data-value="18" data-color="var(--color-purple)"></div>
         <div class="bar-row" data-label="Falta de capacidade física" data-value="10" data-color="var(--color-purple)"></div>
         <div class="bar-row" data-label="Homofobia ou transfobia" data-value="9.6" data-color="var(--color-plum)"></div>
         <div class="bar-row" data-label="Bullying ou assédio" data-value="8.7" data-color="var(--color-vermilion)"></div>
@@ -57,9 +79,11 @@
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 27.</p>
     </div>
 
-    <!-- 3.3 Discriminação -->
+    <!-- 3.4 Discriminação -->
     <div class="block reveal">
-      <p class="block__lede">E a barreira não termina quando a pessoa começa a praticar.</p>
+      <p class="block__lede">Afinal, todo mundo se sente incluso?</p>
+      <p class="body-text">O medo também faz parte da experiência de muita gente — e a barreira não termina
+        quando a pessoa começa a praticar.</p>
       <div class="section-grid grid-duo" style="margin-top: var(--space-lg);">
         <div class="donut" data-chart="donut" data-value="63.5" data-color="var(--color-plum)"
           data-label="já sofreu ou presenciou discriminação ao praticar esporte"></div>
@@ -69,11 +93,12 @@
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 38–39.</p>
     </div>
 
-    <!-- 3.4 Apoio à inclusão trans -->
+    <!-- 3.5 Apoio à inclusão trans -->
     <div class="block reveal">
       <p class="block__lede">
-        A própria comunidade apoia a superação de divisões rígidas de categoria.
+        Inclusão também é pertencer.
       </p>
+      <p class="body-text">A própria comunidade apoia a superação de divisões rígidas de categoria.</p>
       <div class="range" data-chart="range" data-scale="0,100" data-unit="%">
         <div class="range__row"
           data-label="Concordam que pessoas trans deveriam jogar nos mesmos times que pessoas cisgêneras de mesmo gênero"
@@ -82,9 +107,10 @@
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 40.</p>
     </div>
 
-    <!-- 3.5 Companhia (Lopes) -->
+    <!-- 3.6 Companhia (Lopes) -->
     <div class="block reveal">
       <p class="byline">Pelotas · Lopes &amp; Del Vecchio, 2026</p>
+      <p class="block__lede">E a companhia faz diferença.</p>
       <p class="body-text">Outro estudo reforça a importância da companhia entre estudantes do Ensino Médio.</p>
 
       <div class="gbar" data-chart="grouped-bar">

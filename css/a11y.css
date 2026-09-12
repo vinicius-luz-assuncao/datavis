@@ -24,6 +24,12 @@
     transition: none;
   }
 
+  .flow--cascade .flow__step {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
   /* Cena 3D decorativa: fora com movimento reduzido. */
   .scene-block {
     display: none;

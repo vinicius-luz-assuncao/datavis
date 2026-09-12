@@ -12,7 +12,7 @@
   <div class="container">
     <header class="chapter__head reveal">
       <span class="chapter__marker">Capítulo 02 · Conflito</span>
-      <h2 class="section-title">Quem fica de fora primeiro</h2>
+      <h2 class="section-title">Quem é que mais "sobra" no banco</h2>
       <p class="block__lede">Quando olhamos mais de perto, a desigualdade aparece.</p>
     </header>
 
@@ -28,7 +28,7 @@
     <div class="block reveal">
       <p class="byline">Mundo · WHO, 2024</p>
       <p class="body-text">
-        Mulheres são, em média, 5 pontos percentuais menos ativas que homens. Entre adolescentes, a diferença é maior.
+        No mundo, mulheres são, em média, menos ativas que homens. Já na adolescência, a diferença é ainda maior:
       </p>
       <div class="dumbbell" data-chart="dumbbell" data-scale="0,100" data-unit="%"
         data-a-label="Meninas" data-a-color="var(--color-plum)"
@@ -44,30 +44,27 @@
     <!-- Camada 2 — Brasil (IBGE) -->
     <div class="block reveal">
       <p class="byline">Brasil · IBGE, 2017</p>
-      <p class="body-text">No Brasil, o IBGE encontra o mesmo tipo de desigualdade, com seus próprios números.</p>
+      <p class="body-text">E no Brasil, quem mais fica de fora?</p>
       <div class="gbar" data-chart="grouped-bar">
         <div class="gbar__legend">
           <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Homens</span>
           <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Mulheres</span>
         </div>
         <div class="gbar__row">
-          <p class="gbar__row-label">Praticou esporte ou atividade física</p>
-          <div class="gbar__bar" data-name="Homens" data-value="42.7" data-color="var(--color-sky)"></div>
-          <div class="gbar__bar" data-name="Mulheres" data-value="33.4" data-color="var(--color-plum)"></div>
-        </div>
-        <div class="gbar__row">
-          <p class="gbar__row-label">Praticou somente esporte</p>
-          <div class="gbar__bar" data-name="Homens" data-value="31.7" data-color="var(--color-sky)"></div>
-          <div class="gbar__bar" data-name="Mulheres" data-value="16.9" data-color="var(--color-plum)"></div>
+          <p class="gbar__row-label">Não praticam esporte ou atividade física</p>
+          <div class="gbar__bar" data-name="Homens" data-value="57.3" data-color="var(--color-sky)"></div>
+          <div class="gbar__bar" data-name="Mulheres" data-value="66.6" data-color="var(--color-plum)"></div>
         </div>
       </div>
+      <p class="drop">E quando olhamos só para o cenário do esporte, a curva se acentua:
+        <strong>31,7%</strong> dos homens × <strong>16,9%</strong> das mulheres praticam.</p>
       <p class="stat__source small-note">Fonte: IBGE, 2017, p. 12 e p. 15.</p>
     </div>
 
     <!-- Camada 3 — LGBTQIA+ (NIX) -->
     <div class="block reveal">
       <p class="byline">Comunidade LGBTQIA+ · NIX Diversidade/Nike, 2022</p>
-      <p class="body-text">E existe ainda outra camada de exclusão.</p>
+      <p class="body-text">Para pessoas LGBTQIAPN+, chegar é o primeiro desafio.</p>
       <div class="donut" data-chart="donut" data-value="42.8" data-color="var(--color-purple)"
         data-label="da população LGBTQIA+ representada no estudo não tinha acesso ao esporte"></div>
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 21.</p>

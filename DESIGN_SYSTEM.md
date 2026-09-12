@@ -417,7 +417,7 @@ Faixa rosa (`.bridge`): *"O que nos leva à pergunta: por que é que mais gente
 
 # 13. CAPÍTULO 02 — CONFLITO (`sections/conflito.php`)
 
-Título: **Quem fica de fora primeiro.** Três camadas separadas por fonte —
+Título: **Quem é que mais "sobra" no banco.** Três camadas separadas por fonte —
 nunca comparar valores absolutos entre fontes distintas.
 
 ## Cena interativa (vinda do Cap. 01)
@@ -427,17 +427,19 @@ sem texto por cima, legenda funcional abaixo. Some com `reduced-motion`.
 
 ## Mundo (WHO, 2024)
 
-Mulheres ~5 p.p. menos ativas. Dumbbell: meninas `85%` × meninos `78%`
+Mulheres em média menos ativas. Dumbbell: meninas `85%` × meninos `78%`
 (adolescentes sem o nível recomendado).
 
 ## Brasil (IBGE, 2017, p. 12 e p. 15)
 
-Barras agrupadas (`grouped-bar`): atividade `42,7% × 33,4%`;
-só esporte `31,7% × 16,9%` (homens × mulheres).
+Barras agrupadas (`grouped-bar`), 1 linha, enquadramento de ausência:
+não praticam `57,3% × 66,6%` (homens × mulheres). Abaixo, linha-drop (`.drop`,
+texto menor): só esporte `31,7% × 16,9%` — a curva se acentua.
 
 ## LGBTQIA+ (NIX Diversidade/Nike, 2022, p. 21)
 
-Donut `42,8%` sem acesso ao esporte. Cor: `purple`.
+"Para pessoas LGBTQIAPN+, chegar é o primeiro desafio." Donut `42,8%` sem
+acesso ao esporte. Cor: `purple`.
 
 ## Aviso metodológico (callout fixo)
 
@@ -453,22 +455,36 @@ Leitura de **composição e ordem** dos motivos — nunca valor absoluto entre f
 ## Comparador de motivos (IBGE × NIX)
 
 Dumbbell nas categorias equivalentes — tempo (`38,2 × 26,3`), companhia
-(`1,7 × 20,6`), não gostar/interesse (`35,0 × 18`) — mais barras das
-categorias exclusivas da NIX: capacidade física (`10`), homofobia/transfobia
-(`9,6`), bullying/assédio (`8,7`). Fontes: IBGE 2017 p. 20; NIX 2022 p. 27.
+(`1,7 × 20,6`), não gostar/interesse (`35,0 × 18`). Fontes: IBGE 2017 p. 20;
+NIX 2022 p. 27.
+
+## Ranking IBGE ("Vamos olhar mais de perto")
+
+Barras ordenadas com a lista completa: tempo (`38,2`), não gostar
+(`35,0`), saúde/idade (`19,0`), instalação (`2,7`), financeiro (`1,9`),
+companhia (`1,7`). Fonte: IBGE 2017 p. 20.
+
+## Ranking NIX
+
+Barras com a lista completa (`26,3 · 20,6 · 18 · 10 · 9,6 · 8,7`), precedidas
+da linha-drop "O tempo ainda é a principal barreira — mas não é a única."
+Fonte: NIX 2022 p. 27.
 
 ## Discriminação (NIX, p. 38–39)
 
-Par de donuts: `63,5%` (ao praticar) e `68,3%` (em ambientes esportivos).
+"Afinal, todo mundo se sente incluso?" Par único de donuts: `63,5%`
+(ao praticar) e `68,3%` (em ambientes esportivos). Sem repetição do par.
 
 ## Inclusão trans (NIX, p. 40)
 
-Gráfico `range`: `75,6%–76,8%` de apoio a pessoas trans nos mesmos times.
+"Inclusão também é pertencer." Gráfico `range`: `75,6%–76,8%` de apoio
+a pessoas trans nos mesmos times.
 
 ## Companhia (Lopes & Del Vecchio, 2026)
 
-Barras agrupadas: `40%` LGBT+ × `14%` não-LGBT+; escore de barreiras
-`26,1 ± 9,2` (feminino) × `13,8 ± 13,7` (masculino).
+"E a companhia faz diferença." Barras agrupadas: `40%` LGBT+ × `14%`
+não-LGBT+; escore de barreiras `26,1 ± 9,2` (feminino) × `13,8 ± 13,7`
+(masculino).
 
 ## Placeholder
 
@@ -482,12 +498,15 @@ Título: **O que fica quando tiramos o que não podemos resolver.**
 
 ## Sem o tempo
 
-Barras dos motivos NIX com "falta de tempo" esmaecida (`data-muted`) e
-"falta de companhia" em destaque (`vermilion`).
+Barras com os 6 motivos NIX: "falta de tempo" esmaecida (`data-muted`) e
+"falta de companhia" em destaque (`vermilion`); demais esmaecidas.
 
 ## Fluxo
 
-Companhia → Conexão → Pertencimento (`.flow`, 3 colunas, sem ícones).
+Companhia → Conexão → Pertencimento → Acolhimento (`.flow`, 4 colunas,
+sem ícones). Entrada em cascata (`.flow--cascade`): cada etapa desliza da
+esquerda com atraso em degrau (`--i` × 200ms) ao receber `.is-visible`;
+estado final imediato com `reduced-motion`.
 
 ## Nota de projeto (faixa escura `.projeto-note`)
 
@@ -589,6 +608,8 @@ Para: "Vem comigo?"
 
 Texto de apoio: aproximar pessoas, formar conexões, tornar o ambiente
 esportivo mais acolhedor. Visual: FUNDO → NAVY, TEXTO → PAPER, DESTAQUE → AMBER.
+Botão `.btn--accent` "Conheça o projeto" (link placeholder `#`) + linha
+"Esse é o nosso ponto de partida".
 
 ---
 
@@ -637,17 +658,18 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 ├── Capitulo02 (conflito.php)
 │   ├── SceneStage (canvas Quarto, vindo do Cap. 01)
 │   ├── DumbbellChart (85% × 78%)
-│   ├── GroupedBarChart (IBGE gênero)
+│   ├── GroupedBarChart (não praticam 57,3% × 66,6%) + Drop (só esporte)
 │   └── DonutChart (42,8%)
 ├── Capitulo03 (diagnostico.php)
 │   ├── DumbbellChart (motivos IBGE × NIX)
-│   ├── BarChart (motivos exclusivos NIX)
+│   ├── BarChart (ranking IBGE completo)
+│   ├── BarChart (ranking NIX completo) + Drop
 │   ├── DonutChart × 2 (63,5% · 68,3%)
 │   ├── RangeChart (75,6%–76,8%)
 │   └── GroupedBarChart × 2 (companhia · escores)
 ├── Capitulo04 (fechamento.php)
-│   ├── BarChart ("sem o tempo", data-muted)
-│   ├── Flow (companhia → conexão → pertencimento)
+│   ├── BarChart ("sem o tempo", 6 linhas, data-muted)
+│   ├── FlowCascade (4 passos, entrada em cascata)
 │   └── ProjetoNote (faixa escura)
 ├── FontesSection (4 fontes)
 ├── FinalStatement ("VEM COMIGO?")
@@ -659,6 +681,7 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 # 38. COMPONENTES DE APOIO
 
 Criar também: `SectionHeader`, `SourceLabel`, `EditorialCallout`, `IllustrationBlock`, `Icon`, `Divider`.
+Prontos: `Drop` (acento editorial pequeno com filete `amber`), `Btn` (`.btn--accent`).
 
 ---
 

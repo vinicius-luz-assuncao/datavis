@@ -16,8 +16,17 @@
     <p class="final-statement__brand reveal">[ nome do projeto ]</p>
 
     <p class="final-statement__note reveal">
-      Uma experiência pensada para aproximar pessoas, formar conexões e tornar o ambiente esportivo mais
-      acolhedor. Porque o primeiro passo pode ser um movimento — mas permanecer pode começar com uma conexão.
+      Uma experiência pensada para aproximar pessoas, criar conexões e tornar o treino mais acolhedor.
+      Porque o primeiro passo pode ser um movimento — mas permanecer pode começar com uma conexão.
+    </p>
+
+    <p class="reveal" style="margin-top: var(--space-lg);">
+      <a class="btn btn--accent" href="#">Conheça o projeto</a>
+    </p>
+
+    <p class="final-statement__note reveal">
+      Esse é o nosso ponto de partida. Um primeiro movimento para transformar dados em uma experiência
+      que conecte pessoas através do treino.
     </p>
   </div>
 </section>
