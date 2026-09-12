@@ -22,10 +22,10 @@
     <div class="block reveal">
       <div class="split-block">
         <div class="split-block__text">
+          <p class="byline">Mundo</p>
           <p class="body-text">
             No mundo, mulheres são, em média, menos ativas que homens. Já na adolescência, a diferença é ainda maior:
-            entre quem não atinge o nível recomendado de atividade física, as meninas estão em maior proporção que
-            os meninos.
+            85% das meninas não atingem os níveis recomendados, em comparação aos 78% dos meninos.
           </p>
         </div>
         <div class="split-block__chart">
@@ -45,33 +45,47 @@
       </div>
     </div>
 
-    <!-- Camada 2 — Brasil (IBGE) -->
+    <!-- Camada 2 — Brasil (IBGE): texto à esquerda, gráfico à direita -->
     <div class="block reveal">
-      <p class="byline">Brasil</p>
-      <p class="body-text">E no Brasil, quem mais fica de fora?</p>
-      <div class="gbar" data-chart="grouped-bar">
-        <div class="gbar__row">
-          <p class="gbar__row-label">Não praticam esporte ou atividade física</p>
-          <div class="gbar__bar" data-name="Homens" data-value="57.3" data-color="var(--color-sky)"></div>
-          <div class="gbar__bar" data-name="Mulheres" data-value="66.6" data-color="var(--color-plum)"></div>
+      <div class="split-block">
+        <div class="split-block__text">
+          <p class="byline">Brasil</p>
+          <p class="body-text">E no Brasil, quem mais fica de fora? 57,3% dos homens não praticam esporte ou
+            atividade física — enquanto entre as mulheres esse número chega a 66,6%.</p>
+          <p class="drop">E quando olhamos só para o cenário do esporte, a curva se acentua:
+            <strong>31,7%</strong> dos homens × <strong>16,9%</strong> das mulheres praticam.</p>
         </div>
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Homens</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Mulheres</span>
+        <div class="split-block__chart">
+          <div class="gbar" data-chart="grouped-bar">
+            <div class="gbar__row">
+              <p class="gbar__row-label">Não praticam esporte ou atividade física</p>
+              <div class="gbar__bar" data-name="Homens" data-value="57.3" data-color="var(--color-sky)"></div>
+              <div class="gbar__bar" data-name="Mulheres" data-value="66.6" data-color="var(--color-plum)"></div>
+            </div>
+            <div class="gbar__legend">
+              <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Homens</span>
+              <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Mulheres</span>
+            </div>
+          </div>
+          <p class="stat__source small-note">Fonte: IBGE, 2017, p. 12 e p. 15.</p>
         </div>
       </div>
-      <p class="drop">E quando olhamos só para o cenário do esporte, a curva se acentua:
-        <strong>31,7%</strong> dos homens × <strong>16,9%</strong> das mulheres praticam.</p>
-      <p class="stat__source small-note">Fonte: IBGE, 2017, p. 12 e p. 15.</p>
     </div>
 
-    <!-- Camada 3 — LGBTQIA+ (NIX) -->
+    <!-- Camada 3 — LGBTQIA+ (NIX): texto à esquerda, gráfico à direita -->
     <div class="block reveal">
-      <p class="byline">Comunidade LGBTQIAPN+</p>
-      <p class="body-text">Para pessoas LGBTQIAPN+, chegar é o primeiro desafio.</p>
-      <div class="donut" data-chart="donut" data-value="42.8" data-color="var(--color-purple)"
-        data-label="da população LGBTQIA+ representada no estudo não tinha acesso ao esporte"></div>
-      <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 21.</p>
+      <div class="split-block">
+        <div class="split-block__text">
+          <p class="byline">Comunidade LGBTQIAPN+</p>
+          <p class="body-text">Para pessoas LGBTQIAPN+, chegar é o primeiro desafio: 42,8% da população
+            representada na pesquisa não tem acesso ao esporte.</p>
+        </div>
+        <div class="split-block__chart">
+          <div class="donut" data-chart="donut" data-value="42.8" data-color="var(--color-purple)"
+            data-label="da população LGBTQIA+ representada no estudo não tinha acesso ao esporte"></div>
+          <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 21.</p>
+        </div>
+      </div>
     </div>
 
     <!-- Aviso -->
