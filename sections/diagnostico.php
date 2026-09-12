@@ -22,10 +22,6 @@
       </p>
 
       <div class="gbar" data-chart="grouped-bar">
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-amber);"></i> IBGE, 2017</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-purple);"></i> NIX Diversidade/Nike, 2022</span>
-        </div>
         <div class="gbar__row">
           <p class="gbar__row-label">Falta de tempo</p>
           <div class="gbar__bar" data-name="IBGE" data-value="38.2" data-color="var(--color-amber)"></div>
@@ -40,6 +36,10 @@
           <p class="gbar__row-label">Não gostar / falta de interesse</p>
           <div class="gbar__bar" data-name="IBGE" data-value="35.0" data-color="var(--color-amber)"></div>
           <div class="gbar__bar" data-name="NIX" data-value="18" data-color="var(--color-purple)"></div>
+        </div>
+        <div class="gbar__legend">
+          <span class="gbar__legend-item"><i style="background: var(--color-amber);"></i> IBGE, 2017</span>
+          <span class="gbar__legend-item"><i style="background: var(--color-purple);"></i> NIX Diversidade/Nike, 2022</span>
         </div>
       </div>
       <p class="stat__source small-note">Fontes: IBGE, 2017, p. 20; NIX Diversidade/Nike, 2022, p. 27.</p>
@@ -124,14 +124,14 @@
       <p class="body-text">Outro estudo reforça a importância da companhia entre estudantes do Ensino Médio.</p>
 
       <div class="gbar" data-chart="grouped-bar">
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Estudantes LGBT+</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Estudantes não-LGBT+</span>
-        </div>
         <div class="gbar__row">
           <p class="gbar__row-label">Citaram “falta de companhia” como barreira</p>
           <div class="gbar__bar" data-name="LGBT+" data-value="40" data-color="var(--color-plum)"></div>
           <div class="gbar__bar" data-name="Não-LGBT+" data-value="14" data-color="var(--color-sky)"></div>
+        </div>
+        <div class="gbar__legend">
+          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Estudantes LGBT+</span>
+          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Estudantes não-LGBT+</span>
         </div>
       </div>
 

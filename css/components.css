@@ -829,6 +829,7 @@ main section[id] {
   display: flex;
   gap: var(--space-md);
   flex-wrap: wrap;
+  margin-top: var(--space-md);
 }
 
 .gbar__legend-item {

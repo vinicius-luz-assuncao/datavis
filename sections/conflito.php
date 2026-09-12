@@ -20,19 +20,19 @@
 
     <!-- Camada 1 — Mundo (WHO) -->
     <div class="block reveal">
-      <p class="byline">Mundo</p>
+      <!-- <p class="byline">Mundo</p> -->
       <p class="body-text">
         No mundo, mulheres são, em média, menos ativas que homens. Já na adolescência, a diferença é ainda maior:
       </p>
       <div class="gbar" data-chart="grouped-bar">
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Meninas</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Meninos</span>
-        </div>
         <div class="gbar__row">
           <p class="gbar__row-label">Não atingem o nível recomendado de atividade física</p>
           <div class="gbar__bar" data-name="Meninas" data-value="85" data-color="var(--color-plum)"></div>
           <div class="gbar__bar" data-name="Meninos" data-value="78" data-color="var(--color-sky)"></div>
+        </div>
+        <div class="gbar__legend">
+          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Meninas</span>
+          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Meninos</span>
         </div>
       </div>
       <p class="stat__source small-note">Fonte: WHO, 2024.</p>
@@ -43,14 +43,14 @@
       <p class="byline">Brasil</p>
       <p class="body-text">E no Brasil, quem mais fica de fora?</p>
       <div class="gbar" data-chart="grouped-bar">
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Homens</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Mulheres</span>
-        </div>
         <div class="gbar__row">
           <p class="gbar__row-label">Não praticam esporte ou atividade física</p>
           <div class="gbar__bar" data-name="Homens" data-value="57.3" data-color="var(--color-sky)"></div>
           <div class="gbar__bar" data-name="Mulheres" data-value="66.6" data-color="var(--color-plum)"></div>
+        </div>
+        <div class="gbar__legend">
+          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Homens</span>
+          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Mulheres</span>
         </div>
       </div>
       <p class="drop">E quando olhamos só para o cenário do esporte, a curva se acentua:
