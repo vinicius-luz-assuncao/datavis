@@ -3,6 +3,7 @@ import { CONFIG } from './config.js';
 import { createRoom, computeBounds, addLights, stripLights, normalizeModelLights } from './scene.js';
 import { createBall, wrapBall, kickBall, stepBall } from './ball.js';
 import { wrapTenis, collideBallTenis } from './tenis.js';
+import { collectColliders } from './colliders.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 function thud() {
   try {
@@ -37,7 +38,9 @@ function spawnBall(ball, bounds, keepPos) {
 }
 export function initQuarto(container, opts = {}) {
   const section = container.closest('.quarto-section') || container;
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  // Fundo transparente: a página (papel) aparece atrás da cena.
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -45,7 +48,7 @@ export function initQuarto(container, opts = {}) {
   renderer.toneMappingExposure = 1.0;
   container.appendChild(renderer.domElement);
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0b0b12);
+  // Sem scene.background: o canvas é transparente (fundo infinito).
   const bounds = computeBounds();
   bounds.maxX = Math.min(bounds.maxX, 1.4);
   bounds.maxZ = Math.min(bounds.maxZ, 1.4);
@@ -66,7 +69,7 @@ export function initQuarto(container, opts = {}) {
     });
     section.addEventListener('pointerleave', () => { par.tx = 0; par.ty = 0; });
   }
-  const quarto = { scene, camera, ball: null, tenis: null, bounds, ready: false, usingModel: false };
+  const quarto = { scene, camera, ball: null, tenis: null, bounds, ready: false, usingModel: false, colliders: null };
   let stage = null;
   function setStage(g) {
     if (stage) scene.remove(stage);
@@ -143,6 +146,8 @@ export function initQuarto(container, opts = {}) {
       if (tg) { tg.traverse(o => { if (o.isMesh) o.castShadow = true; }); tenis = wrapTenis(tg); }
       else tenis = null;
       setStage(gltf.scene);
+      // Colisores modelados no Blender (Collider_*, tabela, aro, rede).
+      quarto.colliders = collectColliders(gltf.scene);
       // Adota a câmera embutida no GLB (cópia exata: posição, rotação e fov
       // em graus). O aspect segue dinâmico do container (resize).
       const glbCam =
@@ -298,7 +303,7 @@ export function initQuarto(container, opts = {}) {
     const dt = Math.min((now - last) / 1000, 0.033);
     last = now;
     if (quarto.ball) {
-      stepBall(quarto.ball, bounds, dt, thud);
+      stepBall(quarto.ball, bounds, dt, thud, quarto.colliders);
       if (quarto.tenis) {
         collideBallTenis(quarto.ball, quarto.tenis, dt, thud);
         quarto.tenis.update(dt, bounds);

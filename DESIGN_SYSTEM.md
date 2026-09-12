@@ -628,14 +628,20 @@ Em telas estreitas, só os pontos.
 # 22. CENA 3D — QUARTO (`assets/Quarto-interacao/`, `js/quarto.js`)
 
 Exceção documentada à regra "sem 3D": a cena interativa do quarto (three.js,
-GLB `quarto02.glb`) vive no **Capítulo 02**, em palco próprio sem texto por
-cima (antes ficava atrás do texto de abertura do Cap. 01).
+GLB `quarto02.glb`), em palco ampliado (`.scene-stage--tall`: 1560px,
+largura total da viewport) ao fim do Cap. 01.
 
-* Camadas: canvas (`z 0`) → véu claro em degradê (`z 1`, `pointer-events: none`)
-  → texto (`z 2`, não clicável para a bola ser arrastável).
-* `importmap` do three@0.160.0 no `header.php`; `js/quarto.js` reaproveita o
-  `initQuarto()` do projeto com `modelURL` corrigido e câmera própria
-  (posição deslocada à direita, `fov 33`).
+* Fundo transparente (`alpha`, sem `scene.background`): o papel da página é
+  o fundo (infinito). Palco base do Cap. 01 segue escuro.
+* Câmera adotada do próprio GLB (posição, quaternion e `fov` copiados;
+  `aspect` dinâmico; parallax de mouse sobre o quaternion-base). Fallback:
+  câmera do `CONFIG` se o GLB não trouxer câmera.
+* Colisores por nome (`colliders.js`, prefixo `Collider_`): `Collider_*`
+  genérico vira caixa AABB dura com malha oculta; `Collider_Tabela` caixa
+  dura visível; `Collider_Aro` anel de esferas; `Collider_Rede` zona de
+  amortecimento (freia e deixa cair). Paredes alinhadas aos eixos; piso em
+  `y=0`. Sem `Collider_*`, valem `CONFIG.room` + diagonal (fallback).
+* `importmap` do three@0.160.0 no `header.php`.
 * Inicialização preguiçosa (só ao entrar na tela); com
   `prefers-reduced-motion` o 3D nem inicia; sem WebGL/CDN, texto + véu seguem intactos.
 

@@ -10,6 +10,9 @@ export const CONFIG = {
   tenis: { home: [-1.4, 0, -2.3], maxNudge: 0.8, spring: 11, damping: 6.5, kick: 0.7, tilt: 0.1, yaw: 0, radius: 0.55, contact: 1.0, topBounce: 0.45, topSlide: 3.0, scale: 1.0, modelURL: null },
   model: 'quarto02.glb',
   roles: { ball: 'ball', tenis: 'tenis' },
+  // Colisores por nome: tudo que começa com o prefixo vira colisão.
+  // Tabela/aro/rede mantêm a malha visível; Collider_* genérico é ocultado.
+  colliders: { prefix: 'Collider_', rimSamples: 12, netDamp: 6, netSink: 4 },
   useModelLights: true,
   modelLightDiv: { directional: 400, point: 120, spot: 120 },
   camera: { pos: [2.35, 3.6, 3.1], look: [-1.7, 0.85, -2.5], fov: 42 },

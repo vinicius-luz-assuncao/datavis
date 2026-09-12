@@ -1263,6 +1263,8 @@ main section[id] {
   max-width: none;
   margin-left: calc(50% - 50vw);
   border-radius: 0;
+  /* Canvas transparente: o papel da página é o fundo (infinito). */
+  background: transparent;
 }
 
 /* Barra populacional com slider */

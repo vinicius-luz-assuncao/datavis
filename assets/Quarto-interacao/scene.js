@@ -41,7 +41,7 @@ export function normalizeModelLights(root, div) {
 export function createRoom(scene) {
   const { w, d, h, backZ, leftX } = CONFIG.room;
   const c = CONFIG.colors;
-  scene.background = new THREE.Color(0x0b0b12);
+  // Sem fundo sólido: canvas transparente (fundo infinito).
   addLights(scene);
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(w, d),

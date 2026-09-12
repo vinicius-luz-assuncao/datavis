@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { CONFIG } from './config.js';
+import { resolveBallColliders } from './colliders.js';
 export function wrapBall(mesh) {
   mesh.name = 'ball';
   const s = CONFIG.ball.scale || 1;
@@ -42,7 +43,7 @@ export function kickBall(ball, reduced) {
   ball.squash = 0;
   return true;
 }
-export function stepBall(ball, bounds, dt, onBounce) {
+export function stepBall(ball, bounds, dt, onBounce, colliders) {
   const b = CONFIG.ball;
   const dg = CONFIG.wallDiag;
   const rh = CONFIG.returnHome;
@@ -65,19 +66,30 @@ export function stepBall(ball, bounds, dt, onBounce) {
     const f = Math.max(0, 1 - b.friction * dt);
     ball.vel.x *= f; ball.vel.z *= f;
   }
-  if (p.x < bounds.minX) { p.x = bounds.minX; ball.vel.x *= -b.restitutionWall; onBounce && onBounce(); }
-  if (p.x > bounds.maxX) { p.x = bounds.maxX; ball.vel.x *= -b.restitutionWall; onBounce && onBounce(); }
-  if (p.z < bounds.minZ) { p.z = bounds.minZ; ball.vel.z *= -b.restitutionWall; onBounce && onBounce(); }
-  if (p.z > bounds.maxZ) { p.z = bounds.maxZ; ball.vel.z *= -b.restitutionWall; onBounce && onBounce(); }
-  const s = p.x + p.z - dg.c;
-  if (s > 0) {
-    const nx = Math.SQRT1_2, nz = Math.SQRT1_2;
-    p.x -= nx * s; p.z -= nz * s;
-    const vn = ball.vel.x * nx + ball.vel.z * nz;
-    if (vn > 0) {
-      ball.vel.x -= (1 + dg.restitution) * vn * nx;
-      ball.vel.z -= (1 + dg.restitution) * vn * nz;
-      onBounce && onBounce();
+  if (colliders && colliders.active) {
+    // Paredes/tabela/aro/rede vêm do Blender; o retângulo fixo e a
+    // diagonal ficam desligados para não brigar com a geometria modelada.
+    resolveBallColliders(ball, colliders, dt, onBounce);
+    // Rede de segurança: se escapar por alguma fresta, volta ao canto.
+    if (Math.abs(p.x) > 40 || Math.abs(p.z) > 40) {
+      p.copy(bounds.corner).add(new THREE.Vector3(0, 1.5, 0));
+      ball.vel.set(0, 0, 0);
+    }
+  } else {
+    if (p.x < bounds.minX) { p.x = bounds.minX; ball.vel.x *= -b.restitutionWall; onBounce && onBounce(); }
+    if (p.x > bounds.maxX) { p.x = bounds.maxX; ball.vel.x *= -b.restitutionWall; onBounce && onBounce(); }
+    if (p.z < bounds.minZ) { p.z = bounds.minZ; ball.vel.z *= -b.restitutionWall; onBounce && onBounce(); }
+    if (p.z > bounds.maxZ) { p.z = bounds.maxZ; ball.vel.z *= -b.restitutionWall; onBounce && onBounce(); }
+    const s = p.x + p.z - dg.c;
+    if (s > 0) {
+      const nx = Math.SQRT1_2, nz = Math.SQRT1_2;
+      p.x -= nx * s; p.z -= nz * s;
+      const vn = ball.vel.x * nx + ball.vel.z * nz;
+      if (vn > 0) {
+        ball.vel.x -= (1 + dg.restitution) * vn * nx;
+        ball.vel.z -= (1 + dg.restitution) * vn * nz;
+        onBounce && onBounce();
+      }
     }
   }
   const onFloor = p.y <= r + 0.002;
