@@ -800,6 +800,201 @@ document.addEventListener("DOMContentLoaded", function () {
     d3.selectAll("[data-chart='map']").each(function () {
       drawMap(this);
     });
+    d3.selectAll("[data-chart='popslider']").each(function () {
+      drawPopslider(this);
+    });
+  }
+
+  /* ================================================================
+     POPSLIDER — barra populacional horizontal com slider de ano
+     (população adulta total × insuficientemente ativos, 2010–2030)
+     ================================================================ */
+  function drawPopslider(el) {
+    var canvas = el.querySelector("[data-pop-canvas]");
+    var slider = el.querySelector("input[type='range']");
+    var yearEl = el.querySelector("[data-pop-year]");
+    var tip = el.querySelector("[data-pop-tip]");
+    if (!canvas || !slider) return;
+
+    var dur = prefersReducedMotion ? 0 : 200;
+
+    // Âncoras: 2010 derivado do "+5 p.p.", 2024 dado, 2030 projeção.
+    var anchors = [
+      { year: 2010, population: 5.0, inactivePct: 0.26 },
+      { year: 2024, population: 5.8, inactivePct: 0.31 },
+      { year: 2030, population: 6.3, inactivePct: 0.35 }
+    ];
+
+    function interpolate(year) {
+      for (var i = 0; i < anchors.length - 1; i++) {
+        var a = anchors[i];
+        var b = anchors[i + 1];
+        if (year >= a.year && year <= b.year) {
+          var t = (year - a.year) / (b.year - a.year);
+          return {
+            year: year,
+            population: a.population + t * (b.population - a.population),
+            inactivePct: a.inactivePct + t * (b.inactivePct - a.inactivePct)
+          };
+        }
+      }
+      return year < anchors[0].year
+        ? { year: year, population: anchors[0].population, inactivePct: anchors[0].inactivePct }
+        : { year: year, population: anchors[2].population, inactivePct: anchors[2].inactivePct };
+    }
+
+    var data = [];
+    for (var yy = 2010; yy <= 2030; yy++) {
+      var dd = interpolate(yy);
+      dd.inactive = dd.population * dd.inactivePct;
+      data.push(dd);
+    }
+
+    var W = 640;
+    var H = 190;
+    var ML = 8;
+    var MR = 14;
+    var BAR_Y = 78;
+    var BAR_H = 52;
+
+    var x = d3.scaleLinear().domain([0, 6.5]).range([ML, W - MR]);
+
+    var svg = d3
+      .select(canvas)
+      .append("svg")
+      .attr("viewBox", "0 0 " + W + " " + H)
+      .attr("role", "img")
+      .attr(
+        "aria-label",
+        "População adulta total e adultos insuficientemente ativos, de 2010 a 2030. Use o controle de ano para ver cada valor."
+      );
+
+    var axisG = svg
+      .append("g")
+      .attr("transform", "translate(0," + (H - 32) + ")")
+      .call(
+        d3.axisBottom(x).ticks(7).tickFormat(function (d) {
+          return d + " bi";
+        })
+      );
+    axisG
+      .selectAll("text")
+      .style("font-family", "var(--font-geo)")
+      .style("font-size", "12px")
+      .style("fill", "var(--color-gray)");
+    axisG.selectAll("line").style("stroke", "var(--color-neutral)");
+    axisG.select(".domain").style("stroke", "var(--color-neutral)");
+
+    var barBg = svg
+      .append("rect")
+      .attr("x", x(0))
+      .attr("y", BAR_Y)
+      .attr("width", 0)
+      .attr("height", BAR_H)
+      .attr("rx", 8)
+      .style("fill", "var(--color-slate)")
+      .attr("opacity", 0.9);
+
+    var barFg = svg
+      .append("rect")
+      .attr("x", x(0))
+      .attr("y", BAR_Y)
+      .attr("width", 0)
+      .attr("height", BAR_H)
+      .attr("rx", 8)
+      .style("fill", "var(--color-vermilion)");
+
+    var labelTotal = svg
+      .append("text")
+      .attr("text-anchor", "middle")
+      .style("font-family", "var(--font-geo)")
+      .style("font-weight", 600)
+      .style("font-size", "13px")
+      .style("fill", "var(--color-ink)");
+
+    var labelInact = svg
+      .append("text")
+      .style("font-size", "13px")
+      .style("font-weight", "bold");
+
+    function render(d) {
+      var fgW = Math.max(0, x(d.inactive) - x(0));
+      barBg
+        .transition()
+        .duration(dur)
+        .attr("width", Math.max(0, x(d.population) - x(0)));
+      barFg.transition().duration(dur).attr("width", fgW);
+      labelTotal
+        .transition()
+        .duration(dur)
+        .attr("x", x(d.population))
+        .attr("y", BAR_Y - 10)
+        .text(fmt(d.population, 1) + " bi");
+
+      // Rótulo dos inativos: dentro da barra se couber, senão acima.
+      var label = fmt(d.inactive, 1) + " bi (" + Math.round(d.inactivePct * 100) + "%)";
+      var cssW = (fgW / W) * (canvas.clientWidth || W);
+      labelInact.text(label);
+      if (cssW > label.length * 7.2 + 20) {
+        labelInact
+          .transition()
+          .duration(dur)
+          .attr("x", x(0) + fgW / 2)
+          .attr("y", BAR_Y + BAR_H / 2 + 4.5)
+          .style("text-anchor", "middle")
+          .style("fill", "var(--color-paper)");
+      } else {
+        labelInact
+          .transition()
+          .duration(dur)
+          .attr("x", x(0) + fgW)
+          .attr("y", BAR_Y - 10)
+          .style("text-anchor", "middle")
+          .style("fill", "var(--color-ink)");
+      }
+    }
+
+    function datumFor(year) {
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].year === year) return data[i];
+      }
+      return data[0];
+    }
+
+    slider.addEventListener("input", function () {
+      var year = parseInt(slider.value, 10);
+      if (yearEl) yearEl.textContent = year;
+      render(datumFor(year));
+    });
+
+    function showTip(evt) {
+      if (!tip) return;
+      var d = datumFor(parseInt(slider.value, 10));
+      var rect = svg.node().getBoundingClientRect();
+      var pt = d3.pointer(evt, svg.node());
+      tip.innerHTML =
+        "<strong>" +
+        d.year +
+        "</strong><br>População adulta: " +
+        fmt(d.population, 1) +
+        " bi<br>Inativos: " +
+        fmt(d.inactive, 1) +
+        " bi (" +
+        Math.round(d.inactivePct * 100) +
+        "%)";
+      tip.style.opacity = "1";
+      tip.style.left = (pt[0] / W) * rect.width + 14 + "px";
+      tip.style.top = Math.max(0, (pt[1] / H) * rect.height - 10) + "px";
+    }
+
+    function hideTip() {
+      if (tip) tip.style.opacity = "0";
+    }
+
+    barBg.on("mousemove", showTip).on("mouseleave", hideTip);
+    barFg.on("mousemove", showTip).on("mouseleave", hideTip);
+
+    render(datumFor(parseInt(slider.value, 10)));
   }
 
   initCharts();

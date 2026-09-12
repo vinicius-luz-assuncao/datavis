@@ -1163,3 +1163,202 @@ main section[id] {
     margin: var(--space-lg) var(--space-md);
   }
 }
+
+/* ============ CAPÍTULO 01 — composição do wireframe ============ */
+.graphite-note {
+  font-family: var(--font-geo);
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--color-gray);
+  margin-bottom: var(--space-sm);
+}
+
+/* Numerões */
+.hero-nums {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(var(--space-md), 6vw, var(--space-xxl));
+  margin-top: var(--space-lg);
+  padding-left: clamp(2.5rem, 6vw, 4rem);
+}
+
+.hero-nums__scale {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-geo);
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  border-left: 2px solid var(--color-neutral);
+  padding-left: 0.5rem;
+}
+
+.hero-nums__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-nums__value {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  font-size: clamp(4.5rem, 13vw, 10rem);
+  line-height: 0.9;
+}
+
+.hero-nums__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(0.95rem, 2vw, 1.3rem);
+  margin-top: var(--space-sm);
+}
+
+.hero-nums__conj {
+  font-family: var(--font-hero);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--color-gray);
+  padding-bottom: 2.2rem;
+}
+
+/* Barra populacional com slider */
+.popslider {
+  position: relative;
+  margin-top: var(--space-lg);
+}
+
+.popslider__canvas svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.popslider__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.popslider__controls label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.9rem;
+}
+
+.popslider__controls input[type="range"] {
+  flex: 1;
+  accent-color: var(--color-vermilion);
+  height: 2rem;
+  cursor: pointer;
+}
+
+.popslider__year {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-vermilion);
+  min-width: 4.5rem;
+  text-align: right;
+}
+
+.popslider__legend {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.popslider__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-geo);
+  font-size: 0.85rem;
+}
+
+.popslider__legend-item i {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 4px;
+}
+
+.popslider__tip {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  background: rgba(28, 43, 68, 0.92);
+  color: var(--color-paper);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  z-index: 3;
+  max-width: 90%;
+}
+
+.popslider__tip strong {
+  font-family: var(--font-display);
+}
+
+/* Custo em display */
+.cost-display {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  line-height: 1.05;
+  text-align: center;
+  max-width: 22ch;
+  margin-inline: auto;
+}
+
+.cost-display strong {
+  color: var(--color-vermilion);
+}
+
+/* Banco: imagem + texto */
+.bench-block {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+/* Transição para o Capítulo 02 */
+.bridge {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.6vw, 2.8rem);
+  line-height: 1.15;
+  background: var(--color-pink);
+  color: var(--color-paper);
+  border-radius: var(--radius-lg);
+  padding: clamp(var(--space-lg), 5vw, var(--space-xl));
+  max-width: 34ch;
+}
+
+.bridge strong {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 720px) {
+  .hero-nums {
+    flex-wrap: wrap;
+  }
+
+  .bench-block {
+    grid-template-columns: 1fr;
+  }
+}

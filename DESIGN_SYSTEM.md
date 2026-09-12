@@ -360,32 +360,51 @@ Criar uma ilustração editorial de uma pessoa praticando corrida. Ao redor: qua
 # 12. CAPÍTULO 01 — INÍCIO (`sections/inicio.php`)
 
 Título: **O mundo se move menos do que deveria.** Fonte: WHO, 2024.
+Composição do wireframe (hero pronto, não refazer).
 
 ## História de abertura
 
 Texto curto em linhas que entram em cascata (Oswald 500), sobre o canvas 3D
 do quarto (ver §20). Placeholder: tênis parado, segunda-feira que não chega.
 
-## Escala global
+## Faixa de ilustração
 
-Par de donuts: `31%` dos adultos e `80%` dos adolescentes não atingem o nível
-recomendado. Cores: `vermilion` e `amber`.
+Slot genérico (2D ou cena 3D futura) com texto-grafite de apresentação:
+três figuras em movimento (corredor, pessoa em pé, skatista).
 
-## Projeção
+## Numerões
 
-Gráfico `projection`: `26%` (2010, **derivado** do "+5 p.p. desde 2010") →
-`31%` (atual) → `35%` (2030, projeção). Trecho projetado em tracejado.
-Animação sequencial: círculo → linha → círculo → tracejado → círculo.
+Display gigante (sem donuts): `31%` (`amber`, dos adultos) e `80%`
+(`vermilion`, dos adolescentes), com contagem animada (`.stat-count`) e
+escala decorativa 0–100 ao fundo.
 
-## Impacto
+## Barra populacional
 
-Três números compactos (não-gráfico): `~1,8 bi` de adultos inativos ·
-risco de morte `+20–30%` · custo `~US$ 300 bi` (2020–2030).
+Texto "Em um mundo com 8 bilhões de pessoas" + gráfico `popslider`
+(`js/charts.js`): barra horizontal empilhada (total em `slate` × inativos em
+`vermilion`) com slider 2010–2030, tooltip, legenda e marcas de escala.
+Âncoras: 2010 derivado, 2024 dado, 2030 projeção; intermediários interpolados
+(com nota de metodologia na fonte).
+
+## Custo + quadra
+
+Display "Um custo de até **300 bi** na saúde pública global" + slot da
+quadra de basquete 3D (`data-scene="quadra"`; texto será gravado na textura
+do chão quando a GLB existir).
+
+## Banco
+
+Slot PNG (pessoa sentada) + texto do risco `20–30%` em HTML.
 
 ## Benefício
 
 Callout: atividade regular contribui para prevenção/manejo de DCV, câncer e
 diabetes; reduz depressão e ansiedade.
+
+## Transição (ponte para o Cap. 02)
+
+Faixa rosa (`.bridge`): *"O que nos leva à pergunta: por que é que mais gente
+'sobra' no banco?"* — redação ainda em revisão com o autor.
 
 ---
 
