@@ -1358,6 +1358,18 @@ main section[id] {
   align-items: center;
 }
 
+/* Bloco dividido: texto à esquerda, gráfico à direita. */
+.split-block {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.split-block__chart {
+  min-width: 0;
+}
+
 /* Transição para o Capítulo 02 */
 .bridge {
   font-family: var(--font-hero);
@@ -1383,6 +1395,10 @@ main section[id] {
   }
 
   .bench-block {
+    grid-template-columns: 1fr;
+  }
+
+  .split-block {
     grid-template-columns: 1fr;
   }
 }

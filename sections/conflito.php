@@ -18,24 +18,31 @@
 
    
 
-    <!-- Camada 1 — Mundo (WHO) -->
+    <!-- Camada 1 — Mundo (WHO): texto à esquerda, gráfico à direita -->
     <div class="block reveal">
-      <!-- <p class="byline">Mundo</p> -->
-      <p class="body-text">
-        No mundo, mulheres são, em média, menos ativas que homens. Já na adolescência, a diferença é ainda maior:
-      </p>
-      <div class="gbar" data-chart="grouped-bar">
-        <div class="gbar__row">
-          <p class="gbar__row-label">Não atingem o nível recomendado de atividade física</p>
-          <div class="gbar__bar" data-name="Meninas" data-value="85" data-color="var(--color-plum)"></div>
-          <div class="gbar__bar" data-name="Meninos" data-value="78" data-color="var(--color-sky)"></div>
+      <div class="split-block">
+        <div class="split-block__text">
+          <p class="body-text">
+            No mundo, mulheres são, em média, menos ativas que homens. Já na adolescência, a diferença é ainda maior:
+            entre quem não atinge o nível recomendado de atividade física, as meninas estão em maior proporção que
+            os meninos.
+          </p>
         </div>
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Meninas</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Meninos</span>
+        <div class="split-block__chart">
+          <div class="gbar" data-chart="grouped-bar">
+            <div class="gbar__row">
+              <p class="gbar__row-label">Não atingem o nível recomendado de atividade física</p>
+              <div class="gbar__bar" data-name="Meninas" data-value="85" data-color="var(--color-plum)"></div>
+              <div class="gbar__bar" data-name="Meninos" data-value="78" data-color="var(--color-sky)"></div>
+            </div>
+            <div class="gbar__legend">
+              <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Meninas</span>
+              <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Meninos</span>
+            </div>
+          </div>
+          <p class="stat__source small-note">Fonte: WHO, 2024.</p>
         </div>
       </div>
-      <p class="stat__source small-note">Fonte: WHO, 2024.</p>
     </div>
 
     <!-- Camada 2 — Brasil (IBGE) -->
