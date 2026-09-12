@@ -37,20 +37,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ---------------------------------------------------------------- */
-  /* Fica a postos para executar quando o elemento entra no viewport.  */
+  /* Alterna play/reset conforme o elemento entra/sai do viewport,      */
+  /* para a animação repetir a cada passagem pela seção.                */
   /* ---------------------------------------------------------------- */
-  function onEnter(el, cb, once) {
+  function onEnter(el, play, reset) {
     if (prefersReducedMotion) {
-      cb();
+      play();
       return;
     }
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            cb();
-            if (once !== false) observer.disconnect();
-          }
+          if (entry.isIntersecting) play();
+          else if (typeof reset === "function") reset();
         });
       },
       { threshold: 0.35 }
@@ -125,21 +124,32 @@ document.addEventListener("DOMContentLoaded", function () {
         .endAngle(endAngle)();
     }
 
-    // Animação
-    onEnter(el, function () {
-      var duration = 1000;
-      var start = performance.now();
-      var target = (value / 100) * Math.PI * 2;
+    // Animação (repete a cada entrada; reseta ao sair da tela)
+    var rafId = 0;
+    onEnter(
+      el,
+      function () {
+        if (rafId) cancelAnimationFrame(rafId);
+        var duration = 1000;
+        var start = performance.now();
+        var target = (value / 100) * Math.PI * 2;
 
-      function tick(now) {
-        var t = Math.min(1, (now - start) / duration);
-        var eased = 1 - Math.pow(1 - t, 3);
-        arcSlice.attr("d", ring(0, target * eased));
-        valEl.text(fmt(value * eased) + "%");
-        if (t < 1) requestAnimationFrame(tick);
+        function tick(now) {
+          var t = Math.min(1, (now - start) / duration);
+          var eased = 1 - Math.pow(1 - t, 3);
+          arcSlice.attr("d", ring(0, target * eased));
+          valEl.text(fmt(value * eased) + "%");
+          rafId = t < 1 ? requestAnimationFrame(tick) : 0;
+        }
+        rafId = requestAnimationFrame(tick);
+      },
+      function () {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = 0;
+        arcSlice.attr("d", ring(0, 0));
+        valEl.text("0%");
       }
-      requestAnimationFrame(tick);
-    });
+    );
   }
 
   /* ================================================================
@@ -181,13 +191,19 @@ document.addEventListener("DOMContentLoaded", function () {
       row.appendChild(labelEl);
       row.appendChild(track);
 
-      onEnter(row, function () {
-        fill.style.transition = "width 1100ms cubic-bezier(0.16,1,0.3,1)";
-        // pequeno "repaint" para a transição sair do 0
-        requestAnimationFrame(function () {
-          fill.style.width = value + "%";
-        });
-      });
+      onEnter(
+        row,
+        function () {
+          fill.style.transition = "width 1100ms cubic-bezier(0.16,1,0.3,1)";
+          // pequeno "repaint" para a transição sair do 0
+          requestAnimationFrame(function () {
+            fill.style.width = value + "%";
+          });
+        },
+        function () {
+          fill.style.width = "0%";
+        }
+      );
     });
   }
 
@@ -262,15 +278,21 @@ document.addEventListener("DOMContentLoaded", function () {
     axis.innerHTML = "<span>" + startLabel + "</span><span>" + endLabel + "</span>";
     el.appendChild(axis);
 
-    onEnter(el, function () {
-      dots
-        .transition()
-        .delay(function (_, i) {
-          return i * 140;
-        })
-        .duration(500)
-        .style("opacity", 1);
-    });
+    onEnter(
+      el,
+      function () {
+        dots
+          .transition()
+          .delay(function (_, i) {
+            return i * 140;
+          })
+          .duration(500)
+          .style("opacity", 1);
+      },
+      function () {
+        dots.interrupt().style("opacity", 0);
+      }
+    );
   }
 
   /* ================================================================
@@ -382,20 +404,26 @@ document.addEventListener("DOMContentLoaded", function () {
       ".</span>";
     el.appendChild(legend);
 
-    // Animação — círculos crescem
-    onEnter(el, function () {
-      svg
-        .selectAll(".bra-map-dot")
-        .transition()
-        .delay(function (_, i) {
-          return 200 + i * 160;
-        })
-        .duration(800)
-        .ease(d3.easeCubicOut)
-        .attr("r", function (d) {
-          return rScale(d.value);
-        });
-    });
+    // Animação — círculos crescem (resetam ao sair da tela)
+    onEnter(
+      el,
+      function () {
+        svg
+          .selectAll(".bra-map-dot")
+          .transition()
+          .delay(function (_, i) {
+            return 200 + i * 160;
+          })
+          .duration(800)
+          .ease(d3.easeCubicOut)
+          .attr("r", function (d) {
+            return rScale(d.value);
+          });
+      },
+      function () {
+        svg.selectAll(".bra-map-dot").interrupt().attr("r", 0);
+      }
+    );
   }
 
   /* ================================================================
@@ -432,12 +460,18 @@ document.addEventListener("DOMContentLoaded", function () {
       bar.appendChild(track);
       bar.appendChild(valEl);
 
-      onEnter(bar, function () {
-        fill.style.transition = "width 1100ms cubic-bezier(0.16,1,0.3,1)";
-        requestAnimationFrame(function () {
-          fill.style.width = (value / max) * 100 + "%";
-        });
-      });
+      onEnter(
+        bar,
+        function () {
+          fill.style.transition = "width 1100ms cubic-bezier(0.16,1,0.3,1)";
+          requestAnimationFrame(function () {
+            fill.style.width = (value / max) * 100 + "%";
+          });
+        },
+        function () {
+          fill.style.width = "0%";
+        }
+      );
     });
   }
 
@@ -482,15 +516,24 @@ document.addEventListener("DOMContentLoaded", function () {
       row.appendChild(labelEl);
       row.appendChild(track);
 
-      onEnter(row, function () {
-        var p1 = pos(lo);
-        var p2 = pos(hi);
-        segment.style.transition = "left 0.9s ease, width 0.9s ease";
-        segment.style.left = Math.min(p1, p2) + "%";
-        segment.style.width = Math.abs(p2 - p1) + "%";
-        valEl.style.left = (p1 + p2) / 2 + "%";
-        valEl.style.opacity = "1";
-      });
+      onEnter(
+        row,
+        function () {
+          var p1 = pos(lo);
+          var p2 = pos(hi);
+          segment.style.transition = "left 0.9s ease, width 0.9s ease";
+          segment.style.left = Math.min(p1, p2) + "%";
+          segment.style.width = Math.abs(p2 - p1) + "%";
+          valEl.style.left = (p1 + p2) / 2 + "%";
+          valEl.style.opacity = "1";
+        },
+        function () {
+          segment.style.left = "0%";
+          segment.style.width = "0%";
+          valEl.style.left = "";
+          valEl.style.opacity = "0";
+        }
+      );
     });
   }
 
@@ -670,31 +713,42 @@ document.addEventListener("DOMContentLoaded", function () {
         .style("opacity", 1);
     }
 
-    onEnter(el, function () {
-      if (prefersReducedMotion) {
-        solid.attr("stroke-dashoffset", 0);
-        clipRect.attr("width", x(2) - x(1));
-        circles.attr("r", 7);
-        valueText.style("opacity", 1);
-        yearText.style("opacity", 1);
-        return;
+    onEnter(
+      el,
+      function () {
+        if (prefersReducedMotion) {
+          solid.attr("stroke-dashoffset", 0);
+          clipRect.attr("width", x(2) - x(1));
+          circles.attr("r", 7);
+          valueText.style("opacity", 1);
+          yearText.style("opacity", 1);
+          return;
+        }
+        showPoint(0, 100);
+        solid
+          .transition()
+          .delay(500)
+          .duration(750)
+          .ease(d3.easeLinear)
+          .attr("stroke-dashoffset", 0);
+        showPoint(1, 1300);
+        clipRect
+          .transition()
+          .delay(1700)
+          .duration(750)
+          .ease(d3.easeLinear)
+          .attr("width", x(2) - x(1));
+        showPoint(2, 2500);
+      },
+      function () {
+        if (prefersReducedMotion) return;
+        solid.interrupt().attr("stroke-dashoffset", solidLen);
+        clipRect.interrupt().attr("width", 0);
+        circles.interrupt().attr("r", 0);
+        valueText.interrupt().style("opacity", 0);
+        yearText.interrupt().style("opacity", 0);
       }
-      showPoint(0, 100);
-      solid
-        .transition()
-        .delay(500)
-        .duration(750)
-        .ease(d3.easeLinear)
-        .attr("stroke-dashoffset", 0);
-      showPoint(1, 1300);
-      clipRect
-        .transition()
-        .delay(1700)
-        .duration(750)
-        .ease(d3.easeLinear)
-        .attr("width", x(2) - x(1));
-      showPoint(2, 2500);
-    });
+    );
   }
 
   /* ================================================================

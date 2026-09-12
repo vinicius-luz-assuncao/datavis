@@ -730,6 +730,9 @@ Todos os gráficos devem: ser responsivos; possuir fonte; possuir legenda quando
 
 Utilizar animações apenas quando o elemento entrar no viewport
 (`IntersectionObserver`; `prefers-reduced-motion` mostra o estado final).
+Ao sair da tela, cada animação reseta ao estado inicial (classe
+`.is-visible` removida, barras zeradas, contadores em 0, transições D3
+interrompidas) para repetir a cada passagem pela seção.
 
 * Barras: 0% → valor final.
 * Donuts: 0° → percentual.

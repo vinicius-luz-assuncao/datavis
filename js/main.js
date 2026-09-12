@@ -10,7 +10,8 @@
   ).matches;
 
   /* ---------------------------------------------------------- REVEAL */
-  // Revela elementos com a classe .reveal quando entram no viewport.
+  // Alterna .is-visible conforme o elemento entra/sai do viewport, para a
+  // animação de entrada (e a cascata do .flow) repetir a cada passagem.
   function initReveal() {
     const items = Array.from(document.querySelectorAll(".reveal"));
     if (items.length === 0) return;
@@ -23,10 +24,7 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
       { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
@@ -62,8 +60,14 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
           const el = entry.target;
+          if (!entry.isIntersecting) {
+            if (el._countRaf) cancelAnimationFrame(el._countRaf);
+            el._countRaf = 0;
+            el.textContent = formatNumber(0, parseInt(el.dataset.decimals || "0", 10)) + "%";
+            return;
+          }
+          if (el._countRaf) cancelAnimationFrame(el._countRaf);
           const target = parseFloat(el.dataset.value);
           const decimals = parseInt(el.dataset.decimals || "0", 10);
           const duration = 1100;
@@ -73,11 +77,9 @@
             const t = Math.min(1, (now - start) / duration);
             const eased = 1 - Math.pow(1 - t, 3);
             el.textContent = formatNumber(target * eased, decimals) + "%";
-            if (t < 1) requestAnimationFrame(tick);
+            el._countRaf = t < 1 ? requestAnimationFrame(tick) : 0;
           }
-          requestAnimationFrame(tick);
-
-          observer.unobserve(el);
+          el._countRaf = requestAnimationFrame(tick);
         });
       },
       { threshold: 0.4 }
@@ -260,6 +262,13 @@
     );
     if (nums.length === 0) return;
 
+    function reset(el) {
+      if (el._bigRaf) cancelAnimationFrame(el._bigRaf);
+      el._bigRaf = 0;
+      el.style.fontSize = "";
+      el.textContent = "0%";
+    }
+
     function play(el) {
       var target = parseFloat(el.dataset.value) || 0;
       var wrap = el.closest("[data-bignums]");
@@ -271,6 +280,7 @@
         el.textContent = formatNumber(target, 0) + "%";
         return;
       }
+      if (el._bigRaf) cancelAnimationFrame(el._bigRaf);
       var dur = 1400;
       var start = null;
       function tick(now) {
@@ -279,9 +289,9 @@
         var e = 1 - Math.pow(1 - t, 3);
         el.style.fontSize = 20 + (finalPx - 20) * e + "px";
         el.textContent = formatNumber(target * e, 0) + "%";
-        if (t < 1) requestAnimationFrame(tick);
+        el._bigRaf = t < 1 ? requestAnimationFrame(tick) : 0;
       }
-      requestAnimationFrame(tick);
+      el._bigRaf = requestAnimationFrame(tick);
     }
 
     if (prefersReducedMotion) {
@@ -292,9 +302,8 @@
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          play(entry.target);
-          observer.unobserve(entry.target);
+          if (entry.isIntersecting) play(entry.target);
+          else reset(entry.target);
         });
       },
       { threshold: 0.4 }
