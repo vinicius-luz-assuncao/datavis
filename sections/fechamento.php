@@ -60,7 +60,7 @@
     </div>
 
     <!-- 4.3 Nota de projeto -->
-    <div class="block reveal">
+    <!-- <div class="block reveal">
       <div class="projeto-note">
         <span class="projeto-note__tag">Nota de projeto</span>
         <p>
@@ -74,7 +74,7 @@
           não medem seu efeito sobre retenção.
         </p>
       </div>
-    </div>
+    </div> -->
 
     <!-- Ilustração -->
     <figure class="illustration illustration--large reveal" style="margin-top: var(--space-xl);" role="img"

@@ -133,5 +133,14 @@
     <div class="block reveal">
       <p class="bridge">O que nos leva à pergunta: <strong>por que é que mais gente “sobra” no banco?</strong></p>
     </div>
+
+     <!-- Cena interativa (quarto 3D, vinda do Cap. 01) -->
+    <div class="block reveal scene-block">
+      <div class="prose-stage quarto-section scene-stage">
+        <div class="prose-canvas" data-quarto-canvas aria-hidden="true"></div>
+      </div>
+      <p class="graphite-note" style="margin-top: var(--space-sm);">Cena interativa — arraste a bola com o mouse ou o dedo.</p>
+    </div>
+    
   </div>
 </section>
