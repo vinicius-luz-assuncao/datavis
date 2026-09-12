@@ -20,7 +20,7 @@
 
     <!-- 4.1 Sem o tempo -->
     <div class="block reveal">
-      <p class="byline">NIX Diversidade/Nike, 2022</p>
+      <p class="byline">Comunidade LGBTQIAPN+</p>
       <p class="body-text">Tirando o tempo de cena, o que sobra nos dados aponta para outro tipo de barreira.</p>
       <div class="bar-chart" data-chart="bar">
         <div class="bar-row" data-label="Falta de tempo" data-value="26.3" data-color="var(--color-slate)" data-muted="true"></div>

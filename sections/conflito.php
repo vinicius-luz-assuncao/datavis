@@ -13,37 +13,34 @@
     <header class="chapter__head reveal">
       <span class="chapter__marker">Capítulo 02 · Conflito</span>
       <h2 class="section-title">Quem é que mais "sobra" no banco</h2>
-      <p class="block__lede">Quando olhamos mais de perto, a desigualdade aparece.</p>
+      <!-- <p class="block__lede">Quando olhamos mais de perto, a desigualdade aparece.</p> -->
     </header>
 
-    <!-- Cena interativa (quarto 3D, vinda do Cap. 01) -->
-    <div class="block reveal scene-block">
-      <div class="prose-stage quarto-section scene-stage">
-        <div class="prose-canvas" data-quarto-canvas aria-hidden="true"></div>
-      </div>
-      <p class="graphite-note" style="margin-top: var(--space-sm);">Cena interativa — arraste a bola com o mouse ou o dedo.</p>
-    </div>
+   
 
     <!-- Camada 1 — Mundo (WHO) -->
     <div class="block reveal">
-      <p class="byline">Mundo · WHO, 2024</p>
+      <p class="byline">Mundo</p>
       <p class="body-text">
         No mundo, mulheres são, em média, menos ativas que homens. Já na adolescência, a diferença é ainda maior:
       </p>
-      <div class="dumbbell" data-chart="dumbbell" data-scale="0,100" data-unit="%"
-        data-a-label="Meninas" data-a-color="var(--color-plum)"
-        data-b-label="Meninos" data-b-color="var(--color-sky)">
-        <div class="dumbbell__row" data-label="Não atingem o nível recomendado de atividade física" data-a="85" data-b="78"></div>
+      <div class="gbar" data-chart="grouped-bar">
+        <div class="gbar__legend">
+          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Meninas</span>
+          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Meninos</span>
+        </div>
+        <div class="gbar__row">
+          <p class="gbar__row-label">Não atingem o nível recomendado de atividade física</p>
+          <div class="gbar__bar" data-name="Meninas" data-value="85" data-color="var(--color-plum)"></div>
+          <div class="gbar__bar" data-name="Meninos" data-value="78" data-color="var(--color-sky)"></div>
+        </div>
       </div>
-      <div class="dumbbell__legend">
-        <span class="dumbbell__legend-item"><i style="background: var(--color-plum);"></i> Meninas</span>
-        <span class="dumbbell__legend-item"><i style="background: var(--color-sky);"></i> Meninos</span>
-      </div>
+      <p class="stat__source small-note">Fonte: WHO, 2024.</p>
     </div>
 
     <!-- Camada 2 — Brasil (IBGE) -->
     <div class="block reveal">
-      <p class="byline">Brasil · IBGE, 2017</p>
+      <p class="byline">Brasil</p>
       <p class="body-text">E no Brasil, quem mais fica de fora?</p>
       <div class="gbar" data-chart="grouped-bar">
         <div class="gbar__legend">
@@ -63,7 +60,7 @@
 
     <!-- Camada 3 — LGBTQIA+ (NIX) -->
     <div class="block reveal">
-      <p class="byline">Comunidade LGBTQIA+ · NIX Diversidade/Nike, 2022</p>
+      <p class="byline">Comunidade LGBTQIAPN+</p>
       <p class="body-text">Para pessoas LGBTQIAPN+, chegar é o primeiro desafio.</p>
       <div class="donut" data-chart="donut" data-value="42.8" data-color="var(--color-purple)"
         data-label="da população LGBTQIA+ representada no estudo não tinha acesso ao esporte"></div>

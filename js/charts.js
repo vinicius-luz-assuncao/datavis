@@ -442,81 +442,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ================================================================
-     DUMBBELL — dois pontos conectados por linha (comparação 1:1)
-     ================================================================ */
-  function drawDumbbell(el) {
-    var scale = (el.dataset.scale || "0,100").split(",");
-    var min = parseFloat(scale[0]) || 0;
-    var max = parseFloat(scale[1]) || 100;
-    var unit = el.dataset.unit !== undefined ? el.dataset.unit : "%";
-    var aColor = el.dataset.aColor || "var(--color-amber)";
-    var bColor = el.dataset.bColor || "var(--color-purple)";
-
-    function pos(v) {
-      return ((v - min) / (max - min)) * 100;
-    }
-
-    var rows = Array.prototype.slice.call(el.querySelectorAll(".dumbbell__row"));
-
-    rows.forEach(function (row) {
-      var label = row.dataset.label || "";
-      var a = parseFloat(row.dataset.a) || 0;
-      var b = parseFloat(row.dataset.b) || 0;
-
-      var labelEl = document.createElement("span");
-      labelEl.className = "dumbbell__row-label";
-      labelEl.textContent = label;
-
-      var track = document.createElement("div");
-      track.className = "dumbbell__track";
-
-      var line = document.createElement("span");
-      line.className = "dumbbell__line";
-
-      var dotA = document.createElement("span");
-      dotA.className = "dumbbell__dot";
-      dotA.style.background = aColor;
-
-      var dotB = document.createElement("span");
-      dotB.className = "dumbbell__dot";
-      dotB.style.background = bColor;
-
-      var valA = document.createElement("span");
-      valA.className = "dumbbell__val";
-      valA.textContent = fmt(a) + unit;
-
-      var valB = document.createElement("span");
-      valB.className = "dumbbell__val";
-      valB.textContent = fmt(b) + unit;
-
-      track.appendChild(line);
-      track.appendChild(dotA);
-      track.appendChild(dotB);
-      track.appendChild(valA);
-      track.appendChild(valB);
-      row.appendChild(labelEl);
-      row.appendChild(track);
-
-      onEnter(row, function () {
-        var pa = pos(a);
-        var pb = pos(b);
-        line.style.left = Math.min(pa, pb) + "%";
-        line.style.width = Math.abs(pa - pb) + "%";
-        dotA.style.left = pa + "%";
-        dotB.style.left = pb + "%";
-        valA.style.left = pa + "%";
-        valB.style.left = pb + "%";
-        track
-          .querySelectorAll(".dumbbell__dot, .dumbbell__val")
-          .forEach(function (node) {
-            node.style.transition = "opacity 0.6s ease";
-            node.style.opacity = "1";
-          });
-      });
-    });
-  }
-
-  /* ================================================================
      RANGE — intervalo (mín–máx) numa escala
      ================================================================ */
   function drawRange(el) {
@@ -784,9 +709,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     d3.selectAll("[data-chart='grouped-bar']").each(function () {
       drawGroupedBar(this);
-    });
-    d3.selectAll("[data-chart='dumbbell']").each(function () {
-      drawDumbbell(this);
     });
     d3.selectAll("[data-chart='range']").each(function () {
       drawRange(this);

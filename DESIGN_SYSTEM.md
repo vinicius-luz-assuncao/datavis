@@ -427,8 +427,8 @@ sem texto por cima, legenda funcional abaixo. Some com `reduced-motion`.
 
 ## Mundo (WHO, 2024)
 
-Mulheres em média menos ativas. Dumbbell: meninas `85%` × meninos `78%`
-(adolescentes sem o nível recomendado).
+Mulheres em média menos ativas. Barras agrupadas: meninas `85%` × meninos
+`78%` (adolescentes sem o nível recomendado). Fonte após o gráfico.
 
 ## Brasil (IBGE, 2017, p. 12 e p. 15)
 
@@ -454,9 +454,9 @@ Leitura de **composição e ordem** dos motivos — nunca valor absoluto entre f
 
 ## Comparador de motivos (IBGE × NIX)
 
-Dumbbell nas categorias equivalentes — tempo (`38,2 × 26,3`), companhia
-(`1,7 × 20,6`), não gostar/interesse (`35,0 × 18`). Fontes: IBGE 2017 p. 20;
-NIX 2022 p. 27.
+Barras agrupadas nas categorias equivalentes — tempo (`38,2 × 26,3`),
+companhia (`1,7 × 20,6`), não gostar/interesse (`35,0 × 18`).
+Fontes: IBGE 2017 p. 20; NIX 2022 p. 27.
 
 ## Ranking IBGE ("Vamos olhar mais de perto")
 
@@ -555,10 +555,9 @@ Todos via `data-chart` + `data-*`, desenhados com D3 e animados ao entrar no
 viewport (com `prefers-reduced-motion` mostrando o estado final de imediato).
 
 * `grouped-bar` — linhas de `.gbar__bar` (`data-name`, `data-value`, `data-color`;
-  `data-max` e `data-unit` opcionais). Uso: gênero IBGE, companhia Lopes.
-* `dumbbell` — linhas de `.dumbbell__row` (`data-label`, `data-a`, `data-b`);
-  cores/legendas via `data-a-label/color`, `data-b-label/color`. Uso: meninas ×
-  meninos, motivos IBGE × NIX.
+  `data-max` e `data-unit` opcionais). Uso: meninas × meninos, gênero IBGE,
+  motivos IBGE × NIX, companhia Lopes. Comparações 1:1 usam barras agrupadas
+  (o `dumbbell` foi removido por falta de coerência visual).
 * `range` — linhas de `.range__row` (`data-min`, `data-max`). Uso: apoio trans.
 * `projection` — pontos de `.projection__point` (`data-year`, `data-value`,
   `data-tag`); trecho projetado em tracejado com máscara `clipPath`.
@@ -657,11 +656,11 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 │   └── BenchBlock + Bridge (ponte p/ Cap. 02)
 ├── Capitulo02 (conflito.php)
 │   ├── SceneStage (canvas Quarto, vindo do Cap. 01)
-│   ├── DumbbellChart (85% × 78%)
+│   ├── GroupedBarChart (85% × 78%)
 │   ├── GroupedBarChart (não praticam 57,3% × 66,6%) + Drop (só esporte)
 │   └── DonutChart (42,8%)
 ├── Capitulo03 (diagnostico.php)
-│   ├── DumbbellChart (motivos IBGE × NIX)
+│   ├── GroupedBarChart (motivos IBGE × NIX)
 │   ├── BarChart (ranking IBGE completo)
 │   ├── BarChart (ranking NIX completo) + Drop
 │   ├── DonutChart × 2 (63,5% · 68,3%)
@@ -845,7 +844,7 @@ A página deve parecer uma história. Não uma coleção de informações.
 ## FEITO
 * [x] Base, variáveis, grid, container, textura, estilos globais.
 * [x] Estrutura em 4 capítulos + fontes + encerramento (seções antigas em `sections/_arquivo/`).
-* [x] Componentes: StatNumber, BarChart (+`data-muted`), DonutChart, GroupedBarChart, DumbbellChart, RangeChart, ProjectionChart, Flow, ProjetoNote, TrailNav, ProseStage.
+* [x] Componentes: StatNumber, BarChart (+`data-muted`), DonutChart, GroupedBarChart, RangeChart, ProjectionChart, Flow (+cascata), Drop, Btn, ProjetoNote, TrailNav, ProseStage.
 * [x] Dados das 4 fontes nos `data-*` do HTML, cada número com sua fonte.
 * [x] Direção de arte: paleta, 4 fontes, véus, cantos arredondados, cena do quarto.
 * [x] Animações por IntersectionObserver + `prefers-reduced-motion`.

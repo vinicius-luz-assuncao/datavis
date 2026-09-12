@@ -21,16 +21,26 @@
         continua em primeiro — mas a composição muda.
       </p>
 
-      <div class="dumbbell" data-chart="dumbbell" data-scale="0,100" data-unit="%"
-        data-a-label="IBGE 2017" data-a-color="var(--color-amber)"
-        data-b-label="NIX 2022" data-b-color="var(--color-purple)">
-        <div class="dumbbell__row" data-label="Falta de tempo" data-a="38.2" data-b="26.3"></div>
-        <div class="dumbbell__row" data-label="Falta de companhia" data-a="1.7" data-b="20.6"></div>
-        <div class="dumbbell__row" data-label="Não gostar / falta de interesse" data-a="35.0" data-b="18"></div>
-      </div>
-      <div class="dumbbell__legend">
-        <span class="dumbbell__legend-item"><i style="background: var(--color-amber);"></i> IBGE, 2017</span>
-        <span class="dumbbell__legend-item"><i style="background: var(--color-purple);"></i> NIX Diversidade/Nike, 2022</span>
+      <div class="gbar" data-chart="grouped-bar">
+        <div class="gbar__legend">
+          <span class="gbar__legend-item"><i style="background: var(--color-amber);"></i> IBGE, 2017</span>
+          <span class="gbar__legend-item"><i style="background: var(--color-purple);"></i> NIX Diversidade/Nike, 2022</span>
+        </div>
+        <div class="gbar__row">
+          <p class="gbar__row-label">Falta de tempo</p>
+          <div class="gbar__bar" data-name="IBGE" data-value="38.2" data-color="var(--color-amber)"></div>
+          <div class="gbar__bar" data-name="NIX" data-value="26.3" data-color="var(--color-purple)"></div>
+        </div>
+        <div class="gbar__row">
+          <p class="gbar__row-label">Falta de companhia</p>
+          <div class="gbar__bar" data-name="IBGE" data-value="1.7" data-color="var(--color-amber)"></div>
+          <div class="gbar__bar" data-name="NIX" data-value="20.6" data-color="var(--color-purple)"></div>
+        </div>
+        <div class="gbar__row">
+          <p class="gbar__row-label">Não gostar / falta de interesse</p>
+          <div class="gbar__bar" data-name="IBGE" data-value="35.0" data-color="var(--color-amber)"></div>
+          <div class="gbar__bar" data-name="NIX" data-value="18" data-color="var(--color-purple)"></div>
+        </div>
       </div>
       <p class="stat__source small-note">Fontes: IBGE, 2017, p. 20; NIX Diversidade/Nike, 2022, p. 27.</p>
 
@@ -62,7 +72,7 @@
 
     <!-- 3.3 Motivos na comunidade LGBTQIA+ (ranking NIX) -->
     <div class="block reveal">
-      <p class="byline">NIX Diversidade/Nike, 2022</p>
+      <p class="byline">Comunidade LGBTQIAPN+</p>
       <p class="body-text">
         Na comunidade LGBTQIAPN+, algo muda drasticamente: entre os motivos aparecem barreiras que nem
         existem como categoria na pesquisa do IBGE.
@@ -109,7 +119,7 @@
 
     <!-- 3.6 Companhia (Lopes) -->
     <div class="block reveal">
-      <p class="byline">Pelotas · Lopes &amp; Del Vecchio, 2026</p>
+      <p class="byline">Estudantes do Ensino Médio · Pelotas</p>
       <p class="block__lede">E a companhia faz diferença.</p>
       <p class="body-text">Outro estudo reforça a importância da companhia entre estudantes do Ensino Médio.</p>
 
