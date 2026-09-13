@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  margin: var(--space-md);
+  margin: 0px 0px var(--space-lg) 0px;
 }
 
 .stat__source::before {
@@ -696,7 +696,7 @@ main section[id] {
 }
 
 .block {
-  margin-top: var(--space-xs);
+  margin-top: var(--space-lg);
 }
 
 .block__lede {
@@ -1182,7 +1182,7 @@ main section[id] {
 
 /* Números-coluna em escala real (os numerais SÃO as colunas) */
 .bignums {
-  --max: clamp(14rem, 10vw, 0rem);
+  --max: clamp(16rem, 10vw, 0rem);
   display: grid;
   grid-template-columns: 4rem 19rem 4rem 27rem;
   column-gap: clamp(var(--space-md), 5vw, var(--space-xl));
