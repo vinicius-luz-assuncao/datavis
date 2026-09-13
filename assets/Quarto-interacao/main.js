@@ -164,10 +164,13 @@ export function initQuarto(container, opts = {}) {
       const noShadow = [];
       gltf.scene.traverse(o => {
         if (!o.isMesh || !o.visible) return;
-        const nm = o.name || '';
-        if (/text|texto|instance/i.test(nm) || nm.startsWith('NoShadow_')) {
+        // Sobe a hierarquia: vale o nome próprio ou de qualquer ancestral.
+        let chain = o.name || '';
+        let p = o.parent;
+        while (p && p !== gltf.scene) { chain += ' ' + (p.name || ''); p = p.parent; }
+        if (/text|texto|instance/i.test(chain) || /^noshadow_/i.test(chain)) {
           o.castShadow = false;
-          noShadow.push(nm);
+          noShadow.push(o.name || '(sem nome)');
           return;
         }
         o.castShadow = true;
