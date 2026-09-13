@@ -64,28 +64,29 @@
     
     <!-- Barra populacional com slider -->
     <div class="block reveal">
-      <p class="block__lede">Em um mundo com <strong class="pop-huge">8 bilhões</strong> <span class="pop-big">de pessoas</span>, arraste o ano e veja a conta crescer:</p>
-      <p class="body-text">
-        Quase <strong>1,8 bilhão</strong> de adultos estão fisicamente inativos — e, se a tendência
-        continuar, esse número pode chegar a <strong>35% até 2030</strong>.
-      </p>
+      <p class="block__lede">Em um mundo com <strong class="pop-huge">8 bilhões</strong> <span class="pop-big">de pessoas</span></p>
+      
       <div class="popslider" data-chart="popslider">
         <div class="popslider__canvas" data-pop-canvas></div>
         <div class="popslider__controls">
           <label for="popYear">Ano</label>
-          <input type="range" id="popYear" min="2010" max="2030" step="1" value="2010" aria-label="Ano da estimativa" />
-          <span class="popslider__year" data-pop-year>2010</span>
+          <input type="range" id="popYear" min="2010" max="2030" step="1" value="2022" aria-label="Ano da estimativa" />
+          <span class="popslider__year" data-pop-year>2022</span>
         </div>
         <div class="popslider__legend" aria-hidden="true">
-          <span class="popslider__legend-item"><i style="background: var(--color-slate);"></i> População adulta total</span>
-          <span class="popslider__legend-item"><i style="background: var(--color-vermilion);"></i> Adultos insuficientemente ativos</span>
+          <span class="popslider__legend-item"><i style="background: var(--color-pink);"></i> 2010–2026</span>
+          <span class="popslider__legend-item"><i style="background: var(--color-sage);"></i> Projeção 2026–2030</span>
         </div>
         <div class="popslider__tip" data-pop-tip></div>
         <p class="small-note" style="margin-top: var(--space-sm); max-width: 62ch;">
-          Fonte: OMS (2024); totais adultos: ONU WPP 2024. O dado de 2010 é derivado do “+5 p.p. desde 2010”
-          informado pela OMS; o de 2030 é projeção. Valores intermediários são interpolação linear.
+          População: ONU WPP 2024; inatividade: OMS 2024. 2010 e 2022 observados;
+          2026 e 2030 projeções. Anos entre marcos: interpolação linear.
         </p>
       </div>
+      <p class="body-text">
+        Quase <strong>1,8 bilhão</strong> de adultos estão fisicamente inativos — e, se a tendência
+        continuar, esse número pode chegar a <strong>35% até 2030</strong>.
+      </p>
     </div>
     
 

@@ -782,8 +782,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ================================================================
-     POPSLIDER — barra populacional horizontal com slider de ano
-     (população adulta total × insuficientemente ativos, 2010–2030)
+     POPSLIDER — população mundial × adultos inativos, com linha do tempo
+     (2010–2026 observado em rosa; 2026–2030 projeção em sálvia)
      ================================================================ */
   function drawPopslider(el) {
     var canvas = el.querySelector("[data-pop-canvas]");
@@ -794,11 +794,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var dur = prefersReducedMotion ? 0 : 200;
 
-    // Âncoras: 2010 derivado do "+5 p.p.", 2024 dado, 2030 projeção.
+    // Marcos: 2010 e 2022 observados; 2026 e 2030 projeções.
+    // Só viajam total mundial + inativos (sem 15+ e sem prevalência).
     var anchors = [
-      { year: 2010, population: 5.0, inactivePct: 0.26 },
-      { year: 2024, population: 5.8, inactivePct: 0.31 },
-      { year: 2030, population: 6.3, inactivePct: 0.35 }
+      { year: 2010, total: 7.02, inactive: 1.31 },
+      { year: 2022, total: 8.02, inactive: 1.80 },
+      { year: 2026, total: 8.30, inactive: 1.98 },
+      { year: 2030, total: 8.50, inactive: 2.15 }
     ];
 
     function interpolate(year) {
@@ -809,31 +811,33 @@ document.addEventListener("DOMContentLoaded", function () {
           var t = (year - a.year) / (b.year - a.year);
           return {
             year: year,
-            population: a.population + t * (b.population - a.population),
-            inactivePct: a.inactivePct + t * (b.inactivePct - a.inactivePct)
+            total: a.total + t * (b.total - a.total),
+            inactive: a.inactive + t * (b.inactive - a.inactive)
           };
         }
       }
-      return year < anchors[0].year
-        ? { year: year, population: anchors[0].population, inactivePct: anchors[0].inactivePct }
-        : { year: year, population: anchors[2].population, inactivePct: anchors[2].inactivePct };
+      var edge = year < anchors[0].year ? anchors[0] : anchors[anchors.length - 1];
+      return { year: year, total: edge.total, inactive: edge.inactive };
     }
 
     var data = [];
     for (var yy = 2010; yy <= 2030; yy++) {
-      var dd = interpolate(yy);
-      dd.inactive = dd.population * dd.inactivePct;
-      data.push(dd);
+      data.push(interpolate(yy));
     }
 
     var W = 640;
-    var H = 190;
-    var ML = 8;
-    var MR = 14;
-    var BAR_Y = 78;
-    var BAR_H = 52;
+    var H = 205;
+    var ML = 30; // margem à esquerda: o "0 bi" não é mais mordido
+    var MR = 16;
+    var TY = 32; // linha do tempo (anos com círculos)
+    var BAR_Y = 82;
+    var BAR_H = 58;
+    var AXIS_Y = H - 28;
+    var PINK = "var(--color-pink)"; // E8557E — até 2026
+    var SAGE = "var(--color-sage)"; // 8FC9B4 — projeção até 2030
 
-    var x = d3.scaleLinear().domain([0, 6.5]).range([ML, W - MR]);
+    var x = d3.scaleLinear().domain([0, 9]).range([ML, W - MR]);
+    var xYear = d3.scaleLinear().domain([2010, 2030]).range([ML, W - MR]);
 
     var svg = d3
       .select(canvas)
@@ -842,14 +846,75 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("role", "img")
       .attr(
         "aria-label",
-        "População adulta total e adultos insuficientemente ativos, de 2010 a 2030. Use o controle de ano para ver cada valor."
+        "População mundial total e adultos inativos, 2010 a 2030. Linha do tempo: 2010 a 2026 observado, 2026 a 2030 projeção. Use o controle de ano para ver cada valor."
       );
+
+    // Linha do tempo em dois trechos (sem trilha branca atrás).
+    svg
+      .append("line")
+      .attr("x1", xYear(2010))
+      .attr("y1", TY)
+      .attr("x2", xYear(2026))
+      .attr("y2", TY)
+      .attr("stroke", PINK)
+      .attr("stroke-width", 5)
+      .attr("stroke-linecap", "round");
+    svg
+      .append("line")
+      .attr("x1", xYear(2026))
+      .attr("y1", TY)
+      .attr("x2", xYear(2030))
+      .attr("y2", TY)
+      .attr("stroke", SAGE)
+      .attr("stroke-width", 5)
+      .attr("stroke-linecap", "round");
+
+    // Marcos clicáveis (pulam o slider para o ano).
+    var dots = svg
+      .selectAll("circle.pop-year")
+      .data(anchors)
+      .enter()
+      .append("circle")
+      .attr("class", "pop-year")
+      .attr("cx", function (d) {
+        return xYear(d.year);
+      })
+      .attr("cy", TY)
+      .attr("r", 7.5)
+      .style("fill", function (d) {
+        return d.year >= 2026 ? SAGE : PINK;
+      })
+      .style("stroke", "var(--color-paper)")
+      .style("stroke-width", 2)
+      .style("cursor", "pointer")
+      .on("click", function (event, d) {
+        slider.value = d.year;
+        slider.dispatchEvent(new Event("input"));
+      });
+
+    svg
+      .selectAll("text.pop-year-label")
+      .data(anchors)
+      .enter()
+      .append("text")
+      .attr("class", "pop-year-label")
+      .attr("x", function (d) {
+        return xYear(d.year);
+      })
+      .attr("y", TY + 26)
+      .attr("text-anchor", "middle")
+      .style("font-family", "var(--font-geo)")
+      .style("font-size", "13px")
+      .style("fill", "var(--color-ink)")
+      .text(function (d) {
+        return d.year;
+      });
 
     var axisG = svg
       .append("g")
-      .attr("transform", "translate(0," + (H - 32) + ")")
+      .attr("transform", "translate(0," + AXIS_Y + ")")
       .call(
-        d3.axisBottom(x).ticks(7).tickFormat(function (d) {
+        d3.axisBottom(x).ticks(9).tickFormat(function (d) {
           return d + " bi";
         })
       );
@@ -861,6 +926,7 @@ document.addEventListener("DOMContentLoaded", function () {
     axisG.selectAll("line").style("stroke", "var(--color-neutral)");
     axisG.select(".domain").style("stroke", "var(--color-neutral)");
 
+    // Barra: fundo = total mundial (tinta), frente = inativos (rosa/sálvia).
     var barBg = svg
       .append("rect")
       .attr("x", x(0))
@@ -868,8 +934,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("width", 0)
       .attr("height", BAR_H)
       .attr("rx", 8)
-      .style("fill", "var(--color-slate)")
-      .attr("opacity", 0.9);
+      .style("fill", "var(--color-ink)");
 
     var barFg = svg
       .append("rect")
@@ -878,56 +943,64 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("width", 0)
       .attr("height", BAR_H)
       .attr("rx", 8)
-      .style("fill", "var(--color-vermilion)");
+      .style("fill", PINK);
 
+    // Rótulos brancos dentro da barra.
     var labelTotal = svg
       .append("text")
       .attr("text-anchor", "middle")
       .style("font-family", "var(--font-geo)")
       .style("font-weight", 600)
       .style("font-size", "13px")
-      .style("fill", "var(--color-ink)");
+      .style("fill", "var(--color-paper)");
 
     var labelInact = svg
       .append("text")
       .style("font-size", "13px")
-      .style("font-weight", "bold");
+      .style("font-weight", "bold")
+      .style("fill", "var(--color-paper)");
 
     function render(d) {
+      var col = d.year < 2026 ? PINK : SAGE;
+      var bgW = Math.max(0, x(d.total) - x(0));
       var fgW = Math.max(0, x(d.inactive) - x(0));
-      barBg
-        .transition()
-        .duration(dur)
-        .attr("width", Math.max(0, x(d.population) - x(0)));
-      barFg.transition().duration(dur).attr("width", fgW);
+      barBg.transition().duration(dur).attr("width", bgW);
+      barFg.transition().duration(dur).attr("width", fgW).style("fill", col);
       labelTotal
         .transition()
         .duration(dur)
-        .attr("x", x(d.population))
-        .attr("y", BAR_Y - 10)
-        .text(fmt(d.population, 1) + " bi");
-
-      // Rótulo dos inativos: dentro da barra se couber, senão acima.
-      var label = fmt(d.inactive, 1) + " bi (" + Math.round(d.inactivePct * 100) + "%)";
+        .attr("x", x(0) + bgW / 2)
+        .attr("y", BAR_Y + 22)
+        .text(fmt(d.total, 2) + " bi · mundo");
+      // Inativos: dentro da barra (branco) se couber, senão fora (tinta).
+      var iLabel = fmt(d.inactive, 2) + " bi inativos";
       var cssW = (fgW / W) * (canvas.clientWidth || W);
-      labelInact.text(label);
-      if (cssW > label.length * 7.2 + 20) {
+      labelInact.text(iLabel);
+      if (cssW > iLabel.length * 7 + 16) {
         labelInact
           .transition()
           .duration(dur)
           .attr("x", x(0) + fgW / 2)
-          .attr("y", BAR_Y + BAR_H / 2 + 4.5)
+          .attr("y", BAR_Y + 42)
           .style("text-anchor", "middle")
           .style("fill", "var(--color-paper)");
       } else {
         labelInact
           .transition()
           .duration(dur)
-          .attr("x", x(0) + fgW)
-          .attr("y", BAR_Y - 10)
-          .style("text-anchor", "middle")
+          .attr("x", x(0) + fgW + 8)
+          .attr("y", BAR_Y + BAR_H / 2 + 4.5)
+          .style("text-anchor", "start")
           .style("fill", "var(--color-ink)");
       }
+      if (yearEl) yearEl.textContent = d.year + (d.year >= 2026 ? " · projeção" : "");
+      dots
+        .attr("stroke", function (dd) {
+          return dd.year === d.year ? "var(--color-ink)" : "var(--color-paper)";
+        })
+        .attr("stroke-width", function (dd) {
+          return dd.year === d.year ? 3 : 2;
+        });
     }
 
     function datumFor(year) {
@@ -951,13 +1024,12 @@ document.addEventListener("DOMContentLoaded", function () {
       tip.innerHTML =
         "<strong>" +
         d.year +
-        "</strong><br>População adulta: " +
-        fmt(d.population, 1) +
+        (d.year >= 2026 ? " · projeção" : "") +
+        "</strong><br>Mundo: " +
+        fmt(d.total, 2) +
         " bi<br>Inativos: " +
-        fmt(d.inactive, 1) +
-        " bi (" +
-        Math.round(d.inactivePct * 100) +
-        "%)";
+        fmt(d.inactive, 2) +
+        " bi";
       tip.style.opacity = "1";
       tip.style.left = (pt[0] / W) * rect.width + 14 + "px";
       tip.style.top = Math.max(0, (pt[1] / H) * rect.height - 10) + "px";

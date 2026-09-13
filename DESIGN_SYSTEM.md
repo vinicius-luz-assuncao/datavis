@@ -388,10 +388,13 @@ Animação tipo contador digital: contam e crescem juntos até o valor.
 
 "Em um mundo com **8 bilhões** (display maior) **de pessoas** (escala grande)"
 + frase de apoio (`~1,8 bi` inativos; `35% até 2030`) + gráfico `popslider`
-(`js/charts.js`): barra horizontal empilhada (total em `slate` × inativos em
-`vermilion`) com slider 2010–2030, tooltip, legenda e marcas de escala.
-Âncoras: 2010 derivado, 2024 dado, 2030 projeção; intermediários interpolados
-(com nota de metodologia na fonte).
+(`js/charts.js`): linha do tempo com 4 marcos clicáveis (2010–2026 em `pink`,
+2026–2030 projeção em `sage`, sem trilha de fundo) + barra (total em `ink` ×
+inativos na cor do período) com rótulos brancos internos e slider 2010–2030.
+Marcos: 2010 (7,02 · 1,31), 2022 (8,02 · 1,80), 2026 (8,30 · 1,98), 2030
+(8,50 · 2,15); 2010/2022 observados, 2026/2030 projeções; anos entre marcos
+interpolados (nota de metodologia na fonte). Eixo 0–9 bi com respiro à
+esquerda (o "0 bi" não é mordido).
 
 ## Custo + quadra
 
