@@ -82,6 +82,11 @@ export function stepBall(ball, bounds, dt, onBounce, colliders) {
       ball.vel.x += dx * f;
       ball.vel.y += dy * f;
       ball.vel.z += dz * f;
+      const now = (typeof performance !== 'undefined' && performance.now()) || 0;
+      if (!ball._magnetLogged || now - ball._magnetLogged > 3000) {
+        ball._magnetLogged = now;
+        console.info('[quarto] ímã de voo ativo, dist=' + dist.toFixed(2));
+      }
     }
   }
   p.addScaledVector(ball.vel, dt);

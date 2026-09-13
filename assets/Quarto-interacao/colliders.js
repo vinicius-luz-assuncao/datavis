@@ -111,6 +111,15 @@ export function collectColliders(root, opts = {}) {
     (backboard ? ' + tabela' : '') + (rim ? ' + aro' : '') + (net ? ' + rede' : '') +
     (autoPost ? ' + poste-auto' : ''));
   if (assist) console.info('[quarto] ponto assistivo:', assist.point.toArray().map((v) => v.toFixed(2)).join(', '));
+  // Autodiagnóstico: o ponto precisa estar ao alcance do aro.
+  if (assist && rim) {
+    const rc = hoopTarget({ rim });
+    const dd = rc ? rc.distanceTo(assist.point) : -1;
+    const R = (CONFIG.assistPoint && CONFIG.assistPoint.radius) || 5;
+    console.info('[quarto] aro em:', rc ? rc.toArray().map((v) => v.toFixed(2)).join(', ') : '?',
+      '| distância ponto→aro:', dd >= 0 ? dd.toFixed(2) : '?', '| raio do ímã:', R);
+    if (dd > R) console.warn('[quarto] ponto assistivo FORA do alcance do aro — aproxime o null no Blender!');
+  }
   return { walls, backboard, rim, net, assist, active: found > 0 };
 }
 

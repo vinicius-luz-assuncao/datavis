@@ -222,7 +222,7 @@ export function initQuarto(container, opts = {}) {
   const _camDir = new THREE.Vector3();
   const dragHit = new THREE.Vector3();
   const _axis = new THREE.Vector3();
-  const grab = { active: false, moved: false, t0: 0, x0: 0, y0: 0, wasIdle: false, sleep0: false, vel0: new THREE.Vector3(), trail: [] };
+  const grab = { active: false, moved: false, t0: 0, x0: 0, y0: 0, wasIdle: false, sleep0: false, vel0: new THREE.Vector3(), trail: [], magnetLogged: false };
   function clampToRoom(x, z) {
     x = THREE.MathUtils.clamp(x, bounds.minX, bounds.maxX);
     z = THREE.MathUtils.clamp(z, bounds.minZ, bounds.maxZ);
@@ -253,7 +253,7 @@ export function initQuarto(container, opts = {}) {
     if (e.button !== 0) return;
     const ball = ballHit(e);
     if (!ball) return;
-    grab.active = true; grab.moved = false;
+    grab.active = true; grab.moved = false; grab.magnetLogged = false;
     grab.t0 = performance.now(); grab.x0 = e.clientX; grab.y0 = e.clientY;
     grab.wasIdle = ball.sleeping || ball.state === 'idle';
     grab.sleep0 = ball.sleeping;
@@ -286,6 +286,10 @@ export function initQuarto(container, opts = {}) {
           if (md < R && md > 1e-4) {
             const k = Math.min(AP.handPull ?? 0.35, 1) * (1 - md / R);
             cx += mx * k; cy += my * k; cz += mz * k;
+            if (!grab.magnetLogged) {
+              grab.magnetLogged = true;
+              console.info('[quarto] ímã da mão ativo, dist=' + md.toFixed(2));
+            }
           }
         }
         const p = ball.mesh.position;
