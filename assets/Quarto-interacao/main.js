@@ -3,7 +3,7 @@ import { CONFIG } from './config.js';
 import { createRoom, computeBounds, addLights, stripLights, normalizeModelLights } from './scene.js';
 import { createBall, wrapBall, kickBall, stepBall } from './ball.js';
 import { wrapTenis, collideBallTenis } from './tenis.js';
-import { collectColliders, wallsBounds } from './colliders.js';
+import { collectColliders, wallsBounds, hoopTarget } from './colliders.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 function thud() {
   try {
@@ -101,6 +101,9 @@ export function initQuarto(container, opts = {}) {
       if (CONFIG.useModelLights) {
         const n = normalizeModelLights(gltf.scene, CONFIG.modelLightDiv);
         if (n) console.info(`[quarto] ${n} luz(es) do modelo normalizadas`);
+        // Preenchimento suave: clareia as áreas de sombra (~50% visual)
+        // sem mexer no Sol; mantém o kernel suave do PCFSoft.
+        scene.add(new THREE.HemisphereLight(0xf1e9db, 0x1c2b44, 0.55));
         gltf.scene.traverse(o => {
           if (o.isDirectionalLight && !o.castShadow) {
             o.castShadow = true;
@@ -154,9 +157,10 @@ export function initQuarto(container, opts = {}) {
       setStage(gltf.scene);
       // Colisores modelados no Blender (Collider_*, tabela, aro, rede).
       quarto.colliders = collectColliders(gltf.scene);
-      // Tudo que é visível passa a projetar sombra (paredes, piso, cesta).
+      // Tudo que é visível passa a projetar sombra (paredes, piso, cesta) —
+      // exceto texto 3D, que só recebe (sombra de letra suja a cena).
       gltf.scene.traverse(o => {
-        if (o.isMesh && o.visible) o.castShadow = true;
+        if (o.isMesh && o.visible && !/text/i.test(o.name || '')) o.castShadow = true;
       });
       // Arrasto, spawn, retorno e tênis passam a seguir a sala modelada.
       const wb = wallsBounds(quarto.colliders);
@@ -308,6 +312,23 @@ export function initQuarto(container, opts = {}) {
       ball.vel.y *= (CONFIG.ball.throwBoost || 1);
       const sp = ball.vel.length();
       if (sp > CONFIG.ball.maxSpeed) ball.vel.multiplyScalar(CONFIG.ball.maxSpeed / sp);
+      // Arremesso assistido: 1 em 6 arremessos para cima recebe a velocidade
+      // balística exata até o centro do aro (sorteio novo a cada arremesso).
+      // A física segue normal dali: aro, rede e chão reagem de verdade.
+      const as = CONFIG.assistShot || {};
+      const rimC = hoopTarget(quarto.colliders);
+      if (rimC && ball.vel.y > (as.minUp ?? 1) && Math.random() < (as.chance ?? 1 / 6)) {
+        const bp = ball.mesh.position;
+        const dx = rimC.x - bp.x, dy = rimC.y + 0.1 - bp.y, dz = rimC.z - bp.z;
+        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        const T = THREE.MathUtils.clamp(dist / 7, 0.55, 1.15);
+        const g = -(CONFIG.ball.gravity || -14);
+        const sv = new THREE.Vector3(dx / T, dy / T + 0.5 * g * T, dz / T);
+        if (sv.length() <= (as.maxShotSpeed || 9)) {
+          ball.vel.copy(sv);
+          console.info('[quarto] arremesso assistido!');
+        }
+      }
       thud();
     } else {
       ball.vel.set(0, 0, 0);

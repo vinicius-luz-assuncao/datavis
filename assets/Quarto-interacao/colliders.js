@@ -90,6 +90,15 @@ export function collectColliders(root, opts = {}) {
   return { walls, backboard, rim, net, active: found > 0 };
 }
 
+// Centro do aro (alvo do arremesso assistido); null sem aro no GLB.
+export function hoopTarget(colliders) {
+  if (!colliders || !colliders.rim || !colliders.rim.points.length) return null;
+  const c = new THREE.Vector3();
+  colliders.rim.points.forEach((p) => c.add(p));
+  c.multiplyScalar(1 / colliders.rim.points.length);
+  return c;
+}
+
 // Retângulo útil = união das caixas das paredes (para arrasto, spawn,
 // retorno e tênis seguirem a sala modelada em vez da salinha do fallback).
 export function wallsBounds(colliders) {

@@ -642,8 +642,12 @@ largura total da viewport) ao fim do Cap. 01.
   amortecimento (freia e deixa cair). Paredes alinhadas aos eixos; piso em
   `y=0`. Sem `Collider_*`, valem `CONFIG.room` + diagonal (fallback).
   Limites de arrasto/spawn/retorno seguem a união das paredes (`wallsBounds`).
-* Sombras: `castShadow` em todas as malhas visíveis; janela ±10 com
-  `updateProjectionMatrix()` e `bias` (mapa 2048).
+* Sombras: `castShadow` em todas as malhas visíveis (texto 3D só recebe);
+  janela ±10 com `updateProjectionMatrix()` e `bias` (mapa 2048);
+  `HemisphereLight` de preenchimento (~50% visual).
+* Arremesso assistido (`assistShot`, chance 1/6 por arremesso): arremesso
+  para cima sorteado recebe a velocidade balística até o aro; física
+  (aro, rede, chão) reage normalmente dali em diante.
 * Arremesso: altura máxima de segurada `grabHeight: 7`, impulso vertical
   `throwBoost: 1.4`, `maxSpeed: 7`.
 * `importmap` do three@0.160.0 no `header.php`.

@@ -14,6 +14,9 @@ export const CONFIG = {
   // Colisores por nome: tudo que começa com o prefixo vira colisão.
   // Tabela/aro/rede mantêm a malha visível; Collider_* genérico é ocultado.
   colliders: { prefix: 'Collider_', rimSamples: 12, netDamp: 6, netSink: 4 },
+  // Arremesso assistido: chance por arremesso de a bola receber a velocidade
+  // balística exata até o aro (novo sorteio a cada arremesso, sem memória).
+  assistShot: { chance: 1 / 6, minUp: 1.0, maxShotSpeed: 9 },
   useModelLights: true,
   modelLightDiv: { directional: 400, point: 120, spot: 120 },
   camera: { pos: [2.35, 3.6, 3.1], look: [-1.7, 0.85, -2.5], fov: 42 },
