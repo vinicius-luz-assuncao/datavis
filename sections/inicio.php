@@ -47,21 +47,19 @@
         <div class="bignums__axis" aria-hidden="true">
           <span>100</span><span>75</span><span>50</span><span>25</span><span>0</span>
         </div>
-        <div class="bignums__col">
+        <div class="bignums__col-1">
           <span class="bignums__value" data-bignum data-value="31" style="color: var(--color-amber);">0%</span>
         </div>
         <span class="bignums__conj" aria-hidden="true">e</span>
-        <div class="bignums__col">
+        <div class="bignums__col-2">
           <span class="bignums__value" data-bignum data-value="80" style="color: var(--color-vermilion);">0%</span>
         </div>
         <div class="bignums__rule" aria-hidden="true"></div>
         <span class="bignums__cap bignums__cap--a">dos adultos</span>
         <span class="bignums__cap bignums__cap--b">dos adolescentes</span>
       </div>
-      <p class="block__lede">
-              Não atinge o nível mínimo recomendado de atividade física.
-            </p>  
-            <p class="stat__source small-note">Fonte: WHO, 2024.</p>
+      <p class="stat__source small-note">Fonte: WHO, 2024.</p>
+      <p class="block__lede">Não atinge o nível <strong class="text-vermilion">mínimo recomendado</strong> de atividade física.</p>
     </div>
     
     <!-- Barra populacional com slider -->
