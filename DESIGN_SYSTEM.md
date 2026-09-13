@@ -655,7 +655,9 @@ largura total da viewport) ao fim do Cap. 01.
 * Ponto assistivo (`assistPoint`, Empty `ponto_tabela` na boca do cesto):
   bola solta dentro do raio e acima do ponto é atraída de leve
   (força ∝ distância, zero no centro) e cai pela rede. Ignora bola
-  segurada ou dormindo. `radius`/`pull` no config.
+  dormindo; com bola segurada, o alvo da mão desliza até `handPull`
+  (0.35) em direção ao centro — ajuda sem tomar a mão. `radius`/`pull`/
+  `handPull` no config.
 * Arremesso: altura máxima de segurada `grabHeight: 7`, impulso vertical
   `throwBoost: 1.4`, `maxSpeed: 7`.
 * `importmap` do three@0.160.0 no `header.php`.

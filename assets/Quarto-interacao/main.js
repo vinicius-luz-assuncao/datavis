@@ -272,8 +272,22 @@ export function initQuarto(container, opts = {}) {
       setPtr(e);
       ray.setFromCamera(ptr, camera);
       if (ray.ray.intersectPlane(dragPlane, dragHit)) {
-        const [cx, cz] = clampToRoom(dragHit.x, dragHit.z);
-        const cy = THREE.MathUtils.clamp(dragHit.y, (ball.physR ?? CONFIG.ball.radius), CONFIG.ball.grabHeight || 7);
+        let [cx, cz] = clampToRoom(dragHit.x, dragHit.z);
+        let cy = THREE.MathUtils.clamp(dragHit.y, (ball.physR ?? CONFIG.ball.radius), CONFIG.ball.grabHeight || 7);
+        // Mão magnética: perto do ponto assistivo, o alvo desliza
+        // parcialmente até o centro do aro (máx. handPull na borda→0 fora);
+        // a mão continua segurando — é ajuda, não tomada.
+        const AP = CONFIG.assistPoint || {};
+        const AS = quarto.colliders && quarto.colliders.assist;
+        if (AS) {
+          const R = AP.radius || 5;
+          const mx = AS.point.x - cx, my = AS.point.y - cy, mz = AS.point.z - cz;
+          const md = Math.sqrt(mx * mx + my * my + mz * mz);
+          if (md < R && md > 1e-4) {
+            const k = Math.min(AP.handPull ?? 0.35, 1) * (1 - md / R);
+            cx += mx * k; cy += my * k; cz += mz * k;
+          }
+        }
         const p = ball.mesh.position;
         const dx = cx - p.x, dz = cz - p.z;
         if (Math.hypot(e.clientX - grab.x0, e.clientY - grab.y0) > 6) grab.moved = true;
