@@ -104,11 +104,31 @@ export function collectColliders(root, opts = {}) {
     walls.push(autoPost);
   }
 
+  const assist = findAssist(root, (CONFIG.assistPoint && CONFIG.assistPoint.name) || 'ponto_tabela');
+
   const found = walls.length + (backboard ? 1 : 0) + (rim ? 1 : 0);
   if (found) console.info(`[quarto] colisores do GLB: ${walls.length} parede(s)` +
     (backboard ? ' + tabela' : '') + (rim ? ' + aro' : '') + (net ? ' + rede' : '') +
     (autoPost ? ' + poste-auto' : ''));
-  return { walls, backboard, rim, net, active: found > 0 };
+  if (assist) console.info('[quarto] ponto assistivo:', assist.point.toArray().map((v) => v.toFixed(2)).join(', '));
+  return { walls, backboard, rim, net, assist, active: found > 0 };
+}
+
+// Ponto assistivo (ex.: "ponto_tabela"): Empty no centro da boca do cesto.
+// A bola solta por perto é atraída de leve até ele e cai (ímã suave).
+// Nome exato do config, com fallback sem diferenciar maiúsculas.
+function findAssist(root, name) {
+  if (!name) return null;
+  let found = root.getObjectByName(name) || null;
+  if (!found) {
+    const lower = name.toLowerCase();
+    root.traverse((o) => {
+      if (!found && (o.name || '').toLowerCase() === lower) found = o;
+    });
+  }
+  if (!found) return null;
+  found.updateWorldMatrix(true, false);
+  return { point: new THREE.Vector3().setFromMatrixPosition(found.matrixWorld) };
 }
 
 // Centro do aro (alvo do arremesso assistido); null sem aro no GLB.

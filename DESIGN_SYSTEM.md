@@ -652,6 +652,10 @@ largura total da viewport) ao fim do Cap. 01.
 * Arremesso assistido (`assistShot`, chance 1/6 por arremesso): arremesso
   para cima sorteado recebe a velocidade balística até o aro; física
   (aro, rede, chão) reage normalmente dali em diante.
+* Ponto assistivo (`assistPoint`, Empty `ponto_tabela` na boca do cesto):
+  bola solta dentro do raio e acima do ponto é atraída de leve
+  (força ∝ distância, zero no centro) e cai pela rede. Ignora bola
+  segurada ou dormindo. `radius`/`pull` no config.
 * Arremesso: altura máxima de segurada `grabHeight: 7`, impulso vertical
   `throwBoost: 1.4`, `maxSpeed: 7`.
 * `importmap` do three@0.160.0 no `header.php`.

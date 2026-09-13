@@ -68,6 +68,22 @@ export function stepBall(ball, bounds, dt, onBounce, colliders) {
   ball.vel.y += b.gravity * dt;
   const sp0 = ball.vel.length();
   if (sp0 > b.maxSpeed) ball.vel.multiplyScalar(b.maxSpeed / sp0);
+  // Ímã do ponto assistivo: dentro do raio e acima do ponto, desvia a
+  // velocidade em direção a ele, proporcional à distância (mola que zera
+  // no centro = captura suave). Ignora bola segurada ou dormindo.
+  const ap = CONFIG.assistPoint || {};
+  const A = colliders && colliders.assist;
+  if (A && !ball.held && !ball.sleeping) {
+    const dx = A.point.x - p.x, dy = A.point.y - p.y, dz = A.point.z - p.z;
+    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+    const R = ap.radius || 2.5;
+    if (dist < R && dist > 1e-4 && p.y > A.point.y - 0.5) {
+      const f = ((ap.pull || 8) * (dist / R) * dt) / dist;
+      ball.vel.x += dx * f;
+      ball.vel.y += dy * f;
+      ball.vel.z += dz * f;
+    }
+  }
   p.addScaledVector(ball.vel, dt);
   const r = ball.physR ?? b.radius;
   if (p.y < r) {

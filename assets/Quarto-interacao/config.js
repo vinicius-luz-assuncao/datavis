@@ -17,6 +17,10 @@ export const CONFIG = {
   // Arremesso assistido: chance por arremesso de a bola receber a velocidade
   // balística exata até o aro (novo sorteio a cada arremesso, sem memória).
   assistShot: { chance: 1 / 6, minUp: 1.0, maxShotSpeed: 9 },
+  // Ímã do ponto assistivo (Empty "ponto_tabela" na boca do cesto): dentro
+  // do raio e acima do ponto, puxa proporcional à distância (zero no centro
+  // = chegada suave, sem solavanco). A gravidade faz o resto (cai na rede).
+  assistPoint: { name: 'ponto_tabela', radius: 2.5, pull: 8 },
   useModelLights: true,
   modelLightDiv: { directional: 400, point: 120, spot: 120 },
   camera: { pos: [2.35, 3.6, 3.1], look: [-1.7, 0.85, -2.5], fov: 42 },
