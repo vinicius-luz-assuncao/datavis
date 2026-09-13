@@ -274,7 +274,11 @@
       var wrap = el.closest("[data-bignums]");
       var axis = wrap ? wrap.querySelector(".bignums__axis") : null;
       var maxPx = axis ? axis.clientHeight : 160;
-      var finalPx = Math.max(20, (maxPx * target) / 100);
+      // Razão ótica do dígito (altura visual / font-size, ~Abril Fatface):
+      // dividir por ela faz o topo VISÍVEL do número encostar no tick do
+      // valor (só font-size deixaria ~3/4 abaixo). Ajuste fino aqui.
+      var GLYPH_RATIO = 0.78;
+      var finalPx = Math.max(20, (maxPx * target) / 100 / GLYPH_RATIO);
       if (prefersReducedMotion) {
         el.style.fontSize = finalPx + "px";
         el.textContent = formatNumber(target, 0) + "%";

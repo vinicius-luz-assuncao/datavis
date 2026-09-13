@@ -1191,7 +1191,9 @@ main section[id] {
 }
 
 .bignums__axis {
-  height: var(--max);
+  /* O ajuste fino mora aqui: --axis-fix reescala eixo + numerais juntos
+     (o JS mede a altura computada). 1 = neutro. */
+  height: calc(var(--max) * var(--axis-fix, 1));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
