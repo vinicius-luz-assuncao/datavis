@@ -10,11 +10,13 @@
 ?>
 <section class="section chapter" id="conflito">
   <div class="container">
-    <header class="chapter__head reveal">
-      <span class="chapter__marker">Capítulo 02 · Conflito</span>
-      <h2 class="section-title">Quem é que mais "sobra" no banco</h2>
-      <!-- <p class="block__lede">Quando olhamos mais de perto, a desigualdade aparece.</p> -->
-    </header>
+    <header class="chapter__head chapter__head--wide reveal">
+        <span class="chapter__marker">Capítulo 02 · Conflito</span>
+        <h2 class="chapter-title-split">
+          <span class="split-l1">Quem é que realmente "sobra"</span>
+          <span class="split-l2">no banco</span>
+        </h2>
+      </header>
 
    
 
@@ -52,8 +54,10 @@
           <p class="byline">Brasil</p>
           <p class="body-text">E no Brasil, quem mais fica de fora? 57,3% dos homens não praticam esporte ou
             atividade física — enquanto entre as mulheres esse número chega a 66,6%.</p>
-          <p class="drop">E quando olhamos só para o cenário do esporte, a curva se acentua:
-            <strong>31,7%</strong> dos homens × <strong>16,9%</strong> das mulheres praticam.</p>
+          <div class="editorial-callout" style="margin-top: var(--space-md);">
+            <p class="small-note">E quando olhamos só para o cenário do esporte, a curva se acentua:
+              <strong>31,7%</strong> dos homens × <strong>16,9%</strong> das mulheres praticam.</p>
+          </div>
         </div>
         <div class="split-block__chart">
           <div class="gbar" data-chart="grouped-bar">
@@ -81,22 +85,25 @@
             representada na pesquisa não tem acesso ao esporte.</p>
         </div>
         <div class="split-block__chart">
-          <div class="donut" data-chart="donut" data-value="42.8" data-color="var(--color-purple)"
+          <div class="donut donut--side" data-chart="donut" data-value="42.8" data-color="var(--color-purple)"
             data-label="da população LGBTQIA+ representada no estudo não tinha acesso ao esporte"></div>
           <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 21.</p>
         </div>
+            </div>
+        <!-- Aviso -->
+    
+      <div class="editorial-callout-02 ">
+       <span class="small-note">
+  <strong>Nota metodológica:</strong> os dados apresentados provêm de fontes distintas
+  (<strong>WHO</strong>, <strong>IBGE</strong> e <strong>NIX</strong>), com populações, métodos
+  e instrumentos de coleta diferentes. Não se trata, portanto, de
+  <strong>comparações em valores absolutos</strong>.
+</span>
       </div>
+    
     </div>
 
-    <!-- Aviso -->
-    <div class="block reveal">
-      <div class="editorial-callout">
-        <span class="small-note">
-          <strong>Leia com cuidado:</strong> os números vêm de pesquisas diferentes (WHO, IBGE e NIX), com
-          populações, métodos e perguntas distintos. Eles <strong>não devem ser comparados em valor absoluto</strong>.
-        </span>
-      </div>
-    </div>
+    
 
     <!-- Ilustração -->
     <figure class="illustration illustration--medium reveal" style="margin-top: var(--space-xl);" role="img"

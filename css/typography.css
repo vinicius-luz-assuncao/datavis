@@ -70,6 +70,8 @@
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.85rem;
+  background:  var(--color-sky);
+  padding: 2px 3px 1px 6px;
 }
 
 /* Corpo de texto — Corbel (Nunito Sans), humanista arredondada */
