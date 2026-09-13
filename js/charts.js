@@ -794,13 +794,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var dur = prefersReducedMotion ? 0 : 200;
 
-    // Marcos: 2010 e 2022 observados; 2026 e 2030 projeções.
-    // Só viajam total mundial + inativos (sem 15+ e sem prevalência).
+    // Marcos (população adulta 15+): 2010 e 2022 observados;
+    // 2026 e 2030 projeções. Rótulos: total "5,0 bi", inativos "1,3 bi (26%)".
     var anchors = [
-      { year: 2010, total: 7.02, inactive: 1.31 },
-      { year: 2022, total: 8.02, inactive: 1.80 },
-      { year: 2026, total: 8.30, inactive: 1.98 },
-      { year: 2030, total: 8.50, inactive: 2.15 }
+      { year: 2010, total: 5.05, inactive: 1.31, pct: 26 },
+      { year: 2022, total: 5.80, inactive: 1.80, pct: 31 },
+      { year: 2026, total: 6.00, inactive: 1.98, pct: 33 },
+      { year: 2030, total: 6.15, inactive: 2.15, pct: 35 }
     ];
 
     function interpolate(year) {
@@ -812,12 +812,13 @@ document.addEventListener("DOMContentLoaded", function () {
           return {
             year: year,
             total: a.total + t * (b.total - a.total),
-            inactive: a.inactive + t * (b.inactive - a.inactive)
+            inactive: a.inactive + t * (b.inactive - a.inactive),
+            pct: a.pct + t * (b.pct - a.pct)
           };
         }
       }
       var edge = year < anchors[0].year ? anchors[0] : anchors[anchors.length - 1];
-      return { year: year, total: edge.total, inactive: edge.inactive };
+      return { year: year, total: edge.total, inactive: edge.inactive, pct: edge.pct };
     }
 
     var data = [];
@@ -826,17 +827,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     var W = 640;
-    var H = 205;
+    var H = 215;
     var ML = 30; // margem à esquerda: o "0 bi" não é mais mordido
     var MR = 16;
-    var TY = 32; // linha do tempo (anos com círculos)
-    var BAR_Y = 82;
+    var BAR_Y = 44;
     var BAR_H = 58;
+    var TY = 142; // linha do tempo (anos com círculos pontilhados)
     var AXIS_Y = H - 28;
     var PINK = "var(--color-pink)"; // E8557E — até 2026
     var SAGE = "var(--color-sage)"; // 8FC9B4 — projeção até 2030
 
-    var x = d3.scaleLinear().domain([0, 9]).range([ML, W - MR]);
+    var x = d3.scaleLinear().domain([0, 6.5]).range([ML, W - MR]);
     var xYear = d3.scaleLinear().domain([2010, 2030]).range([ML, W - MR]);
 
     var svg = d3
@@ -846,10 +847,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("role", "img")
       .attr(
         "aria-label",
-        "População mundial total e adultos inativos, 2010 a 2030. Linha do tempo: 2010 a 2026 observado, 2026 a 2030 projeção. Use o controle de ano para ver cada valor."
+        "População adulta total e adultos inativos, 2010 a 2030. Linha do tempo: 2010 a 2026 observado, 2026 a 2030 projeção. Use o controle de ano para ver cada valor."
       );
 
-    // Linha do tempo em dois trechos (sem trilha branca atrás).
+    // Linha do tempo em dois trechos, junto ao slider (sem trilha atrás).
     svg
       .append("line")
       .attr("x1", xYear(2010))
@@ -869,7 +870,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("stroke-width", 5)
       .attr("stroke-linecap", "round");
 
-    // Marcos clicáveis (pulam o slider para o ano).
+    // Marcos em destaque: círculos pontilhados, clicáveis (pulam o slider).
     var dots = svg
       .selectAll("circle.pop-year")
       .data(anchors)
@@ -885,7 +886,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return d.year >= 2026 ? SAGE : PINK;
       })
       .style("stroke", "var(--color-paper)")
-      .style("stroke-width", 2)
+      .style("stroke-width", 2.5)
+      .style("stroke-dasharray", "1.5 2.5")
       .style("cursor", "pointer")
       .on("click", function (event, d) {
         slider.value = d.year;
@@ -901,7 +903,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("x", function (d) {
         return xYear(d.year);
       })
-      .attr("y", TY + 26)
+      .attr("y", TY - 16)
       .attr("text-anchor", "middle")
       .style("font-family", "var(--font-geo)")
       .style("font-size", "13px")
@@ -926,7 +928,7 @@ document.addEventListener("DOMContentLoaded", function () {
     axisG.selectAll("line").style("stroke", "var(--color-neutral)");
     axisG.select(".domain").style("stroke", "var(--color-neutral)");
 
-    // Barra: fundo = total mundial (tinta), frente = inativos (rosa/sálvia).
+    // Barra: fundo = total adulto (slate), frente = inativos (vermilion).
     var barBg = svg
       .append("rect")
       .attr("x", x(0))
@@ -934,7 +936,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("width", 0)
       .attr("height", BAR_H)
       .attr("rx", 8)
-      .style("fill", "var(--color-ink)");
+      .style("fill", "var(--color-slate)")
+      .attr("opacity", 0.9);
 
     var barFg = svg
       .append("rect")
@@ -943,54 +946,52 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("width", 0)
       .attr("height", BAR_H)
       .attr("rx", 8)
-      .style("fill", PINK);
+      .style("fill", "var(--color-vermilion)");
 
-    // Rótulos brancos dentro da barra.
+    // Rótulos fora/acima, no padrão original.
     var labelTotal = svg
       .append("text")
       .attr("text-anchor", "middle")
       .style("font-family", "var(--font-geo)")
       .style("font-weight", 600)
       .style("font-size", "13px")
-      .style("fill", "var(--color-paper)");
+      .style("fill", "var(--color-ink)");
 
     var labelInact = svg
       .append("text")
       .style("font-size", "13px")
-      .style("font-weight", "bold")
-      .style("fill", "var(--color-paper)");
+      .style("font-weight", "bold");
 
     function render(d) {
-      var col = d.year < 2026 ? PINK : SAGE;
       var bgW = Math.max(0, x(d.total) - x(0));
       var fgW = Math.max(0, x(d.inactive) - x(0));
       barBg.transition().duration(dur).attr("width", bgW);
-      barFg.transition().duration(dur).attr("width", fgW).style("fill", col);
+      barFg.transition().duration(dur).attr("width", fgW);
       labelTotal
         .transition()
         .duration(dur)
-        .attr("x", x(0) + bgW / 2)
-        .attr("y", BAR_Y + 22)
-        .text(fmt(d.total, 2) + " bi · mundo");
-      // Inativos: dentro da barra (branco) se couber, senão fora (tinta).
-      var iLabel = fmt(d.inactive, 2) + " bi inativos";
+        .attr("x", x(d.total))
+        .attr("y", BAR_Y - 10)
+        .text(fmt(d.total, 1) + " bi");
+      // Inativos "1,3 bi (26%)": dentro da barra se couber, senão acima.
+      var iLabel = fmt(d.inactive, 1) + " bi (" + Math.round(d.pct) + "%)";
       var cssW = (fgW / W) * (canvas.clientWidth || W);
       labelInact.text(iLabel);
-      if (cssW > iLabel.length * 7 + 16) {
+      if (cssW > iLabel.length * 7.2 + 20) {
         labelInact
           .transition()
           .duration(dur)
           .attr("x", x(0) + fgW / 2)
-          .attr("y", BAR_Y + 42)
+          .attr("y", BAR_Y + BAR_H / 2 + 4.5)
           .style("text-anchor", "middle")
           .style("fill", "var(--color-paper)");
       } else {
         labelInact
           .transition()
           .duration(dur)
-          .attr("x", x(0) + fgW + 8)
-          .attr("y", BAR_Y + BAR_H / 2 + 4.5)
-          .style("text-anchor", "start")
+          .attr("x", x(0) + fgW)
+          .attr("y", BAR_Y - 10)
+          .style("text-anchor", "middle")
           .style("fill", "var(--color-ink)");
       }
       if (yearEl) yearEl.textContent = d.year + (d.year >= 2026 ? " · projeção" : "");
@@ -1025,11 +1026,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "<strong>" +
         d.year +
         (d.year >= 2026 ? " · projeção" : "") +
-        "</strong><br>Mundo: " +
-        fmt(d.total, 2) +
+        "</strong><br>População adulta: " +
+        fmt(d.total, 1) +
         " bi<br>Inativos: " +
-        fmt(d.inactive, 2) +
-        " bi";
+        fmt(d.inactive, 1) +
+        " bi (" +
+        Math.round(d.pct) +
+        "%)";
       tip.style.opacity = "1";
       tip.style.left = (pt[0] / W) * rect.width + 14 + "px";
       tip.style.top = Math.max(0, (pt[1] / H) * rect.height - 10) + "px";

@@ -74,12 +74,12 @@
           <span class="popslider__year" data-pop-year>2022</span>
         </div>
         <div class="popslider__legend" aria-hidden="true">
-          <span class="popslider__legend-item"><i style="background: var(--color-pink);"></i> 2010–2026</span>
-          <span class="popslider__legend-item"><i style="background: var(--color-sage);"></i> Projeção 2026–2030</span>
+          <span class="popslider__legend-item"><i style="background: var(--color-slate);"></i> População adulta total</span>
+          <span class="popslider__legend-item"><i style="background: var(--color-vermilion);"></i> Adultos insuficientemente ativos</span>
         </div>
         <div class="popslider__tip" data-pop-tip></div>
         <p class="small-note" style="margin-top: var(--space-sm); max-width: 62ch;">
-          População: ONU WPP 2024; inatividade: OMS 2024. 2010 e 2022 observados;
+          Fonte: OMS (2024); totais adultos: ONU WPP 2024. 2010 e 2022 observados;
           2026 e 2030 projeções. Anos entre marcos: interpolação linear.
         </p>
       </div>
