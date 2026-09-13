@@ -694,6 +694,8 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 │   ├── CostDisplay + QuadraSlot (futura)
 │   └── BenchBlock + Bridge (ponte p/ Cap. 02)
 ├── Capitulo02 (conflito.php)
+│   ├── PlanetCanvas × 3 (`planet.js`, `data-planet` + `data-model`; giro base
+│   │   com tilt, arrasto/fling que retorna à base, pausa fora da tela)
 │   ├── SceneStage (canvas Quarto, vindo do Cap. 01)
 │   ├── GroupedBarChart (85% × 78%)
 │   ├── GroupedBarChart (não praticam 57,3% × 66,6%) + Drop (só esporte)

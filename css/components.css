@@ -1500,6 +1500,31 @@ main section[id] {
   min-width: 0;
 }
 
+/* Trio: planeta | texto | gráfico. */
+.split-block--trio {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 5fr);
+  align-items: center;
+}
+
+.split-block__planet {
+  min-width: 0;
+}
+
+.planet-canvas {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 280px;
+  margin-inline: auto;
+}
+
+.planet-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
 /* Transição para o Capítulo 02 */
 .bridge {
   font-family: var(--font-display);
@@ -1529,5 +1554,13 @@ main section[id] {
 
   .split-block {
     grid-template-columns: 1fr;
+  }
+
+  .split-block--trio {
+    grid-template-columns: 1fr;
+  }
+
+  .planet-canvas {
+    max-width: 240px;
   }
 }

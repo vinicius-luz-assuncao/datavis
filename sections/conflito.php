@@ -20,9 +20,12 @@
 
    
 
-    <!-- Camada 1 — Mundo (WHO): texto à esquerda, gráfico à direita -->
+    <!-- Camada 1 — Mundo (WHO): planeta, texto e gráfico -->
     <div class="block reveal">
-      <div class="split-block">
+      <div class="split-block split-block--trio">
+        <div class="split-block__planet">
+          <div class="planet-canvas" data-planet data-model="assets/earth/planet.glb" aria-hidden="true"></div>
+        </div>
         <div class="split-block__text">
           <p class="byline">Mundo</p>
           <p class="body-text">
@@ -47,9 +50,12 @@
       </div>
     </div>
 
-    <!-- Camada 2 — Brasil (IBGE): texto à esquerda, gráfico à direita -->
+    <!-- Camada 2 — Brasil (IBGE): planeta, texto e gráfico -->
     <div class="block reveal">
-      <div class="split-block">
+      <div class="split-block split-block--trio">
+        <div class="split-block__planet">
+          <div class="planet-canvas" data-planet data-model="assets/earth/planet.glb" aria-hidden="true"></div>
+        </div>
         <div class="split-block__text">
           <p class="byline">Brasil</p>
           <p class="body-text">E no Brasil, quem mais fica de fora? 57,3% dos homens não praticam esporte ou
@@ -76,9 +82,12 @@
       </div>
     </div>
 
-    <!-- Camada 3 — LGBTQIA+ (NIX): texto à esquerda, gráfico à direita -->
+    <!-- Camada 3 — LGBTQIA+ (NIX): planeta, texto e gráfico -->
     <div class="block reveal">
-      <div class="split-block">
+      <div class="split-block split-block--trio">
+        <div class="split-block__planet">
+          <div class="planet-canvas" data-planet data-model="assets/earth/planet.glb" aria-hidden="true"></div>
+        </div>
         <div class="split-block__text">
           <p class="byline">Comunidade LGBTQIAPN+</p>
           <p class="body-text">Para pessoas LGBTQIAPN+, chegar é o primeiro desafio: 42,8% da população
