@@ -627,8 +627,8 @@ Em telas estreitas, só os pontos.
 
 # 22. CENA 3D — QUARTO (`assets/Quarto-interacao/`, `js/quarto.js`)
 
-Exceção documentada à regra "sem 3D": a cena interativa do quarto (three.js,
-GLB `quarto02.glb`), em palco ampliado (`.scene-stage--tall`: 1560px,
+Exceção documentada à regra "sem 3D": a cena interativa da quadra (three.js,
+GLB `quadra.glb`), em palco ampliado (`.scene-stage--tall`: 1560px,
 largura total da viewport) ao fim do Cap. 01.
 
 * Fundo transparente (`alpha`, sem `scene.background`): o papel da página é

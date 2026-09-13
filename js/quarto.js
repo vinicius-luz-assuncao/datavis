@@ -11,7 +11,7 @@ if (stage && !reducedMotion) {
         try {
           /* A câmera agora vem do próprio GLB (posição, rotação e fov). */
           initQuarto(stage, {
-            modelURL: "assets/Quarto-interacao/quarto02.glb",
+            modelURL: "assets/Quarto-interacao/quadra.glb",
           });
         } catch (err) {
           /* Sem WebGL/CDN o palco segue só com texto + véu. */

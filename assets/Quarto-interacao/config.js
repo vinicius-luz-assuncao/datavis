@@ -9,7 +9,7 @@ export const CONFIG = {
   wallDiag: { c: -0.6, restitution: 0.55 },
   returnHome: { target: [-1.9, -2.6], force: 1.6, delay: 1.0, stopDist: 0.25 },
   tenis: { home: [-1.4, 0, -2.3], maxNudge: 0.8, spring: 11, damping: 6.5, kick: 0.7, tilt: 0.1, yaw: 0, radius: 0.55, contact: 1.0, topBounce: 0.45, topSlide: 3.0, scale: 1.0, modelURL: null },
-  model: 'quarto02.glb',
+  model: 'quadra.glb',
   roles: { ball: 'ball', tenis: 'tenis' },
   // Colisores por nome: tudo que começa com o prefixo vira colisão.
   // Tabela/aro/rede mantêm a malha visível; Collider_* genérico é ocultado.
