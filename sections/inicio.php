@@ -89,13 +89,24 @@
         </p>
       </div>
     </div>
+    
 
     <!-- Custo + quadra 3D (futura) -->
-    <div class="block reveal">
+    <!-- <div class="block reveal">
       <p class="cost-display">Um custo de até <strong>300 bi</strong> na saúde pública global</p>
-      <p class="stat__source small-note">Estimativa 2020–2030. Fonte: WHO, 2024.</p>
+      <p class="stat__source small-note">Estimativa 2020–2030. Fonte: WHO, 2024.</p> -->
       <!-- Futura cena 3D: plugar a GLB da quadra aqui (padrão js/quarto.js);
+       
            o texto do custo será gravado na textura do chão da quadra. -->
+
+         <!-- Cena interativa (quadra de basquete 3D, palco ampliado em largura total) -->
+        <div class="block reveal scene-block">
+          <div class="prose-stage quarto-section scene-stage scene-stage--tall">
+            <div class="prose-canvas" data-quarto-canvas aria-hidden="true"></div>
+          </div>
+          <p class="graphite-note" style="margin-top: var(--space-sm);">Cena interativa — arraste a bola com o mouse ou o dedo.</p>
+        </div>
+
       <figure class="illustration illustration--large" data-scene="quadra" role="img"
         aria-label="Espaço 3D futuro de uma quadra de basquete onde a bola cai na quadra; o texto do custo será gravado na textura do chão.">
         <figcaption class="illustration__art">Quadra de basquete 3D (cena futura — bola cai na quadra; texto no chão)</figcaption>
@@ -132,14 +143,6 @@
     <!-- Transição para o Capítulo 02 -->
     <div class="block reveal">
       <p class="bridge">O que nos leva à pergunta: <strong>por que é que mais gente “sobra” no banco?</strong></p>
-    </div>
-
-     <!-- Cena interativa (quarto 3D, palco ampliado em largura total) -->
-    <div class="block reveal scene-block">
-      <div class="prose-stage quarto-section scene-stage scene-stage--tall">
-        <div class="prose-canvas" data-quarto-canvas aria-hidden="true"></div>
-      </div>
-      <p class="graphite-note" style="margin-top: var(--space-sm);">Cena interativa — arraste a bola com o mouse ou o dedo.</p>
     </div>
     
   </div>
