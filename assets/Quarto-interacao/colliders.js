@@ -118,7 +118,9 @@ function clampNum(v, a, b) {
 
 // Resolve a bola contra caixas duras + esferas do aro + zona da rede.
 // Paredes/tabela: empurra para fora pela face mais próxima e reflete.
-export function resolveBallColliders(ball, colliders, dt, onBounce) {
+export function resolveBallColliders(ball, colliders, dt, onBounce, opts) {
+  // rimScale (<1, usado com a bola segurada) estreita só a zona do aro,
+  // para dar para centralizar a bola no cesto; paredes/tabela seguem integrais.
   if (!colliders) return;
   const b = CONFIG.ball;
   const rest = (CONFIG.colliders && CONFIG.colliders.restitution) || b.restitutionWall;
@@ -170,7 +172,7 @@ export function resolveBallColliders(ball, colliders, dt, onBounce) {
 
   // Aro: esferas duras (som de batida no aro).
   if (colliders.rim) {
-    const rr = r + colliders.rim.r;
+    const rr = r * ((opts && opts.rimScale) || 1) + colliders.rim.r;
     const rimRest = Math.min(0.9, rest + 0.15);
     for (const c of colliders.rim.points) {
       const dx = p.x - c.x, dy = p.y - c.y, dz = p.z - c.z;

@@ -51,9 +51,13 @@ export function stepBall(ball, bounds, dt, onBounce, colliders) {
   if (ball.held) {
     // Segurada pela mão: sem gravidade nem velocidade, mas respeita os
     // colisores — só reposiciona para fora (sem rebote e sem som), então
-    // não atravessa poste, aro, tabela nem paredes. Dá para apoiar a bola
-    // no aro e soltá-la lá de cima.
-    if (colliders && colliders.active) resolveBallColliders(ball, colliders, dt, null);
+    // não atravessa poste, aro, tabela nem paredes. A zona do aro é mais
+    // estreita aqui (heldRadiusScale) para dar para centralizar no cesto.
+    if (colliders && colliders.active) {
+      resolveBallColliders(ball, colliders, dt, null, {
+        rimScale: (CONFIG.colliders && CONFIG.colliders.heldRadiusScale) || 0.55
+      });
+    }
     return;
   }
   if (ball.sleeping) return;
