@@ -25,8 +25,14 @@ function normName(nm) {
 
 export function initPlanet(container, opts = {}) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const BASE_SPEED = reduced ? 0 : opts.speed ?? 0.35; // rad/s
+  // mode "spin" (padrão): giro contínuo + fling que retorna à base.
+  // mode "float": sem giro — flutuação vertical discreta; arrasto gira
+  // livre, ao soltar retorna à orientação original.
+  const mode = opts.mode || 'spin';
+  const BASE_SPEED = reduced || mode !== 'spin' ? 0 : opts.speed ?? 0.35; // rad/s
   const TILT = ((opts.tilt ?? 23.4) * Math.PI) / 180;
+  const FLOAT_AMP = opts.floatAmp ?? 0.12;
+  const FLOAT_SPEED = opts.floatSpeed ?? 0.8;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setClearColor(0x000000, 0);
@@ -113,6 +119,8 @@ export function initPlanet(container, opts = {}) {
           anchor.matrixWorld.decompose(wp, wq, new THREE.Vector3());
           spinGroup.position.copy(wp);
           spinGroup.quaternion.copy(wq);
+          homeQuat = spinGroup.quaternion.clone();
+          baseY = spinGroup.position.y;
           console.info('[planeta] pivô:', anchor.name);
         } else {
           console.info('[planeta] sem Empty de pivô; fallback com tilt do código.');
@@ -128,6 +136,11 @@ export function initPlanet(container, opts = {}) {
           }
           // Com câmera do GLB: modelo intacto — o recorte do Blender vale.
         }
+        // Fallback (sem Empty): origem atual vira a referência de retorno.
+        if (!homeQuat) {
+          homeQuat = spinGroup.quaternion.clone();
+          baseY = spinGroup.position.y;
+        }
       } else {
         console.warn('[planeta] nenhuma malha no GLB; sem giro.');
       }
@@ -137,6 +150,10 @@ export function initPlanet(container, opts = {}) {
   );
 
   // Estado de giro: extra decai a zero (volta ao giro base).
+  // No modo float, homeQuat guarda a orientação original de retorno.
+  let homeQuat = null;
+  let baseY = 0;
+  let t0 = performance.now();
   let extra = 0;
   let dragging = false;
   let lastX = 0;
@@ -203,11 +220,22 @@ export function initPlanet(container, opts = {}) {
     }
     const dt = Math.min((now - last) / 1000, 0.05);
     last = now;
-    if (!dragging && extra !== 0) {
-      extra += (0 - extra) * Math.min(1, dt * 1.8);
-      if (Math.abs(extra) < 0.005) extra = 0;
+    if (mode === 'float') {
+      // Flutuação discreta + retorno à orientação original ao soltar.
+      if (!reduced) {
+        spinGroup.position.y = baseY + Math.sin(((now - t0) / 1000) * FLOAT_SPEED) * FLOAT_AMP;
+      }
+      if (!dragging && homeQuat) {
+        if (reduced) spinGroup.quaternion.copy(homeQuat);
+        else spinGroup.quaternion.slerp(homeQuat, Math.min(1, dt * 2.2));
+      }
+    } else {
+      if (!dragging && extra !== 0) {
+        extra += (0 - extra) * Math.min(1, dt * 1.8);
+        if (Math.abs(extra) < 0.005) extra = 0;
+      }
+      spinBy(spinGroup, (BASE_SPEED + extra) * dt);
     }
-    spinBy(spinGroup, (BASE_SPEED + extra) * dt);
     renderer.render(scene, camera);
   });
 

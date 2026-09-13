@@ -54,7 +54,7 @@
     <div class="block reveal">
       <div class="split-block split-block--trio">
         <div class="split-block__planet">
-          <div class="planet-canvas" data-planet data-model="assets/earth/planet.glb" aria-hidden="true"></div>
+          <div class="planet-canvas" data-planet data-model="assets/earth/planet-brasil.glb" data-mode="float" aria-hidden="true"></div>
         </div>
         <div class="split-block__text">
           <p class="byline">Brasil</p>
@@ -86,7 +86,7 @@
     <div class="block reveal">
       <div class="split-block split-block--trio">
         <div class="split-block__planet">
-          <div class="planet-canvas" data-planet data-model="assets/earth/planet.glb" aria-hidden="true"></div>
+          <div class="planet-canvas" data-planet data-model="assets/earth/planet-lgbtqia.glb" data-mode="float" aria-hidden="true"></div>
         </div>
         <div class="split-block__text">
           <p class="byline">Comunidade LGBTQIAPN+</p>
