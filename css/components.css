@@ -1256,6 +1256,19 @@ main section[id] {
   margin-top: 0;
 }
 
+/* Cena que começa por trás da fonte do gráfico acima: o topo do palco
+   desliza para baixo do bloco anterior (que pinta por cima). */
+.scene-block--overlap {
+  margin-top: calc(-1 * var(--space-xl));
+  position: relative;
+  z-index: 0;
+}
+
+.block:has(+ .scene-block--overlap) {
+  position: relative;
+  z-index: 1;
+}
+
 /* Palco ampliado: ~3x a altura (1560px) em largura total da página. */
 .prose-stage.scene-stage--tall {
   min-height: 1560px;

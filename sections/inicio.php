@@ -99,8 +99,8 @@
        
            o texto do custo será gravado na textura do chão da quadra. -->
 
-         <!-- Cena interativa (quadra de basquete 3D, palco ampliado em largura total) -->
-        <div class="block reveal scene-block">
+          <!-- Cena interativa (quadra de basquete 3D, palco ampliado em largura total) -->
+        <div class="block reveal scene-block scene-block--overlap">
           <div class="prose-stage quarto-section scene-stage scene-stage--tall">
             <div class="prose-canvas" data-quarto-canvas aria-hidden="true"></div>
           </div>
