@@ -158,10 +158,21 @@ export function initQuarto(container, opts = {}) {
       // Colisores modelados no Blender (Collider_*, tabela, aro, rede).
       quarto.colliders = collectColliders(gltf.scene);
       // Tudo que é visível passa a projetar sombra (paredes, piso, cesta) —
-      // exceto texto 3D, que só recebe (sombra de letra suja a cena).
+      // exceto: texto 3D e instâncias de geometria (sombra de letra suja a
+      // cena) + qualquer objeto com o prefixo NoShadow_ (válvula de escape
+      // permanente: renomeie no Blender e reexporte).
+      const noShadow = [];
       gltf.scene.traverse(o => {
-        if (o.isMesh && o.visible && !/text/i.test(o.name || '')) o.castShadow = true;
+        if (!o.isMesh || !o.visible) return;
+        const nm = o.name || '';
+        if (/text|texto|instance/i.test(nm) || nm.startsWith('NoShadow_')) {
+          o.castShadow = false;
+          noShadow.push(nm);
+          return;
+        }
+        o.castShadow = true;
       });
+      if (noShadow.length) console.info('[quarto] sem projetar sombra:', [...new Set(noShadow)].join(', '));
       // Arrasto, spawn, retorno e tênis passam a seguir a sala modelada.
       const wb = wallsBounds(quarto.colliders);
       if (wb) {
