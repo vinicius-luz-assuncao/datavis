@@ -48,6 +48,14 @@ export function stepBall(ball, bounds, dt, onBounce, colliders) {
   const dg = CONFIG.wallDiag;
   const rh = CONFIG.returnHome;
   const p = ball.mesh.position;
+  if (ball.held) {
+    // Segurada pela mão: sem gravidade nem velocidade, mas respeita os
+    // colisores — só reposiciona para fora (sem rebote e sem som), então
+    // não atravessa poste, aro, tabela nem paredes. Dá para apoiar a bola
+    // no aro e soltá-la lá de cima.
+    if (colliders && colliders.active) resolveBallColliders(ball, colliders, dt, null);
+    return;
+  }
   if (ball.sleeping) return;
   if (!isFinite(p.x + p.y + p.z) || p.y < -2 || p.y > 12) {
     p.copy(bounds.corner).add(new THREE.Vector3(0, 1.5, 0));
