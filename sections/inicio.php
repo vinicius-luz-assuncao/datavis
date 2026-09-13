@@ -10,7 +10,7 @@
 ?>
 <section class="section chapter" id="inicio">
   <div class="container">
-    <header class="chapter__head reveal">
+    <header class="chapter__head chapter__head--wide reveal">
       <span class="chapter__marker">Capítulo 01 · Início</span>
       <h2 class="chapter-title-split">
         <span class="split-l1">Nossa sociedade está se tornando cada vez mais...</span>
