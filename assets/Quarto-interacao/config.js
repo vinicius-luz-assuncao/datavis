@@ -20,7 +20,7 @@ export const CONFIG = {
   // Ímã do ponto assistivo (Empty "ponto_tabela" na boca do cesto): dentro
   // do raio e acima do ponto, puxa proporcional à distância (zero no centro
   // = chegada suave, sem solavanco). A gravidade faz o resto (cai na rede).
-  assistPoint: { name: 'ponto_tabela', radius: 5.0, pull: 8, handPull: 0.35 },
+  assistPoint: { name: 'ponto_tabela', radius: 6.25, pull: 10, handPull: 0.44, brake: 0.8 },
   useModelLights: true,
   modelLightDiv: { directional: 400, point: 120, spot: 120 },
   camera: { pos: [2.35, 3.6, 3.1], look: [-1.7, 0.85, -2.5], fov: 42 },

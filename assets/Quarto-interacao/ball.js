@@ -82,6 +82,9 @@ export function stepBall(ball, bounds, dt, onBounce, colliders) {
       ball.vel.x += dx * f;
       ball.vel.y += dy * f;
       ball.vel.z += dz * f;
+      // Freio suave de aproximação: tira um pouco da velocidade para a
+      // bola chegar mansa ao centro (sem matar a queda pela gravidade).
+      ball.vel.multiplyScalar(Math.max(0, 1 - (ap.brake || 0.8) * dt));
       const now = (typeof performance !== 'undefined' && performance.now()) || 0;
       if (!ball._magnetLogged || now - ball._magnetLogged > 3000) {
         ball._magnetLogged = now;
