@@ -74,13 +74,14 @@
           <span class="popslider__year" data-pop-year>2022</span>
         </div>
         <div class="popslider__legend" aria-hidden="true">
-          <span class="popslider__legend-item"><i style="background: var(--color-slate);"></i> População adulta total</span>
-          <span class="popslider__legend-item"><i style="background: var(--color-vermilion);"></i> Adultos insuficientemente ativos</span>
+          <span class="popslider__legend-item"><i style="background: var(--color-slate);"></i> População Mundial Total</span>
+          <span class="popslider__legend-item"><i style="background: var(--color-vermilion);"></i> Nº de Adultos Inativos</span>
         </div>
         <div class="popslider__tip" data-pop-tip></div>
         <p class="small-note" style="margin-top: var(--space-sm); max-width: 62ch;">
-          Fonte: OMS (2024); totais adultos: ONU WPP 2024. 2010 e 2022 observados;
-          2026 e 2030 projeções. Anos entre marcos: interpolação linear.
+          Fonte: OMS (2024) e ONU (2024). 2010 e 2022: dados observados;
+          2026 e 2030: projeções baseadas na tendência atual. Anos entre marcos:
+          interpolação linear.
         </p>
       </div>
       <p class="body-text">

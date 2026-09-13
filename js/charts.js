@@ -794,13 +794,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var dur = prefersReducedMotion ? 0 : 200;
 
-    // Marcos (população adulta 15+): 2010 e 2022 observados;
-    // 2026 e 2030 projeções. Rótulos: total "5,0 bi", inativos "1,3 bi (26%)".
+    // Marcos (população mundial × adultos inativos): 2010 e 2022 observados;
+    // 2026 e 2030 projeções (tendência atual). Fonte: OMS (2024) e ONU (2024).
     var anchors = [
-      { year: 2010, total: 5.05, inactive: 1.31, pct: 26 },
-      { year: 2022, total: 5.80, inactive: 1.80, pct: 31 },
-      { year: 2026, total: 6.00, inactive: 1.98, pct: 33 },
-      { year: 2030, total: 6.15, inactive: 2.15, pct: 35 }
+      { year: 2010, total: 7.02, inactive: 1.31 },
+      { year: 2022, total: 8.02, inactive: 1.80 },
+      { year: 2026, total: 8.30, inactive: 1.98 },
+      { year: 2030, total: 8.50, inactive: 2.15 }
     ];
 
     function interpolate(year) {
@@ -812,13 +812,12 @@ document.addEventListener("DOMContentLoaded", function () {
           return {
             year: year,
             total: a.total + t * (b.total - a.total),
-            inactive: a.inactive + t * (b.inactive - a.inactive),
-            pct: a.pct + t * (b.pct - a.pct)
+            inactive: a.inactive + t * (b.inactive - a.inactive)
           };
         }
       }
       var edge = year < anchors[0].year ? anchors[0] : anchors[anchors.length - 1];
-      return { year: year, total: edge.total, inactive: edge.inactive, pct: edge.pct };
+      return { year: year, total: edge.total, inactive: edge.inactive };
     }
 
     var data = [];
@@ -837,7 +836,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var PINK = "var(--color-pink)"; // E8557E — até 2026
     var SAGE = "var(--color-sage)"; // 8FC9B4 — projeção até 2030
 
-    var x = d3.scaleLinear().domain([0, 6.5]).range([ML, W - MR]);
+    var x = d3.scaleLinear().domain([0, 9]).range([ML, W - MR]);
     var xYear = d3.scaleLinear().domain([2010, 2030]).range([ML, W - MR]);
 
     var svg = d3
@@ -847,7 +846,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("role", "img")
       .attr(
         "aria-label",
-        "População adulta total e adultos inativos, 2010 a 2030. Linha do tempo: 2010 a 2026 observado, 2026 a 2030 projeção. Use o controle de ano para ver cada valor."
+        "População mundial total e adultos inativos, 2010 a 2030. Linha do tempo arrastável: 2010 a 2026 observado, 2026 a 2030 projeção."
       );
 
     // Linha do tempo em dois trechos, junto ao slider (sem trilha atrás).
@@ -869,6 +868,42 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("stroke", SAGE)
       .attr("stroke-width", 5)
       .attr("stroke-linecap", "round");
+
+    // Zona de arrasto ANTES dos marcos (eles pintam por cima e seguem clicáveis).
+    function yearFromEvent(evt) {
+      var pt = d3.pointer(evt, svg.node());
+      var y = Math.round(xYear.invert(pt[0]));
+      return Math.max(2010, Math.min(2030, y));
+    }
+    var dragging = false;
+    svg
+      .append("rect")
+      .attr("x", xYear(2010) - 12)
+      .attr("y", TY - 20)
+      .attr("width", xYear(2030) - xYear(2010) + 24)
+      .attr("height", 40)
+      .style("fill", "transparent")
+      .style("cursor", "ew-resize")
+      .style("touch-action", "none")
+      .on("pointerdown", function (evt) {
+        dragging = true;
+        try {
+          evt.target.setPointerCapture(evt.pointerId);
+        } catch (e) {}
+        slider.value = yearFromEvent(evt);
+        slider.dispatchEvent(new Event("input"));
+      })
+      .on("pointermove", function (evt) {
+        if (!dragging) return;
+        slider.value = yearFromEvent(evt);
+        slider.dispatchEvent(new Event("input"));
+      })
+      .on("pointerup", function () {
+        dragging = false;
+      })
+      .on("pointercancel", function () {
+        dragging = false;
+      });
 
     // Marcos em destaque: círculos pontilhados, clicáveis (pulam o slider).
     var dots = svg
@@ -911,6 +946,17 @@ document.addEventListener("DOMContentLoaded", function () {
       .text(function (d) {
         return d.year;
       });
+
+    // Pegador do ano atual (move junto com o slider).
+    var handle = svg
+      .append("circle")
+      .attr("class", "pop-handle")
+      .attr("cy", TY)
+      .attr("r", 10)
+      .style("fill", "var(--color-paper)")
+      .style("stroke", "var(--color-ink)")
+      .style("stroke-width", 3)
+      .style("pointer-events", "none");
 
     var axisG = svg
       .append("g")
@@ -967,14 +1013,15 @@ document.addEventListener("DOMContentLoaded", function () {
       var fgW = Math.max(0, x(d.inactive) - x(0));
       barBg.transition().duration(dur).attr("width", bgW);
       barFg.transition().duration(dur).attr("width", fgW);
+      handle.attr("cx", xYear(d.year));
       labelTotal
         .transition()
         .duration(dur)
         .attr("x", x(d.total))
         .attr("y", BAR_Y - 10)
-        .text(fmt(d.total, 1) + " bi");
-      // Inativos "1,3 bi (26%)": dentro da barra se couber, senão acima.
-      var iLabel = fmt(d.inactive, 1) + " bi (" + Math.round(d.pct) + "%)";
+        .text(fmt(d.total, 2) + " bi");
+      // Inativos "1,31 bi": dentro da barra se couber, senão acima.
+      var iLabel = fmt(d.inactive, 2) + " bi";
       var cssW = (fgW / W) * (canvas.clientWidth || W);
       labelInact.text(iLabel);
       if (cssW > iLabel.length * 7.2 + 20) {
@@ -1026,13 +1073,11 @@ document.addEventListener("DOMContentLoaded", function () {
         "<strong>" +
         d.year +
         (d.year >= 2026 ? " · projeção" : "") +
-        "</strong><br>População adulta: " +
-        fmt(d.total, 1) +
+        "</strong><br>Mundo: " +
+        fmt(d.total, 2) +
         " bi<br>Inativos: " +
-        fmt(d.inactive, 1) +
-        " bi (" +
-        Math.round(d.pct) +
-        "%)";
+        fmt(d.inactive, 2) +
+        " bi";
       tip.style.opacity = "1";
       tip.style.left = (pt[0] / W) * rect.width + 14 + "px";
       tip.style.top = Math.max(0, (pt[1] / H) * rect.height - 10) + "px";
