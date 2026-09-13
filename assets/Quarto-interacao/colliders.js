@@ -84,9 +84,30 @@ export function collectColliders(root, opts = {}) {
     });
   });
 
+  // Poste automático: coluna do chão até a base da tabela, na mesma linha
+  // (segue a tabela se ela for movida no Blender). Desligar: autoPost:false.
+  // Se modelar um Collider_Poste próprio, desligue este para não duplicar.
+  let autoPost = null;
+  if (backboard && (cfg.autoPost !== false)) {
+    const th = cfg.postThickness || 0.3;
+    const ox = (cfg.postOffset && cfg.postOffset[0]) || 0;
+    const oz = (cfg.postOffset && cfg.postOffset[1]) || 0;
+    const bc = backboard.box.getCenter(new THREE.Vector3());
+    const top = Math.max(0.5, backboard.box.min.y);
+    autoPost = {
+      name: 'poste-auto',
+      box: new THREE.Box3(
+        new THREE.Vector3(bc.x + ox - th / 2, 0, bc.z + oz - th / 2),
+        new THREE.Vector3(bc.x + ox + th / 2, top, bc.z + oz + th / 2)
+      )
+    };
+    walls.push(autoPost);
+  }
+
   const found = walls.length + (backboard ? 1 : 0) + (rim ? 1 : 0);
   if (found) console.info(`[quarto] colisores do GLB: ${walls.length} parede(s)` +
-    (backboard ? ' + tabela' : '') + (rim ? ' + aro' : '') + (net ? ' + rede' : ''));
+    (backboard ? ' + tabela' : '') + (rim ? ' + aro' : '') + (net ? ' + rede' : '') +
+    (autoPost ? ' + poste-auto' : ''));
   return { walls, backboard, rim, net, active: found > 0 };
 }
 

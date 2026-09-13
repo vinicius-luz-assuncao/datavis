@@ -639,8 +639,10 @@ largura total da viewport) ao fim do Cap. 01.
 * Colisores por nome (`colliders.js`, prefixo `Collider_`): `Collider_*`
   genérico vira caixa AABB dura com malha oculta; `Collider_Tabela` caixa
   dura visível; `Collider_Aro` anel de esferas; `Collider_Rede` zona de
-  amortecimento (freia e deixa cair). Paredes alinhadas aos eixos; piso em
-  `y=0`. Sem `Collider_*`, valem `CONFIG.room` + diagonal (fallback).
+  amortecimento (freia e deixa cair). Poste automático (`autoPost: true`):
+  coluna do chão à base da tabela, na mesma linha (segue a tabela; desligue
+  se modelar um `Collider_Poste` próprio). Paredes alinhadas aos eixos;
+  piso em `y=0`. Sem `Collider_*`, valem `CONFIG.room` + diagonal (fallback).
   Limites de arrasto/spawn/retorno seguem a união das paredes (`wallsBounds`).
 * Sombras: `castShadow` em todas as malhas visíveis, exceto texto 3D e
   instâncias (`/text|texto|instance/i`, só recebem) e o prefixo `NoShadow_`

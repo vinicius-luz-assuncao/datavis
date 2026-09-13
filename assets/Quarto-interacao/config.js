@@ -13,7 +13,7 @@ export const CONFIG = {
   roles: { ball: 'ball', tenis: 'tenis' },
   // Colisores por nome: tudo que começa com o prefixo vira colisão.
   // Tabela/aro/rede mantêm a malha visível; Collider_* genérico é ocultado.
-  colliders: { prefix: 'Collider_', rimSamples: 12, netDamp: 6, netSink: 4, heldRadiusScale: 0.55 },
+  colliders: { prefix: 'Collider_', rimSamples: 12, netDamp: 6, netSink: 4, heldRadiusScale: 0.55, autoPost: true, postThickness: 0.3, postOffset: [0, 0] },
   // Arremesso assistido: chance por arremesso de a bola receber a velocidade
   // balística exata até o aro (novo sorteio a cada arremesso, sem memória).
   assistShot: { chance: 1 / 6, minUp: 1.0, maxShotSpeed: 9 },
