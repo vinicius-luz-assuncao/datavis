@@ -2,8 +2,9 @@ export const CONFIG = {
   room: { w: 12, d: 12, h: 6, backZ: -4, leftX: -4 },
   ball: {
     radius: 0.584, color: 0xe2483d, restitutionFloor: 0.42, restitutionWall: 0.55,
-    gravity: -14, friction: 2.2, stopSpeed: 0.25, maxSpeed: 6,
-    kickUp: 4.2, kickUpReduced: 2.0, kickSide: 2.0, kickBias: 0.3, squash: 0.045, scale: 1.0
+    gravity: -14, friction: 2.2, stopSpeed: 0.25, maxSpeed: 7,
+    kickUp: 4.2, kickUpReduced: 2.0, kickSide: 2.0, kickBias: 0.3, squash: 0.045, scale: 1.0,
+    grabHeight: 7, throwBoost: 1.4
   },
   wallDiag: { c: -0.6, restitution: 0.55 },
   returnHome: { target: [-1.9, -2.6], force: 1.6, delay: 1.0, stopDist: 0.25 },

@@ -104,9 +104,13 @@ export function initQuarto(container, opts = {}) {
         gltf.scene.traverse(o => {
           if (o.isDirectionalLight && !o.castShadow) {
             o.castShadow = true;
-            o.shadow.mapSize.set(1024, 1024);
-            o.shadow.camera.left = -7; o.shadow.camera.right = 7;
-            o.shadow.camera.top = 7; o.shadow.camera.bottom = -7;
+            o.shadow.mapSize.set(2048, 2048);
+            // Janela cobre a sala modelada (~14 un.); sem o update abaixo,
+            // o three.js manteria o padrão ±5.
+            o.shadow.camera.left = -10; o.shadow.camera.right = 10;
+            o.shadow.camera.top = 10; o.shadow.camera.bottom = -10;
+            o.shadow.camera.updateProjectionMatrix();
+            o.shadow.bias = -0.0005;
           }
         });
       } else {
@@ -150,6 +154,10 @@ export function initQuarto(container, opts = {}) {
       setStage(gltf.scene);
       // Colisores modelados no Blender (Collider_*, tabela, aro, rede).
       quarto.colliders = collectColliders(gltf.scene);
+      // Tudo que é visível passa a projetar sombra (paredes, piso, cesta).
+      gltf.scene.traverse(o => {
+        if (o.isMesh && o.visible) o.castShadow = true;
+      });
       // Arrasto, spawn, retorno e tênis passam a seguir a sala modelada.
       const wb = wallsBounds(quarto.colliders);
       if (wb) {
@@ -247,7 +255,7 @@ export function initQuarto(container, opts = {}) {
       ray.setFromCamera(ptr, camera);
       if (ray.ray.intersectPlane(dragPlane, dragHit)) {
         const [cx, cz] = clampToRoom(dragHit.x, dragHit.z);
-        const cy = THREE.MathUtils.clamp(dragHit.y, (ball.physR ?? CONFIG.ball.radius), 3.2);
+        const cy = THREE.MathUtils.clamp(dragHit.y, (ball.physR ?? CONFIG.ball.radius), CONFIG.ball.grabHeight || 7);
         const p = ball.mesh.position;
         const dx = cx - p.x, dz = cz - p.z;
         if (Math.hypot(e.clientX - grab.x0, e.clientY - grab.y0) > 6) grab.moved = true;
@@ -296,6 +304,8 @@ export function initQuarto(container, opts = {}) {
         THREE.MathUtils.clamp((b.y - a.y) / dt, -CONFIG.ball.maxSpeed, CONFIG.ball.maxSpeed),
         THREE.MathUtils.clamp((b.z - a.z) / dt, -CONFIG.ball.maxSpeed, CONFIG.ball.maxSpeed)
       );
+      // Impulso vertical extra no arremesso: arco mais alto (limitado por maxSpeed abaixo).
+      ball.vel.y *= (CONFIG.ball.throwBoost || 1);
       const sp = ball.vel.length();
       if (sp > CONFIG.ball.maxSpeed) ball.vel.multiplyScalar(CONFIG.ball.maxSpeed / sp);
       thud();

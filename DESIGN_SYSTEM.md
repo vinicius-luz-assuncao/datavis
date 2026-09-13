@@ -641,6 +641,11 @@ largura total da viewport) ao fim do Cap. 01.
   dura visível; `Collider_Aro` anel de esferas; `Collider_Rede` zona de
   amortecimento (freia e deixa cair). Paredes alinhadas aos eixos; piso em
   `y=0`. Sem `Collider_*`, valem `CONFIG.room` + diagonal (fallback).
+  Limites de arrasto/spawn/retorno seguem a união das paredes (`wallsBounds`).
+* Sombras: `castShadow` em todas as malhas visíveis; janela ±10 com
+  `updateProjectionMatrix()` e `bias` (mapa 2048).
+* Arremesso: altura máxima de segurada `grabHeight: 7`, impulso vertical
+  `throwBoost: 1.4`, `maxSpeed: 7`.
 * `importmap` do three@0.160.0 no `header.php`.
 * Inicialização preguiçosa (só ao entrar na tela); com
   `prefers-reduced-motion` o 3D nem inicia; sem WebGL/CDN, texto + véu seguem intactos.
