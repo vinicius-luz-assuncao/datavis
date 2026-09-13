@@ -658,6 +658,9 @@ largura total da viewport) ao fim do Cap. 01.
   dormindo; com bola segurada, o alvo da mão desliza até `handPull`
   (0.44) em direção ao centro — ajuda sem tomar a mão. `radius` (6.25)/
   `pull` (10)/`handPull`/`brake` (0.8, freio de aproximação) no config.
+* Descida de cesta (`ball.swish`): bola mansa no centro da boca do aro
+  (dist < 0.35, |Δy| < 0.6) desce reto 0,45s pelo cesto e devolve à
+  gravidade embaixo (rede/chão reagem normal).
 * Arremesso: altura máxima de segurada `grabHeight: 7`, impulso vertical
   `throwBoost: 1.4`, `maxSpeed: 7`.
 * `importmap` do three@0.160.0 no `header.php`.

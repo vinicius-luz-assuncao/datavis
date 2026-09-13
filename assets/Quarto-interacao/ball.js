@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { CONFIG } from './config.js';
-import { resolveBallColliders } from './colliders.js';
+import { resolveBallColliders, hoopTarget } from './colliders.js';
 export function wrapBall(mesh) {
   mesh.name = 'ball';
   const s = CONFIG.ball.scale || 1;
@@ -61,6 +61,32 @@ export function stepBall(ball, bounds, dt, onBounce, colliders) {
     return;
   }
   if (ball.sleeping) return;
+  // Descida de cesta: em curso, desce reto pelo aro sem física externa.
+  if (ball.swish) {
+    const sw = ball.swish;
+    sw.t -= dt;
+    const k = Math.min(1, 12 * dt);
+    p.x += (sw.cx - p.x) * k;
+    p.z += (sw.cz - p.z) * k;
+    p.y -= 3.5 * dt;
+    ball.vel.set(0, -3.5, 0);
+    if (sw.t <= 0 || p.y < sw.rimY - 1.2) ball.swish = null; // gravidade retoma
+    return;
+  }
+  // Gatilho: bola mansa no centro da boca do aro vira descida de cesta.
+  if (!ball.held && colliders && colliders.rim) {
+    const rc = hoopTarget(colliders);
+    if (rc) {
+      const dx = p.x - rc.x, dz = p.z - rc.z;
+      const hd = Math.sqrt(dx * dx + dz * dz);
+      const hs = Math.hypot(ball.vel.x, ball.vel.z);
+      if (hd < 0.35 && Math.abs(p.y - rc.y) < 0.6 && hs < 3 && ball.vel.y < 2) {
+        ball.swish = { t: 0.45, cx: rc.x, cz: rc.z, rimY: rc.y };
+        ball.sleeping = false;
+        if (onBounce) onBounce();
+      }
+    }
+  }
   if (!isFinite(p.x + p.y + p.z) || p.y < -2 || p.y > 12) {
     p.copy(bounds.corner).add(new THREE.Vector3(0, 1.5, 0));
     ball.vel.set(0, 0, 0);
