@@ -389,14 +389,20 @@ Animação tipo contador digital: contam e crescem juntos até o valor.
 "Em um mundo com **8 bilhões** (display maior) **de pessoas** (escala grande)"
 + frase de apoio (`~1,8 bi` inativos; `35% até 2030`) + gráfico `popslider`
 (`js/charts.js`): barra horizontal (total mundial em `slate` × inativos em
-`vermilion`, rótulos "7,02 bi" acima e "1,31 bi" dentro/fora) + timeline
-que É o slider (arrasto + marcos em círculos pontilhados clicáveis;
-2010–2026 em `pink`, 2026–2030 projeção em `sage`, sem trilha de fundo),
-sincronizada nos dois sentidos com o input 2010–2030, tooltip e tag
-"· projeção". Marcos: 2010 (7,02 · 1,31), 2022 (8,02 · 1,80),
-2026 (8,30 · 1,98), 2030 (8,50 · 2,15); 2010/2022 observados, 2026/2030
-projeções (tendência atual); anos entre marcos interpolados (nota na fonte:
-OMS 2024 e ONU 2024). Eixo 0–9 bi com respiro à esquerda.
+`vermilion`, legenda com inativos primeiro; rótulos "7,02 bi" acima e
+"1,31 bi (19%)" dentro/fora, % arredondada de inativos/total) + timeline
+fina que É o slider único (arrasto, marcos clicáveis, pegador, teclado com
+`role=slider`; sem rosa: sálvia no observado, slate na projeção; anos e
+rótulos "Dados observados"/"Projeção" nas mesmas cores, sem fundo) + eixo
+de valores 0–9 bi fino em cima junto das barras + tooltip e tag
+"· projeção".
+Marcos: 2010 (7,02 · 1,31), 2022 (8,02 · 1,80), 2026 (8,30 · 1,98),
+2030 (8,50 · 2,15); 2010/2022 observados, 2026/2030 projeções (tendência
+atual); anos entre marcos interpolados (nota na fonte: OMS 2024 e ONU 2024).
+Eixo com respiro à esquerda (o "0 bi" não é mordido). Autoplay por
+ociosidade: 4s parado avança 1 ano/0,9s; em 2030 espera 4s e reseta a 2010;
+qualquer interação reinicia; sem autoplay com reduced-motion, aba oculta
+ou fora da tela.
 
 ## Custo + quadra
 

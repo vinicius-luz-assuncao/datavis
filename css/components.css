@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  margin: 0px 0px var(--space-lg) 0px;
+  margin: var(--space-sm) 0 var(--space-lg);
 }
 
 .stat__source::before {
@@ -251,7 +251,7 @@
 }
 
 #hero .lede {
-  max-width: 35ch;
+  max-width: 37ch;
 }
 
 /* ==========================================================================
@@ -394,6 +394,7 @@
   border-left: 4px solid var(--color-magenta);
   padding-left: var(--space-md);
   max-width: 60ch;
+  margin-inline: auto;
 }
 
 .editorial-callout .stat-number {
@@ -696,7 +697,7 @@ main section[id] {
 }
 
 .block {
-  margin-top: var(--space-lg);
+  margin-top: var(--space-xxl);
 }
 
 .block__lede {
@@ -1193,7 +1194,7 @@ main section[id] {
 .bignums__axis {
   /* O ajuste fino mora aqui: --axis-fix reescala eixo + numerais juntos
      (o JS mede a altura computada). 1 = neutro. */
-  height: calc(var(--max) * var(--axis-fix, 1));
+  height: calc(var(--max) * var(--axis-fix, 0.9));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1206,15 +1207,14 @@ main section[id] {
 }
 
 .bignums__col-1 {
-  
   min-width: 0;
-  transform: translateY(9px);
+  transform: translateY(11px);
 }
 
 
 .bignums__col-2 {
   min-width: 0;
-  transform: translateY(20px);
+  transform: translateY(27px);
 }
 
 .bignums__conj {
@@ -1224,7 +1224,7 @@ main section[id] {
   font-size: 4rem;
   letter-spacing: 0.05em;
   color: var(--color-gray);
-  transform: translateX(0) translatey(137px);
+  transform: translateX(0) translatey(155px);
 }
 
 .bignums__value {
@@ -1241,6 +1241,7 @@ main section[id] {
   height: 2px;
   background: var(--color-ink);
   /* margin-top: var(--space-sm); */
+  z-index: 1;
 }
 
 .bignums__cap {
@@ -1289,6 +1290,13 @@ main section[id] {
   z-index: 1;
 }
 
+/* Bloco que come�a sobrepondo um pouco o canvas anterior. */
+.block--overlap {
+  margin-top: calc(-3.3 * var(--space-xl));
+  position: relative;
+  z-index: 1;
+}
+
 /* Palco ampliado: ~3x a altura (1560px) em largura total da página. */
 .prose-stage.scene-stage--tall {
   min-height: 1560px;
@@ -1319,7 +1327,13 @@ main section[id] {
   margin-top: var(--space-md);
 }
 
-.popslider__controls label {
+.popslider [role="slider"]:focus-visible {
+  outline: 3px solid var(--color-vermilion);
+  outline-offset: 4px;
+}
+
+.popslider__controls label,
+.popslider__label {
   font-family: var(--font-display);
   font-weight: 700;
   text-transform: uppercase;
@@ -1399,10 +1413,24 @@ main section[id] {
   color: var(--color-vermilion);
 }
 
+/* Foto editorial com cantos suaves */
+.photo {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Banco: imagem + texto */
 .bench-block {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
   gap: var(--space-xl);
   align-items: center;
 }
@@ -1421,18 +1449,17 @@ main section[id] {
 
 /* Transição para o Capítulo 02 */
 .bridge {
-  font-family: var(--font-hero);
-  font-weight: 400;
-  font-size: clamp(1.6rem, 3.6vw, 2.8rem);
-  line-height: 1.15;
-  background: var(--color-pink);
-  color: var(--color-paper);
-  border-radius: var(--radius-lg);
-  padding: clamp(var(--space-lg), 5vw, var(--space-xl));
-  max-width: 34ch;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.75rem, 3.4vw, 3.5rem);
+  line-height: 1.02;
+  color: var(--color-ink);
+  max-width: 24ch;
 }
 
 .bridge strong {
+  color: var(--color-vermilion);
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-underline-offset: 6px;

@@ -68,14 +68,9 @@
       
       <div class="popslider" data-chart="popslider">
         <div class="popslider__canvas" data-pop-canvas></div>
-        <div class="popslider__controls">
-          <label for="popYear">Ano</label>
-          <input type="range" id="popYear" min="2010" max="2030" step="1" value="2022" aria-label="Ano da estimativa" />
-          <span class="popslider__year" data-pop-year>2022</span>
-        </div>
         <div class="popslider__legend" aria-hidden="true">
-          <span class="popslider__legend-item"><i style="background: var(--color-slate);"></i> População Mundial Total</span>
           <span class="popslider__legend-item"><i style="background: var(--color-vermilion);"></i> Nº de Adultos Inativos</span>
+          <span class="popslider__legend-item"><i style="background: var(--color-slate);"></i> População Mundial Total</span>
         </div>
         <div class="popslider__tip" data-pop-tip></div>
         <p class="small-note" style="margin-top: var(--space-sm); max-width: 62ch;">
@@ -104,21 +99,20 @@
           <div class="prose-stage quarto-section scene-stage scene-stage--tall">
             <div class="prose-canvas" data-quarto-canvas aria-hidden="true"></div>
           </div>
-          <p class="graphite-note" style="margin-top: var(--space-sm);">Cena interativa — arraste a bola com o mouse ou o dedo.</p>
+          <!-- <p class="graphite-note" style="margin-top: var(--space-sm);">Cena interativa — arraste a bola com o mouse ou o dedo.</p> -->
         </div>
 
-      <figure class="illustration illustration--large" data-scene="quadra" role="img"
+      <!-- <figure class="illustration illustration--large" data-scene="quadra" role="img"
         aria-label="Espaço 3D futuro de uma quadra de basquete onde a bola cai na quadra; o texto do custo será gravado na textura do chão.">
         <figcaption class="illustration__art">Quadra de basquete 3D (cena futura — bola cai na quadra; texto no chão)</figcaption>
-      </figure>
+      </figure> -->
     </div>
 
-    <!-- Banco: imagem + risco -->
-    <div class="block reveal">
+    <!-- Banco: imagem + risco (começa sobre o canvas) -->
+    <div class="block reveal block--overlap">
       <div class="bench-block">
-        <figure class="illustration illustration--medium" role="img"
-          aria-label="Ilustração editorial de uma pessoa sentada no banco, fora do jogo.">
-          <figcaption class="illustration__art">Pessoa sentada no banco (PNG futuro)</figcaption>
+        <figure class="photo">
+          <img src="assets/img/banco.png" alt="Pessoa sentada no banco, fora do jogo" loading="lazy" />
         </figure>
         <div class="bench-text">
           <p class="body-text">
@@ -131,6 +125,7 @@
     </div>
 
     <!-- Benefício -->
+    
     <div class="block reveal">
       <div class="editorial-callout">
         <span class="small-note">
@@ -142,7 +137,7 @@
 
     <!-- Transição para o Capítulo 02 -->
     <div class="block reveal">
-      <p class="bridge">O que nos leva à pergunta: <strong>por que é que mais gente “sobra” no banco?</strong></p>
+      <p class="bridge">O que nos leva à <strong>pergunta...</strong></p>
     </div>
     
   </div>

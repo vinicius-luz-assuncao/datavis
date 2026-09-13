@@ -18,13 +18,13 @@
   <div class="container">
     <div class="split">
       <div class="split-copy">
-        <span class="eyebrow" style="color: var(--color-sky);">Saúde e Direitos</span>
+        <span class="eyebrow" style="color: var(--color-sky);">Direito a Saúde</span>
         <h1 class="hero-title">
-          <span class="hero-title-color">Movimentar-se é um direito, </span><br />
-          <span class="hero-title-color-02">mas quem fica de fora?</span>
+          <span class="hero-title-color">Movimentar-se é Saúde </span><br />
+          <span class="hero-title-color-02">e saúde é um direito.</span>
         </h1>
         <p class="lede hero-title-color-02" style="margin-top: var(--space-lg);">
-          Por que, mesmo sabendo que atividade física salva vidas, tantas pessoas não conseguem pratica-la?
+          Ainda assim, a maioria das pessoas não praticam atividades físicas, o que provoca isto?
         </p>
       </div>
     </div>

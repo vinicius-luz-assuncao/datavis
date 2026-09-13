@@ -787,10 +787,9 @@ document.addEventListener("DOMContentLoaded", function () {
      ================================================================ */
   function drawPopslider(el) {
     var canvas = el.querySelector("[data-pop-canvas]");
-    var slider = el.querySelector("input[type='range']");
     var yearEl = el.querySelector("[data-pop-year]");
     var tip = el.querySelector("[data-pop-tip]");
-    if (!canvas || !slider) return;
+    if (!canvas) return;
 
     var dur = prefersReducedMotion ? 0 : 200;
 
@@ -826,15 +825,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     var W = 640;
-    var H = 215;
+    var H = 210;
     var ML = 30; // margem à esquerda: o "0 bi" não é mais mordido
     var MR = 16;
-    var BAR_Y = 44;
+    var BAR_Y = 40;
     var BAR_H = 58;
-    var TY = 142; // linha do tempo (anos com círculos pontilhados)
-    var AXIS_Y = H - 28;
-    var PINK = "var(--color-pink)"; // E8557E — até 2026
-    var SAGE = "var(--color-sage)"; // 8FC9B4 — projeção até 2030
+    var AXIS_Y = 114; // eixo de valores (0–9 bi) em cima, junto das barras
+    var TY = 148; // timeline-slider fina, abaixo
+    var SAGE = "var(--color-sage)"; // 8FC9B4 — observado
+    var SLATE = "#8FB0AE"; // projeção
 
     var x = d3.scaleLinear().domain([0, 9]).range([ML, W - MR]);
     var xYear = d3.scaleLinear().domain([2010, 2030]).range([ML, W - MR]);
@@ -849,15 +848,16 @@ document.addEventListener("DOMContentLoaded", function () {
         "População mundial total e adultos inativos, 2010 a 2030. Linha do tempo arrastável: 2010 a 2026 observado, 2026 a 2030 projeção."
       );
 
-    // Linha do tempo em dois trechos, junto ao slider (sem trilha atrás).
+    // Linha do tempo fina: observado em sálvia, projeção em slate
+    // (mesmas cores dos rótulos de período; sem rosa na linha).
     svg
       .append("line")
       .attr("x1", xYear(2010))
       .attr("y1", TY)
       .attr("x2", xYear(2026))
       .attr("y2", TY)
-      .attr("stroke", PINK)
-      .attr("stroke-width", 5)
+      .attr("stroke", "#8FC9B4")
+      .attr("stroke-width", 3)
       .attr("stroke-linecap", "round");
     svg
       .append("line")
@@ -865,8 +865,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("y1", TY)
       .attr("x2", xYear(2030))
       .attr("y2", TY)
-      .attr("stroke", SAGE)
-      .attr("stroke-width", 5)
+      .attr("stroke", SLATE)
+      .attr("stroke-width", 3)
       .attr("stroke-linecap", "round");
 
     // Zona de arrasto ANTES dos marcos (eles pintam por cima e seguem clicáveis).
@@ -887,16 +887,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .style("touch-action", "none")
       .on("pointerdown", function (evt) {
         dragging = true;
+        scheduleIdle();
         try {
           evt.target.setPointerCapture(evt.pointerId);
         } catch (e) {}
-        slider.value = yearFromEvent(evt);
-        slider.dispatchEvent(new Event("input"));
+        setYear(yearFromEvent(evt));
       })
       .on("pointermove", function (evt) {
         if (!dragging) return;
-        slider.value = yearFromEvent(evt);
-        slider.dispatchEvent(new Event("input"));
+        setYear(yearFromEvent(evt));
       })
       .on("pointerup", function () {
         dragging = false;
@@ -916,17 +915,16 @@ document.addEventListener("DOMContentLoaded", function () {
         return xYear(d.year);
       })
       .attr("cy", TY)
-      .attr("r", 7.5)
+      .attr("r", 5.5)
       .style("fill", function (d) {
-        return d.year >= 2026 ? SAGE : PINK;
+        return d.year >= 2026 ? SLATE : SAGE;
       })
       .style("stroke", "var(--color-paper)")
-      .style("stroke-width", 2.5)
-      .style("stroke-dasharray", "1.5 2.5")
+      .style("stroke-width", 2)
       .style("cursor", "pointer")
       .on("click", function (event, d) {
-        slider.value = d.year;
-        slider.dispatchEvent(new Event("input"));
+        setYear(d.year);
+        scheduleIdle();
       });
 
     svg
@@ -938,38 +936,59 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("x", function (d) {
         return xYear(d.year);
       })
-      .attr("y", TY - 16)
+      .attr("y", TY + 44)
       .attr("text-anchor", "middle")
       .style("font-family", "var(--font-geo)")
+      .style("font-weight", 400)
       .style("font-size", "13px")
-      .style("fill", "var(--color-ink)")
+      .style("fill", function (d) {
+        return d.year >= 2026 ? SLATE : SAGE;
+      })
       .text(function (d) {
         return d.year;
       });
+
+    // Rótulos de período no centro de cada trecho: caixa alta e baixa,
+    // sem fundo, cor na fonte (rosa/sálvia do trecho).
+    function periodLabel(xCenter, yCenter, label, color) {
+      svg
+        .append("text")
+        .attr("x", xCenter)
+        .attr("y", yCenter)
+        .attr("text-anchor", "middle")
+        .style("font-family", "var(--font-display)")
+        .style("font-weight", 400)
+        .style("font-size", "12px")
+        .style("letter-spacing", "0.08em")
+        .style("fill", color)
+        .text(label);
+    }
+    periodLabel((xYear(2010) + xYear(2026)) / 2, 170, "Dados observados", "#8FC9B4");
+    periodLabel((xYear(2026) + xYear(2030)) / 2, 170, "Projeção", SLATE);
 
     // Pegador do ano atual (move junto com o slider).
     var handle = svg
       .append("circle")
       .attr("class", "pop-handle")
       .attr("cy", TY)
-      .attr("r", 10)
+      .attr("r", 8)
       .style("fill", "var(--color-paper)")
       .style("stroke", "var(--color-ink)")
-      .style("stroke-width", 3)
+      .style("stroke-width", 2.5)
       .style("pointer-events", "none");
 
     var axisG = svg
       .append("g")
       .attr("transform", "translate(0," + AXIS_Y + ")")
       .call(
-        d3.axisBottom(x).ticks(9).tickFormat(function (d) {
+        d3.axisBottom(x).ticks(9).tickSize(3).tickFormat(function (d) {
           return d + " bi";
         })
       );
     axisG
       .selectAll("text")
       .style("font-family", "var(--font-geo)")
-      .style("font-size", "12px")
+      .style("font-size", "10px")
       .style("fill", "var(--color-gray)");
     axisG.selectAll("line").style("stroke", "var(--color-neutral)");
     axisG.select(".domain").style("stroke", "var(--color-neutral)");
@@ -1020,8 +1039,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("x", x(d.total))
         .attr("y", BAR_Y - 10)
         .text(fmt(d.total, 2) + " bi");
-      // Inativos "1,31 bi": dentro da barra se couber, senão acima.
-      var iLabel = fmt(d.inactive, 2) + " bi";
+      // Inativos "1,31 bi (19%)": dentro da barra se couber, senão acima.
+      var iPct = Math.round((d.inactive / d.total) * 100);
+      var iLabel = fmt(d.inactive, 2) + " bi (" + iPct + "%)";
       var cssW = (fgW / W) * (canvas.clientWidth || W);
       labelInact.text(iLabel);
       if (cssW > iLabel.length * 7.2 + 20) {
@@ -1047,7 +1067,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return dd.year === d.year ? "var(--color-ink)" : "var(--color-paper)";
         })
         .attr("stroke-width", function (dd) {
-          return dd.year === d.year ? 3 : 2;
+          return dd.year === d.year ? 2.5 : 2;
         });
     }
 
@@ -1058,15 +1078,97 @@ document.addEventListener("DOMContentLoaded", function () {
       return data[0];
     }
 
-    slider.addEventListener("input", function () {
-      var year = parseInt(slider.value, 10);
-      if (yearEl) yearEl.textContent = year;
-      render(datumFor(year));
-    });
+    // Controle único: timeline (mouse/toque/teclado). Sem input duplo.
+    var currentYear = 2022;
+    function setYear(year) {
+      currentYear = Math.max(2010, Math.min(2030, Math.round(year)));
+      render(datumFor(currentYear));
+      svg.attr("aria-valuenow", currentYear);
+    }
+
+    // Autoplay por ociosidade: 4s parado → avança 1 ano por vez; em 2030,
+    // espera 4s e reseta para 2010. Qualquer interação reinicia a contagem.
+    // Sem autoplay com reduced-motion, aba oculta ou gráfico fora da tela.
+    var idleTimer = 0;
+    var stepTimer = 0;
+    var autoPlaying = false;
+    var inView = true;
+    function stopAuto() {
+      if (idleTimer) clearTimeout(idleTimer);
+      if (stepTimer) clearTimeout(stepTimer);
+      idleTimer = 0;
+      stepTimer = 0;
+      autoPlaying = false;
+    }
+    function scheduleIdle() {
+      stopAuto();
+      if (prefersReducedMotion) return;
+      idleTimer = setTimeout(startAuto, 4000);
+    }
+    function startAuto() {
+      idleTimer = 0;
+      if (document.hidden || !inView) {
+        scheduleIdle();
+        return;
+      }
+      autoPlaying = true;
+      stepAuto();
+    }
+    function stepAuto() {
+      if (!autoPlaying) return;
+      if (document.hidden || !inView) {
+        autoPlaying = false;
+        scheduleIdle();
+        return;
+      }
+      if (currentYear >= 2030) {
+        stepTimer = setTimeout(function () {
+          setYear(2010);
+          autoPlaying = false;
+          scheduleIdle();
+        }, 4000);
+        return;
+      }
+      setYear(currentYear + 1);
+      stepTimer = setTimeout(stepAuto, 900);
+    }
+    if (typeof IntersectionObserver !== "undefined") {
+      new IntersectionObserver(
+        function (entries) {
+          inView = !!(entries[0] && entries[0].isIntersecting);
+        },
+        { threshold: 0.2 }
+      ).observe(el);
+    }
+    svg
+      .attr("role", "slider")
+      .attr("tabindex", "0")
+      .attr(
+        "aria-label",
+        "Ano da estimativa, 2010 a 2030. População mundial total e adultos inativos. Linha do tempo: 2010 a 2026 observado, 2026 a 2030 projeção."
+      )
+      .attr("aria-valuemin", 2010)
+      .attr("aria-valuemax", 2030)
+      .attr("aria-valuenow", currentYear)
+      .on("keydown", function (event) {
+        var step = 0;
+        if (event.key === "ArrowLeft" || event.key === "ArrowDown") step = -1;
+        else if (event.key === "ArrowRight" || event.key === "ArrowUp") step = 1;
+        else if (event.key === "Home") {
+          scheduleIdle();
+          return setYear(2010);
+        } else if (event.key === "End") {
+          scheduleIdle();
+          return setYear(2030);
+        } else return;
+        event.preventDefault();
+        scheduleIdle();
+        setYear(currentYear + step);
+      });
 
     function showTip(evt) {
       if (!tip) return;
-      var d = datumFor(parseInt(slider.value, 10));
+      var d = datumFor(currentYear);
       var rect = svg.node().getBoundingClientRect();
       var pt = d3.pointer(evt, svg.node());
       tip.innerHTML =
@@ -1077,7 +1179,9 @@ document.addEventListener("DOMContentLoaded", function () {
         fmt(d.total, 2) +
         " bi<br>Inativos: " +
         fmt(d.inactive, 2) +
-        " bi";
+        " bi (" +
+        Math.round((d.inactive / d.total) * 100) +
+        "%)";
       tip.style.opacity = "1";
       tip.style.left = (pt[0] / W) * rect.width + 14 + "px";
       tip.style.top = Math.max(0, (pt[1] / H) * rect.height - 10) + "px";
@@ -1090,7 +1194,8 @@ document.addEventListener("DOMContentLoaded", function () {
     barBg.on("mousemove", showTip).on("mouseleave", hideTip);
     barFg.on("mousemove", showTip).on("mouseleave", hideTip);
 
-    render(datumFor(parseInt(slider.value, 10)));
+    setYear(2022);
+    scheduleIdle();
   }
 
   initCharts();
