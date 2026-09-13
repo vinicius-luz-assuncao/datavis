@@ -1,8 +1,8 @@
 /* ==========================================================================
-   COMPONENTES â€” estilos especÃ­ficos dos blocos
+   COMPONENTES — estilos específicos dos blocos
    ========================================================================== */
 
-/* --- StatNumber (grandes nÃºmeros da seÃ§Ã£o de evidÃªncias) --- */
+/* --- StatNumber (grandes números da seção de evidências) --- */
 .stat {
   display: flex;
   flex-direction: column;
@@ -46,14 +46,14 @@
   font-weight: 500;
 }
 
-/* --- GrÃ¡ficos (base) --- */
+/* --- Gráficos (base) --- */
 [data-chart] svg {
   width: 100%;
   height: auto;
 }
 
 /* ==========================================================================
-   GRÃFICO DE BARRAS (Gerado por D3 a partir de .bar-row)
+   GRÁFICO DE BARRAS (Gerado por D3 a partir de .bar-row)
    ========================================================================== */
 .bar-chart {
   display: flex;
@@ -103,7 +103,7 @@
 }
 
 /* ==========================================================================
-   GRÃFICO DONUT (Gerado por D3; percentual no centro)
+   GRÁFICO DONUT (Gerado por D3; percentual no centro)
    ========================================================================== */
 .donut {
   display: flex;
@@ -147,9 +147,9 @@
 }
 
 /* ==========================================================================
-   HERO â€” imagem de fundo + overlay editorial para leitura
+   HERO — imagem de fundo + overlay editorial para leitura
    A imagem vive num pseudo-elemento ::before para poder ser deslocada
-   horizontalmente pelo efeito parallax (main.js define a variÃ¡vel
+   horizontalmente pelo efeito parallax (main.js define a variável
    --hero-shift em px a cada scroll).
    ========================================================================== */
 #hero {
@@ -163,9 +163,9 @@
 }
 
 /* As camadas vivem em .hero-media (imgs reais empilhadas, cada uma maior
-   que o hero). Cada camada recebe do main.js as prÃ³prias variÃ¡veis
-   --layer-scroll-shift e --layer-mouse-x/-y, jÃ¡ multiplicadas pela sua
-   profundidade (data-depth): 01 = primeiro plano (mais rÃ¡pido),
+   que o hero). Cada camada recebe do main.js as próprias variáveis
+   --layer-scroll-shift e --layer-mouse-x/-y, já multiplicadas pela sua
+   profundidade (data-depth): 01 = primeiro plano (mais rápido),
    04 = fundo (mais lento). */
 .hero-media {
   position: absolute;
@@ -175,9 +175,9 @@
 }
 
 /* Todas as camadas compartilham o mesmo transform (base-x + scroll + mouse)
-   e object-fit: cover. O oversize varia por camada â€” camadas Ã  frente sÃ£o
+   e object-fit: cover. O oversize varia por camada — camadas à frente são
    maiores para dar "sobra" ao parallax sem expor bordas. As porcentagens
-   foram calibradas para amplitudes de atÃ© ~20% da largura do hero. */
+   foram calibradas para amplitudes de até ~20% da largura do hero. */
 .hero-media__img {
   position: absolute;
   max-width: none;
@@ -193,7 +193,7 @@
   will-change: transform;
 }
 
-/* Layer 1 â€” primeiro plano (depth 1): mais oversize, maior buffer */
+/* Layer 1 — primeiro plano (depth 1): mais oversize, maior buffer */
 .hero-media__img[data-layer="1"] {
   inset: 2%;
   width: 100%;
@@ -201,7 +201,7 @@
   left: -6%;
 }
 
-/* Layer 2 â€” meio-frente (depth 0.68) */
+/* Layer 2 — meio-frente (depth 0.68) */
 .hero-media__img[data-layer="2"] {
   inset: 0;
   width: 105%;
@@ -209,7 +209,7 @@
   left: 0%;
 }
 
-/* Layer 3 â€” meio-fundo (depth 0.4) */
+/* Layer 3 — meio-fundo (depth 0.4) */
 .hero-media__img[data-layer="3"] {
   inset: 0%;
   width: 110%;
@@ -217,7 +217,7 @@
   left: 1%;
 }
 
-/* Layer 4 â€” fundo (depth 0.18): menor oversize, menor movimento */
+/* Layer 4 — fundo (depth 0.18): menor oversize, menor movimento */
 .hero-media__img[data-layer="4"] {
   inset: -7%;
   width: 114%;
@@ -229,7 +229,7 @@
 .hero-media__img[data-layer="3"] { z-index: 2; }
 .hero-media__img[data-layer="4"] { z-index: 1; }
 
-/* Overlay: papel sÃ³lido Ã  esquerda (texto) â†’ transparente Ã  direita (foto) */
+/* Overlay: papel sólido à esquerda (texto) → transparente à direita (foto) */
 #hero::after {
   content: "";
   position: absolute;
@@ -255,7 +255,7 @@
 }
 
 /* ==========================================================================
-   GRÃFICO DE TENDÃŠNCIA QUALITATIVA
+   GRÁFICO DE TENDÊNCIA QUALITATIVA
    ========================================================================== */
 .trend__axis {
   display: flex;
@@ -366,7 +366,7 @@
 }
 
 /* ==========================================================================
-   CONCLUSÃƒO â€” passos
+   CONCLUSÃO — passos
    ========================================================================== */
 .conclusion-step {
   display: flex;
@@ -401,7 +401,7 @@
 }
 
 /* ==========================================================================
-   FONTES E LIMITAÃ‡Ã•ES
+   FONTES E LIMITAÇÕES
    ========================================================================== */
 .source-item {
   border-top: var(--line-ink);
@@ -449,7 +449,7 @@
 }
 
 /* ==========================================================================
-   ILUSTRAÃ‡ÃƒO (placeholder editorial)
+   ILUSTRAÇÃO (placeholder editorial)
    ========================================================================== */
 .illustration {
   display: grid;
@@ -501,7 +501,7 @@
 }
 
 /* ==========================================================================
-   REVELAÃ‡ÃƒO NO SCROLL (main.js adiciona .is-visible)
+   REVELAÇÃO NO SCROLL (main.js adiciona .is-visible)
    ========================================================================== */
 .reveal {
   opacity: 0;
@@ -516,10 +516,10 @@
 }
 
 /* ==========================================================================
-   NAVEGAÃ‡ÃƒO DE Ã‚NCORAS â€” "PERCURSO"
+   NAVEGAÇÃO DE ÂNCORAS — "PERCURSO"
    Trilha lateral fixa com checkpoints numerados. A linha preenche conforme
-   a rolagem (a distÃ¢ncia percorrida na narrativa). O rÃ³tulo aparece no
-   hover, no foco e na seÃ§Ã£o ativa. Em telas estreitas, sÃ³ os pontos.
+   a rolagem (a distância percorrida na narrativa). O rótulo aparece no
+   hover, no foco e na seção ativa. Em telas estreitas, só os pontos.
    ========================================================================== */
 .trail {
   --dot: 1.15rem;
@@ -640,7 +640,7 @@
   transform: scale(1.18);
 }
 
-/* Telas estreitas: some o rÃ³tulo e encolhe os checkpoints */
+/* Telas estreitas: some o rótulo e encolhe os checkpoints */
 @media (max-width: 899px) {
   .trail {
     --dot: 0.8rem;
@@ -666,13 +666,13 @@
   }
 }
 
-/* Garante que a Ã¢ncora nÃ£o pare atrÃ¡s de um eventual cabeÃ§alho fixo */
+/* Garante que a âncora não pare atrás de um eventual cabeçalho fixo */
 main section[id] {
   scroll-margin-top: 1.5rem;
 }
 
 /* ==========================================================================
-   CAPÃTULOS â€” narrativa em 4 tempos
+   CAPÍTULOS — narrativa em 4 tempos
    ========================================================================== */
 .chapter__head {
   max-width: 50ch;
@@ -752,8 +752,8 @@ main section[id] {
   transform: none;
 }
 
-/* Palco da histÃ³ria de abertura: canvas three.js ao fundo (z 0),
-   vÃ©u claro em degradÃª (z 1) e texto original por cima (z 2). */
+/* Palco da história de abertura: canvas three.js ao fundo (z 0),
+   véu claro em degradê (z 1) e texto original por cima (z 2). */
 .prose-stage {
   position: relative;
   margin: var(--space-xl) 0 0;
@@ -797,7 +797,7 @@ main section[id] {
   z-index: 2;
   margin: var(--space-xl);
   max-width: 44ch;
-  /* Texto nÃ£o clicÃ¡vel: o ponteiro atravessa atÃ© o canvas (bola arrastÃ¡vel). */
+  /* Texto não clicável: o ponteiro atravessa até o canvas (bola arrastável). */
   pointer-events: none;
   user-select: none;
 }
@@ -962,7 +962,7 @@ main section[id] {
   display: block;
 }
 
-/* --- Linha-drop: acento editorial pequeno entre texto e grÃ¡fico --- */
+/* --- Linha-drop: acento editorial pequeno entre texto e gráfico --- */
 .drop {
   font-family: var(--font-display);
   font-weight: 500;
@@ -978,7 +978,7 @@ main section[id] {
   font-weight: 700;
 }
 
-/* --- Fluxo (companhia â†’ conexÃ£o â†’ pertencimento â†’ acolhimento) --- */
+/* --- Fluxo (companhia → conexão → pertencimento → acolhimento) --- */
 .flow {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -995,7 +995,7 @@ main section[id] {
 }
 
 /* Cascata de entrada: cada etapa desliza da esquerda com atraso em degrau
-   (--i) quando o bloco recebe .is-visible. Sem JS, tudo visÃ­vel. */
+   (--i) quando o bloco recebe .is-visible. Sem JS, tudo visível. */
 .flow--cascade .flow__step {
   opacity: 0;
   transform: translateX(-24px);
@@ -1008,7 +1008,7 @@ main section[id] {
   transform: none;
 }
 
-/* --- BotÃ£o editorial --- */
+/* --- Botão editorial --- */
 .btn {
   display: inline-block;
   font-family: var(--font-display);
@@ -1135,7 +1135,7 @@ main section[id] {
   }
 }
 
-/* ============ CAPÃTULO 01 â€” composiÃ§Ã£o do wireframe ============ */
+/* ============ CAPÍTULO 01 — composição do wireframe ============ */
 .graphite-note {
   font-family: var(--font-geo);
   font-style: italic;
@@ -1145,7 +1145,7 @@ main section[id] {
   margin-bottom: var(--space-sm);
 }
 
-/* TÃ­tulo bipartido do capÃ­tulo (linha Oswald + destaque Elephant) */
+/* Título bipartido do capítulo (linha Oswald + destaque Elephant) */
 .chapter-title-split {
   max-width: 100%;
 }
@@ -1175,7 +1175,7 @@ main section[id] {
   margin-top: 0;
 }
 
-/* NÃºmeros-coluna em escala real (os numerais SÃƒO as colunas) */
+/* Números-coluna em escala real (os numerais SÃO as colunas) */
 .bignums {
   --max: clamp(8rem, 14vw, 0rem);
   display: grid;
@@ -1261,10 +1261,10 @@ main section[id] {
   margin-top: 0;
 }
 
-/* Cena que comeÃ§a por trÃ¡s da fonte do grÃ¡fico acima: o topo do palco
+/* Cena que começa por trás da fonte do gráfico acima: o topo do palco
    desliza para baixo do bloco anterior (que pinta por cima). */
 .scene-block--overlap {
-  margin-top: calc(-6 * var(--space-xl));
+  margin-top: calc(-1 * var(--space-xl));
   position: relative;
   z-index: 0;
 }
@@ -1274,14 +1274,14 @@ main section[id] {
   z-index: 1;
 }
 
-/* Palco ampliado: ~3x a altura (1560px) em largura total da pÃ¡gina. */
+/* Palco ampliado: ~3x a altura (1560px) em largura total da página. */
 .prose-stage.scene-stage--tall {
   min-height: 1560px;
   width: 100vw;
   max-width: none;
   margin-left: calc(50% - 50vw);
   border-radius: 0;
-  /* Canvas transparente: o papel da pÃ¡gina Ã© o fundo (infinito). */
+  /* Canvas transparente: o papel da página é o fundo (infinito). */
   background: transparent;
 }
 
@@ -1392,7 +1392,7 @@ main section[id] {
   align-items: center;
 }
 
-/* Bloco dividido: texto Ã  esquerda, grÃ¡fico Ã  direita. */
+/* Bloco dividido: texto à esquerda, gráfico à direita. */
 .split-block {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -1404,7 +1404,7 @@ main section[id] {
   min-width: 0;
 }
 
-/* TransiÃ§Ã£o para o CapÃ­tulo 02 */
+/* Transição para o Capítulo 02 */
 .bridge {
   font-family: var(--font-hero);
   font-weight: 400;
