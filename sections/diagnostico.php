@@ -17,14 +17,14 @@
           </h2>
         </header>
 
-    <!-- 3.1 Motivos em 3 colunas: população em geral · comunidade · destaques -->
+    <!-- 3.1 Motivos em 2 colunas: população em geral · comunidade -->
     <div class="block reveal">
-      
-      <div class="trio-cols">
+      <p class="block__lede">na dificuldade para praticar atividade física</p>
+      <div class="trio-cols trio-cols--duo">
         <div class="trio__col">
-          <p class="byline">População brasileira em geral</p>
+          <p class="byline">A População brasileira em geral</p>
           <p class="body-text">
-            O principal motivo é a falta de tempo:
+            tem como principal motivo a falta de tempo.
           </p>
           <div class="bar-chart" data-chart="bar">
             <div class="bar-row" data-label="Falta de tempo" data-value="38.2" data-color="var(--color-amber)"></div>
@@ -37,55 +37,69 @@
           <p class="stat__source small-note">Fonte: IBGE, 2017, p. 20.</p>
         </div>
         <div class="trio__col">
-          <p class="byline">Comunidade LGBTQIAPN+</p>
+          <p class="byline">Na Comunidade LGBTQIAPN+</p>
           <p class="body-text">
             A composição muda mas algo se destaca
           </p>
           <div class="bar-chart" data-chart="bar">
             <div class="bar-row" data-label="Falta de tempo" data-value="26.3" data-color="var(--color-purple)"></div>
-            <div class="bar-row" data-label="Falta de companhia" data-value="20.6" data-color="var(--color-purple)"></div>
+            <div class="bar-row" data-label="Falta de companhia" data-value="20.6" data-color="var(--color-pink)"></div>
             <div class="bar-row" data-label="Falta de interesse" data-value="18" data-color="var(--color-purple)"></div>
             <div class="bar-row" data-label="Falta de capacidade física" data-value="10" data-color="var(--color-purple)"></div>
-            <div class="bar-row" data-label="Homofobia ou transfobia" data-value="9.6" data-color="var(--color-plum)"></div>
+            <div class="bar-row" data-label="Homofobia ou transfobia" data-value="9.6" data-color="var(--color-pink)"></div>
             <div class="bar-row" data-label="Bullying ou assédio" data-value="8.7" data-color="var(--color-vermilion)"></div>
           </div>
           <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 27.</p>
         </div>
+      </div>
+  <!-- 3.2 Destaques em 3 colunas (um motivo por coluna) -->
+      <p class="byline">Destaques</p>
+      <p class="body-text">
+A falta de companhia é um fator importante e destoante          </p>
+      <div class="trio-cols">
         <div class="trio__col">
-          <p class="byline">Destaques</p>
           <div class="gbar" data-chart="grouped-bar">
             <div class="gbar__row">
               <p class="gbar__row-label">Falta de tempo</p>
-              <div class="gbar__bar" data-name="IBGE" data-value="38.2" data-color="var(--color-amber)"></div>
-              <div class="gbar__bar" data-name="NIX" data-value="26.3" data-color="var(--color-purple)"></div>
-            </div>
-            <div class="gbar__row">
-              <p class="gbar__row-label">Falta de companhia</p>
-              <div class="gbar__bar" data-name="IBGE" data-value="1.7" data-color="var(--color-amber)"></div>
-              <div class="gbar__bar" data-name="NIX" data-value="20.6" data-color="var(--color-purple)"></div>
-            </div>
-            <div class="gbar__row">
-              <p class="gbar__row-label">Não gostar / falta de interesse</p>
-              <div class="gbar__bar" data-name="IBGE" data-value="35.0" data-color="var(--color-amber)"></div>
-              <div class="gbar__bar" data-name="NIX" data-value="18" data-color="var(--color-purple)"></div>
-            </div>
-
-            <div class="gbar__legend">
-              <span class="gbar__legend-item"><i style="background: var(--color-amber);"></i> IBGE, 2017</span>
-              <span class="gbar__legend-item"><i style="background: var(--color-purple);"></i> NIX Diversidade/Nike, 2022</span>
+              <div class="gbar__bar" data-name="População geral" data-value="38.2" data-color="var(--color-amber)"></div>
+              <div class="gbar__bar" data-name="LGBTQIAPN+" data-value="26.3" data-color="var(--color-purple)"></div>
             </div>
           </div>
-          <p class="stat__source small-note">Fontes: IBGE, 2017, p. 20; NIX Diversidade/Nike, 2022, p. 27.</p>
+        </div>
+        <div class="trio__col">
+          <div class="gbar" data-chart="grouped-bar">
+            <div class="gbar__row">
+              <p class="gbar__row-label">Falta de companhia</p>
+              <div class="gbar__bar" data-name="População geral" data-value="1.7" data-color="var(--color-amber)"></div>
+              <div class="gbar__bar" data-name="LGBTQIAPN+" data-value="20.6" data-color="var(--color-pink)"></div>
+            </div>
+          </div>
+        </div>
+        <div class="trio__col">
+          <div class="gbar" data-chart="grouped-bar">
+            <div class="gbar__row">
+              <p class="gbar__row-label">Não gostar / falta de interesse</p>
+              <div class="gbar__bar" data-name="População geral" data-value="35.0" data-color="var(--color-amber)"></div>
+              <div class="gbar__bar" data-name="LGBTQIAPN+" data-value="18" data-color="var(--color-purple)"></div>
+            </div>
+          </div>
         </div>
       </div>
+      
+      <p class="stat__source small-note">Fontes: IBGE, 2017, p. 20; NIX Diversidade/Nike, 2022, p. 27.</p>
+    
+
+
       <div class="editorial-callout" style="margin-top: var(--space-lg);">
         <span class="small-note">
           As categorias e os pesos de cada pesquisa são próprios. A leitura aqui é de <strong>composição e ordem</strong>
           dos motivos — não de comparação em valor absoluto.
         </span>
       </div>
+      
     </div>
 
+  
     <!-- 3.4 Discriminação -->
     <div class="block reveal">
       <p class="block__lede">Afinal, todo mundo se sente incluso?</p>

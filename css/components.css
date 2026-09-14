@@ -544,9 +544,13 @@
 .trio-cols {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4ch;
+  gap: var(--space-xl);
   align-items: start;
   margin-top: var(--space-lg);
+}
+
+.trio-cols--duo {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .trio__col {
@@ -554,7 +558,8 @@
 }
 
 @media (max-width: 960px) {
-  .trio-cols {
+  .trio-cols,
+  .trio-cols--duo {
     grid-template-columns: 1fr;
   }
 }
