@@ -29,9 +29,7 @@
         <div class="split-block__text">
           <p class="byline">Mundo</p>
           <p class="body-text">
-            No mundo, mulheres são, em média, menos ativas que homens. Já na adolescência, a diferença é ainda maior:
-            85% das meninas não atingem os níveis recomendados, em comparação aos 78% dos meninos.
-          </p>
+            No mundo, mulheres são, em média, menos ativas que homens. Já na <strong style="color: var(--color-pink);">adolescência 85% das meninas</strong> não atingem os níveis recomendados, em comparação aos <strong style="color: var(--color-sky);">78% dos meninos.</strong></p>
         </div>
         <div class="split-block__chart">
           <div class="gbar" data-chart="grouped-bar">

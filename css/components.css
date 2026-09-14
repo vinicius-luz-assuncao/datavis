@@ -929,7 +929,7 @@ main section[id] {
 
 .gbar__bar {
   display: grid;
-  grid-template-columns: minmax(7ch, 16ch) 1fr auto;
+  grid-template-columns: minmax(7ch, 7ch) 1fr auto;
   align-items: center;
   gap: var(--space-sm);
 }
