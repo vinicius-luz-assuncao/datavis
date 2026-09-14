@@ -1301,13 +1301,15 @@ main section[id] {
   grid-template-columns: 4rem 19rem 4rem 27rem;
   column-gap: clamp(var(--space-md), 5vw, var(--space-xl));
   align-items: end;
+  position: relative;
+  overflow: hidden;
   /* margin-top: var(--space-lg); */
 }
 
 .bignums__axis {
   /* O ajuste fino mora aqui: --axis-fix reescala eixo + numerais juntos
      (o JS mede a altura computada). 1 = neutro. */
-  height: calc(var(--max) * var(--axis-fix, 0.9));
+  height: calc(var(--max) * var(--axis-fix, 0.85));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1317,6 +1319,26 @@ main section[id] {
   color: var(--color-gray);
   border-right: 6px solid var(--color-neutral);
   padding: 0.5rem 1rem 0rem 0rem;
+}
+
+/* Linhas de grade horizontais: uma para cada número do eixo Y.
+   Cada ::after nasce na direção do número (topo-meio do <span>) e
+   travessa o gráfico — o excesso é recortado pelo overflow: hidden
+   do .bignums. Ficam atrás das barras (z-index: 0). */
+.bignums__axis span {
+  position: relative;
+}
+
+.bignums__axis span::after {
+  content: "";
+  position: absolute;
+  left: calc(100% + 0.5rem);
+  top: 50%;
+  width: 80vw;
+  height: 1px;
+  background: var(--color-neutral);
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .bignums__col-1 {
@@ -1337,7 +1359,7 @@ main section[id] {
   font-size: 4rem;
   letter-spacing: 0.05em;
   color: var(--color-gray);
-  transform: translateX(0) translatey(155px);
+  transform: translateX(0) translatey(140px);
 }
 
 .bignums__value {
@@ -1347,6 +1369,9 @@ main section[id] {
   font-size: 1.25rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  /* Acima das linhas de grade (que passam por trás dos numerais) */
+  position: relative;
+  z-index: 1;
 }
 
 .bignums__rule {
