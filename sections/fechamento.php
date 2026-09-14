@@ -76,10 +76,5 @@
       </div>
     </div> -->
 
-    <!-- Ilustração -->
-    <figure class="illustration illustration--large reveal" style="margin-top: var(--space-xl);" role="img"
-      aria-label="Ilustração editorial: duas pessoas se encontrando para treinar; uma mão estendida. Ideia de conexão e convite, 'vem comigo'.">
-      <figcaption class="illustration__art">Duas pessoas se encontrando para treinar</figcaption>
-    </figure>
   </div>
 </section>

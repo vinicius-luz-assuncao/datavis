@@ -486,11 +486,6 @@ Fonte: NIX 2022 p. 27.
 "Afinal, todo mundo se sente incluso?" Par único de donuts: `63,5%`
 (ao praticar) e `68,3%` (em ambientes esportivos). Sem repetição do par.
 
-## Inclusão trans (NIX, p. 40)
-
-"Inclusão também é pertencer." Gráfico `range`: `75,6%–76,8%` de apoio
-a pessoas trans nos mesmos times.
-
 ## Companhia (Lopes & Del Vecchio, 2026)
 
 "E a companhia faz diferença." Barras agrupadas: `40%` LGBT+ × `14%`
@@ -569,7 +564,6 @@ viewport (com `prefers-reduced-motion` mostrando o estado final de imediato).
   `data-max` e `data-unit` opcionais). Uso: meninas × meninos, gênero IBGE,
   motivos IBGE × NIX, companhia Lopes. Comparações 1:1 usam barras agrupadas
   (o `dumbbell` foi removido por falta de coerência visual).
-* `range` — linhas de `.range__row` (`data-min`, `data-max`). Uso: apoio trans.
 * `projection` — pontos de `.projection__point` (`data-year`, `data-value`,
   `data-tag`); trecho projetado em tracejado com máscara `clipPath`.
 * `bar` + `data-muted="true"` — linha esmaecida para o "sem o tempo".
@@ -710,7 +704,6 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 │   ├── BarChart (ranking IBGE completo)
 │   ├── BarChart (ranking NIX completo) + Drop
 │   ├── DonutChart × 2 (63,5% · 68,3%)
-│   ├── RangeChart (75,6%–76,8%)
 │   └── GroupedBarChart × 2 (companhia · escores)
 ├── Capitulo04 (fechamento.php)
 │   ├── BarChart ("sem o tempo", 6 linhas, data-muted)
@@ -738,7 +731,7 @@ não há `src/data/*.ts`). Cada número carrega sua fonte no `stat__source` ao l
 ```text
 WHO 2024 ............ 31 · 80 · 1,8 bi · +5 p.p. · 35 (2030) · 20–30 · US$ 300 bi
 IBGE 2017 ........... 42,7 · 33,4 · 31,7 · 16,9 · motivos (38,2 · 35,0 · 19,0 · 2,7 · 1,9 · 1,7)
-NIX 2022 ............ 42,8 · 63,5 · 68,3 · 75,6–76,8 · motivos (26,3 · 20,6 · 18 · 10 · 9,6 · 8,7)
+NIX 2022 ............ 42,8 · 63,5 · 68,3 · motivos (26,3 · 20,6 · 18 · 10 · 9,6 · 8,7)
 Lopes & Del Vecchio . 40 · 14 · 26,1 ± 9,2 · 13,8 ± 13,7
 ```
 
@@ -821,7 +814,7 @@ Transformar a composição em narrativa vertical:
 ```text
 HERO → 01 INÍCIO (31% · 80% · projeção · 1,8 bi) →
 02 CONFLITO (gênero · IBGE · 42,8%) →
-03 DIAGNÓSTICO (motivos · 63,5% · 68,3% · 75,6–76,8% · companhia) →
+03 DIAGNÓSTICO (motivos · 63,5% · 68,3% · companhia) →
 04 FECHAMENTO (sem o tempo · fluxo · nota de projeto) →
 FONTES → VEM COMIGO?
 ```
@@ -893,7 +886,7 @@ A página deve parecer uma história. Não uma coleção de informações.
 ## FEITO
 * [x] Base, variáveis, grid, container, textura, estilos globais.
 * [x] Estrutura em 4 capítulos + fontes + encerramento (seções antigas em `sections/_arquivo/`).
-* [x] Componentes: StatNumber, BarChart (+`data-muted`), DonutChart, GroupedBarChart, RangeChart, ProjectionChart, Flow (+cascata), Drop, Btn, ProjetoNote, TrailNav, ProseStage.
+* [x] Componentes: StatNumber, BarChart (+`data-muted`), DonutChart (+`donut--side`), GroupedBarChart, ProjectionChart, Flow (+cascata), Drop, Btn, ProjetoNote, TrailNav, ProseStage.
 * [x] Dados das 4 fontes nos `data-*` do HTML, cada número com sua fonte.
 * [x] Direção de arte: paleta, 4 fontes, véus, cantos arredondados, cena do quarto.
 * [x] Animações por IntersectionObserver + `prefers-reduced-motion`.
@@ -912,7 +905,7 @@ A página estará conceitualmente correta quando o usuário conseguir entender a
 
 ```text
 31% · 80% → 2030: 35% → MULHERES PRATICAM MENOS → 42,8% SEM ACESSO →
-TEMPO × COMPANHIA → 63,5% · 68,3% → 75,6–76,8% → 40% × 14% →
+TEMPO × COMPANHIA → 63,5% · 68,3% → 40% × 14% →
 SEM O TEMPO, SOBRA COMPANHIA → VEM COMIGO?
 ```
 

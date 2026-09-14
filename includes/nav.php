@@ -5,16 +5,15 @@
  * Recebe do index.php a variável $navItems: uma lista de
  * ['id' => 'id-da-secao', 'label' => 'Rótulo legível'].
  *
- * Conceito: a narrativa é um percurso. Cada seção é um checkpoint
- * numerado; a linha preenche conforme a rolagem (a distância percorrida).
- * Os links são âncoras reais — funcionam mesmo sem JavaScript.
- */
+ * Conceito: cada seção é um checkpoint; a linha preenche conforme a
+ * rolagem (a distância percorrida). Os links são âncoras reais —
+ * funcionam mesmo sem JavaScript.
+  */
 if (!isset($navItems) || empty($navItems)) {
   return;
 }
 ?>
-<nav class="trail" id="trail" aria-label="Percurso da narrativa">
-  <span class="trail__eyebrow" aria-hidden="true">Percurso</span>
+<nav class="trail" id="trail" aria-label="Navegação de seções">
   <div class="trail__body">
     <span class="trail__track" aria-hidden="true">
       <span class="trail__progress" data-trail-progress></span>

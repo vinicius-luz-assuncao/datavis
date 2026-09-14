@@ -476,68 +476,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* ================================================================
-     RANGE — intervalo (mín–máx) numa escala
-     ================================================================ */
-  function drawRange(el) {
-    var scale = (el.dataset.scale || "0,100").split(",");
-    var min = parseFloat(scale[0]) || 0;
-    var max = parseFloat(scale[1]) || 100;
-    var unit = el.dataset.unit !== undefined ? el.dataset.unit : "%";
-
-    function pos(v) {
-      return ((v - min) / (max - min)) * 100;
-    }
-
-    var rows = Array.prototype.slice.call(el.querySelectorAll(".range__row"));
-
-    rows.forEach(function (row) {
-      var label = row.dataset.label || "";
-      var lo = parseFloat(row.dataset.min) || 0;
-      var hi = parseFloat(row.dataset.max) || 0;
-      var color = row.dataset.color || "var(--color-purple)";
-
-      var labelEl = document.createElement("p");
-      labelEl.className = "range__row-label";
-      labelEl.textContent = label;
-
-      var track = document.createElement("div");
-      track.className = "range__track";
-
-      var segment = document.createElement("span");
-      segment.className = "range__segment";
-      segment.style.background = color;
-
-      var valEl = document.createElement("span");
-      valEl.className = "range__value";
-      valEl.textContent = fmt(lo) + "–" + fmt(hi) + unit;
-
-      track.appendChild(segment);
-      track.appendChild(valEl);
-      row.appendChild(labelEl);
-      row.appendChild(track);
-
-      onEnter(
-        row,
-        function () {
-          var p1 = pos(lo);
-          var p2 = pos(hi);
-          segment.style.transition = "left 0.9s ease, width 0.9s ease";
-          segment.style.left = Math.min(p1, p2) + "%";
-          segment.style.width = Math.abs(p2 - p1) + "%";
-          valEl.style.left = (p1 + p2) / 2 + "%";
-          valEl.style.opacity = "1";
-        },
-        function () {
-          segment.style.left = "0%";
-          segment.style.width = "0%";
-          valEl.style.left = "";
-          valEl.style.opacity = "0";
-        }
-      );
-    });
-  }
-
-  /* ================================================================
      PROJECTION — linha do tempo (dados + projeção)
      ================================================================ */
   var projClipSeq = 0;
@@ -763,9 +701,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     d3.selectAll("[data-chart='grouped-bar']").each(function () {
       drawGroupedBar(this);
-    });
-    d3.selectAll("[data-chart='range']").each(function () {
-      drawRange(this);
     });
     d3.selectAll("[data-chart='projection']").each(function () {
       drawProjection(this);

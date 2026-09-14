@@ -114,21 +114,7 @@ A falta de companhia é um fator importante e destoante          </p>
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 38–39.</p>
     </div>
 
-    <!-- 3.5 Apoio à inclusão trans -->
-    <div class="block reveal">
-      <p class="block__lede">
-        Inclusão também é pertencer.
-      </p>
-      <p class="body-text">A própria comunidade apoia a superação de divisões rígidas de categoria.</p>
-      <div class="range" data-chart="range" data-scale="0,100" data-unit="%">
-        <div class="range__row"
-          data-label="Concordam que pessoas trans deveriam jogar nos mesmos times que pessoas cisgêneras de mesmo gênero"
-          data-min="75.6" data-max="76.8" data-color="var(--color-purple)"></div>
-      </div>
-      <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 40.</p>
-    </div>
-
-    <!-- 3.6 Companhia (Lopes) -->
+    <!-- 3.5 Companhia (Lopes) -->
     <div class="block reveal">
       <p class="byline">Estudantes do Ensino Médio · Pelotas</p>
       <p class="block__lede">E a companhia faz diferença.</p>
@@ -156,10 +142,5 @@ A falta de companhia é um fator importante e destoante          </p>
       <p class="stat__source small-note">Fonte: Lopes &amp; Del Vecchio, 2026.</p>
     </div>
 
-    <!-- Ilustração -->
-    <figure class="illustration illustration--medium reveal" style="margin-top: var(--space-xl);" role="img"
-      aria-label="Ilustração editorial: uma pessoa observando o grupo de fora, ou um vestiário pouco acolhedor. Foco em pertencimento e segurança.">
-      <figcaption class="illustration__art">Quem observa o grupo de fora</figcaption>
-    </figure>
   </div>
 </section>
