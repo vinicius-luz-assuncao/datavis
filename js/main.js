@@ -318,6 +318,92 @@
     });
   }
 
+  /* --------------------------------------------- ROLAGEM HORIZONTAL */
+  // Teste: prende a seção (sticky) e converte rolagem vertical em saltos
+  // entre camadas (snap quantizado com animação); nunca para no meio.
+  // Ao fim, o vertical continua sozinho. Sem .is-hscroll = vertical.
+  function initHScroll() {
+    const wrap = document.querySelector("[data-hscroll]");
+    if (!wrap) return;
+    if (prefersReducedMotion) return;
+    if (window.matchMedia("(max-width: 720px)").matches) return;
+    const stage = wrap.querySelector("[data-hstage]");
+    const track = wrap.querySelector("[data-htrack]");
+    if (!stage || !track) return;
+    wrap.classList.add("is-hscroll");
+
+    const panels = Array.from(track.children);
+    const last = Math.max(0, panels.length - 1);
+    const DUR = 550; // ms do pulo entre camadas
+    let maxX = 0;
+    let stop = 0; // parada atual (0..last)
+    let curX = 0; // posição exibida
+    let animId = 0;
+    let animFrom = 0;
+    let animStart = 0;
+
+    function measure() {
+      maxX = Math.max(0, track.scrollWidth - stage.clientWidth);
+    }
+
+    function xFor(s) {
+      return last > 0 ? -(s / last) * maxX : 0;
+    }
+
+    function paint(x) {
+      curX = x;
+      track.style.transform = "translate3d(" + x.toFixed(1) + "px,0,0)";
+    }
+
+    function tweenTo(target) {
+      if (animId) cancelAnimationFrame(animId);
+      animFrom = curX;
+      animStart = performance.now();
+      const dest = xFor(target);
+      function frame(now) {
+        const t = Math.min(1, (now - animStart) / DUR);
+        const e = 1 - Math.pow(1 - t, 3);
+        paint(animFrom + (dest - animFrom) * e);
+        if (t < 1) animId = requestAnimationFrame(frame);
+        else animId = 0;
+      }
+      animId = requestAnimationFrame(frame);
+    }
+
+    let ticking = false;
+    function update() {
+      const total = wrap.offsetHeight - window.innerHeight;
+      const top = wrap.getBoundingClientRect().top;
+      let p = total > 0 ? -top / total : 0;
+      p = Math.max(0, Math.min(1, p));
+      const target = Math.round(p * last);
+      if (target !== stop) {
+        stop = target;
+        tweenTo(stop);
+      }
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", () => {
+      measure();
+      if (animId) cancelAnimationFrame(animId);
+      animId = 0;
+      paint(xFor(stop));
+      onScroll();
+    });
+    measure();
+    paint(xFor(0));
+    update();
+  }
+
   /* ---------------------------------------------------------- INIT */
   document.addEventListener("DOMContentLoaded", () => {
     initReveal();
@@ -326,5 +412,6 @@
     initHeroMouseParallax();
     initTrail();
     initBigNums();
+    initHScroll();
   });
 })();

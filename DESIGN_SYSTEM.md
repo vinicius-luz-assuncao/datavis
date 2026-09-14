@@ -698,6 +698,9 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 │   │   Mundo gira (spin+tilt); Brasil e LGBTQIAPN+ flutuam (`float`: sem giro,
 │   │   arrasto livre, retorno à origem ao soltar). Pivô no Empty
 │   │   `centro_do_planeta`; Sol pela rotação do Blender; pausa fora da tela)
+│   ├── HScroll test (`data-hscroll`: camadas 1–3 lado a lado com sticky;
+│   │   `initHScroll` no `main.js`; sem a classe = vertical; ao fim, o
+│   │   vertical continua. Mobile/reduced-motion: vertical)
 │   ├── SceneStage (canvas Quarto, vindo do Cap. 01)
 │   ├── GroupedBarChart (85% × 78%)
 │   ├── GroupedBarChart (não praticam 57,3% × 66,6%) + Drop (só esporte)

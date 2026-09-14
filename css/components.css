@@ -768,12 +768,12 @@ main section[id] {
 
 .byline {
   font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-plum);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .prose-intro {
@@ -1500,9 +1500,78 @@ main section[id] {
   min-width: 0;
 }
 
+/* Rolagem horizontal de teste: sem .is-hscroll (sem JS, mobile,
+   reduced-motion) os painéis empilham no vertical normal. Com a classe,
+   a seção prende (sticky) e o trilho desliza; ao fim, o vertical continua. */
+.hwrap.is-hscroll {
+  height: 300vh;
+  margin-top: calc(-1 * var(--space-lg));
+}
+
+.hwrap.is-hscroll .hstage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hwrap.is-hscroll .htrack {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  will-change: transform;
+}
+
+.hwrap.is-hscroll .hpanel {
+  flex: 0 0 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.hwrap.is-hscroll .hpanel .block {
+  margin-top: 0;
+  width: 100%;
+}
+
+/* Cabeçalho e nota fixos sobre as 3 camadas (sem bloquear a interação). */
+.hwrap.is-hscroll .hstage__head {
+  position: absolute;
+  top: var(--space-md);
+  left: 0;
+  right: 0;
+  z-index: 2;
+  pointer-events: none;
+  margin-bottom: 0;
+}
+
+.hwrap.is-hscroll .hstage__note {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(72ch, calc(100% - 2rem));
+  z-index: 2;
+  pointer-events: none;
+  margin: 0;
+}
+
+.hwrap.is-hscroll .hstage__note > * {
+  margin: 0;
+}
+
+.hwrap.is-hscroll .hpanel {
+  box-sizing: border-box;
+  padding-top: clamp(150px, 24vh, 230px);
+  padding-bottom: clamp(100px, 16vh, 150px);
+}
+
 /* Trio: planeta | texto | gráfico. */
 .split-block--trio {
-  grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 5fr);
+  grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 5fr);
   align-items: center;
 }
 

@@ -9,10 +9,13 @@
 ?>
 <section class="section chapter" id="diagnostico">
   <div class="container">
-    <header class="chapter__head reveal">
-      <span class="chapter__marker">Capítulo 03 · Diagnóstico</span>
-      <h2 class="section-title">Os motivos mudam quando se olha mais de perto</h2>
-    </header>
+         <header class="chapter__head chapter__head--wide reveal hstage__head">
+          <span class="chapter__marker">Capítulo 03 · Diagnóstico</span>
+          <h2 class="chapter-title-split">
+            <span class="split-l1">Olhando de perto</span>
+            <span class="split-l2">algo muda drasticamente</span>
+          </h2>
+        </header>
 
     <!-- 3.1 Motivos: IBGE x NIX -->
     <div class="block reveal">
