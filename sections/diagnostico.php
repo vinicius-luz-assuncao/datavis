@@ -17,79 +17,73 @@
           </h2>
         </header>
 
-    <!-- 3.1 Motivos: IBGE x NIX -->
+    <!-- 3.1 Motivos em 3 colunas: população em geral · comunidade · destaques -->
     <div class="block reveal">
-      <p class="block__lede">
-        Na população em geral, o motivo mais citado é a falta de tempo. Dentro da comunidade LGBTQIA+, o tempo
-        continua em primeiro — mas a composição muda.
-      </p>
+      
+      <div class="trio-cols">
+        <div class="trio__col">
+          <p class="byline">População brasileira em geral</p>
+          <p class="body-text">
+            O principal motivo é a falta de tempo:
+          </p>
+          <div class="bar-chart" data-chart="bar">
+            <div class="bar-row" data-label="Falta de tempo" data-value="38.2" data-color="var(--color-amber)"></div>
+            <div class="bar-row" data-label="Não gostar ou não querer" data-value="35" data-color="var(--color-amber)"></div>
+            <div class="bar-row" data-label="Saúde ou idade" data-value="19" data-color="var(--color-amber)"></div>
+            <div class="bar-row" data-label="Falta de instalação acessível" data-value="2.7" data-color="var(--color-amber)"></div>
+            <div class="bar-row" data-label="Problema financeiro" data-value="1.9" data-color="var(--color-amber)"></div>
+            <div class="bar-row" data-label="Falta de companhia" data-value="1.7" data-color="var(--color-amber)"></div>
+          </div>
+          <p class="stat__source small-note">Fonte: IBGE, 2017, p. 20.</p>
+        </div>
+        <div class="trio__col">
+          <p class="byline">Comunidade LGBTQIAPN+</p>
+          <p class="body-text">
+            A composição muda mas algo se destaca
+          </p>
+          <div class="bar-chart" data-chart="bar">
+            <div class="bar-row" data-label="Falta de tempo" data-value="26.3" data-color="var(--color-purple)"></div>
+            <div class="bar-row" data-label="Falta de companhia" data-value="20.6" data-color="var(--color-purple)"></div>
+            <div class="bar-row" data-label="Falta de interesse" data-value="18" data-color="var(--color-purple)"></div>
+            <div class="bar-row" data-label="Falta de capacidade física" data-value="10" data-color="var(--color-purple)"></div>
+            <div class="bar-row" data-label="Homofobia ou transfobia" data-value="9.6" data-color="var(--color-plum)"></div>
+            <div class="bar-row" data-label="Bullying ou assédio" data-value="8.7" data-color="var(--color-vermilion)"></div>
+          </div>
+          <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 27.</p>
+        </div>
+        <div class="trio__col">
+          <p class="byline">Destaques</p>
+          <div class="gbar" data-chart="grouped-bar">
+            <div class="gbar__row">
+              <p class="gbar__row-label">Falta de tempo</p>
+              <div class="gbar__bar" data-name="IBGE" data-value="38.2" data-color="var(--color-amber)"></div>
+              <div class="gbar__bar" data-name="NIX" data-value="26.3" data-color="var(--color-purple)"></div>
+            </div>
+            <div class="gbar__row">
+              <p class="gbar__row-label">Falta de companhia</p>
+              <div class="gbar__bar" data-name="IBGE" data-value="1.7" data-color="var(--color-amber)"></div>
+              <div class="gbar__bar" data-name="NIX" data-value="20.6" data-color="var(--color-purple)"></div>
+            </div>
+            <div class="gbar__row">
+              <p class="gbar__row-label">Não gostar / falta de interesse</p>
+              <div class="gbar__bar" data-name="IBGE" data-value="35.0" data-color="var(--color-amber)"></div>
+              <div class="gbar__bar" data-name="NIX" data-value="18" data-color="var(--color-purple)"></div>
+            </div>
 
-      <div class="gbar" data-chart="grouped-bar">
-        <div class="gbar__row">
-          <p class="gbar__row-label">Falta de tempo</p>
-          <div class="gbar__bar" data-name="IBGE" data-value="38.2" data-color="var(--color-amber)"></div>
-          <div class="gbar__bar" data-name="NIX" data-value="26.3" data-color="var(--color-purple)"></div>
-        </div>
-        <div class="gbar__row">
-          <p class="gbar__row-label">Falta de companhia</p>
-          <div class="gbar__bar" data-name="IBGE" data-value="1.7" data-color="var(--color-amber)"></div>
-          <div class="gbar__bar" data-name="NIX" data-value="20.6" data-color="var(--color-purple)"></div>
-        </div>
-        <div class="gbar__row">
-          <p class="gbar__row-label">Não gostar / falta de interesse</p>
-          <div class="gbar__bar" data-name="IBGE" data-value="35.0" data-color="var(--color-amber)"></div>
-          <div class="gbar__bar" data-name="NIX" data-value="18" data-color="var(--color-purple)"></div>
-        </div>
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-amber);"></i> IBGE, 2017</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-purple);"></i> NIX Diversidade/Nike, 2022</span>
+            <div class="gbar__legend">
+              <span class="gbar__legend-item"><i style="background: var(--color-amber);"></i> IBGE, 2017</span>
+              <span class="gbar__legend-item"><i style="background: var(--color-purple);"></i> NIX Diversidade/Nike, 2022</span>
+            </div>
+          </div>
+          <p class="stat__source small-note">Fontes: IBGE, 2017, p. 20; NIX Diversidade/Nike, 2022, p. 27.</p>
         </div>
       </div>
-      <p class="stat__source small-note">Fontes: IBGE, 2017, p. 20; NIX Diversidade/Nike, 2022, p. 27.</p>
-
       <div class="editorial-callout" style="margin-top: var(--space-lg);">
         <span class="small-note">
           As categorias e os pesos de cada pesquisa são próprios. A leitura aqui é de <strong>composição e ordem</strong>
           dos motivos — não de comparação em valor absoluto.
         </span>
       </div>
-    </div>
-
-    <!-- 3.2 Motivos na população em geral (ranking IBGE) -->
-    <div class="block reveal">
-      <p class="block__lede">Vamos olhar mais de perto.</p>
-      <p class="body-text">
-        Na população brasileira em geral, o principal motivo para não praticar esporte é a falta de tempo —
-        seguida de perto por simplesmente não gostar ou não querer.
-      </p>
-      <div class="bar-chart" data-chart="bar">
-        <div class="bar-row" data-label="Falta de tempo" data-value="38.2" data-color="var(--color-amber)"></div>
-        <div class="bar-row" data-label="Não gostar ou não querer" data-value="35" data-color="var(--color-amber)"></div>
-        <div class="bar-row" data-label="Saúde ou idade" data-value="19" data-color="var(--color-slate)"></div>
-        <div class="bar-row" data-label="Falta de instalação acessível" data-value="2.7" data-color="var(--color-slate)"></div>
-        <div class="bar-row" data-label="Problema financeiro" data-value="1.9" data-color="var(--color-slate)"></div>
-        <div class="bar-row" data-label="Falta de companhia" data-value="1.7" data-color="var(--color-slate)"></div>
-      </div>
-      <p class="stat__source small-note">Fonte: IBGE, 2017, p. 20.</p>
-    </div>
-
-    <!-- 3.3 Motivos na comunidade LGBTQIA+ (ranking NIX) -->
-    <div class="block reveal">
-      <p class="byline">Comunidade LGBTQIAPN+</p>
-      <p class="body-text">
-        Na comunidade LGBTQIAPN+, algo muda drasticamente: entre os motivos aparecem barreiras que nem
-        existem como categoria na pesquisa do IBGE.
-      </p>
-      <p class="drop">O tempo ainda é a principal barreira — mas não é a única.</p>
-      <div class="bar-chart" data-chart="bar">
-        <div class="bar-row" data-label="Falta de tempo" data-value="26.3" data-color="var(--color-purple)"></div>
-        <div class="bar-row" data-label="Falta de companhia" data-value="20.6" data-color="var(--color-purple)"></div>
-        <div class="bar-row" data-label="Falta de interesse" data-value="18" data-color="var(--color-purple)"></div>
-        <div class="bar-row" data-label="Falta de capacidade física" data-value="10" data-color="var(--color-purple)"></div>
-        <div class="bar-row" data-label="Homofobia ou transfobia" data-value="9.6" data-color="var(--color-plum)"></div>
-        <div class="bar-row" data-label="Bullying ou assédio" data-value="8.7" data-color="var(--color-vermilion)"></div>
-      </div>
-      <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 27.</p>
     </div>
 
     <!-- 3.4 Discriminação -->

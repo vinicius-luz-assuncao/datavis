@@ -58,7 +58,7 @@
 .bar-chart {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   margin-top: var(--space-lg);
 }
 
@@ -71,10 +71,10 @@
 
 .bar-row__label {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   font-size: 1.1rem;
-  text-align: right;
+  text-align: left;
 }
 
 .bar-row__track {
@@ -89,6 +89,7 @@
   height: 100%;
   width: 0;
   transform-origin: left;
+  border-radius: var(--radius-sm);
 }
 
 .bar-row__value {
@@ -539,6 +540,25 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+/* --- Trio de motivos (população em geral · comunidade · destaques) --- */
+.trio-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4ch;
+  align-items: start;
+  margin-top: var(--space-lg);
+}
+
+.trio__col {
+  min-width: 0;
+}
+
+@media (max-width: 960px) {
+  .trio-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ==========================================================================
    REVELAÇÃO NO SCROLL (main.js adiciona .is-visible)
    ========================================================================== */
@@ -770,7 +790,7 @@ main section[id] {
   font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  /* letter-spacing: 0.14em; */
   text-transform: uppercase;
   color: var(--color-plum);
   margin-bottom: var(--space-xs);
@@ -948,6 +968,41 @@ main section[id] {
   background: var(--color-neutral);
   border-radius: var(--radius-sm);
   overflow: hidden;
+}
+
+/* Trio: barras simples com o visual grouped-bar (nomes discretos,
+   trilhos finos, valor fora da barra). Só aqui — o Fechamento mantém o seu. */
+.trio__col .bar-row {
+  grid-template-columns: minmax(12ch, 9ch) 1fr 3ch;
+  gap: var(--space-md);
+}
+
+.trio__col .bar-row__label {
+  font-family: var(--font-geo);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  /* letter-spacing: 0.05em; */
+  color: var(--color-gray);
+  text-align: left;
+}
+
+.trio__col .bar-row__track {
+  height: 1.5rem;
+  overflow: visible;
+  /* border-radius: var(--radius-sm); */
+}
+
+.trio__col .bar-row__value {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(100% + 0.5rem);
+  right: auto;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  color: var(--color-ink);
 }
 
 .gbar__fill {
@@ -1223,7 +1278,7 @@ main section[id] {
   display: block;
   font-family: var(--font-hero);
   font-weight: 400;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(3rem, 8vw, 6rem);
   line-height: 1;
   color: var(--color-vermilion);
   margin-top: var(--space-xs);
