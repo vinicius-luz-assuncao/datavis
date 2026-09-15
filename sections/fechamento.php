@@ -1,7 +1,7 @@
 <?php
 /**
  * CAPÍTULO 04 — FECHAMENTO
- * "O que fica quando tiramos o que não podemos resolver"
+ * "E SE O PRIMEIRO PASSO FOSSE ACOMPANHADO?"
  *
  * Tirando a falta de tempo (estrutural), o que sobra é companhia/vínculo.
  * A "Nota de projeto" separa explicitamente achado de pesquisa de decisão de projeto.
@@ -11,14 +11,17 @@
   <div class="container">
     <header class="chapter__head reveal">
       <span class="chapter__marker">Capítulo 04 · Fechamento</span>
-      <h2 class="section-title">O que fica quando tiramos o que não podemos resolver</h2>
-      <p class="block__lede">
-        Falta de tempo é a principal barreira — e é estrutural: rotina, trabalho, transporte, distância.
-        Um aplicativo não cria mais horas no dia.
-      </p>
+      <h2 class="chapter-title-split">
+            <span class="split-l1">E SE O PRIMEIRO PASSO</span>
+            <span class="split-l2">fosse acompanhado?</span>
+          </h2>      
     </header>
 
-    <!-- 4.1 Sem o tempo -->
+    <p class="block__lede">
+        Falta de tempo é compreendida como a principal barreira, mas a falta de companhia pode ser uma barreira ainda mais complexa a ser superada.
+      </p>
+
+    <!-- 4.1 Sem o tempo
     <div class="block reveal">
       <p class="byline">Comunidade LGBTQIAPN+</p>
       <p class="body-text">Tirando o tempo de cena, o que sobra nos dados aponta para outro tipo de barreira.</p>
@@ -31,7 +34,7 @@
         <div class="bar-row" data-label="Bullying ou assédio" data-value="8.7" data-color="var(--color-slate)" data-muted="true"></div>
       </div>
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 27.</p>
-    </div>
+    </div> -->
 
     <!-- 4.2 Companhia → Conexão → Pertencimento -->
     <div class="block reveal">

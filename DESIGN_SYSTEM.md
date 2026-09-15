@@ -21,7 +21,7 @@ CONFLITO — quem fica de fora primeiro
    ↓
 DIAGNÓSTICO — os motivos mudam quando se olha mais de perto
    ↓
-FECHAMENTO — o que fica quando tiramos o que não podemos resolver
+FECHAMENTO — E SE O PRIMEIRO PASSO FOSSE ACOMPANHADO?
 ```
 
 A página deve transmitir a sensação de uma **reportagem visual de revista**, combinando:
@@ -500,7 +500,7 @@ Pessoa observando o grupo de fora / vestiário pouco acolhedor.
 
 # 15. CAPÍTULO 04 — FECHAMENTO (`sections/fechamento.php`)
 
-Título: **O que fica quando tiramos o que não podemos resolver.**
+Título: **E SE O PRIMEIRO PASSO FOSSE ACOMPANHADO?.**
 
 ## Sem o tempo
 
