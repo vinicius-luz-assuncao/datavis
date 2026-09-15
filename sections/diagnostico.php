@@ -106,9 +106,9 @@ A falta de companhia é um fator importante e destoante          </p>
       <p class="body-text">O medo também faz parte da experiência de muita gente — e a barreira não termina
         quando a pessoa começa a praticar.</p>
       <div class="section-grid grid-duo" style="margin-top: var(--space-lg);">
-        <div class="donut" data-chart="donut" data-value="63.5" data-color="var(--color-plum)"
+        <div class="donut donut--side" data-chart="donut" data-value="63.5" data-color="var(--color-plum)"
           data-label="já sofreu ou presenciou discriminação ao praticar esporte"></div>
-        <div class="donut" data-chart="donut" data-value="68.3" data-color="var(--color-vermilion)"
+        <div class="donut donut--side" data-chart="donut" data-value="68.3" data-color="var(--color-vermilion)"
           data-label="relataram discriminação em ambientes esportivos (estádios, ginásios, competições de rua)"></div>
       </div>
       <p class="stat__source small-note">Fonte: NIX Diversidade/Nike, 2022, p. 38–39.</p>
@@ -125,18 +125,6 @@ A falta de companhia é um fator importante e destoante          </p>
           <p class="gbar__row-label">Citaram “falta de companhia” como barreira</p>
           <div class="gbar__bar" data-name="LGBT+" data-value="40" data-color="var(--color-plum)"></div>
           <div class="gbar__bar" data-name="Não-LGBT+" data-value="14" data-color="var(--color-sky)"></div>
-        </div>
-        <div class="gbar__legend">
-          <span class="gbar__legend-item"><i style="background: var(--color-plum);"></i> Estudantes LGBT+</span>
-          <span class="gbar__legend-item"><i style="background: var(--color-sky);"></i> Estudantes não-LGBT+</span>
-        </div>
-      </div>
-
-      <div class="gbar" data-chart="grouped-bar" data-max="40" data-unit=" pts" style="margin-top: var(--space-xl);">
-        <div class="gbar__row">
-          <p class="gbar__row-label">Escore de barreiras específicas (média ± desvio)</p>
-          <div class="gbar__bar" data-name="Feminino 26,1 ± 9,2" data-value="26.1" data-color="var(--color-plum)"></div>
-          <div class="gbar__bar" data-name="Masculino 13,8 ± 13,7" data-value="13.8" data-color="var(--color-sky)"></div>
         </div>
       </div>
       <p class="stat__source small-note">Fonte: Lopes &amp; Del Vecchio, 2026.</p>

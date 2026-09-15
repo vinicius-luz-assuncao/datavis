@@ -1,35 +1,38 @@
 /* ==========================================================================
-   DESIGN TOKENS — Esporte como direito
+   DESIGN TOKENS â€” Esporte como direito
    ========================================================================== */
 
 :root {
   /* ---------------------------------------------------------------- Cores
      Paleta editorial nova: creme quente + navy, com acentos vibrantes.
      Os nomes antigos (teal, magenta, yellow, orange, gray) foram mantidos
-     como aliases semânticos para não quebrar o conteúdo já escrito. */
+     como aliases semÃ¢nticos para nÃ£o quebrar o conteÃºdo jÃ¡ escrito. */
 
   /* Base */
   --color-paper: #f1e9db;      /* papel quente (fundo) */
-  --color-ink: #1c2b44;        /* navy (texto, títulos, linhas) */
+  --color-ink: #1c2b44;        /* navy (texto, tÃ­tulos, linhas) */
 
   /* Paleta principal nomeada */
-  --color-navy: #1c2b44;       /* seções escuras */
+  --color-navy: #1c2b44;       /* partes escuras */
+  --color-navy-70: #475163;
   --color-cream: #f1e9db;      /* variante do papel */
   --color-vermilion: #e8542b;  /* energia / impacto */
   --color-pink: #e8557e;       /* rosa vivo */
-  --color-plum: #c44e7c;       /* ameixa / exclusão */
+  --color-plum: #c44e7c;       /* ameixa / exclusÃ£o */
   --color-purple: #7a5994;     /* dado LGBTQIA+ */
   --color-amber: #f5a23f;      /* destaque */
   --color-sky: #4aa8d8;        /* acesso / positivo */
-  --color-sage: #8fc9b4;       /* saúde / inclusão */
+  --color-sage-dark: #528885;   /* variante escura do sage (uso sob demanda) */
+  --color-sage: #8fc9b4;       /* saÃºde / inclusÃ£o */
   --color-slate: #8fb0ae;      /* neutro frio */
+  
 
-  /* Aliases semânticos (uso legado — continuam válidos) */
-  --color-teal: #4aa8d8;       /* acesso, prática esportiva */
-  --color-magenta: #c44e7c;    /* exclusão, discriminação */
+  /* Aliases semÃ¢nticos (uso legado â€” continuam vÃ¡lidos) */
+  --color-teal: #4aa8d8;       /* acesso, prÃ¡tica esportiva */
+  --color-magenta: #c44e7c;    /* exclusÃ£o, discriminaÃ§Ã£o */
   --color-yellow: #f5a23f;     /* destaques, chamadas */
-  --color-orange: #e8542b;     /* dados socioeconômicos */
-  --color-gray: #8fb0ae;       /* informações secundárias */
+  --color-orange: #e8542b;     /* dados socioeconÃ´micos */
+  --color-gray: #8fb0ae;       /* informaÃ§Ãµes secundÃ¡rias */
 
   /* Tom da faixa final (fundo navy, texto paper) */
   --color-paper-in-ink: #f1e9db;
@@ -38,14 +41,14 @@
   --color-neutral: #dcd3be;
 
   /* ------------------------------------------------------------- Tipografia
-     4 famílias com papéis fixos (substitutas Google Fonts para a paleta):
-     Elephant→Abril Fatface | Neufreit→Oswald | Futura→Jost | Corbel→Nunito Sans */
-  --font-hero: "Abril Fatface", Georgia, serif;              /* grandes números, título do hero */
-  --font-display: "Oswald", "Archivo Narrow", sans-serif;    /* seção, eyebrow, labels */
-  --font-geo: "Jost", "Futura", sans-serif;                  /* sub-títulos, labels de gráfico */
+     4 famÃ­lias com papÃ©is fixos (substitutas Google Fonts para a paleta):
+     Elephantâ†’Abril Fatface | Neufreitâ†’Oswald | Futuraâ†’Jost | Corbelâ†’Nunito Sans */
+  --font-hero: "Abril Fatface", Georgia, serif;              /* grandes nÃºmeros, tÃ­tulo do hero */
+  --font-display: "Oswald", "Archivo Narrow", sans-serif;    /* seÃ§Ã£o, eyebrow, labels */
+  --font-geo: "Jost", "Futura", sans-serif;                  /* sub-tÃ­tulos, labels de grÃ¡fico */
   --font-text: "Nunito Sans", "Inter", system-ui, sans-serif;/* corpo, legendas, fontes */
 
-  /* Espaçamento */
+  /* EspaÃ§amento */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
@@ -61,7 +64,7 @@
   --line-ink: 1px solid var(--color-ink);
   --line-soft: 1px solid rgba(28, 43, 68, 0.18);
 
-  /* Raios (direção de arte: cantos arredondados suaves) */
+  /* Raios (direÃ§Ã£o de arte: cantos arredondados suaves) */
   --radius-sm: 6px;
   --radius-md: 14px;
   --radius-lg: 24px;

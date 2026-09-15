@@ -25,7 +25,7 @@
         </div>
 
         <div class="editorial-callout reveal" style="margin-top: var(--space-lg);">
-          <span class="stat-number" style="color: var(--color-magenta); font-size: clamp(3rem, 7vw, 6rem);">80%</span>
+          <span class="stat-number" style="color: var(--color-plum); font-size: clamp(3rem, 7vw, 6rem);">80%</span>
           <p class="stat__label">das equipes estão concentradas no Sul/Sudeste.</p>
         </div>
 

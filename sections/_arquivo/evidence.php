@@ -17,7 +17,7 @@
     <div class="section-grid">
       <!-- STAT 01 -->
       <div class="stat col-span-4 reveal">
-        <span class="stat-number stat-count" style="color: var(--color-teal);"
+        <span class="stat-number stat-count" style="color: var(--color-sky);"
           data-value="42.8" data-decimals="1">0%</span>
         <p class="stat__label">da amostra LGBTQIA+ não tem acesso ao esporte.</p>
         <p class="stat__source">Fonte: Nike/Nix, 2021</p>
@@ -25,7 +25,7 @@
 
       <!-- STAT 02 -->
       <div class="stat col-span-4 reveal">
-        <span class="stat-number stat-count" style="color: var(--color-magenta);"
+        <span class="stat-number stat-count" style="color: var(--color-plum);"
           data-value="63.5" data-decimals="1">0%</span>
         <p class="stat__label">já sofreu ou presenciou discriminação em ambientes esportivos.</p>
         <p class="stat__source">Fonte: Nike/Nix, 2021</p>
@@ -33,7 +33,7 @@
 
       <!-- STAT 03 -->
       <div class="stat col-span-4 reveal">
-        <span class="stat-number stat-count" style="color: var(--color-orange);"
+        <span class="stat-number stat-count" style="color: var(--color-vermilion);"
           data-value="76" data-decimals="0">0%</span>
         <p class="stat__label">da população geral não pratica esporte.</p>
         <p class="stat__source">Fonte: PNAD, 2015</p>

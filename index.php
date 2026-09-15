@@ -10,15 +10,16 @@
 
 $BASE = __DIR__;
 
-// Ordem da narrativa em 4 tempos + método e encerramento.
+// Ordem da narrativa em 4 tempos + encerramento. As fontes ficam
+// depois do fechamento, como um bloco recolhível, atrás do "Vem comigo?".
 $secoes = [
   "sections/hero.php",
   "sections/inicio.php",
   "sections/conflito.php",
   "sections/diagnostico.php",
   "sections/fechamento.php",
-  "sections/fontes.php",
-  "sections/final.php"
+  "sections/final.php",
+  "sections/fontes.php"
 ];
 
 include $BASE . "/includes/header.php";

@@ -22,8 +22,8 @@
 
         <!-- Gráfico de barras (dados editáveis aqui) -->
         <div class="bar-chart reveal" data-chart="bar">
-          <div class="bar-row" data-label="Homens" data-value="42.7" data-color="var(--color-teal)"></div>
-          <div class="bar-row" data-label="Mulheres" data-value="33.4" data-color="var(--color-magenta)"></div>
+          <div class="bar-row" data-label="Homens" data-value="42.7" data-color="var(--color-sky)"></div>
+          <div class="bar-row" data-label="Mulheres" data-value="33.4" data-color="var(--color-plum)"></div>
         </div>
         <p class="stat__source small-note">Fonte: PNAD, 2015. Taxa de prática esportiva por gênero.</p>
       </div>

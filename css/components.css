@@ -1,8 +1,8 @@
 /* ==========================================================================
-   COMPONENTES — estilos específicos dos blocos
+   COMPONENTES â€” estilos especÃ­ficos dos blocos
    ========================================================================== */
 
-/* --- StatNumber (grandes números da seção de evidências) --- */
+/* --- StatNumber (grandes nÃºmeros da seÃ§Ã£o de evidÃªncias) --- */
 .stat {
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
 
 .stat__source {
   font-size: 0.85rem;
-  color: var(--color-gray);
+  color: var(--color-sage-dark);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -42,18 +42,18 @@
 .small-note {
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--color-gray);
+  color: var(--color-vermilion);
   font-weight: 500;
 }
 
-/* --- Gráficos (base) --- */
+/* --- GrÃ¡ficos (base) --- */
 [data-chart] svg {
   width: 100%;
   height: auto;
 }
 
 /* ==========================================================================
-   GRÁFICO DE BARRAS (Gerado por D3 a partir de .bar-row)
+   GRÃFICO DE BARRAS (Gerado por D3 a partir de .bar-row)
    ========================================================================== */
 .bar-chart {
   display: flex;
@@ -104,7 +104,7 @@
 }
 
 /* ==========================================================================
-   GRÁFICO DONUT (Gerado por D3; percentual no centro)
+   GRÃFICO DONUT (Gerado por D3; percentual no centro)
    ========================================================================== */
 .donut {
   display: flex;
@@ -113,7 +113,7 @@
   gap: var(--space-md);
 }
 
-/* Donut com rótulo ao lado: círculo à esquerda, texto à direita. */
+/* Donut com rÃ³tulo ao lado: cÃ­rculo Ã  esquerda, texto Ã  direita. */
 .donut--side {
   flex-direction: row;
   justify-content: center;
@@ -175,12 +175,13 @@
   text-transform: uppercase;
   max-width: 20ch;
   text-align: center;
+  color: var(--color-navy);
 }
 
 /* ==========================================================================
-   HERO — imagem de fundo + overlay editorial para leitura
+   HERO â€” imagem de fundo + overlay editorial para leitura
    A imagem vive num pseudo-elemento ::before para poder ser deslocada
-   horizontalmente pelo efeito parallax (main.js define a variável
+   horizontalmente pelo efeito parallax (main.js define a variÃ¡vel
    --hero-shift em px a cada scroll).
    ========================================================================== */
 #hero {
@@ -194,9 +195,9 @@
 }
 
 /* As camadas vivem em .hero-media (imgs reais empilhadas, cada uma maior
-   que o hero). Cada camada recebe do main.js as próprias variáveis
-   --layer-scroll-shift e --layer-mouse-x/-y, já multiplicadas pela sua
-   profundidade (data-depth): 01 = primeiro plano (mais rápido),
+   que o hero). Cada camada recebe do main.js as prÃ³prias variÃ¡veis
+   --layer-scroll-shift e --layer-mouse-x/-y, jÃ¡ multiplicadas pela sua
+   profundidade (data-depth): 01 = primeiro plano (mais rÃ¡pido),
    04 = fundo (mais lento). */
 .hero-media {
   position: absolute;
@@ -206,9 +207,9 @@
 }
 
 /* Todas as camadas compartilham o mesmo transform (base-x + scroll + mouse)
-   e object-fit: cover. O oversize varia por camada — camadas à frente são
+   e object-fit: cover. O oversize varia por camada â€” camadas Ã  frente sÃ£o
    maiores para dar "sobra" ao parallax sem expor bordas. As porcentagens
-   foram calibradas para amplitudes de até ~20% da largura do hero. */
+   foram calibradas para amplitudes de atÃ© ~20% da largura do hero. */
 .hero-media__img {
   position: absolute;
   max-width: none;
@@ -224,7 +225,7 @@
   will-change: transform;
 }
 
-/* Layer 1 — primeiro plano (depth 1): mais oversize, maior buffer */
+/* Layer 1 â€” primeiro plano (depth 1): mais oversize, maior buffer */
 .hero-media__img[data-layer="1"] {
   inset: 2%;
   width: 100%;
@@ -232,7 +233,7 @@
   left: -6%;
 }
 
-/* Layer 2 — meio-frente (depth 0.68) */
+/* Layer 2 â€” meio-frente (depth 0.68) */
 .hero-media__img[data-layer="2"] {
   inset: 0;
   width: 105%;
@@ -240,7 +241,7 @@
   left: 0%;
 }
 
-/* Layer 3 — meio-fundo (depth 0.4) */
+/* Layer 3 â€” meio-fundo (depth 0.4) */
 .hero-media__img[data-layer="3"] {
   inset: 0%;
   width: 110%;
@@ -248,7 +249,7 @@
   left: 1%;
 }
 
-/* Layer 4 — fundo (depth 0.18): menor oversize, menor movimento */
+/* Layer 4 â€” fundo (depth 0.18): menor oversize, menor movimento */
 .hero-media__img[data-layer="4"] {
   inset: -7%;
   width: 114%;
@@ -260,7 +261,7 @@
 .hero-media__img[data-layer="3"] { z-index: 2; }
 .hero-media__img[data-layer="4"] { z-index: 1; }
 
-/* Overlay: papel sólido à esquerda (texto) → transparente à direita (foto) */
+/* Overlay: papel sÃ³lido Ã  esquerda (texto) â†’ transparente Ã  direita (foto) */
 #hero::after {
   content: "";
   position: absolute;
@@ -286,7 +287,7 @@
 }
 
 /* ==========================================================================
-   GRÁFICO DE TENDÊNCIA QUALITATIVA
+   GRÃFICO DE TENDÃŠNCIA QUALITATIVA
    ========================================================================== */
 .trend__axis {
   display: flex;
@@ -295,7 +296,7 @@
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.9rem;
-  color: var(--color-gray);
+  color: var(--color-slate);
   margin-top: var(--space-sm);
   letter-spacing: 0.05em;
 }
@@ -340,7 +341,7 @@
 .barrier-step__icon {
   width: 2.5rem;
   height: 2.5rem;
-  color: var(--color-magenta);
+  color: var(--color-plum);
   font-size: 2rem;
   line-height: 1;
 }
@@ -354,7 +355,7 @@
 
 .barrier-step__desc {
   font-size: 0.9rem;
-  color: var(--color-gray);
+  color: var(--color-slate);
   line-height: 1.4;
 }
 
@@ -374,7 +375,7 @@
 
 .region-label {
   font-size: 0.8rem;
-  color: var(--color-gray);
+  color: var(--color-slate);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -385,19 +386,19 @@
   gap: var(--space-sm);
   flex-wrap: wrap;
   font-size: 0.85rem;
-  color: var(--color-gray);
+  color: var(--color-slate);
 }
 
 .map-legend .dot {
   width: 0.7em;
   height: 0.7em;
   border-radius: 50%;
-  background: var(--color-teal);
+  background: var(--color-sky);
   flex: 0 0 auto;
 }
 
 /* ==========================================================================
-   CONCLUSÃO — passos
+   CONCLUSÃƒO â€” passos
    ========================================================================== */
 .conclusion-step {
   display: flex;
@@ -410,7 +411,7 @@
 .conclusion-step__icon {
   width: 2.5rem;
   height: 2.5rem;
-  color: var(--color-teal);
+  color: var(--color-sky);
   font-size: 2rem;
   line-height: 1;
 }
@@ -422,9 +423,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  border-left: 4px solid var(--color-magenta);
+  border-left: 4px solid var(--color-plum);
   padding-left: var(--space-md);
-  max-width: 40ch;
+  max-width: 44ch;
   /* margin-inline: auto; */
 }
 
@@ -436,12 +437,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  border-left: 4px solid var(--color-magenta);
+  border-left: 4px solid var(--color-plum);
   padding-left: var(--space-md);
   max-width: 80ch;}
 
 /* ==========================================================================
-   FONTES E LIMITAÇÕES
+   FONTES E LIMITAÃ‡Ã•ES
    ========================================================================== */
 .source-item {
   border-top: var(--line-ink);
@@ -459,6 +460,68 @@
 
 .source-item__sample {
   font-size: 0.9rem;
+}
+
+/* Bloco recolhível das fontes ("aba" atrás do Vem comigo?) */
+.fontes-box {
+  width: fit-content;
+  max-width: 100%;
+  background: var(--color-paper);
+  border: var(--line-ink);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 0 var(--color-neutral);
+}
+
+.fontes-box__tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-sm) var(--space-lg);
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+  transition: background 0.2s ease;
+}
+
+.fontes-box__tab::-webkit-details-marker {
+  display: none;
+}
+
+.fontes-box__tab:hover {
+  background: var(--color-neutral);
+}
+
+.fontes-box[open] .fontes-box__tab {
+  border-bottom: var(--line-soft);
+}
+
+.fontes-box__chevron {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1;
+  border: var(--line-ink);
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+}
+
+.fontes-box[open] .fontes-box__chevron {
+  transform: rotate(45deg);
+}
+
+.fontes-box__body {
+  padding: var(--space-sm) var(--space-lg) var(--space-md);
 }
 
 /* ==========================================================================
@@ -485,11 +548,11 @@
 }
 
 .final-statement .fs-line--accent {
-  color: var(--color-yellow);
+  color: var(--color-amber);
 }
 
 /* ==========================================================================
-   ILUSTRAÇÃO (placeholder editorial)
+   ILUSTRAÃ‡ÃƒO (placeholder editorial)
    ========================================================================== */
 .illustration {
   display: grid;
@@ -515,7 +578,7 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--space-sm);
-  color: var(--color-gray);
+  color: var(--color-slate);
   font-family: var(--font-display);
   text-transform: uppercase;
   font-size: 0.9rem;
@@ -540,7 +603,7 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* --- Trio de motivos (população em geral · comunidade · destaques) --- */
+/* --- Trio de motivos (populaÃ§Ã£o em geral Â· comunidade Â· destaques) --- */
 .trio-cols {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -565,7 +628,7 @@
 }
 
 /* ==========================================================================
-   REVELAÇÃO NO SCROLL (main.js adiciona .is-visible)
+   REVELAÃ‡ÃƒO NO SCROLL (main.js adiciona .is-visible)
    ========================================================================== */
 .reveal {
   opacity: 0;
@@ -580,10 +643,10 @@
 }
 
 /* ==========================================================================
-   NAVEGAÇÃO DE ÂNCORAS — "PERCURSO"
+   NAVEGAÃ‡ÃƒO DE Ã‚NCORAS â€” "PERCURSO"
    Trilha lateral fixa com checkpoints numerados. A linha preenche conforme
-   a rolagem (a distância percorrida na narrativa). O rótulo aparece no
-   hover, no foco e na seção ativa. Em telas estreitas, só os pontos.
+   a rolagem (a distÃ¢ncia percorrida na narrativa). O rÃ³tulo aparece no
+   hover, no foco e na seÃ§Ã£o ativa. Em telas estreitas, sÃ³ os pontos.
    ========================================================================== */
 .trail {
   --dot: 1.15rem;
@@ -692,7 +755,7 @@
   transform: scale(1.18);
 }
 
-/* Telas estreitas: some o rótulo e encolhe os checkpoints */
+/* Telas estreitas: some o rÃ³tulo e encolhe os checkpoints */
 @media (max-width: 899px) {
   .trail {
     --dot: 0.8rem;
@@ -714,20 +777,20 @@
   }
 }
 
-/* Garante que a âncora não pare atrás de um eventual cabeçalho fixo */
+/* Garante que a Ã¢ncora nÃ£o pare atrÃ¡s de um eventual cabeÃ§alho fixo */
 main section[id] {
   /* scroll-margin-top: 1.5rem; */
 }
 
 /* ==========================================================================
-   CAPÍTULOS — narrativa em 4 tempos
+   CAPÃTULOS â€” narrativa em 4 tempos
    ========================================================================== */
 .chapter__head {
   max-width: 50ch;
   margin-bottom: var(--space-xl);
 }
 
-/* Cabeçalho em coluna cheia (sem o estreitamento de 50ch). */
+/* CabeÃ§alho em coluna cheia (sem o estreitamento de 50ch). */
 .chapter__head--wide {
   max-width: none;
 }
@@ -748,7 +811,7 @@ main section[id] {
 }
 
 /* Grupo em tela cheia: o bloco ocupa ao menos uma viewport (centralizado).
-   Uso: envolver cada grupo de informações com .screen. Variante --start
+   Uso: envolver cada grupo de informaÃ§Ãµes com .screen. Variante --start
    alinha ao topo em vez do centro. */
 .screen {
   min-height: 100vh;
@@ -820,8 +883,8 @@ main section[id] {
   transform: none;
 }
 
-/* Palco da história de abertura: canvas three.js ao fundo (z 0),
-   véu claro em degradê (z 1) e texto original por cima (z 2). */
+/* Palco da histÃ³ria de abertura: canvas three.js ao fundo (z 0),
+   vÃ©u claro em degradÃª (z 1) e texto original por cima (z 2). */
 .prose-stage {
   position: relative;
   margin: var(--space-xl) 0 0;
@@ -865,7 +928,7 @@ main section[id] {
   z-index: 2;
   margin: var(--space-xl);
   max-width: 44ch;
-  /* Texto não clicável: o ponteiro atravessa até o canvas (bola arrastável). */
+  /* Texto nÃ£o clicÃ¡vel: o ponteiro atravessa atÃ© o canvas (bola arrastÃ¡vel). */
   pointer-events: none;
   user-select: none;
 }
@@ -888,7 +951,7 @@ main section[id] {
 }
 
 .bar-row--muted .bar-row__label {
-  color: var(--color-gray);
+  color: var(--color-slate);
 }
 
 /* --- Grid de barras agrupadas --- */
@@ -948,7 +1011,7 @@ main section[id] {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-gray);
+  color: var(--color-navy);
 }
 
 .gbar__track {
@@ -960,7 +1023,7 @@ main section[id] {
 }
 
 /* Trio: barras simples com o visual grouped-bar (nomes discretos,
-   trilhos finos, valor fora da barra). Só aqui — o Fechamento mantém o seu. */
+   trilhos finos, valor fora da barra). SÃ³ aqui â€” o Fechamento mantÃ©m o seu. */
 .trio__col .bar-row {
   grid-template-columns: minmax(12ch, 9ch) 1fr 3ch;
   gap: var(--space-md);
@@ -971,7 +1034,7 @@ main section[id] {
   font-size: 0.8rem;
   text-transform: uppercase;
   /* letter-spacing: 0.05em; */
-  color: var(--color-gray);
+  color: var(--color-navy);
   text-align: left;
 }
 
@@ -1019,7 +1082,7 @@ main section[id] {
   display: block;
 }
 
-/* --- Linha-drop: acento editorial pequeno entre texto e gráfico --- */
+/* --- Linha-drop: acento editorial pequeno entre texto e grÃ¡fico --- */
 .drop {
   font-family: var(--font-display);
   font-weight: 500;
@@ -1035,7 +1098,7 @@ main section[id] {
   font-weight: 700;
 }
 
-/* --- Fluxo (companhia → conexão → pertencimento → acolhimento) --- */
+/* --- Fluxo (companhia â†’ conexÃ£o â†’ pertencimento â†’ acolhimento) --- */
 .flow {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1052,7 +1115,7 @@ main section[id] {
 }
 
 /* Cascata de entrada: cada etapa desliza da esquerda com atraso em degrau
-   (--i) quando o bloco recebe .is-visible. Sem JS, tudo visível. */
+   (--i) quando o bloco recebe .is-visible. Sem JS, tudo visÃ­vel. */
 .flow--cascade .flow__step {
   opacity: 0;
   transform: translateX(-24px);
@@ -1065,7 +1128,7 @@ main section[id] {
   transform: none;
 }
 
-/* --- Botão editorial --- */
+/* --- BotÃ£o editorial --- */
 .btn {
   display: inline-block;
   font-family: var(--font-display);
@@ -1102,7 +1165,7 @@ main section[id] {
 
 .flow__desc {
   font-size: 0.9rem;
-  color: var(--color-gray);
+  color: var(--color-slate);
   line-height: 1.4;
 }
 
@@ -1192,17 +1255,17 @@ main section[id] {
   }
 }
 
-/* ============ CAPÍTULO 01 — composição do wireframe ============ */
+/* ============ CAPÃTULO 01 â€” composiÃ§Ã£o do wireframe ============ */
 .graphite-note {
   font-family: var(--font-geo);
   font-style: italic;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
-  color: var(--color-gray);
+  color: var(--color-slate);
   margin-bottom: var(--space-sm);
 }
 
-/* Título bipartido do capítulo (linha Oswald + destaque Elephant) */
+/* TÃ­tulo bipartido do capÃ­tulo (linha Oswald + destaque Elephant) */
 .chapter-title-split {
   max-width: 100%;
 }
@@ -1232,7 +1295,7 @@ main section[id] {
   margin-top: 0;
 }
 
-/* Números-coluna em escala real (os numerais SÃO as colunas) */
+/* NÃºmeros-coluna em escala real (os numerais SÃƒO as colunas) */
 .bignums {
   --max: clamp(16rem, 10vw, 0rem);
   display: grid;
@@ -1254,15 +1317,15 @@ main section[id] {
   align-items: flex-end;
   font-family: var(--font-geo);
   font-size: 0.9rem;
-  color: var(--color-gray);
+  color: var(--color-slate);
   border-right: 6px solid var(--color-neutral);
   padding: 0.5rem 1rem 0rem 0rem;
 }
 
-/* Linhas de grade horizontais: uma para cada número do eixo Y.
-   Cada ::after nasce na direção do número (topo-meio do <span>) e
-   travessa o gráfico — o excesso é recortado pelo overflow: hidden
-   do .bignums. Ficam atrás das barras (z-index: 0). */
+/* Linhas de grade horizontais: uma para cada nÃºmero do eixo Y.
+   Cada ::after nasce na direÃ§Ã£o do nÃºmero (topo-meio do <span>) e
+   travessa o grÃ¡fico â€” o excesso Ã© recortado pelo overflow: hidden
+   do .bignums. Ficam atrÃ¡s das barras (z-index: 0). */
 .bignums__axis span {
   position: relative;
 }
@@ -1296,7 +1359,7 @@ main section[id] {
   font-weight: 500;
   font-size: 4rem;
   letter-spacing: 0.05em;
-  color: var(--color-gray);
+  color: var(--color-navy-70);
   transform: translateX(0) translatey(140px);
 }
 
@@ -1307,7 +1370,7 @@ main section[id] {
   font-size: 1.25rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  /* Acima das linhas de grade (que passam por trás dos numerais) */
+  /* Acima das linhas de grade (que passam por trÃ¡s dos numerais) */
   position: relative;
   z-index: 1;
 }
@@ -1326,7 +1389,7 @@ main section[id] {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 2.85rem;
-  color: var(--color-gray);
+  color: var(--color-navy-70);
   /* margin-top: var(--space-sm); */
 }
 
@@ -1353,7 +1416,7 @@ main section[id] {
   margin-top: 0;
 }
 
-/* Cena que começa por trás da fonte do gráfico acima: o topo do palco
+/* Cena que comeÃ§a por trÃ¡s da fonte do grÃ¡fico acima: o topo do palco
    desliza para baixo do bloco anterior (que pinta por cima). */
 .scene-block--overlap {
   margin-top: calc(-1 * var(--space-xl));
@@ -1366,21 +1429,21 @@ main section[id] {
   z-index: 1;
 }
 
-/* Bloco que come�a sobrepondo um pouco o canvas anterior. */
+/* Bloco que comeï¿½a sobrepondo um pouco o canvas anterior. */
 .block--overlap {
   margin-top: calc(-2.3 * var(--space-xl));
   position: relative;
   z-index: 1;
 }
 
-/* Palco ampliado: ~3x a altura (1560px) em largura total da página. */
+/* Palco ampliado: ~3x a altura (1560px) em largura total da pÃ¡gina. */
 .prose-stage.scene-stage--tall {
   min-height: 1560px;
   width: 100vw;
   max-width: none;
   margin-left: calc(50% - 50vw);
   border-radius: 0;
-  /* Canvas transparente: o papel da página é o fundo (infinito). */
+  /* Canvas transparente: o papel da pÃ¡gina Ã© o fundo (infinito). */
   background: transparent;
 }
 
@@ -1511,7 +1574,7 @@ main section[id] {
   align-items: center;
 }
 
-/* Bloco dividido: texto à esquerda, gráfico à direita. */
+/* Bloco dividido: texto Ã  esquerda, grÃ¡fico Ã  direita. */
 .split-block {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -1524,8 +1587,8 @@ main section[id] {
 }
 
 /* Rolagem horizontal de teste: sem .is-hscroll (sem JS, mobile,
-   reduced-motion) os painéis empilham no vertical normal. Com a classe,
-   a seção prende (sticky) e o trilho desliza; ao fim, o vertical continua. */
+   reduced-motion) os painÃ©is empilham no vertical normal. Com a classe,
+   a seÃ§Ã£o prende (sticky) e o trilho desliza; ao fim, o vertical continua. */
 .hwrap.is-hscroll {
   height: 300vh;
   margin-top: calc(-1 * var(--space-lg));
@@ -1560,7 +1623,7 @@ main section[id] {
   width: 100%;
 }
 
-/* Cabeçalho e nota fixos sobre as 3 camadas (sem bloquear a interação). */
+/* CabeÃ§alho e nota fixos sobre as 3 camadas (sem bloquear a interaÃ§Ã£o). */
 .hwrap.is-hscroll .hstage__head {
   position: absolute;
   top: var(--space-md);
@@ -1592,7 +1655,7 @@ main section[id] {
   padding-bottom: clamp(100px, 16vh, 150px);
 }
 
-/* Trio: planeta | texto | gráfico. */
+/* Trio: planeta | texto | grÃ¡fico. */
 .split-block--trio {
   grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 5fr);
   align-items: center;
@@ -1617,7 +1680,7 @@ main section[id] {
   touch-action: none;
 }
 
-/* Transição para o Capítulo 02 */
+/* TransiÃ§Ã£o para o CapÃ­tulo 02 */
 .bridge {
   font-family: var(--font-display);
   font-weight: 700;

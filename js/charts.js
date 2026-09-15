@@ -3,11 +3,11 @@
    ==========================================================================
    Cada gráfico é disparado pelo atributo `data-chart` presente no HTML:
 
-     <div data-chart="donut" data-value="42.8" data-color="var(--color-teal)"
+     <div data-chart="donut" data-value="42.8" data-color="var(--color-sky)"
           data-label="da amostra não tem acesso"></div>
 
      <div class="bar-chart" data-chart="bar">
-       <div class="bar-row" data-label="Homens" data-value="42.7" data-color="var(--color-teal)"></div>
+       <div class="bar-row" data-label="Homens" data-value="42.7" data-color="var(--color-sky)"></div>
        ...
      </div>
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
      ================================================================ */
   function drawDonut(el) {
     var value = parseFloat(el.dataset.value) || 0;
-    var color = el.dataset.color || "var(--color-teal)";
+    var color = el.dataset.color || "var(--color-sky)";
     var label = el.dataset.label || "";
 
     var SIZE = 280;
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return py(d[1]);
       })
       .attr("r", 8)
-      .style("fill", "var(--color-orange)")
+      .style("fill", "var(--color-vermilion)")
       .style("stroke", "var(--color-paper)")
       .style("stroke-width", 2)
       .style("opacity", 0);
@@ -369,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return centroids[d.region][1];
       })
       .attr("r", 0)
-      .style("fill", "var(--color-teal)")
+      .style("fill", "var(--color-sky)")
       .style("stroke", "var(--color-paper)")
       .style("stroke-width", 2);
 
@@ -615,7 +615,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("text-anchor", "middle")
       .style("font-family", "var(--font-geo)")
       .style("font-size", "15px")
-      .style("fill", "var(--color-gray)")
+      .style("fill", "var(--color-slate)")
       .style("opacity", 0)
       .text(function (d) {
         return d.year + (d.tag ? " · " + d.tag : "");
@@ -768,7 +768,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var AXIS_Y = 114; // eixo de valores (0–9 bi) em cima, junto das barras
     var TY = 148; // timeline-slider fina, abaixo
     var SAGE = "var(--color-sage)"; // 8FC9B4 — observado
-    var SLATE = "#8FB0AE"; // projeção
+    var SLATE = "var(--color-slate)"; // projeção
 
     var x = d3.scaleLinear().domain([0, 9]).range([ML, W - MR]);
     var xYear = d3.scaleLinear().domain([2010, 2030]).range([ML, W - MR]);
@@ -791,7 +791,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .attr("y1", TY)
       .attr("x2", xYear(2026))
       .attr("y2", TY)
-      .attr("stroke", "#8FC9B4")
+      .attr("stroke", "var(--color-sage)")
       .attr("stroke-width", 3)
       .attr("stroke-linecap", "round");
     svg
@@ -898,7 +898,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .style("fill", color)
         .text(label);
     }
-    periodLabel((xYear(2010) + xYear(2026)) / 2, 170, "Dados observados", "#8FC9B4");
+    periodLabel((xYear(2010) + xYear(2026)) / 2, 170, "Dados observados", "var(--color-sage)");
     periodLabel((xYear(2026) + xYear(2030)) / 2, 170, "Projeção", SLATE);
 
     // Pegador do ano atual (move junto com o slider).
@@ -924,7 +924,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .selectAll("text")
       .style("font-family", "var(--font-geo)")
       .style("font-size", "10px")
-      .style("fill", "var(--color-gray)");
+      .style("fill", "var(--color-slate)");
     axisG.selectAll("line").style("stroke", "var(--color-neutral)");
     axisG.select(".domain").style("stroke", "var(--color-neutral)");
 

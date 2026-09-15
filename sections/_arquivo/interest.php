@@ -16,7 +16,7 @@
       <!-- Gráfico 1 -->
       <div class="reveal">
         <div class="donut" data-chart="donut"
-          data-value="76.8" data-color="var(--color-yellow)"
+          data-value="76.8" data-color="var(--color-amber)"
           data-label="considera o esporte “muito importante” para a comunidade">
         </div>
         <p class="stat__source small-note">Fonte: Nike/Nix, 2021</p>
@@ -25,7 +25,7 @@
       <!-- Gráfico 2 -->
       <div class="reveal">
         <div class="donut" data-chart="donut"
-          data-value="95.8" data-color="var(--color-teal)"
+          data-value="95.8" data-color="var(--color-sky)"
           data-label="admira atletas assumidos">
         </div>
         <p class="stat__source small-note">Fonte: Nike/Nix, 2021</p>

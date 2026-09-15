@@ -49,7 +49,7 @@ include $BASE . "/includes/header.php";
   .ds-swatch__hex {
     font-family: var(--font-geo);
     font-size: 0.85rem;
-    color: var(--color-gray);
+    color: var(--color-slate);
   }
   .ds-swatch__use {
     font-size: 0.9rem;
@@ -66,7 +66,7 @@ include $BASE . "/includes/header.php";
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-gray);
+    color: var(--color-slate);
     margin-bottom: var(--space-sm);
   }
   .ds-space-row {

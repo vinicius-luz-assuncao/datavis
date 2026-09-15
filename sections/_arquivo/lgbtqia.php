@@ -23,7 +23,7 @@
       <!-- Gráfico 1: Acesso -->
       <div class="col-span-6 reveal">
         <div class="donut" data-chart="donut"
-          data-value="42.8" data-color="var(--color-teal)"
+          data-value="42.8" data-color="var(--color-sky)"
           data-label="da amostra não tem acesso ao esporte">
         </div>
         <p class="stat__source small-note">Fonte: Nike/Nix, 2021</p>
@@ -32,7 +32,7 @@
       <!-- Gráfico 2: Discriminação -->
       <div class="col-span-6 reveal">
         <div class="donut" data-chart="donut"
-          data-value="63.5" data-color="var(--color-magenta)"
+          data-value="63.5" data-color="var(--color-plum)"
           data-label="sofreu ou presenciou discriminação">
         </div>
         <p class="stat__source small-note">Fonte: Nike/Nix, 2021</p>
