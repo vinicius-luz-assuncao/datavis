@@ -303,6 +303,7 @@ HERO (abertura)
 04 — FECHAMENTO (sections/fechamento.php)
 FONTES E LIMITAÇÕES (sections/fontes.php)
 MENSAGEM FINAL (sections/final.php — "VEM COMIGO?")
+EQUIPE (sections/equipe.php — cartões com foto, nome e texto)
 ```
 
 As seções da narrativa antiga (12 blocos) estão arquivadas em `sections/_arquivo/`
@@ -485,16 +486,8 @@ Fonte: NIX 2022 p. 27.
 
 "Afinal, todo mundo se sente incluso?" Par único de donuts: `63,5%`
 (ao praticar) e `68,3%` (em ambientes esportivos). Sem repetição do par.
-
-## Companhia (Lopes & Del Vecchio, 2026)
-
-"E a companhia faz diferença." Barras agrupadas: `40%` LGBT+ × `14%`
-não-LGBT+; escore de barreiras `26,1 ± 9,2` (feminino) × `13,8 ± 13,7`
-(masculino).
-
-## Placeholder
-
-Pessoa observando o grupo de fora / vestiário pouco acolhedor.
+(Bloco da companhia Lopes removido; a fonte segue citada no Fechamento e
+em Fontes.)
 
 ---
 
@@ -562,7 +555,7 @@ viewport (com `prefers-reduced-motion` mostrando o estado final de imediato).
 
 * `grouped-bar` — linhas de `.gbar__bar` (`data-name`, `data-value`, `data-color`;
   `data-max` e `data-unit` opcionais). Uso: meninas × meninos, gênero IBGE,
-  motivos IBGE × NIX, companhia Lopes. Comparações 1:1 usam barras agrupadas
+  motivos IBGE × NIX. Comparações 1:1 usam barras agrupadas
   (o `dumbbell` foi removido por falta de coerência visual).
 * `projection` — pontos de `.projection__point` (`data-year`, `data-value`,
   `data-tag`); trecho projetado em tracejado com máscara `clipPath`.
@@ -620,7 +613,9 @@ Botão `.btn--accent` "Conheça o projeto" (link placeholder `#`) + linha
 # 21. NAVEGAÇÃO "PERCURSO" (`includes/nav.php`)
 
 A narrativa é um percurso: trilha lateral fixa com checkpoints numerados
-(`01–07`), linha que preenche conforme a rolagem e rótulo no hover/foco/ativo.
+de `00` (abertura) a `07`, cada bolinha numa cor do sistema (sky, amber,
+plum, purple, vermilion, pink, slate, sage via `--dot-color`), linha que
+preenche conforme a rolagem e rótulo no hover/foco/ativo.
 Em telas estreitas, só os pontos.
 
 * `index.php` gera `$navItems` a partir de `$secoes` + `$navLabels` — a navegação
@@ -703,14 +698,14 @@ LandingPage (index.php: $secoes + $navLabels + $navItems)
 │   ├── GroupedBarChart (motivos IBGE × NIX)
 │   ├── BarChart (ranking IBGE completo)
 │   ├── BarChart (ranking NIX completo) + Drop
-│   ├── DonutChart × 2 (63,5% · 68,3%)
-│   └── GroupedBarChart × 2 (companhia · escores)
+│   └── DonutChart × 2 (63,5% · 68,3%)
 ├── Capitulo04 (fechamento.php)
 │   ├── BarChart ("sem o tempo", 6 linhas, data-muted)
 │   ├── FlowCascade (4 passos, entrada em cascata)
 │   └── ProjetoNote (faixa escura)
 ├── FontesSection (4 fontes)
 ├── FinalStatement ("VEM COMIGO?")
+├── EquipeSection (team-cards: foto do disco ou iniciais + review do txt ou lorem)
 └── TrailNav (includes/nav.php — percurso com progresso)
 ```
 

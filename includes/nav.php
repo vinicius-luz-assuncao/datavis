@@ -19,13 +19,13 @@ if (!isset($navItems) || empty($navItems)) {
       <span class="trail__progress" data-trail-progress></span>
     </span>
     <ul class="trail__list">
-      <?php foreach ($navItems as $i => $item): ?>
+      <?php foreach ($navItems as $item): ?>
         <li class="trail__item">
           <a class="trail__link"
              href="#<?= htmlspecialchars($item['id'], ENT_QUOTES, 'UTF-8') ?>"
              data-trail-target="<?= htmlspecialchars($item['id'], ENT_QUOTES, 'UTF-8') ?>">
             <span class="trail__label"><?= htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') ?></span>
-            <span class="trail__dot" aria-hidden="true"><?= str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
+            <span class="trail__dot" aria-hidden="true" style="--dot-color: <?= htmlspecialchars($item['dot'] ?? 'var(--color-ink)', ENT_QUOTES, 'UTF-8') ?>;"><?= htmlspecialchars($item['num'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
           </a>
         </li>
       <?php endforeach; ?>

@@ -19,29 +19,35 @@ $secoes = [
   "sections/diagnostico.php",
   "sections/fechamento.php",
   "sections/final.php",
-  "sections/fontes.php"
+  "sections/fontes.php",
+  "sections/equipe.php"
 ];
 
 include $BASE . "/includes/header.php";
 
-// Rótulos do "percurso" (navegação de âncoras). A chave é o nome do
-// arquivo da seção — assim a navegação acompanha automaticamente a
-// ordem de $secoes. Seções sem rótulo aqui simplesmente não entram.
+// Navegação de âncoras: número (abertura = 00) e cor do design system
+// por bolinha. A chave é o nome do arquivo da seção.
 $navLabels = [
-  "hero" => "Abertura",
-  "inicio" => "Início",
-  "conflito" => "Conflito",
-  "diagnostico" => "Diagnóstico",
-  "fechamento" => "Fechamento",
-  "fontes" => "Fontes",
-  "final" => "Vem comigo?"
+  "hero" => ["label" => "Abertura", "num" => "00", "dot" => "var(--color-sky)"],
+  "inicio" => ["label" => "Introdução", "num" => "01", "dot" => "var(--color-amber)"],
+  "conflito" => ["label" => "Conflito", "num" => "02", "dot" => "var(--color-plum)"],
+  "diagnostico" => ["label" => "Diagnóstico", "num" => "03", "dot" => "var(--color-purple)"],
+  "fechamento" => ["label" => "Conclusão", "num" => "04", "dot" => "var(--color-vermilion)"],
+  "final" => ["label" => "Vem comigo?", "num" => "05", "dot" => "var(--color-pink)"],
+  "fontes" => ["label" => "Fontes", "num" => "06", "dot" => "var(--color-slate)"],
+  "equipe" => ["label" => "Equipe", "num" => "07", "dot" => "var(--color-sage)"],
 ];
 
 $navItems = [];
 foreach ($secoes as $sec) {
   $id = basename($sec, ".php");
   if (isset($navLabels[$id])) {
-    $navItems[] = ["id" => $id, "label" => $navLabels[$id]];
+    $navItems[] = [
+      "id" => $id,
+      "label" => $navLabels[$id]["label"],
+      "num" => $navLabels[$id]["num"],
+      "dot" => $navLabels[$id]["dot"],
+    ];
   }
 }
 

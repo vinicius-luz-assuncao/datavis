@@ -738,8 +738,8 @@
   place-items: center;
   border-radius: 50%;
   background: var(--color-paper);
-  border: 2px solid var(--color-ink);
-  color: var(--color-ink);
+  border: 2px solid var(--dot-color, var(--color-ink));
+  color: var(--dot-color, var(--color-ink));
   font-family: var(--font-geo);
   font-size: 0.55rem;
   font-weight: 600;
@@ -749,8 +749,8 @@
 }
 
 .trail__link.is-active .trail__dot {
-  background: var(--color-vermilion);
-  border-color: var(--color-vermilion);
+  background: var(--dot-color, var(--color-vermilion));
+  border-color: var(--dot-color, var(--color-vermilion));
   color: var(--color-paper);
   transform: scale(1.18);
 }
@@ -1111,7 +1111,7 @@ main section[id] {
   flex-direction: column;
   gap: var(--space-sm);
   padding-top: var(--space-md);
-  border-top: 2px solid var(--color-ink);
+  /* border-top: 2px solid var(--color-ink); */
 }
 
 /* Cartao de midia: fundo chapado na cor da etapa + PNG transparente com
@@ -1127,9 +1127,9 @@ main section[id] {
 
 .flow__media img {
   position: absolute;
-  bottom: 1%;
-  left: 12%;
-  width: 100%;
+  bottom: -2%;
+  left: 9%;
+  width: 82%;
   height: auto;
   max-height: 104%;
   object-fit: contain;
@@ -1137,9 +1137,49 @@ main section[id] {
   will-change: transform;
 }
 
-/* Degrade da etapa Companhia -- so tokens do design system. */
+/* Ajuste fino por imagem (medido no PNG: centro e largura da figura).
+   Companhia: figura full-width centralizada. Conexão/Acolhimento: figura
+   à esquerda, imagem deslocada p/ centralizar. Pertencimento: figura
+   pequena à direita, imagem ampliada e deslocada. */
+.flow__media--companhia img {
+  left: 17%;
+  bottom: 2%;
+  width: 94%;
+}
+
+.flow__media--conexao img {
+  left: 1%;
+  width: 100%;
+  bottom: -7%;
+}
+
+.flow__media--pertencimento img {
+  left: 10%;
+  width: 100%;
+  bottom: -7%;
+}
+
+.flow__media--acolhimento img {
+  left: -2%;
+  width: 100%;
+  bottom: -14%;
+}
+
+/* Degrade das etapas -- so tokens do design system (base -> navy). */
 .flow__media--companhia {
   background: linear-gradient(135deg, var(--color-sky) 0%, var(--color-navy) 100%);
+}
+
+.flow__media--conexao {
+  background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-navy) 100%);
+}
+
+.flow__media--pertencimento {
+  background: linear-gradient(135deg, var(--color-amber) 0%, var(--color-navy) 100%);
+}
+
+.flow__media--acolhimento {
+  background: linear-gradient(135deg, var(--color-vermilion) 0%, var(--color-navy) 100%);
 }
 
 /* Texto sobre a imagem (topo-esquerda, como a referencia). */
@@ -1207,6 +1247,18 @@ main section[id] {
   transform: translateY(-2px);
 }
 
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-paper);
+  border: 2px solid var(--color-paper);
+}
+
+.btn--ghost:hover {
+  background-color: var(--color-paper);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
 .btn:focus-visible {
   outline: 3px solid currentColor;
   outline-offset: 3px;
@@ -1223,6 +1275,123 @@ main section[id] {
   font-size: 0.9rem;
   color: var(--color-slate);
   line-height: 1.4;
+}
+
+/* --- Equipe: grade de cartões com foto, nome e texto --- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.team-card {
+  background: var(--color-paper);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(28, 43, 68, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(28, 43, 68, 0.15);
+}
+
+.team-card__photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-neutral);
+}
+
+.team-card__img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.team-card:hover .team-card__img,
+.team-card:focus-within .team-card__img {
+  opacity: 1;
+}
+
+.team-card__photo img,
+.team-card__initials {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.team-card__initials {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.5rem;
+  color: var(--color-paper);
+}
+
+.team-card:hover .team-card__photo img {
+  transform: scale(1.05);
+}
+
+.team-card__body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.team-card__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.team-card__review {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-ink);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.team-card.expanded .team-card__review {
+  display: block;
+}
+
+.team-card__more {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-vermilion);
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  cursor: pointer;
+}
+
+.team-card__more:hover {
+  text-decoration: underline;
+}
+
+.team-card__more:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
 }
 
 /* --- Nota de projeto (faixa escura) --- */
@@ -1255,6 +1424,63 @@ main section[id] {
 
 .projeto-note strong {
   color: var(--color-amber);
+}
+
+/* --- Convite: foto em destaque + texto --- */
+.invite-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.invite__photo {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.invite__photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bleed inferior: funde a foto no fundo navy com fade longo e suave. */
+.invite__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    transparent 48%,
+    var(--color-navy) 100%
+  );
+  pointer-events: none;
+}
+
+.invite__link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1rem;
+  color: var(--color-paper);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.invite__link:hover {
+  color: var(--color-amber);
+}
+
+@media (max-width: 720px) {
+  .invite-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* --- Final: kicker, marca e nota --- */

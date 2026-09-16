@@ -492,5 +492,45 @@
     initBigNums();
     initHScroll();
     initFlowParallax();
+    initTeam();
   });
+
+  /* -------------------------------------------------- EQUIPE */
+  // Foto carrega no primeiro hover/foco do cartão e aparece em fade.
+  function initTeam() {
+    document.querySelectorAll("[data-team-card]").forEach((card) => {
+      const img = card.querySelector("[data-src]");
+      if (img) {
+        const load = () => {
+          if (!img.getAttribute("src")) img.src = img.dataset.src;
+        };
+        card.addEventListener("mouseenter", load, { once: true });
+        card.addEventListener("focusin", load, { once: true });
+      }
+      const review = card.querySelector("[data-team-review]");
+      const more = card.querySelector("[data-team-more]");
+      if (!review || !more) return;
+      const check = () => {
+        const overflowing =
+          review.scrollHeight > review.clientHeight + 2;
+        if (overflowing) more.removeAttribute("hidden");
+        else {
+          more.setAttribute("hidden", "");
+          card.classList.remove("expanded");
+          more.setAttribute("aria-expanded", "false");
+          more.textContent = "Ler mais";
+        }
+      };
+      more.addEventListener("click", () => {
+        const open = card.classList.toggle("expanded");
+        more.setAttribute("aria-expanded", open ? "true" : "false");
+        more.textContent = open ? "Ler menos" : "Ler mais";
+      });
+      check();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(check);
+      }
+      window.addEventListener("resize", check);
+    });
+  }
 })();

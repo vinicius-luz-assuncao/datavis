@@ -12,7 +12,7 @@
 ?>
 <section class="section chapter" id="diagnostico">
   <div class="container">
-    <div class="hwrap" data-hscroll style="--hpanels: 4;">
+    <div class="hwrap" data-hscroll style="--hpanels: 3;">
       <div class="hstage" data-hstage>
         <header class="chapter__head chapter__head--wide reveal hstage__head">
           <span class="chapter__marker">Capítulo 03 · Diagnóstico</span>
@@ -124,23 +124,6 @@
             </div>
           </div>
 
-          <!-- Carrossel 04 — Companhia (Lopes) -->
-          <div class="hpanel">
-            <div class="block reveal">
-              <p class="byline">Estudantes do Ensino Médio · Pelotas</p>
-              <p class="block__lede">E a companhia faz diferença.</p>
-              <p class="body-text">Outro estudo reforça a importância da companhia entre estudantes do Ensino Médio.</p>
-
-              <div class="gbar" data-chart="grouped-bar">
-                <div class="gbar__row">
-                  <p class="gbar__row-label">Citaram “falta de companhia” como barreira</p>
-                  <div class="gbar__bar" data-name="LGBT+" data-value="40" data-color="var(--color-plum)"></div>
-                  <div class="gbar__bar" data-name="Não-LGBT+" data-value="14" data-color="var(--color-sky)"></div>
-                </div>
-              </div>
-              <p class="stat__source small-note">Fonte: Lopes &amp; Del Vecchio, 2026.</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

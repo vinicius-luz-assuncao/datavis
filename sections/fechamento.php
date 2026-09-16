@@ -39,9 +39,8 @@
      <p class="block__lede">
         Falta de tempo é compreendida como a principal barreira, mas a falta de companhia pode ser uma barreira ainda mais complexa a ser superada.
       </p>
-      <p class="body-text">A necessidade de companhia aparece como 2º motivo entre pessoas LGBTQIAPN+ que não
-        praticam esporte — e foi significativamente mais citada por estudantes LGBTQIAPN+ do que por não-LGBTQIAPN+.</p>
-         <p class="stat__source small-note">Fontes: NIX Diversidade/Nike, 2022, p. 27; Lopes &amp; Del Vecchio, 2026.</p>
+      <p class="body-text">É a partir dessa descoberta que surge uma possibilidade: <strong>e se encontrar alguém para começar também fosse parte da experiência esportiva?</strong></p>
+         <!-- <p class="stat__source small-note">Fontes: NIX Diversidade/Nike, 2022, p. 27; Lopes &amp; Del Vecchio, 2026.</p> -->
       <div class="flow flow--cascade" style="margin-top: var(--space-lg);">
         <div class="flow__step" style="--i: 0;">
           <div class="flow__media flow__media--companhia" style="--flow-bg: var(--color-sky);" data-flow-media>
@@ -53,28 +52,36 @@
           </div>
         </div>
         <div class="flow__step" style="--i: 1;">
-          <div class="flow__media" style="--flow-bg: var(--color-sage);" data-flow-media>
-            <img src="assets/img/flow-conexao.png" alt="" loading="lazy" onerror="this.remove()" />
+          <div class="flow__media flow__media--conexao" style="--flow-bg: var(--color-sage);" data-flow-media>
+            <img src="assets/img/Conexão.png" alt="" loading="lazy" onerror="this.remove()" />
+            <div class="flow__overlay" data-flow-overlay>
+              <span class="flow__keyword">Conexão</span>
+              <span class="flow__desc">Um vínculo que sustenta a prática.</span>
+            </div>
           </div>
-          <span class="flow__keyword">Conexão</span>
-          <span class="flow__desc">Um vínculo que sustenta a prática.</span>
         </div>
         <div class="flow__step" style="--i: 2;">
-          <div class="flow__media" style="--flow-bg: var(--color-amber);" data-flow-media>
-            <img src="assets/img/flow-pertencimento.png" alt="" loading="lazy" onerror="this.remove()" />
+          <div class="flow__media flow__media--pertencimento" style="--flow-bg: var(--color-amber);" data-flow-media>
+            <img src="assets/img/Pertencimento.png" alt="" loading="lazy" onerror="this.remove()" />
+            <div class="flow__overlay" data-flow-overlay>
+              <span class="flow__keyword">Pertencimento</span>
+              <span class="flow__desc">Um lugar onde se quer voltar.</span>
+            </div>
           </div>
-          <span class="flow__keyword">Pertencimento</span>
-          <span class="flow__desc">Um lugar onde se quer voltar.</span>
         </div>
         <div class="flow__step" style="--i: 3;">
-          <div class="flow__media" style="--flow-bg: var(--color-vermilion);" data-flow-media>
-            <img src="assets/img/flow-acolhimento.png" alt="" loading="lazy" onerror="this.remove()" />
+          <div class="flow__media flow__media--acolhimento" style="--flow-bg: var(--color-vermilion);" data-flow-media>
+            <img src="assets/img/Acolhimento.png" alt="" loading="lazy" onerror="this.remove()" />
+            <div class="flow__overlay" data-flow-overlay>
+              <span class="flow__keyword">Acolhimento</span>
+              <span class="flow__desc">Um treino mais acolhedor.</span>
+            </div>
           </div>
-          <span class="flow__keyword">Acolhimento</span>
-          <span class="flow__desc">Um treino mais acolhedor.</span>
         </div>
       </div>
-     
+      <p class="section-subtitle" style="margin-top: var(--space-xl);">Talvez o próximo passo seja encontrar alguém.</p>
+      <p class="body-text">Queremos entender como criar ambientes esportivos onde seja mais fácil <strong>encontrar companhia, construir conexões e sentir que se pertence.</strong></p>
+      <p class="block__lede">Vem com a gente?</p>
     </div>
 
     <!-- 4.3 Nota de projeto -->
