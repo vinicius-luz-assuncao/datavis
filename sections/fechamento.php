@@ -17,9 +17,7 @@
           </h2>      
     </header>
 
-    <p class="block__lede">
-        Falta de tempo é compreendida como a principal barreira, mas a falta de companhia pode ser uma barreira ainda mais complexa a ser superada.
-      </p>
+    
 
     <!-- 4.1 Sem o tempo
     <div class="block reveal">
@@ -38,28 +36,45 @@
 
     <!-- 4.2 Companhia → Conexão → Pertencimento -->
     <div class="block reveal">
-      <p class="block__lede">E se o primeiro passo fosse acompanhado?</p>
+     <p class="block__lede">
+        Falta de tempo é compreendida como a principal barreira, mas a falta de companhia pode ser uma barreira ainda mais complexa a ser superada.
+      </p>
       <p class="body-text">A necessidade de companhia aparece como 2º motivo entre pessoas LGBTQIAPN+ que não
         praticam esporte — e foi significativamente mais citada por estudantes LGBTQIAPN+ do que por não-LGBTQIAPN+.</p>
+         <p class="stat__source small-note">Fontes: NIX Diversidade/Nike, 2022, p. 27; Lopes &amp; Del Vecchio, 2026.</p>
       <div class="flow flow--cascade" style="margin-top: var(--space-lg);">
         <div class="flow__step" style="--i: 0;">
-          <span class="flow__keyword">Companhia</span>
-          <span class="flow__desc">Alguém com quem começar.</span>
+          <div class="flow__media flow__media--companhia" style="--flow-bg: var(--color-sky);" data-flow-media>
+            <img src="assets/img/Companhia.png" alt="" loading="lazy" onerror="this.remove()" />
+            <div class="flow__overlay" data-flow-overlay>
+              <span class="flow__keyword">Companhia</span>
+              <span class="flow__desc">Alguém com quem começar.</span>
+            </div>
+          </div>
         </div>
         <div class="flow__step" style="--i: 1;">
+          <div class="flow__media" style="--flow-bg: var(--color-sage);" data-flow-media>
+            <img src="assets/img/flow-conexao.png" alt="" loading="lazy" onerror="this.remove()" />
+          </div>
           <span class="flow__keyword">Conexão</span>
           <span class="flow__desc">Um vínculo que sustenta a prática.</span>
         </div>
         <div class="flow__step" style="--i: 2;">
+          <div class="flow__media" style="--flow-bg: var(--color-amber);" data-flow-media>
+            <img src="assets/img/flow-pertencimento.png" alt="" loading="lazy" onerror="this.remove()" />
+          </div>
           <span class="flow__keyword">Pertencimento</span>
           <span class="flow__desc">Um lugar onde se quer voltar.</span>
         </div>
         <div class="flow__step" style="--i: 3;">
+          <div class="flow__media" style="--flow-bg: var(--color-vermilion);" data-flow-media>
+            <img src="assets/img/flow-acolhimento.png" alt="" loading="lazy" onerror="this.remove()" />
+          </div>
           <span class="flow__keyword">Acolhimento</span>
           <span class="flow__desc">Um treino mais acolhedor.</span>
         </div>
       </div>
-      <p class="stat__source small-note">Fontes: NIX Diversidade/Nike, 2022, p. 27; Lopes &amp; Del Vecchio, 2026.</p>
+     
     </div>
 
     <!-- 4.3 Nota de projeto -->

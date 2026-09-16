@@ -409,6 +409,79 @@
     }
   }
 
+  /* ------------------------------------------- PARALLAX FLOW MEDIA */
+  // A imagem desliza dentro do cartão conforme a rolagem (o texto parado
+  // cria o parallax relativo). Sem reduced-motion nem JS: imagem estática.
+  function initFlowParallax() {
+    const medias = Array.from(document.querySelectorAll("[data-flow-media]"));
+    if (medias.length === 0) return;
+    if (prefersReducedMotion) return;
+    const finePointer = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+
+    const mice = new WeakMap();
+    let ticking = false;
+    function update() {
+      const vh = window.innerHeight;
+      medias.forEach((media) => {
+        const img = media.querySelector("img");
+        const overlay = media.querySelector("[data-flow-overlay]");
+        if (!img && !overlay) return;
+        const rect = media.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > vh) return;
+        const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+        const m = mice.get(media) || { x: 0, y: 0 };
+        if (img) {
+          img.style.transform =
+            "translate3d(" +
+            (m.x * 10).toFixed(1) +
+            "px," +
+            (-progress * 26 + m.y * 8).toFixed(1) +
+            "px,0)";
+        }
+        if (overlay) {
+          overlay.style.transform =
+            "translate3d(" +
+            (m.x * -5).toFixed(1) +
+            "px," +
+            (progress * 12 + m.y * -4).toFixed(1) +
+            "px,0)";
+        }
+      });
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    if (finePointer) {
+      medias.forEach((media) => {
+        media.addEventListener("pointermove", (e) => {
+          if (e.pointerType !== "mouse") return;
+          const rect = media.getBoundingClientRect();
+          mice.set(media, {
+            x: ((e.clientX - rect.left) / rect.width) * 2 - 1,
+            y: ((e.clientY - rect.top) / rect.height) * 2 - 1
+          });
+          onScroll();
+        });
+        media.addEventListener("pointerleave", () => {
+          mice.delete(media);
+          onScroll();
+        });
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
   /* ---------------------------------------------------------- INIT */
   document.addEventListener("DOMContentLoaded", () => {
     initReveal();
@@ -418,5 +491,6 @@
     initTrail();
     initBigNums();
     initHScroll();
+    initFlowParallax();
   });
 })();

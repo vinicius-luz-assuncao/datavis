@@ -1,8 +1,8 @@
 /* ==========================================================================
-   COMPONENTES Ã¢â‚¬â€ estilos especÃƒÂ­ficos dos blocos
+   COMPONENTES ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â estilos especÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ficos dos blocos
    ========================================================================== */
 
-/* --- StatNumber (grandes nÃƒÂºmeros da seÃƒÂ§ÃƒÂ£o de evidÃƒÂªncias) --- */
+/* --- StatNumber (grandes nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºmeros da seÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o de evidÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âªncias) --- */
 .stat {
   display: flex;
   flex-direction: column;
@@ -46,14 +46,14 @@
   font-weight: 500;
 }
 
-/* --- GrÃƒÂ¡ficos (base) --- */
+/* --- GrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ficos (base) --- */
 [data-chart] svg {
   width: 100%;
   height: auto;
 }
 
 /* ==========================================================================
-   GRÃƒÂFICO DE BARRAS (Gerado por D3 a partir de .bar-row)
+   GRÃƒÆ’Ã†â€™Ãƒâ€šÃ‚ÂFICO DE BARRAS (Gerado por D3 a partir de .bar-row)
    ========================================================================== */
 .bar-chart {
   display: flex;
@@ -104,7 +104,7 @@
 }
 
 /* ==========================================================================
-   GRÃƒÂFICO DONUT (Gerado por D3; percentual no centro)
+   GRÃƒÆ’Ã†â€™Ãƒâ€šÃ‚ÂFICO DONUT (Gerado por D3; percentual no centro)
    ========================================================================== */
 .donut {
   display: flex;
@@ -113,7 +113,7 @@
   gap: var(--space-md);
 }
 
-/* Donut com rÃƒÂ³tulo ao lado: cÃƒÂ­rculo ÃƒÂ  esquerda, texto ÃƒÂ  direita. */
+/* Donut com rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³tulo ao lado: cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­rculo ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  esquerda, texto ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  direita. */
 .donut--side {
   flex-direction: row;
   justify-content: center;
@@ -179,9 +179,9 @@
 }
 
 /* ==========================================================================
-   HERO Ã¢â‚¬â€ imagem de fundo + overlay editorial para leitura
+   HERO ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â imagem de fundo + overlay editorial para leitura
    A imagem vive num pseudo-elemento ::before para poder ser deslocada
-   horizontalmente pelo efeito parallax (main.js define a variÃƒÂ¡vel
+   horizontalmente pelo efeito parallax (main.js define a variÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡vel
    --hero-shift em px a cada scroll).
    ========================================================================== */
 #hero {
@@ -195,9 +195,9 @@
 }
 
 /* As camadas vivem em .hero-media (imgs reais empilhadas, cada uma maior
-   que o hero). Cada camada recebe do main.js as prÃƒÂ³prias variÃƒÂ¡veis
-   --layer-scroll-shift e --layer-mouse-x/-y, jÃƒÂ¡ multiplicadas pela sua
-   profundidade (data-depth): 01 = primeiro plano (mais rÃƒÂ¡pido),
+   que o hero). Cada camada recebe do main.js as prÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³prias variÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡veis
+   --layer-scroll-shift e --layer-mouse-x/-y, jÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ multiplicadas pela sua
+   profundidade (data-depth): 01 = primeiro plano (mais rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡pido),
    04 = fundo (mais lento). */
 .hero-media {
   position: absolute;
@@ -207,9 +207,9 @@
 }
 
 /* Todas as camadas compartilham o mesmo transform (base-x + scroll + mouse)
-   e object-fit: cover. O oversize varia por camada Ã¢â‚¬â€ camadas ÃƒÂ  frente sÃƒÂ£o
+   e object-fit: cover. O oversize varia por camada ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â camadas ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  frente sÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o
    maiores para dar "sobra" ao parallax sem expor bordas. As porcentagens
-   foram calibradas para amplitudes de atÃƒÂ© ~20% da largura do hero. */
+   foram calibradas para amplitudes de atÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â© ~20% da largura do hero. */
 .hero-media__img {
   position: absolute;
   max-width: none;
@@ -225,7 +225,7 @@
   will-change: transform;
 }
 
-/* Layer 1 Ã¢â‚¬â€ primeiro plano (depth 1): mais oversize, maior buffer */
+/* Layer 1 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â primeiro plano (depth 1): mais oversize, maior buffer */
 .hero-media__img[data-layer="1"] {
   inset: 2%;
   width: 100%;
@@ -233,7 +233,7 @@
   left: -6%;
 }
 
-/* Layer 2 Ã¢â‚¬â€ meio-frente (depth 0.68) */
+/* Layer 2 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â meio-frente (depth 0.68) */
 .hero-media__img[data-layer="2"] {
   inset: 0;
   width: 105%;
@@ -241,7 +241,7 @@
   left: 0%;
 }
 
-/* Layer 3 Ã¢â‚¬â€ meio-fundo (depth 0.4) */
+/* Layer 3 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â meio-fundo (depth 0.4) */
 .hero-media__img[data-layer="3"] {
   inset: 0%;
   width: 110%;
@@ -249,7 +249,7 @@
   left: 1%;
 }
 
-/* Layer 4 Ã¢â‚¬â€ fundo (depth 0.18): menor oversize, menor movimento */
+/* Layer 4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â fundo (depth 0.18): menor oversize, menor movimento */
 .hero-media__img[data-layer="4"] {
   inset: -7%;
   width: 114%;
@@ -261,7 +261,7 @@
 .hero-media__img[data-layer="3"] { z-index: 2; }
 .hero-media__img[data-layer="4"] { z-index: 1; }
 
-/* Overlay: papel sÃƒÂ³lido ÃƒÂ  esquerda (texto) Ã¢â€ â€™ transparente ÃƒÂ  direita (foto) */
+/* Overlay: papel sÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³lido ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  esquerda (texto) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ transparente ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  direita (foto) */
 #hero::after {
   content: "";
   position: absolute;
@@ -287,7 +287,7 @@
 }
 
 /* ==========================================================================
-   GRÃƒÂFICO DE TENDÃƒÅ NCIA QUALITATIVA
+   GRÃƒÆ’Ã†â€™Ãƒâ€šÃ‚ÂFICO DE TENDÃƒÆ’Ã†â€™Ãƒâ€¦Ã‚Â NCIA QUALITATIVA
    ========================================================================== */
 .trend__axis {
   display: flex;
@@ -398,7 +398,7 @@
 }
 
 /* ==========================================================================
-   CONCLUSÃƒÆ’O Ã¢â‚¬â€ passos
+   CONCLUSÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢O ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â passos
    ========================================================================== */
 .conclusion-step {
   display: flex;
@@ -442,7 +442,7 @@
   max-width: 80ch;}
 
 /* ==========================================================================
-   FONTES E LIMITAÃƒâ€¡Ãƒâ€¢ES
+   FONTES E LIMITAÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ES
    ========================================================================== */
 .source-item {
   border-top: var(--line-ink);
@@ -462,7 +462,7 @@
   font-size: 0.9rem;
 }
 
-/* Bloco recolhÃ­vel das fontes ("aba" atrÃ¡s do Vem comigo?) */
+/* Bloco recolhÃƒÆ’Ã‚Â­vel das fontes ("aba" atrÃƒÆ’Ã‚Â¡s do Vem comigo?) */
 .fontes-box {
   width: fit-content;
   max-width: 100%;
@@ -552,7 +552,7 @@
 }
 
 /* ==========================================================================
-   ILUSTRAÃƒâ€¡ÃƒÆ’O (placeholder editorial)
+   ILUSTRAÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢O (placeholder editorial)
    ========================================================================== */
 .illustration {
   display: grid;
@@ -603,7 +603,7 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* --- Trio de motivos (populaÃƒÂ§ÃƒÂ£o em geral Ã‚Â· comunidade Ã‚Â· destaques) --- */
+/* --- Trio de motivos (populaÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o em geral ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· comunidade ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· destaques) --- */
 .trio-cols {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -628,7 +628,7 @@
 }
 
 /* ==========================================================================
-   REVELAÃƒâ€¡ÃƒÆ’O NO SCROLL (main.js adiciona .is-visible)
+   REVELAÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢O NO SCROLL (main.js adiciona .is-visible)
    ========================================================================== */
 .reveal {
   opacity: 0;
@@ -643,10 +643,10 @@
 }
 
 /* ==========================================================================
-   NAVEGAÃƒâ€¡ÃƒÆ’O DE Ãƒâ€šNCORAS Ã¢â‚¬â€ "PERCURSO"
+   NAVEGAÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢O DE ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡NCORAS ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â "PERCURSO"
    Trilha lateral fixa com checkpoints numerados. A linha preenche conforme
-   a rolagem (a distÃƒÂ¢ncia percorrida na narrativa). O rÃƒÂ³tulo aparece no
-   hover, no foco e na seÃƒÂ§ÃƒÂ£o ativa. Em telas estreitas, sÃƒÂ³ os pontos.
+   a rolagem (a distÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ncia percorrida na narrativa). O rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³tulo aparece no
+   hover, no foco e na seÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o ativa. Em telas estreitas, sÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ os pontos.
    ========================================================================== */
 .trail {
   --dot: 1.15rem;
@@ -755,7 +755,7 @@
   transform: scale(1.18);
 }
 
-/* Telas estreitas: some o rÃƒÂ³tulo e encolhe os checkpoints */
+/* Telas estreitas: some o rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³tulo e encolhe os checkpoints */
 @media (max-width: 899px) {
   .trail {
     --dot: 0.8rem;
@@ -777,20 +777,20 @@
   }
 }
 
-/* Garante que a ÃƒÂ¢ncora nÃƒÂ£o pare atrÃƒÂ¡s de um eventual cabeÃƒÂ§alho fixo */
+/* Garante que a ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ncora nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o pare atrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡s de um eventual cabeÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§alho fixo */
 main section[id] {
   /* scroll-margin-top: 1.5rem; */
 }
 
 /* ==========================================================================
-   CAPÃƒÂTULOS Ã¢â‚¬â€ narrativa em 4 tempos
+   CAPÃƒÆ’Ã†â€™Ãƒâ€šÃ‚ÂTULOS ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â narrativa em 4 tempos
    ========================================================================== */
 .chapter__head {
   max-width: 100ch;
   margin-bottom: var(--space-xl);
 }
 
-/* CabeÃƒÂ§alho em coluna cheia (sem o estreitamento de 50ch). */
+/* CabeÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§alho em coluna cheia (sem o estreitamento de 50ch). */
 .chapter__head--wide {
   max-width: none;
 }
@@ -811,7 +811,7 @@ main section[id] {
 }
 
 /* Grupo em tela cheia: o bloco ocupa ao menos uma viewport (centralizado).
-   Uso: envolver cada grupo de informaÃƒÂ§ÃƒÂµes com .screen. Variante --start
+   Uso: envolver cada grupo de informaÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âµes com .screen. Variante --start
    alinha ao topo em vez do centro. */
 .screen {
   min-height: 100vh;
@@ -883,8 +883,8 @@ main section[id] {
   transform: none;
 }
 
-/* Palco da histÃƒÂ³ria de abertura: canvas three.js ao fundo (z 0),
-   vÃƒÂ©u claro em degradÃƒÂª (z 1) e texto original por cima (z 2). */
+/* Palco da histÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ria de abertura: canvas three.js ao fundo (z 0),
+   vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©u claro em degradÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âª (z 1) e texto original por cima (z 2). */
 .prose-stage {
   position: relative;
   margin: var(--space-xl) 0 0;
@@ -928,7 +928,7 @@ main section[id] {
   z-index: 2;
   margin: var(--space-xl);
   max-width: 44ch;
-  /* Texto nÃƒÂ£o clicÃƒÂ¡vel: o ponteiro atravessa atÃƒÂ© o canvas (bola arrastÃƒÂ¡vel). */
+  /* Texto nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o clicÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡vel: o ponteiro atravessa atÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â© o canvas (bola arrastÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡vel). */
   pointer-events: none;
   user-select: none;
 }
@@ -1023,7 +1023,7 @@ main section[id] {
 }
 
 /* Trio: barras simples com o visual grouped-bar (nomes discretos,
-   trilhos finos, valor fora da barra). SÃƒÂ³ aqui Ã¢â‚¬â€ o Fechamento mantÃƒÂ©m o seu. */
+   trilhos finos, valor fora da barra). SÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ aqui ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â o Fechamento mantÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©m o seu. */
 .trio__col .bar-row {
   grid-template-columns: minmax(12ch, 9ch) 1fr 3ch;
   gap: var(--space-md);
@@ -1082,7 +1082,7 @@ main section[id] {
   display: block;
 }
 
-/* --- Linha-drop: acento editorial pequeno entre texto e grÃƒÂ¡fico --- */
+/* --- Linha-drop: acento editorial pequeno entre texto e grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡fico --- */
 .drop {
   font-family: var(--font-display);
   font-weight: 500;
@@ -1098,7 +1098,7 @@ main section[id] {
   font-weight: 700;
 }
 
-/* --- Fluxo (companhia Ã¢â€ â€™ conexÃƒÂ£o Ã¢â€ â€™ pertencimento Ã¢â€ â€™ acolhimento) --- */
+/* --- Fluxo (companhia ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ conexÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ pertencimento ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ acolhimento) --- */
 .flow {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1114,8 +1114,64 @@ main section[id] {
   border-top: 2px solid var(--color-ink);
 }
 
+/* CartÃƒÂ£o de mÃƒÂ­dia: fundo chapado na cor da etapa + PNG transparente com
+   folga para o parallax (a imagem desliza, o texto parado = parallax). */
+.flow__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--flow-bg, var(--color-neutral));
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.flow__media img {
+  position: absolute;
+  bottom: 1%;
+  left: 12%;
+  width: 100%;
+  height: auto;
+  max-height: 104%;
+  object-fit: contain;
+  object-position: bottom center;
+  will-change: transform;
+}
+
+/* DegradÃƒÂª da etapa Companhia Ã¢â‚¬â€ sÃƒÂ³ tokens do design system. */
+.flow__media--companhia {
+  background: linear-gradient(135deg, var(--color-sky) 0%, var(--color-navy) 100%);
+}
+
+/* Texto sobre a imagem (topo-esquerda, como a referÃƒÂªncia). */
+.flow__overlay {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  right: var(--space-md);
+  z-index: 1;
+  will-change: transform;
+}
+
+.flow__overlay .flow__keyword,
+.flow__overlay .flow__desc {
+  display: block;
+  color: var(--color-cream);
+}
+
+.flow__overlay .flow__keyword {
+  font-size: clamp(1.15rem, 2vw, 2.8rem);
+  line-height: 1.05;
+}
+
+.flow__overlay .flow__desc {
+  font-size: 0.85rem;
+  line-height: 1.35;
+  max-width: 20ch;
+  margin-top: 0.35rem;
+}
+
 /* Cascata de entrada: cada etapa desliza da esquerda com atraso em degrau
-   (--i) quando o bloco recebe .is-visible. Sem JS, tudo visÃƒÂ­vel. */
+   (--i) quando o bloco recebe .is-visible. Sem JS, tudo visÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­vel. */
 .flow--cascade .flow__step {
   opacity: 0;
   transform: translateX(-24px);
@@ -1128,7 +1184,7 @@ main section[id] {
   transform: none;
 }
 
-/* --- BotÃƒÂ£o editorial --- */
+/* --- BotÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o editorial --- */
 .btn {
   display: inline-block;
   font-family: var(--font-display);
@@ -1255,7 +1311,7 @@ main section[id] {
   }
 }
 
-/* ============ CAPÃƒÂTULO 01 Ã¢â‚¬â€ composiÃƒÂ§ÃƒÂ£o do wireframe ============ */
+/* ============ CAPÃƒÆ’Ã†â€™Ãƒâ€šÃ‚ÂTULO 01 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â composiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o do wireframe ============ */
 .graphite-note {
   font-family: var(--font-geo);
   font-style: italic;
@@ -1265,7 +1321,7 @@ main section[id] {
   margin-bottom: var(--space-sm);
 }
 
-/* TÃƒÂ­tulo bipartido do capÃƒÂ­tulo (linha Oswald + destaque Elephant) */
+/* TÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­tulo bipartido do capÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­tulo (linha Oswald + destaque Elephant) */
 .chapter-title-split {
   max-width: 100%;
 }
@@ -1295,7 +1351,7 @@ main section[id] {
   margin-top: 0;
 }
 
-/* NÃƒÂºmeros-coluna em escala real (os numerais SÃƒÆ’O as colunas) */
+/* NÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºmeros-coluna em escala real (os numerais SÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢O as colunas) */
 .bignums {
   --max: clamp(16rem, 10vw, 0rem);
   display: grid;
@@ -1322,10 +1378,10 @@ main section[id] {
   padding: 0.5rem 1rem 0rem 0rem;
 }
 
-/* Linhas de grade horizontais: uma para cada nÃƒÂºmero do eixo Y.
-   Cada ::after nasce na direÃƒÂ§ÃƒÂ£o do nÃƒÂºmero (topo-meio do <span>) e
-   travessa o grÃƒÂ¡fico Ã¢â‚¬â€ o excesso ÃƒÂ© recortado pelo overflow: hidden
-   do .bignums. Ficam atrÃƒÂ¡s das barras (z-index: 0). */
+/* Linhas de grade horizontais: uma para cada nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºmero do eixo Y.
+   Cada ::after nasce na direÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o do nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºmero (topo-meio do <span>) e
+   travessa o grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡fico ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â o excesso ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â© recortado pelo overflow: hidden
+   do .bignums. Ficam atrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡s das barras (z-index: 0). */
 .bignums__axis span {
   position: relative;
 }
@@ -1370,7 +1426,7 @@ main section[id] {
   font-size: 1.25rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  /* Acima das linhas de grade (que passam por trÃƒÂ¡s dos numerais) */
+  /* Acima das linhas de grade (que passam por trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡s dos numerais) */
   position: relative;
   z-index: 1;
 }
@@ -1416,7 +1472,7 @@ main section[id] {
   margin-top: 0;
 }
 
-/* Cena que comeÃƒÂ§a por trÃƒÂ¡s da fonte do grÃƒÂ¡fico acima: o topo do palco
+/* Cena que comeÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§a por trÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡s da fonte do grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡fico acima: o topo do palco
    desliza para baixo do bloco anterior (que pinta por cima). */
 .scene-block--overlap {
   margin-top: calc(-1 * var(--space-xl));
@@ -1429,21 +1485,21 @@ main section[id] {
   z-index: 1;
 }
 
-/* Bloco que comeÃ¯Â¿Â½a sobrepondo um pouco o canvas anterior. */
+/* Bloco que comeÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½a sobrepondo um pouco o canvas anterior. */
 .block--overlap {
   margin-top: calc(-2.3 * var(--space-xl));
   position: relative;
   z-index: 1;
 }
 
-/* Palco ampliado: ~3x a altura (1560px) em largura total da pÃƒÂ¡gina. */
+/* Palco ampliado: ~3x a altura (1560px) em largura total da pÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡gina. */
 .prose-stage.scene-stage--tall {
   min-height: 1560px;
   width: 100vw;
   max-width: none;
   margin-left: calc(50% - 50vw);
   border-radius: 0;
-  /* Canvas transparente: o papel da pÃƒÂ¡gina ÃƒÂ© o fundo (infinito). */
+  /* Canvas transparente: o papel da pÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡gina ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â© o fundo (infinito). */
   background: transparent;
 }
 
@@ -1574,7 +1630,7 @@ main section[id] {
   align-items: center;
 }
 
-/* Bloco dividido: texto ÃƒÂ  esquerda, grÃƒÂ¡fico ÃƒÂ  direita. */
+/* Bloco dividido: texto ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  esquerda, grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡fico ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  direita. */
 .split-block {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -1587,8 +1643,8 @@ main section[id] {
 }
 
 /* Rolagem horizontal de teste: sem .is-hscroll (sem JS, mobile,
-   reduced-motion) os painÃƒÂ©is empilham no vertical normal. Com a classe,
-   a seÃƒÂ§ÃƒÂ£o prende (sticky) e o trilho desliza; ao fim, o vertical continua. */
+   reduced-motion) os painÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©is empilham no vertical normal. Com a classe,
+   a seÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o prende (sticky) e o trilho desliza; ao fim, o vertical continua. */
 .hwrap.is-hscroll {
   height: calc(var(--hpanels, 3) * 100vh);
   margin-top: calc(-1 * var(--space-lg));
@@ -1623,7 +1679,7 @@ main section[id] {
   width: 100%;
 }
 
-/* CabeÃƒÂ§alho e nota fixos sobre as 3 camadas (sem bloquear a interaÃƒÂ§ÃƒÂ£o). */
+/* CabeÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§alho e nota fixos sobre as 3 camadas (sem bloquear a interaÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o). */
 .hwrap.is-hscroll .hstage__head {
   position: absolute;
   top: var(--space-md);
@@ -1655,7 +1711,7 @@ main section[id] {
   padding-bottom: clamp(100px, 16vh, 150px);
 }
 
-/* Trio: planeta | texto | grÃƒÂ¡fico. */
+/* Trio: planeta | texto | grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡fico. */
 .split-block--trio {
   grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 5fr);
   align-items: center;
@@ -1680,7 +1736,7 @@ main section[id] {
   touch-action: none;
 }
 
-/* TransiÃƒÂ§ÃƒÂ£o para o CapÃƒÂ­tulo 02 */
+/* TransiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o para o CapÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­tulo 02 */
 .bridge {
   font-family: var(--font-display);
   font-weight: 700;
@@ -1703,7 +1759,7 @@ main section[id] {
     flex-wrap: wrap;
   }
 
-  .bench-block {
+  .bench-block {  
     grid-template-columns: 1fr;
   }
 
