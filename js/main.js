@@ -256,11 +256,65 @@
   /* --------------------------------------------- NÚMEROS-COLUNA */
   // Numerais que contam de 0 até o valor enquanto crescem até a altura
   // proporcional na escala (como um contador digital).
+  //
+  // A altura de cada dígito sai da ESCALA real:
+  //   alturaBarra = (maxPx * valor) / 100            // barra em px
+  //   fontSize    = (alturaBarra / CAP_RATIO) * AJUSTE_OLHO
+  // onde CAP_RATIO é a razão ótica MEDIDA da fonte (altura visual do
+  // dígito / font-size) e AJUSTE_OLHO é o "fine tuning" que só o olho dá.
+
+  // Primeira família do --font-hero (ex.: "Abril Fatface").
+  function heroFontCSS() {
+    var val = "";
+    try {
+      val = getComputedStyle(document.documentElement).getPropertyValue(
+        "--font-hero"
+      );
+    } catch (e) {}
+    var first = (val || '"Abril Fatface", Georgia, serif').split(",")[0].trim();
+    return first;
+  }
+
+  // Mede a razão ótica do dígito (borda de tinta do "8") via canvas:
+  // altura-real / font-size. Cai para 0.78 se a fonte ainda não chegou.
+  function medirCapRatio(font) {
+    try {
+      var canvas = document.createElement("canvas");
+      var ctx = canvas.getContext("2d");
+      var base = 200;
+      ctx.font = "400 " + base + "px " + font;
+      var m = ctx.measureText("8");
+      var ink = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+      if (ink > 0) return ink / base;
+    } catch (e) {}
+    return 0.78;
+  }
+
+  var AJUSTE_OLHO = 0.95; // ← o "fine tuning" que só o olho dá
+  var CAP_RATIO = medirCapRatio(heroFontCSS());
+
   function initBigNums() {
     var nums = Array.prototype.slice.call(
       document.querySelectorAll("[data-bignum]")
     );
     if (nums.length === 0) return;
+
+    // Quando a fonte de verdade terminar de carregar (ou a página, no
+    // `load`), re-mede a razão ótica e repinta o que estiver visível —
+    // a primeira medição pode ter usado a fonte de reserva.
+    function repaintVisible() {
+      var nova = medirCapRatio(heroFontCSS());
+      if (nova === CAP_RATIO) return;
+      CAP_RATIO = nova;
+      nums.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) play(el);
+      });
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(repaintVisible);
+    }
+    window.addEventListener("load", repaintVisible);
 
     function reset(el) {
       if (el._bigRaf) cancelAnimationFrame(el._bigRaf);
@@ -274,11 +328,8 @@
       var wrap = el.closest("[data-bignums]");
       var axis = wrap ? wrap.querySelector(".bignums__axis") : null;
       var maxPx = axis ? axis.clientHeight : 160;
-      // Razão ótica do dígito (altura visual / font-size, ~Abril Fatface):
-      // dividir por ela faz o topo VISÍVEL do número encostar no tick do
-      // valor (só font-size deixaria ~3/4 abaixo). Ajuste fino aqui.
-      var GLYPH_RATIO = 0.78;
-      var finalPx = Math.max(20, (maxPx * target) / 100 / GLYPH_RATIO);
+      var alturaBarra = (maxPx * target) / 100;
+      var finalPx = Math.max(20, (alturaBarra / CAP_RATIO) * AJUSTE_OLHO);
       if (prefersReducedMotion) {
         el.style.fontSize = finalPx + "px";
         el.textContent = formatNumber(target, 0) + "%";

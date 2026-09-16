@@ -27,7 +27,7 @@
         <div class="bignums" data-bignums role="img"
           aria-label="31% dos adultos e 80% dos adolescentes não atingem o nível recomendado de atividade física. Fonte: WHO, 2024.">
           <div class="bignums__axis" aria-hidden="true">
-            <span>100</span><span>75</span><span>50</span><span>25</span><span>0</span>
+            <span>100</span><span>90</span><span>80</span><span>70</span><span>60</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span><span>0</span>
           </div>
           <div class="bignums__col-1">
             <span class="bignums__value" data-bignum data-value="31" style="color: var(--color-amber);">0%</span>

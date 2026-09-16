@@ -1138,9 +1138,9 @@ main section[id] {
 }
 
 /* Ajuste fino por imagem (medido no PNG: centro e largura da figura).
-   Companhia: figura full-width centralizada. Conexão/Acolhimento: figura
-   à esquerda, imagem deslocada p/ centralizar. Pertencimento: figura
-   pequena à direita, imagem ampliada e deslocada. */
+   Companhia: figura full-width centralizada. ConexÃ£o/Acolhimento: figura
+   Ã  esquerda, imagem deslocada p/ centralizar. Pertencimento: figura
+   pequena Ã  direita, imagem ampliada e deslocada. */
 .flow__media--companhia img {
   left: 17%;
   bottom: 2%;
@@ -1277,7 +1277,7 @@ main section[id] {
   line-height: 1.4;
 }
 
-/* --- Equipe: grade de cartões com foto, nome e texto --- */
+/* --- Equipe: grade de cartÃµes com foto, nome e texto --- */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -1581,8 +1581,8 @@ main section[id] {
 .bignums {
   --max: clamp(16rem, 10vw, 0rem);
   display: grid;
-  grid-template-columns: 4rem 19rem 4rem 27rem;
-  column-gap: clamp(var(--space-md), 5vw, var(--space-xl));
+  grid-template-columns: 4rem 18rem 2rem 44rem;
+  column-gap: clamp(8px, 5vw, 33px);
   align-items: end;
   position: relative;
   overflow: hidden;
@@ -1592,7 +1592,7 @@ main section[id] {
 .bignums__axis {
   /* O ajuste fino mora aqui: --axis-fix reescala eixo + numerais juntos
      (o JS mede a altura computada). 1 = neutro. */
-  height: calc(var(--max) * var(--axis-fix, 0.85));
+  height: calc(var(--max) * var(--axis-fix, 0.88));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1601,7 +1601,7 @@ main section[id] {
   font-size: 0.9rem;
   color: var(--color-slate);
   border-right: 6px solid var(--color-neutral);
-  padding: 0.5rem 1rem 0rem 0rem;
+  padding: 0rem 1rem 0rem 0rem;
 }
 
 /* Linhas de grade horizontais: uma para cada numero do eixo Y.
@@ -1620,7 +1620,7 @@ main section[id] {
   width: 80vw;
   height: 1px;
   background: var(--color-neutral);
-  opacity: 0.5;
+  opacity: 0.32;
   pointer-events: none;
 }
 
